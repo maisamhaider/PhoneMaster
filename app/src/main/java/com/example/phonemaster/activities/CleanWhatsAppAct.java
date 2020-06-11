@@ -21,10 +21,10 @@ public class CleanWhatsAppAct extends AppCompatActivity implements View.OnClickL
         ConstraintLayout received_file_CL =findViewById(R.id.back_up_conversation_history_CL);
 
 
-        back_up_conversation_history_CL.setOnClickListener(this);
-        images_CL.setOnClickListener(this);
-        audio_CL.setOnClickListener(this);
-        received_file_CL.setOnClickListener(this);
+//        back_up_conversation_history_CL.setOnClickListener(this);
+//        images_CL.setOnClickListener(this);
+//        audio_CL.setOnClickListener(this);
+//        received_file_CL.setOnClickListener(this);
     }
 
     @Override
