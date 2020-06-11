@@ -1,5 +1,6 @@
 package com.example.phonemaster.utils;
 
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -106,13 +107,9 @@ public class Utils {
         return recentTasks;
     }
 
-    public List<ActivityManager.RunningAppProcessInfo> recentApps() {
-
-        final ActivityManager activityManager = (ActivityManager)
-                context.getSystemService(Context.ACTIVITY_SERVICE);
-        final List<ActivityManager.RunningAppProcessInfo> recentTasks = Objects.requireNonNull(activityManager).getRunningAppProcesses();
-        return recentTasks;
-    }
+//    public List<ActivityManager.RunningAppProcessInfo> recentApps() {
+//
+//    }
 
     public List<String> GetAllApkInfo() {
 

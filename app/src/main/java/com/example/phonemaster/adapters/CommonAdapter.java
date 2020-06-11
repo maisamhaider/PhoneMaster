@@ -108,8 +108,7 @@ public class CommonAdapter extends RecyclerView.Adapter<CommonAdapter.WhatsAppSt
             }
         });
     }
-
-
+    
     @Override
     public int getItemCount() {
         return fileList.size();
