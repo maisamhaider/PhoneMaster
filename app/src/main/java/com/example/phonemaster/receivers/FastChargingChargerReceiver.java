@@ -11,6 +11,7 @@ import com.example.phonemaster.activities.ChargingLockedScreenAct;
 
 public class FastChargingChargerReceiver extends BroadcastReceiver {
 
+    //TODO Execute the from service class..and service class is not created already.
     @Override
     public void onReceive(Context context, Intent intent) {
         KeyguardManager myKM = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
