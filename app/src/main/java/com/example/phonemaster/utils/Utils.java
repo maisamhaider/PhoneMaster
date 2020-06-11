@@ -2,6 +2,9 @@ package com.example.phonemaster.utils;
 
 import android.app.Activity;
 import android.app.ActivityManager;
+import android.app.usage.UsageStats;
+import android.app.usage.UsageStatsManager;
+import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +16,7 @@ import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.os.StatFs;
 import android.provider.ContactsContract;
@@ -44,6 +48,8 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 import static android.content.Context.ACTIVITY_SERVICE;
 
@@ -153,8 +159,10 @@ public class Utils {
 
         final ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         final List<ActivityManager.RunningServiceInfo> recentTasks = activityManager.getRunningServices(Integer.MAX_VALUE);
+
         return recentTasks;
     }
+
 
     public List<ActivityManager.RunningAppProcessInfo> recentApps() {
 

@@ -29,7 +29,7 @@ public class CpuCooler extends AppCompatActivity {
         textView = findViewById(R.id.qwer);
         utils = new Utils(this);
 
-                for (int i = 0; i < utils.loadProcessInfo().size(); i++)
+        for (int i = 0; i < utils.loadProcessInfo().size(); i++)
         {
             textView.setText(textView.getText()  +utils.loadProcessInfo().get(i).process  +"\n\n" );
         }
