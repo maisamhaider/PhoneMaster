@@ -4,33 +4,90 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.phonemaster.R;
 import com.example.phonemaster.adapters.DeepCleanVideosAdapter;
+import com.example.phonemaster.async.DeepCleanPkgsTask;
 import com.example.phonemaster.permission.Permissions;
+import com.example.phonemaster.utils.Utils;
 
 public class DeepCleanAct extends AppCompatActivity {
 
     private static final int PICK_IMAGES = 1;
     private Permissions permissions;
 
+    Utils utils;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_deep_clean);
         permissions = new Permissions(this);
-         ImageView deepCleanImage_iv1,deepCleanImage_iv2,deepCleanImage_iv3,deepCleanImage_iv4;
+        permissions.permission();
+        utils = new Utils(this);
+         ImageView deepCleanImage_iv1,deepCleanImage_iv2,deepCleanImage_iv3,deepCleanImage_iv4,deepCleanVideos_iv1,deepCleanVideos_iv2,deepCleanVideos_iv3,deepCleanVideos_iv4;
         deepCleanImage_iv1 = findViewById(R.id.deepCleanImage_iv1);
         deepCleanImage_iv2 = findViewById(R.id.deepCleanImage_iv2);
         deepCleanImage_iv3 = findViewById(R.id.deepCleanImage_iv3);
         deepCleanImage_iv4 = findViewById(R.id.deepCleanImage_iv4);
 
-        TextView deepCleanImagesSize_tv,deepCleanVideosSize_tv;
+        deepCleanVideos_iv1 = findViewById(R.id.deepCleanVideos_iv1);
+        deepCleanVideos_iv2 = findViewById(R.id.deepCleanVideos_iv2);
+        deepCleanVideos_iv3 = findViewById(R.id.deepCleanVideos_iv3);
+        deepCleanVideos_iv4 = findViewById(R.id.deepCleanVideos_iv4);
+
+        TextView deepCleanImagesSize_tv,deepCleanVideosSize_tv,deepCleanAudiosDataSize_tv,deepCleanLargeFileSize_tv,deepCleanInstallationPkgseSize_tv;
         deepCleanImagesSize_tv = findViewById(R.id.deepCleanImagesSize_tv);
         deepCleanVideosSize_tv = findViewById(R.id.deepCleanVideosSize_tv);
+        deepCleanAudiosDataSize_tv = findViewById(R.id.deepCleanAudiosDataSize_tv);
+        deepCleanLargeFileSize_tv = findViewById(R.id.deepCleanLargeFileSize_tv);
+        deepCleanInstallationPkgseSize_tv = findViewById(R.id.deepCleanInstallationPkgseSize_tv);
+
+
+
+        float imagesSize = utils.getAllIAAsSize("images");
+        float VideosSize = utils.getAllIAAsSize("videos");
+        float audiosSize = utils.getAllIAAsSize("audios");
+        float docSize = utils.getAllDocSize(String.valueOf(Environment.getExternalStorageDirectory()));
+        float pkgSize = utils.getAllPkgsSize(String.valueOf(Environment.getExternalStorageDirectory()));
+
+        deepCleanImagesSize_tv.setText(utils.getCalculatedDataSize(imagesSize));
+        deepCleanVideosSize_tv.setText(utils.getCalculatedDataSize(VideosSize));
+        deepCleanAudiosDataSize_tv.setText(utils.getCalculatedDataSize(audiosSize));
+        deepCleanLargeFileSize_tv.setText(utils.getCalculatedDataSize(docSize));
+        deepCleanInstallationPkgseSize_tv.setText(utils.getCalculatedDataSize(pkgSize));
+
+        Glide.with(this)
+                .load(utils.getAllImagePaths().get(utils.getAllImagePaths().size()-1).getImagePath())
+                .into(deepCleanImage_iv1);
+        Glide.with(this)
+                .load(utils.getAllImagePaths().get(utils.getAllImagePaths().size()-2).getImagePath())
+                .into(deepCleanImage_iv2);
+        Glide.with(this)
+                .load(utils.getAllImagePaths().get(utils.getAllImagePaths().size()-3).getImagePath())
+                .into(deepCleanImage_iv3);
+        Glide.with(this)
+                .load(utils.getAllImagePaths().get(utils.getAllImagePaths().size()-4).getImagePath())
+                .into(deepCleanImage_iv4);
+
+        Glide.with(this)
+                .load(utils.getAllVideosPaths().get(utils.getAllVideosPaths().size()-1).getVideoPath())
+                .into(deepCleanVideos_iv1);
+        Glide.with(this)
+                .load(utils.getAllVideosPaths().get(utils.getAllVideosPaths().size()-2).getVideoPath())
+                .into(deepCleanVideos_iv2);
+        Glide.with(this)
+                .load(utils.getAllVideosPaths().get(utils.getAllVideosPaths().size()-3).getVideoPath())
+                .into(deepCleanVideos_iv3);
+        Glide.with(this)
+                .load(utils.getAllVideosPaths().get(utils.getAllVideosPaths().size()-4).getVideoPath())
+                .into(deepCleanVideos_iv4);
+
+
 
         deepCleanImagesSize_tv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,6 +105,36 @@ public class DeepCleanAct extends AppCompatActivity {
                 if (permissions.permission())
                 {
                     Intent intent = new Intent(DeepCleanAct.this, DeepCleanAllVideosAct.class);
+                    startActivity(intent);
+                }
+            }
+        });
+        deepCleanAudiosDataSize_tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (permissions.permission())
+                {
+                    Intent intent = new Intent(DeepCleanAct.this, DeepCleanAllAudiosAct.class);
+                    startActivity(intent);
+                }
+            }
+        });
+        deepCleanLargeFileSize_tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (permissions.permission())
+                {
+                    Intent intent = new Intent(DeepCleanAct.this, DeepCleanAllDocsAct.class);
+                    startActivity(intent);
+                }
+            }
+        });
+        deepCleanInstallationPkgseSize_tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (permissions.permission())
+                {
+                    Intent intent = new Intent(DeepCleanAct.this, DeepCleanAllPackagesAct.class);
                     startActivity(intent);
                 }
             }

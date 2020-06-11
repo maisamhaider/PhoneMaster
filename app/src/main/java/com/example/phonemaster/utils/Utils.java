@@ -23,11 +23,15 @@ import android.widget.Toast;
 import androidx.core.content.ContextCompat;
 
 import com.example.phonemaster.R;
+import com.example.phonemaster.models.DeepCleanAudioModel;
+import com.example.phonemaster.models.DeepCleanDocsModel;
 import com.example.phonemaster.models.DeepCleanImagesModel;
+import com.example.phonemaster.models.DeepCleanPackagesModel;
 import com.example.phonemaster.models.DeepCleanVideosModel;
 import com.example.phonemaster.models.NumberAndNamesModel;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FilenameFilter;
@@ -481,61 +485,150 @@ public class Utils {
         return list ;
     }
 
-//    public List<DeepCleanVideosModel> getAllVideosPaths()
-//    {
-//        List<DeepCleanVideosModel> list = new ArrayList<>();
-//        DeepCleanVideosModel file;
-//        Uri uri;
-//        Cursor cursor;
-//        int column_index_data;
-//        String absolutePath = null;
-//        uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
-//        String sortOrder = MediaStore.MediaColumns.DATE_MODIFIED + " DESC";
-//        cursor = context.getContentResolver().query(uri, null, null,
-//                null, sortOrder);
-//        column_index_data = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
-//        while (cursor.moveToNext()) {
-//            absolutePath = cursor.getString(column_index_data);
-//            String title = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.TITLE));
-//            Long size = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.SIZE));
-////            Long size = (new File(absolutePathOfVideo)).length();
-//            file = new DeepCleanVideosModel();
-//            file.setVideoPath(absolutePath);
-////            file.setSize(size);
-////            file.setType(FileTypes.ImageType);
-//            if (/*isPhoto(absolutePathOfVideo) &&*/ size > 0)
-//                list.add(file);
-//        }
-//        return list ;
-//    }
+    public List<DeepCleanAudioModel> getAllAudiosPaths()
+    {
+        List<DeepCleanAudioModel> list = new ArrayList<>();
+        DeepCleanAudioModel file;
+        Uri uri;
+        Cursor cursor;
+        int column_index_data;
+        String absolutePath = null;
+        uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+        String sortOrder = MediaStore.MediaColumns.DATE_MODIFIED + " DESC";
+        cursor = context.getContentResolver().query(uri, null, null,
+                null, sortOrder);
+        column_index_data = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
+        while (cursor.moveToNext()) {
+            absolutePath = cursor.getString(column_index_data);
+            String title = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.TITLE));
+            Long size = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.SIZE));
+//            Long size = (new File(absolutePathOfVideo)).length();
+            file = new DeepCleanAudioModel();
+            file.setAudioPath(absolutePath);
+            file.setAudioName(title);
+//            file.setSize(size);
+//            file.setType(FileTypes.ImageType);
+            if (/*isPhoto(absolutePathOfVideo) &&*/ size > 0)
+                list.add(file);
+        }
+        return list ;
+    }
 
-//    public List<DeepCleanVideosModel> getAllVideosPaths()
-//    {
-//        List<DeepCleanVideosModel> list = new ArrayList<>();
-//        DeepCleanVideosModel file;
-//        Uri uri;
-//        Cursor cursor;
-//        int column_index_data;
-//        String absolutePath = null;
-//        uri = MediaStore.Files.Media.EXTERNAL_CONTENT_URI;
-//        String sortOrder = MediaStore.MediaColumns.DATE_MODIFIED + " DESC";
-//        cursor = context.getContentResolver().query(uri, null, null,
-//                null, sortOrder);
-//        column_index_data = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
-//        while (cursor.moveToNext()) {
-//            absolutePath = cursor.getString(column_index_data);
-//            String title = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.TITLE));
-//            Long size = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.SIZE));
-////            Long size = (new File(absolutePathOfVideo)).length();
-//            file = new DeepCleanVideosModel();
-//            file.setVideoPath(absolutePath);
-////            file.setSize(size);
-////            file.setType(FileTypes.ImageType);
-//            if (/*isPhoto(absolutePathOfVideo) &&*/ size > 0)
-//                list.add(file);
-//        }
-//        return list ;
-//    }
+
+        public List<DeepCleanDocsModel> getAllDocs( String path)
+        {
+            File fold = new File(path);
+            List<DeepCleanDocsModel> docList = new ArrayList<>();
+            File[] mlist = fold.listFiles();
+            File[] mFilelist = fold.listFiles(new AllDoFilter());
+            for (File f : mlist) {
+                if (f.isDirectory()) {
+                    List<DeepCleanDocsModel> fList = getAllDocs(f.getAbsolutePath());
+                    docList.addAll(fList);
+                }
+            }
+            for (File f : mFilelist) {
+                DeepCleanDocsModel doc = new DeepCleanDocsModel();
+                doc.setDocName(f.getName());
+//                doc.setSize(f.length());
+//                doc.setType(FileTypes.DocumentType);
+                doc.setDocPath(f.getAbsolutePath());
+                if (f.length() > 0)
+                    docList.add(doc);
+            }
+            return docList;
+    }
+
+
+    public List<DeepCleanPackagesModel> getAllPackages(String path)
+    {
+        File fold = new File(path);
+        List<DeepCleanPackagesModel> docList = new ArrayList<>();
+        File[] mlist = fold.listFiles();
+        File[] mFilelist = fold.listFiles(new AllPackagesFilter());
+        for (File f : mlist) {
+            if (f.isDirectory()) {
+                List<DeepCleanPackagesModel> fList = getAllPackages(f.getAbsolutePath());
+                docList.addAll(fList);
+            }
+        }
+        for (File f : mFilelist) {
+            DeepCleanPackagesModel doc = new DeepCleanPackagesModel();
+            doc.setPkgName(f.getName());
+//                doc.setSize(f.length());
+//                doc.setType(FileTypes.DocumentType);
+            doc.setPkgPath(f.getAbsolutePath());
+            if (f.length() > 0)
+                docList.add(doc);
+        }
+        return docList;
+    }
+
+    public float getAllDocSize( String path)
+    {
+        float docSize = 0;
+        File fold = new File(path);
+        File[] mlist = fold.listFiles();
+        File[] mFilelist = fold.listFiles(new AllDoFilter());
+        for (File f : mlist) {
+            if (f.isDirectory()) {
+                getAllDocs(f.getAbsolutePath());
+            }
+        }
+        for (File f : mFilelist) {
+            DeepCleanDocsModel doc = new DeepCleanDocsModel();
+            docSize = docSize + f.length();
+        }
+        return  docSize;
+    }
+    public float getAllPkgsSize( String path)
+    {
+        float docSize = 0;
+        File fold = new File(path);
+        File[] mlist = fold.listFiles();
+        File[] mFilelist = fold.listFiles(new AllPackagesFilter());
+        for (File f : mlist) {
+            if (f.isDirectory()) {
+                getAllDocs(f.getAbsolutePath());
+            }
+        }
+        for (File f : mFilelist) {
+            DeepCleanDocsModel doc = new DeepCleanDocsModel();
+            docSize =docSize + f.length();
+        }
+        return  docSize;
+    }
+    // return images audio videos size
+    public float getAllIAAsSize( String forWhat)
+    {
+        Uri uri = null;
+        Cursor cursor;
+
+        float size = 0;
+        if (forWhat.matches("videos"))
+        {
+            uri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
+        }
+        else if (forWhat.matches("images"))
+        {
+            uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+
+        }
+        else if (forWhat.matches("audios"))
+        {
+            uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+
+        }
+
+        String sortOrder = MediaStore.MediaColumns.DATE_MODIFIED + " DESC";
+        cursor = context.getContentResolver().query(uri, null, null,
+                null, sortOrder);
+         while (cursor.moveToNext()) {
+               size = size+cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.SIZE));
+
+        }
+        return size ;
+    }
     public void scanaddedFile(String path) {
         try {
             MediaScannerConnection.scanFile(context, new String[] { path },
@@ -565,6 +658,54 @@ public class Utils {
         String ssDate = d.substring(d.lastIndexOf(pointString));
         d = d.replace(ssDate, "");
         return d;
+    }
+
+    public static class AllDoFilter implements FileFilter {
+        @Override
+        public boolean accept(File pathname) {
+            String path = pathname.getPath();
+            return (path.endsWith(".ods") || path.endsWith(".xls") || path.endsWith(".xlsx")
+                    || path.endsWith(".doc") || path.endsWith(".odt") || path.endsWith(".docx")
+                    || path.endsWith(".pps") || path.endsWith(".pptx") || path.endsWith(".ppt")
+                    || path.endsWith(".PDF") || path.endsWith(".pdf") || path.endsWith(".txt")
+                    || path.endsWith(".ziip") || path.endsWith(".7z") || path.endsWith(".rar")
+                    || path.endsWith(".rpm") || path.endsWith(".tar.gz")
+                    || path.endsWith(".z") || path.endsWith(".zip"));
+        }
+    }
+    public static class AllPackagesFilter implements FileFilter {
+        @Override
+        public boolean accept(File pathname) {
+            String path = pathname.getPath();
+            return (path.endsWith(".apk") );
+        }
+    }
+    public String getCalculatedDataSize(float size)
+    {
+        float sizeBytes = size;
+        String sizePrefix = "Bytes";
+        float finalSize = size;
+        if (sizeBytes>=1024)
+        {
+            float sizeKb =  sizeBytes /1024;
+            sizePrefix = "KB";
+            finalSize = sizeKb   ;
+             if (sizeKb>=1024)
+            {
+                float sizeMB = sizeKb /1024;
+                sizePrefix = "MB";
+                finalSize = sizeMB ;
+                if (sizeMB>=1024)
+                {
+                    float sizeGb = sizeMB /1024;
+                    sizePrefix = "GB";
+                    finalSize = sizeGb  ;
+
+                }
+
+            }
+        }
+        return String.format("%.2f",finalSize)+sizePrefix;
     }
 
 

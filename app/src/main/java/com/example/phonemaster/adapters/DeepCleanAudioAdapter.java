@@ -7,29 +7,31 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.phonemaster.R;
-import com.example.phonemaster.models.DeepCleanImagesModel;
+import com.example.phonemaster.models.DeepCleanAudioModel;
+import com.example.phonemaster.models.DeepCleanVideosModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DeepCleanImagesAdapter extends RecyclerView.Adapter<DeepCleanImagesAdapter.WhatsAppStatusHolder> {
+public class DeepCleanAudioAdapter extends RecyclerView.Adapter<DeepCleanAudioAdapter.WhatsAppStatusHolder> {
     Context context;
-    List<DeepCleanImagesModel> fileList;
+    List<DeepCleanAudioModel> fileList;
     List<String> list;
 
-    public DeepCleanImagesAdapter(Context context) {
+    public DeepCleanAudioAdapter(Context context) {
         this.context = context;
         list = new ArrayList<>();
     }
 
 
-    public void setFileList(List<DeepCleanImagesModel> fileList) {
+    public void setFileList(List<DeepCleanAudioModel> fileList) {
         this.fileList = fileList;
     }
 
@@ -44,7 +46,7 @@ public class DeepCleanImagesAdapter extends RecyclerView.Adapter<DeepCleanImages
     @NonNull
     @Override
     public WhatsAppStatusHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.deep_clean_images_rv_layout, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.deep_clean_audio_rv_layout, parent, false);
 
         return new WhatsAppStatusHolder(view);
     }
@@ -52,23 +54,21 @@ public class DeepCleanImagesAdapter extends RecyclerView.Adapter<DeepCleanImages
     @Override
     public void onBindViewHolder(@NonNull WhatsAppStatusHolder holder, int position) {
 
-        final String imageString = fileList.get(position).getImagePath();
+        final String audioString = fileList.get(position).getAudioPath();
+        final String audioName = fileList.get(position).getAudioName();
 
+        holder.deepCleanAudioName_tv.setText(audioName);
 
-        Glide.with(context)
-                .load(imageString)
-                .into(holder.deepCleanRv_iv);
-
-        holder.selectImage_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        holder.selectAudio_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked)
                 {
-                    list.add(imageString);
+                    list.add(audioString);
                 }
                 else
                 {
-                    list.remove(imageString);
+                    list.remove(audioString);
                 }
             }
         });
@@ -82,14 +82,17 @@ public class DeepCleanImagesAdapter extends RecyclerView.Adapter<DeepCleanImages
 
     class WhatsAppStatusHolder extends RecyclerView.ViewHolder {
 
-        ImageView deepCleanRv_iv;
-        CheckBox selectImage_cb;
+        ImageView deepCleanAudioRv_iv;
+        CheckBox selectAudio_cb;
+        TextView deepCleanAudioName_tv;
 
         public WhatsAppStatusHolder(@NonNull View itemView) {
             super(itemView);
 
-            deepCleanRv_iv = itemView.findViewById(R.id.deepCleanRv_iv);
-            selectImage_cb = itemView.findViewById(R.id.selectImage_cb);
+            deepCleanAudioRv_iv = itemView.findViewById(R.id.deepCleanAudioRv_iv);
+            selectAudio_cb = itemView.findViewById(R.id.selectAudio_cb);
+            deepCleanAudioName_tv = itemView.findViewById(R.id.deepCleanAudioName_tv);
+
         }
     }
 }

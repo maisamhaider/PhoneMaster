@@ -103,6 +103,12 @@
                     android:id="@+id/whatsAppStatusSaver_btn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
+
+                <Button
+                    android:text="Smart Charging "
+                    android:id="@+id/smartCharging_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
                 <View
                     android:background="@color/colorPrimaryDark"
                     android:layout_marginTop="10dp"

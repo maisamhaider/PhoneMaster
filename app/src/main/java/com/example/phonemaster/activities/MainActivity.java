@@ -4,9 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ActivityManager;
+import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,8 +19,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.phonemaster.R;
-import com.example.phonemaster.activities.CleanWhatsAppAct;
 import com.example.phonemaster.permission.Permissions;
+import com.example.phonemaster.receivers.FastChargingChargerReceiver;
 import com.example.phonemaster.utils.Utils;
 
 import java.util.Objects;
@@ -25,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final int REQUEST_PERMISSION = 1000;
     private Permissions permissions;
     private Utils utils;
+    private SharedPreferences preferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         permissions = new Permissions(this);
         permissions.permission();
         utils = new Utils(this);
+        preferences = getSharedPreferences("myPref",Context.MODE_PRIVATE);
 
         Button cleanWhatsApp_btn = findViewById(R.id.cleanWhatsApp_btn);
         Button cpuCooler_btn = findViewById(R.id.cpuCooler_btn);
@@ -41,8 +47,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button harassmentFilter_btn = findViewById(R.id.harassmentFilter_btn);
         Button unInstallApp_btn = findViewById(R.id.unInstallApp_btn);
         Button deepClean_btn = findViewById(R.id.deepClean_btn);
+        Button smartCharging_btn = findViewById(R.id.smartCharging_btn);
 
 
+        if(Build.VERSION.SDK_INT >25){
+            startForegroundService(new Intent(this, Service.class));
+        }else{
+            startService(new Intent(this, Service.class));
+        }
+//        if (preferences.getBoolean("SMART_CHARGE",false))
+//        {
+//            FastChargingChargerReceiver fastChargingChargerReceiver = new FastChargingChargerReceiver();
+//            IntentFilter intentFilter = new IntentFilter( Intent.ACTION_BATTERY_CHANGED );
+//            getApplicationContext().registerReceiver( fastChargingChargerReceiver, intentFilter );
+//
+//        }
 
 
 
@@ -54,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         harassmentFilter_btn.setOnClickListener(this);
         unInstallApp_btn.setOnClickListener(this);
         deepClean_btn.setOnClickListener(this);
-
+        smartCharging_btn.setOnClickListener(this);
         ramAndStorageFun();
 
     }
@@ -87,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId())
             {
                 case R.id.cleanWhatsApp_btn:
-                    if (!permissions.permission())
+                    if (permissions.permission())
                     {
                         Intent cleanWhatsAppActIntent = new Intent(this, CleanWhatsAppAct.class);
                         startActivity(cleanWhatsAppActIntent);
@@ -122,6 +141,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 case R.id.deepClean_btn:
                     Intent deepCleanIntent = new Intent(this, DeepCleanAct.class);
                     startActivity(deepCleanIntent);
+                    break;
+                case R.id.smartCharging_btn:
+                    Intent smartChargingIntent = new Intent(this, SmartChargingAct.class);
+                    startActivity(smartChargingIntent);
                     break;
 
             }

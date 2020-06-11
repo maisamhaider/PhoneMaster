@@ -349,7 +349,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:text="files "
+                    android:text="Installation packages "
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/deepCleanInstallationPkgs_iv"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -357,7 +357,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Delete Large File "
+                    android:text="Delete Installation packages "
                     app:layout_constraintStart_toStartOf="@+id/deepCleanInstallationPkgseTitle_tv"
                     app:layout_constraintTop_toBottomOf="@+id/deepCleanInstallationPkgseTitle_tv" />
                 <TextView

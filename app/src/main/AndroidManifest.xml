@@ -4,6 +4,7 @@
     package="com.example.phonemaster">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission
         android:name="android.permission.PACKAGE_USAGE_STATS"
@@ -29,7 +30,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.DeepCleanAllVideosAct"></activity>
+        <activity android:name=".activities.ChargingLockedScreenAct"
+            android:showOnLockScreen="true"
+            android:screenOrientation="sensorPortrait"
+
+        />
+        <activity android:name=".activities.FastChargeAct" />
+        <activity android:name=".activities.FullChargedRemindAct" />
+        <activity android:name=".activities.SmartChargingAct" />
+        <activity android:name=".activities.DeepCleanAllPackagesAct" />
+        <activity android:name=".activities.DeepCleanAllDocsAct" />
+        <activity android:name=".activities.DeepCleanAllAudiosAct" />
+        <activity android:name=".activities.DeepCleanAllVideosAct" />
         <activity android:name=".activities.DeepCleanAllImagesAct" />
         <activity android:name=".activities.DeepCleanAct" />
         <activity android:name=".activities.UnInstallAppAct" />
@@ -52,6 +64,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <receiver android:name=".receivers.FastChargingChargerReceiver"
+             android:enabled="true">
+            <intent-filter>
+                <action android:name="android.intent.action.PHONE_STATE"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

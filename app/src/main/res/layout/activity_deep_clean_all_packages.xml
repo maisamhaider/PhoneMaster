@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.DeepCleanAllPackagesAct">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/deepCleanAllPkgs_rv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/deepCleanImages_btn" />
+
+
+    <Button
+        android:id="@+id/deepCleanPkgs_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="Clean" />
+
+</RelativeLayout>
