@@ -20,8 +20,7 @@ import android.widget.Toast;
 
 import com.example.phonemaster.R;
 import com.example.phonemaster.permission.Permissions;
-import com.example.phonemaster.receivers.FastChargingChargerReceiver;
-import com.example.phonemaster.utils.Utils;
+ import com.example.phonemaster.utils.Utils;
 
 import java.util.Objects;
 
