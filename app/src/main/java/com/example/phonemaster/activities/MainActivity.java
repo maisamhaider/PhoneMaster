@@ -20,7 +20,8 @@ import android.widget.Toast;
 
 import com.example.phonemaster.R;
 import com.example.phonemaster.permission.Permissions;
- import com.example.phonemaster.utils.Utils;
+import com.example.phonemaster.receivers.FastChargingChargerReceiver;
+import com.example.phonemaster.utils.Utils;
 
 import java.util.Objects;
 
@@ -47,21 +48,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button unInstallApp_btn = findViewById(R.id.unInstallApp_btn);
         Button deepClean_btn = findViewById(R.id.deepClean_btn);
         Button smartCharging_btn = findViewById(R.id.smartCharging_btn);
-
-
-        if(Build.VERSION.SDK_INT >25){
-            startForegroundService(new Intent(this, Service.class));
-        }else{
-            startService(new Intent(this, Service.class));
-        }
-//        if (preferences.getBoolean("SMART_CHARGE",false))
-//        {
-//            FastChargingChargerReceiver fastChargingChargerReceiver = new FastChargingChargerReceiver();
-//            IntentFilter intentFilter = new IntentFilter( Intent.ACTION_BATTERY_CHANGED );
-//            getApplicationContext().registerReceiver( fastChargingChargerReceiver, intentFilter );
-//
-//        }
-
 
 
         cleanWhatsApp_btn.setOnClickListener(this);

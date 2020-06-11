@@ -63,12 +63,9 @@ public class DeepCleanDocsAdapter extends RecyclerView.Adapter<DeepCleanDocsAdap
         holder.selectDocs_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked)
-                {
+                if (isChecked) {
                     list.add(docsString);
-                }
-                else
-                {
+                } else {
                     list.remove(docsString);
                 }
             }

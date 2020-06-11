@@ -12,24 +12,29 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.phonemaster.R;
 import com.example.phonemaster.models.DeepCleanAudioModel;
+import com.example.phonemaster.models.CommonModel;
+import com.example.phonemaster.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DeepCleanAudioAdapter extends RecyclerView.Adapter<DeepCleanAudioAdapter.WhatsAppStatusHolder> {
+public class CommonAdapter extends RecyclerView.Adapter<CommonAdapter.WhatsAppStatusHolder> {
     Context context;
-    List<DeepCleanAudioModel> fileList;
+    List<CommonModel> fileList;
     List<String> list;
+    Utils utils;
 
-    public DeepCleanAudioAdapter(Context context) {
+    public CommonAdapter(Context context) {
         this.context = context;
         list = new ArrayList<>();
+
     }
 
 
-    public void setFileList(List<DeepCleanAudioModel> fileList) {
+    public void setFileList(List<CommonModel> fileList) {
         this.fileList = fileList;
     }
 
@@ -52,21 +57,53 @@ public class DeepCleanAudioAdapter extends RecyclerView.Adapter<DeepCleanAudioAd
     @Override
     public void onBindViewHolder(@NonNull WhatsAppStatusHolder holder, int position) {
 
-        final String audioString = fileList.get(position).getAudioPath();
-        final String audioName = fileList.get(position).getAudioName();
+        final String pathString = fileList.get(position).getPath();
+        final String name = fileList.get(position).getName();
+        utils = new Utils(context);
 
-        holder.commonFileName_tv.setText(audioName);
+        holder.commonFileName_tv.setText(name);
+        if (pathString.endsWith("mp4"))
+        {
+            holder.commonIsVideo_iv.setVisibility(View.VISIBLE);
+            Glide.with(context).load(pathString).into(holder.commonFileRv_iv);
+
+        }
+        else
+            {
+                holder.commonIsVideo_iv.setVisibility(View.INVISIBLE);
+
+            }
+     if (pathString.endsWith(String.valueOf(new Utils.AllDoFilter())))
+        {
+             Glide.with(context).load(R.drawable.ic_launcher_foreground).into(holder.commonFileRv_iv);
+        }
+        else if (pathString.endsWith(String.valueOf(new Utils.AllImgFilter())))
+        {
+             Glide.with(context).load(R.drawable.ic_launcher_foreground).into(holder.commonFileRv_iv);
+
+        }
+        else if (pathString.endsWith(String.valueOf(new Utils.AllAudioFilter())))
+        {
+             Glide.with(context).load(R.drawable.ic_launcher_background).into(holder.commonFileRv_iv);
+
+        }
+        else if (pathString.endsWith(String.valueOf(new Utils.AllPackagesFilter())))
+        {
+             Glide.with(context).load(R.drawable.ic_launcher_foreground).into(holder.commonFileRv_iv);
+
+        }
+
 
         holder.selectAudio_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked)
                 {
-                    list.add(audioString);
+                    list.add(pathString);
                 }
                 else
                 {
-                    list.remove(audioString);
+                    list.remove(pathString);
                 }
             }
         });

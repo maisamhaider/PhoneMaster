@@ -35,10 +35,10 @@ public class WhatsAppStatusAct extends AppCompatActivity {
         File file1 = new File(Environment.getExternalStorageDirectory().getPath() + "/WhatsApp/Media/.Statuses");
 
 
-        Log.i("listSize", String.valueOf(utils.getListFiles(file1, "videos").size()));
+        Log.i("listSize", String.valueOf(utils.getListFiles(file1).size()));
         whatsAppStatus_rv.setLayoutManager(new GridLayoutManager(this, 3));
 
-        WhatsAppStatusAdapter appStatusAdapter = new WhatsAppStatusAdapter(this, utils.getListFiles(file1, "videos"));
+        WhatsAppStatusAdapter appStatusAdapter = new WhatsAppStatusAdapter(this, utils.getListFiles(file1));
         whatsAppStatus_rv.setAdapter(appStatusAdapter);
         appStatusAdapter.notifyDataSetChanged();
 

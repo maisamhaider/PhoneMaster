@@ -65,9 +65,8 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".activities.ChargingLockedScreenAct$FastChargingChargerReceiver"
-             android:enabled="true"
-            tools:ignore="Instantiatable">
+        <receiver android:name=".receivers.FastChargingChargerReceiver"
+             android:enabled="true">
             <intent-filter>
                 <action android:name="android.intent.action.PHONE_STATE"/>
             </intent-filter>

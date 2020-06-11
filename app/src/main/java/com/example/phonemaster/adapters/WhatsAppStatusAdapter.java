@@ -2,8 +2,6 @@ package com.example.phonemaster.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,15 +13,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.phonemaster.R;
 import com.example.phonemaster.activities.OnImageVideoAct;
+import com.example.phonemaster.models.CommonModel;
 
-import java.io.File;
 import java.util.List;
 
 public class WhatsAppStatusAdapter extends RecyclerView.Adapter<WhatsAppStatusAdapter.WhatsAppStatusHolder> {
     Context context;
-    List<File> fileList;
+    List<CommonModel> fileList;
 
-    public WhatsAppStatusAdapter(Context context, List<File> fileList) {
+    public WhatsAppStatusAdapter(Context context, List<CommonModel> fileList) {
         this.context = context;
         this.fileList = fileList;
 
@@ -40,7 +38,7 @@ public class WhatsAppStatusAdapter extends RecyclerView.Adapter<WhatsAppStatusAd
     @Override
     public void onBindViewHolder(@NonNull WhatsAppStatusHolder holder, int position) {
 
-        final String imageVideoString = fileList.get(position).getAbsolutePath();
+        final String imageVideoString = fileList.get(position).getPath();
         if (imageVideoString.endsWith("mp4"))
         {
             holder.isVideo_iv.setVisibility(View.VISIBLE);
