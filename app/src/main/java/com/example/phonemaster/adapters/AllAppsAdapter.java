@@ -21,8 +21,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.example.phonemaster.R;
 import com.example.phonemaster.activities.MainActivity;
-import com.example.phonemaster.models.AllApplicationsModel;
-import com.example.phonemaster.utils.AppUtility;
+ import com.example.phonemaster.utils.AppUtility;
+import com.example.phonemaster.utils.Utils;
 
 
 import java.util.ArrayList;
@@ -33,12 +33,11 @@ import bot.box.appusage.utils.UsageUtils;
 
 public class AllAppsAdapter extends RecyclerView.Adapter<AllAppsAdapter.AllAppsHolder>   {
 
-    private List<AllApplicationsModel> apps;
-    private List<AllApplicationsModel> fullList;
+    private List<String> apps;
+    private List<String> fullList;
     private Context context;
     private AppUtility appUtility;
-    private MainActivity mainActivity;
-
+     private Utils utils;
 
     @SuppressLint("NewApi")
     public AllAppsAdapter(Context context) {
@@ -48,10 +47,9 @@ public class AllAppsAdapter extends RecyclerView.Adapter<AllAppsAdapter.AllAppsH
         apps = new ArrayList<>(  );
         fullList = new ArrayList<>(  );
 
-
      }
 
-     public void setList(List<AllApplicationsModel> apps){
+     public void setList(List<String> apps){
         this.apps.clear();
          this.fullList.clear();
         this.apps = apps;
@@ -68,14 +66,13 @@ public class AllAppsAdapter extends RecyclerView.Adapter<AllAppsAdapter.AllAppsH
     @SuppressLint("NewApi")
     @Override
     public void onBindViewHolder(@NonNull AllAppsHolder holder, final int position) {
-
-         mainActivity = new MainActivity();
-        String appName = apps.get( position ).getAppName();
-        final String appPackage = apps.get( position ).getPackageName();
+        utils = new Utils(context);
+         String appName = utils.GetAppName( apps.get( position )) ;
+        final String appPackage = apps.get( position );
 
         holder.appName_Tv.setText( appName );
 
-        Glide.with(context).load( UsageUtils.parsePackageIcon(apps.get( position ).getPackageName(), R.mipmap.ic_launcher))
+        Glide.with(context).load( UsageUtils.parsePackageIcon(apps.get( position ), R.mipmap.ic_launcher))
                 .transition(new DrawableTransitionOptions().crossFade()).into(holder.appImage_Iv);
 
          if (Monitor.hasUsagePermission())
@@ -95,7 +92,7 @@ public class AllAppsAdapter extends RecyclerView.Adapter<AllAppsAdapter.AllAppsH
         holder.deleteAppImage_Iv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String packageName = apps.get( position ).getPackageName();
+                String packageName = apps.get( position );
 
 
                 if (appUtility.isSystemApp( packageName )) {

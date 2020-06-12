@@ -5,8 +5,10 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.BatteryManager;
+import android.util.Log;
 
 import com.example.phonemaster.activities.ChargingLockedScreenAct;
+
 
 
 public class FastChargingChargerReceiver extends BroadcastReceiver {
@@ -14,7 +16,7 @@ public class FastChargingChargerReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        Log.w(TAG, "onReceive: " );
+        Log.w("TAG", "onReceive: " );
 //        Toast.makeText(context, "onReceive", Toast.LENGTH_SHORT).show();
         KeyguardManager myKM = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
 

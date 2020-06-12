@@ -17,20 +17,19 @@ public class FastChargeAct extends AppCompatActivity {
     FastAllAppsTask allAppsTask;
     FastChargeAllAppsAdapter adapter;
     Db db;
-    LinearLayoutManager linearLayoutManager;
     RecyclerView fastCharge_rv;
-     @Override
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fast_charge);
         fastCharge_rv = findViewById(R.id.fastCharge_rv);
-        linearLayoutManager = new LinearLayoutManager(this);
 
 
         db = new Db(this);
-         adapter = new FastChargeAllAppsAdapter(this);
+        adapter = new FastChargeAllAppsAdapter(this);
 
-         allAppsTask = new FastAllAppsTask(this,adapter,fastCharge_rv,linearLayoutManager,db);
-         allAppsTask.execute();
+        allAppsTask = new FastAllAppsTask(this, adapter, fastCharge_rv, db);
+        allAppsTask.execute();
     }
 }

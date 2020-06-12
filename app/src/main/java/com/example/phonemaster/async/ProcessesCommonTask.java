@@ -6,8 +6,7 @@ import android.os.AsyncTask;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.phonemaster.adapters.FastChargeAllAppsAdapter;
-import com.example.phonemaster.database.Db;
+import com.example.phonemaster.adapters.ProcessesAdapter;
 import com.example.phonemaster.utils.LoadingDialog;
 import com.example.phonemaster.utils.Utils;
 
@@ -15,37 +14,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class FastAllAppsTask extends AsyncTask<Void, Integer, String> {
+public class ProcessesCommonTask extends AsyncTask<Void, Integer, String> {
 
     Context context;
-    private FastChargeAllAppsAdapter appsAdapter;
+    private ProcessesAdapter processesAdapter;
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
     private List<String> list;
     Utils utils;
     LoadingDialog loadingDialog;
-    Db db ;
 
-    public FastAllAppsTask(Context context, FastChargeAllAppsAdapter appsAdapter,
-                           RecyclerView recyclerView,Db db) {
+    public ProcessesCommonTask(Context context, ProcessesAdapter processesAdapter,
+                               RecyclerView recyclerView ) {
         this.context = context;
-        this.appsAdapter = appsAdapter;
+        this.processesAdapter = processesAdapter;
         this.recyclerView = recyclerView;
-        this.linearLayoutManager = linearLayoutManager;
-        this.list = new ArrayList<>();
+         this.list = new ArrayList<>();
         utils = new Utils(context);
         loadingDialog = new LoadingDialog(context);
-        this.db = db;
-
 
     }
 
     @Override
     protected void onPreExecute() {
+
         linearLayoutManager = new LinearLayoutManager(context);
         try {
             loadingDialog.show();
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -55,17 +50,17 @@ public class FastAllAppsTask extends AsyncTask<Void, Integer, String> {
     @Override
     protected String doInBackground(Void... voids) {
 
-            list = utils.GetAllInstalledApkInfo();
-
+        list = utils.getActiveApps();
         return null;
     }
 
     @Override
     protected void onPostExecute(String s) {
+        linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
-        appsAdapter.setList(list,db);
-        recyclerView.setAdapter(appsAdapter);
-        appsAdapter.notifyDataSetChanged();
+        processesAdapter.setApps(list);
+        recyclerView.setAdapter(processesAdapter);
+        processesAdapter.notifyDataSetChanged();
         loadingDialog.dismiss();
 
 

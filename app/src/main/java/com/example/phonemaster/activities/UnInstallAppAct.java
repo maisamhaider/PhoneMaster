@@ -24,7 +24,7 @@ public class UnInstallAppAct extends AppCompatActivity {
         linearLayoutManager.setOrientation( RecyclerView.VERTICAL );
 
         allAppsAdapter = new AllAppsAdapter(this );
-        allAppsTsk = new AllAppsTask(this,allAppsAdapter,allAppsUnInstallApp_rv,linearLayoutManager);
+        allAppsTsk = new AllAppsTask(this,allAppsAdapter,allAppsUnInstallApp_rv);
         allAppsTsk.execute(  );
     }
 }
