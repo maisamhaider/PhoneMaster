@@ -40,6 +40,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import static android.content.Context.ACTIVITY_SERVICE;
+
 public class Utils {
 
     Context context;
@@ -102,14 +104,28 @@ public class Utils {
     public List<ActivityManager.RunningServiceInfo> loadProcessInfo() {
 
 
-        final ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-        final List<ActivityManager.RunningServiceInfo> recentTasks = activityManager.getRunningServices(Integer.MAX_VALUE);
+          ActivityManager activityManager = (ActivityManager) context.getSystemService(ACTIVITY_SERVICE);
+          List<ActivityManager.RunningServiceInfo> recentTasks = activityManager.getRunningServices(Integer.MAX_VALUE);
         return recentTasks;
     }
 
-//    public List<ActivityManager.RunningAppProcessInfo> recentApps() {
-//
-//    }
+    public static List<String> getActiveApps(Context context) {
+
+        PackageManager pm = context.getPackageManager();
+        List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
+        List<String> list = new ArrayList<>();
+
+        for (ApplicationInfo packageInfo : packages) {
+
+            if (!isSTOPPED(packageInfo)) {
+                if (!list.contains( packageInfo.packageName )) {
+                    list.add( packageInfo.packageName );
+                }
+            }
+        }
+
+        return list;
+    }
 
     public List<String> GetAllApkInfo() {
 
@@ -141,13 +157,21 @@ public class Utils {
 
         return ((activityInfo.applicationInfo.flags & ApplicationInfo.FLAG_STOPPED) != 0);
     }
+    private static boolean isSTOPPED(ApplicationInfo pkgInfo) {
+
+        return ((pkgInfo.flags & ApplicationInfo.FLAG_STOPPED) != 0);
+    }
+    private static boolean isSYSTEM(ApplicationInfo pkgInfo) {
+
+        return ((pkgInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0);
+    }
 
     public boolean isSystemPackage(ResolveInfo resolveInfo) {
 
         return ((resolveInfo.activityInfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0);
     }
 
-    public String getApplicationLabel(Context context, String packageName) {
+    public static String getApplicationLabel(Context context, String packageName) {
 
         PackageManager packageManager = context.getPackageManager();
         List<ApplicationInfo> packages = packageManager.getInstalledApplications(PackageManager.GET_META_DATA);

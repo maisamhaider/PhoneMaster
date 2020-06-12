@@ -2,6 +2,7 @@ package com.example.phonemaster.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -11,6 +12,7 @@ import com.example.phonemaster.utils.Utils;
 public class PhoneBoostAct extends AppCompatActivity {
     Utils utils;
     TextView textView;
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,9 +20,9 @@ public class PhoneBoostAct extends AppCompatActivity {
         utils = new Utils(this);
 
         textView = findViewById(R.id.uuu);
-        for (int i = 0; i < utils.loadProcessInfo().size(); i++)
+        for (int i = 0; i < utils.getActiveApps(this).size(); i++)
         {
-            textView.setText(textView.getText()  +utils.loadProcessInfo().get(i).process +"\n\n" );
+            textView.setText(textView.getText()  +utils.getActiveApps(this).get(i)+"\n\n" );
         }
 //        ActivityManager am = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
 //        am.killBackgroundProcesses(PACKAGENAME);
