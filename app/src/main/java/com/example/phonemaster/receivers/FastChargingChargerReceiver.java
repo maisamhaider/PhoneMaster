@@ -8,42 +8,44 @@ import android.os.BatteryManager;
 
 import com.example.phonemaster.activities.ChargingLockedScreenAct;
 
+
 public class FastChargingChargerReceiver extends BroadcastReceiver {
 
-    //TODO Execute the from service class..and service class is not created already.
     @Override
     public void onReceive(Context context, Intent intent) {
+
+        Log.w(TAG, "onReceive: " );
+//        Toast.makeText(context, "onReceive", Toast.LENGTH_SHORT).show();
         KeyguardManager myKM = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
 
-        int batterySource = intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, 0);
+         int batterySource = intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, 0);
 
-        if (batterySource == BatteryManager.BATTERY_PLUGGED_AC) {
-            if( myKM.inKeyguardRestrictedInputMode()) {
-                Intent i = new Intent(context, ChargingLockedScreenAct.class);
-                context.startActivity(i);
-            } else {
-                //it is not locked
-            }
+        Intent i = new Intent(context, ChargingLockedScreenAct.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-        } else if (batterySource == BatteryManager.BATTERY_PLUGGED_USB) {
+            if (batterySource == BatteryManager.BATTERY_PLUGGED_AC) {
+                if(myKM!=null && myKM.inKeyguardRestrictedInputMode()) {
 
-            if( myKM.inKeyguardRestrictedInputMode()) {
-                 Intent i = new Intent(context, ChargingLockedScreenAct.class);
-                context.startActivity(i);
-            } else {
-                //it is not locked
-            }
+                    context.startActivity(i);
 
-        } else if (batterySource == BatteryManager.BATTERY_PLUGGED_WIRELESS) {
+                } else {
+                    //it is not locked
+                     }
 
-            if( myKM.inKeyguardRestrictedInputMode()) {
-                 Intent i = new Intent(context, ChargingLockedScreenAct.class);
-                context.startActivity(i);
-            } else {
-                //it is not locked
-            }
+            } else if (batterySource == BatteryManager.BATTERY_PLUGGED_USB) {
+
+                if(myKM!=null &&  myKM.inKeyguardRestrictedInputMode()) {
+
+                    context.startActivity(i);
+                } else {
+                    //it is not locked
+                }
+
+            } else if (batterySource == BatteryManager.BATTERY_PLUGGED_WIRELESS) {
+                if(myKM!=null &&  myKM.inKeyguardRestrictedInputMode()) {
+                    context.startActivity(i);
+                } else {
+                    //it is not locked
+                }
+                }
         }
-    }
-
-
 }

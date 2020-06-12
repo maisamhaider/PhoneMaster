@@ -2,7 +2,10 @@ package com.example.phonemaster.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.app.ActivityManager;
 import android.app.Service;
 import android.content.Context;
@@ -21,6 +24,7 @@ import android.widget.Toast;
 import com.example.phonemaster.R;
 import com.example.phonemaster.permission.Permissions;
 import com.example.phonemaster.receivers.FastChargingChargerReceiver;
+import com.example.phonemaster.services.MyService;
 import com.example.phonemaster.utils.Utils;
 
 import java.util.Objects;
@@ -30,6 +34,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Permissions permissions;
     private Utils utils;
     private SharedPreferences preferences;
+    private int REQUEST_READ_PHONE_STATE = 5005;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +55,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button deepClean_btn = findViewById(R.id.deepClean_btn);
         Button smartCharging_btn = findViewById(R.id.smartCharging_btn);
 
+
+//        if(Build.VERSION.SDK_INT >25){
+//            startForegroundService(new Intent(this, Service.class));
+//        }else{
+//            startService(new Intent(this, Service.class));
+//        }
+//        if (preferences.getBoolean("SMART_CHARGE",false))
+//        {
+//            FastChargingChargerReceiver fastChargingChargerReceiver = new FastChargingChargerReceiver();
+//            IntentFilter intentFilter = new IntentFilter( Intent.ACTION_BATTERY_CHANGED );
+//            getApplicationContext().registerReceiver( fastChargingChargerReceiver, intentFilter );
+//        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            startForegroundService(new Intent(this, MyService.class));
+        }else{
+            startService(new Intent(this, MyService.class));
+        }
+
+        int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE);
+
+        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_PHONE_STATE}, REQUEST_READ_PHONE_STATE);
+        } else {
+            Toast.makeText(this, "Read phone state", Toast.LENGTH_SHORT).show();
+        }
 
         cleanWhatsApp_btn.setOnClickListener(this);
         cpuCooler_btn.setOnClickListener(this);
