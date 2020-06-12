@@ -571,6 +571,24 @@ public class Utils {
         }
         return docList;
     }
+    public float getAllSize( String path)
+    {
+        float docSize = 0;
+        File fold = new File(path);
+        File[] mlist = fold.listFiles();
+        File[] mFilelist = fold.listFiles();
+        for (File f : mlist) {
+            if (f.isDirectory()) {
+                getAllDocs(f.getAbsolutePath());
+            }
+        }
+        for (File f : mFilelist) {
+            DeepCleanDocsModel doc = new DeepCleanDocsModel();
+            docSize = docSize + f.length();
+        }
+        return  docSize;
+    }
+
 
     public float getAllDocSize( String path)
     {
@@ -715,6 +733,5 @@ public class Utils {
         }
         return String.format("%.2f",finalSize)+sizePrefix;
     }
-
 
 }
