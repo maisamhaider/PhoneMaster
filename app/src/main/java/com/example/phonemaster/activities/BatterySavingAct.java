@@ -2,16 +2,11 @@ package com.example.phonemaster.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ActivityManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 
 import com.example.phonemaster.R;
 import com.example.phonemaster.utils.Utils;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class BatterySavingAct extends AppCompatActivity {
     Utils utils;

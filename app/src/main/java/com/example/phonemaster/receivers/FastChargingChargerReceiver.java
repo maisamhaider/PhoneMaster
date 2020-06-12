@@ -26,29 +26,18 @@ public class FastChargingChargerReceiver extends BroadcastReceiver {
         Intent i = new Intent(context, ChargingLockedScreenAct.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
             if (batterySource == BatteryManager.BATTERY_PLUGGED_AC) {
-                if(myKM!=null && myKM.inKeyguardRestrictedInputMode()) {
+
 
                     context.startActivity(i);
 
-                } else {
-                    //it is not locked
-                     }
 
             } else if (batterySource == BatteryManager.BATTERY_PLUGGED_USB) {
 
-                if(myKM!=null &&  myKM.inKeyguardRestrictedInputMode()) {
-
                     context.startActivity(i);
-                } else {
-                    //it is not locked
-                }
 
             } else if (batterySource == BatteryManager.BATTERY_PLUGGED_WIRELESS) {
-                if(myKM!=null &&  myKM.inKeyguardRestrictedInputMode()) {
+
                     context.startActivity(i);
-                } else {
-                    //it is not locked
-                }
                 }
         }
 }

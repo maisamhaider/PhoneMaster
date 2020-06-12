@@ -1,19 +1,13 @@
 package com.example.phonemaster.async;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
-import android.view.LayoutInflater;
-import android.view.View;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-import com.example.phonemaster.R;
 import com.example.phonemaster.adapters.AllAppsAdapter;
 import com.example.phonemaster.models.AllApplicationsModel;
 import com.example.phonemaster.utils.LoadingDialog;

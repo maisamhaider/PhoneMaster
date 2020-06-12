@@ -3,12 +3,7 @@ package com.example.phonemaster.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Path;
 import android.os.Bundle;
-import android.os.Environment;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -18,7 +13,6 @@ import com.example.phonemaster.async.WhatsAppCommonTask;
 import com.example.phonemaster.utils.Utils;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 public class WhatsAppImagesListAct extends AppCompatActivity {

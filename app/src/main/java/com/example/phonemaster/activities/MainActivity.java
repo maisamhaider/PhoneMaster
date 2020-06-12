@@ -7,10 +7,8 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.app.ActivityManager;
-import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -23,7 +21,6 @@ import android.widget.Toast;
 
 import com.example.phonemaster.R;
 import com.example.phonemaster.permission.Permissions;
-import com.example.phonemaster.receivers.FastChargingChargerReceiver;
 import com.example.phonemaster.services.MyService;
 import com.example.phonemaster.utils.Utils;
 

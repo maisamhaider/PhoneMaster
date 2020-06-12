@@ -6,9 +6,7 @@ import android.os.AsyncTask;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.phonemaster.adapters.DeepCleanImagesAdapter;
 import com.example.phonemaster.adapters.DeepCleanVideosAdapter;
-import com.example.phonemaster.models.DeepCleanImagesModel;
 import com.example.phonemaster.models.DeepCleanVideosModel;
 import com.example.phonemaster.utils.LoadingDialog;
 import com.example.phonemaster.utils.Utils;

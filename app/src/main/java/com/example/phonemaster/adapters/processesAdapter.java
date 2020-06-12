@@ -3,18 +3,13 @@ package com.example.phonemaster.adapters;
 import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,14 +18,12 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.example.phonemaster.R;
 import com.example.phonemaster.activities.MainActivity;
-import com.example.phonemaster.models.AllApplicationsModel;
 import com.example.phonemaster.utils.AppUtility;
 import com.example.phonemaster.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import bot.box.appusage.handler.Monitor;
 import bot.box.appusage.utils.UsageUtils;
 
 public class processesAdapter extends RecyclerView.Adapter<processesAdapter.AllAppsHolder>   {

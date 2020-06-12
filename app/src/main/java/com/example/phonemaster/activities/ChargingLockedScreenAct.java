@@ -27,9 +27,9 @@ public class ChargingLockedScreenAct extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED|
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
-//            this.setShowWhenLocked(true);
-//        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
+            this.setShowWhenLocked(true);
+        }
 
     }
 

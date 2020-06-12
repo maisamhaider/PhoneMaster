@@ -20,10 +20,10 @@ public class PhoneBoostAct extends AppCompatActivity {
         utils = new Utils(this);
 
         textView = findViewById(R.id.uuu);
-        for (int i = 0; i < utils.getActiveApps(this).size(); i++)
-        {
-            textView.setText(textView.getText()  +utils.getActiveApps(this).get(i)+"\n\n" );
-        }
+//        for (int i = 0; i < utils.getActiveApps(PhoneBoostAct.this).size(); i++)
+//        {
+//            textView.setText(textView.getText()  +utils.getActiveApps(PhoneBoostAct.this).get(i)+"\n\n" );
+//        }
 //        ActivityManager am = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
 //        am.killBackgroundProcesses(PACKAGENAME);
     }

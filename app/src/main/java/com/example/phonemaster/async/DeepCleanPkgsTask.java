@@ -4,13 +4,10 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Environment;
 
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.phonemaster.adapters.DeepCleanAudioAdapter;
 import com.example.phonemaster.adapters.DeepCleanPackagesAdapter;
-import com.example.phonemaster.models.DeepCleanAudioModel;
 import com.example.phonemaster.models.DeepCleanPackagesModel;
 import com.example.phonemaster.utils.LoadingDialog;
 import com.example.phonemaster.utils.Utils;

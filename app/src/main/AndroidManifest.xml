@@ -40,6 +40,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".activities.ChargingLockedScreenAct"
             android:showOnLockScreen="true"
+            android:launchMode="singleInstance"
             android:screenOrientation="sensorPortrait"
 
         />

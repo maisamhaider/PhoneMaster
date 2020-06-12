@@ -12,8 +12,6 @@ import android.widget.TextView;
 import com.example.phonemaster.R;
 import com.example.phonemaster.utils.Utils;
 
-import java.io.File;
-
 public class CleanWhatsAppAct extends AppCompatActivity implements View.OnClickListener {
 
     @Override
