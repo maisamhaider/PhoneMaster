@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp">
+
+
+    <ImageView
+        android:id="@+id/commonFileRv_iv"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="4dp"
+        android:src="@drawable/ic_launcher_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.487" />
+
+    <ImageView
+        android:src="@mipmap/ic_launcher"
+        android:id="@+id/commonIsVideo_iv"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/commonFileRv_iv"
+        app:layout_constraintEnd_toEndOf="@+id/commonFileRv_iv"
+        app:layout_constraintStart_toStartOf="@+id/commonFileRv_iv"
+        app:layout_constraintTop_toTopOf="@+id/commonFileRv_iv" />
+
+    <TextView
+        android:id="@+id/commonFileName_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="file"
+        app:layout_constraintStart_toStartOf="@+id/commonFileRv_iv"
+        app:layout_constraintTop_toBottomOf="@+id/commonFileRv_iv" />
+
+    <TextView
+        android:id="@+id/commonFileSize_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="file"
+        app:layout_constraintEnd_toEndOf="@+id/selectCommon_cb"
+        app:layout_constraintHorizontal_bias="0.272"
+        app:layout_constraintStart_toStartOf="@+id/selectCommon_cb"
+        app:layout_constraintTop_toBottomOf="@+id/selectCommon_cb" />
+
+    <CheckBox
+        android:id="@+id/selectCommon_cb"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.508" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
