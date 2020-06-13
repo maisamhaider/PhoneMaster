@@ -84,6 +84,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
                 <Button
+                    android:text="Junk Clean"
+                    android:id="@+id/junkClean_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <Button
                     android:text="CPU Cooler"
                     android:id="@+id/cpuCooler_btn"
                     android:layout_width="match_parent"

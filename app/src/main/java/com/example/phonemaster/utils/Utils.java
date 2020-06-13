@@ -1,6 +1,5 @@
 package com.example.phonemaster.utils;
 
-import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -22,13 +21,13 @@ import android.widget.Toast;
 import androidx.core.content.ContextCompat;
 
 import com.example.phonemaster.R;
+import com.example.phonemaster.models.CommonModel;
 import com.example.phonemaster.models.DeepCleanAudioModel;
 import com.example.phonemaster.models.DeepCleanDocsModel;
 import com.example.phonemaster.models.DeepCleanImagesModel;
 import com.example.phonemaster.models.DeepCleanPackagesModel;
 import com.example.phonemaster.models.DeepCleanVideosModel;
 import com.example.phonemaster.models.NumberAndNamesModel;
-import com.example.phonemaster.models.CommonModel;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -38,7 +37,6 @@ import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import static android.content.Context.ACTIVITY_SERVICE;
 
