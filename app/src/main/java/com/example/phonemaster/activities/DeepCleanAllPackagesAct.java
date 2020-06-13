@@ -29,8 +29,7 @@ public class DeepCleanAllPackagesAct extends AppCompatActivity {
         setContentView(R.layout.activity_deep_clean_all_packages);
 
         utils = new Utils(this);
-        RecyclerView deepCleanAllPkgs_rv;
-        deepCleanAllPkgs_rv = findViewById(R.id.deepCleanAllPkgs_rv);
+        RecyclerView deepCleanAllPkgs_rv = findViewById(R.id.deepCleanAllPkgs_rv);
         Button deepCleanPkgs_btn = findViewById(R.id.deepCleanPkgs_btn);
 
         deepCleanPackagesAdapter = new DeepCleanPackagesAdapter(this);

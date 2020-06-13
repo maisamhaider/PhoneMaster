@@ -2,17 +2,13 @@ package com.example.phonemaster.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,23 +20,22 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.example.phonemaster.R;
 import com.example.phonemaster.activities.MainActivity;
 import com.example.phonemaster.database.Db;
-import com.example.phonemaster.models.AllApplicationsModel;
 import com.example.phonemaster.utils.AppUtility;
+import com.example.phonemaster.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import bot.box.appusage.handler.Monitor;
 import bot.box.appusage.utils.UsageUtils;
 
 public class FastChargeAllAppsAdapter extends RecyclerView.Adapter<FastChargeAllAppsAdapter.AllAppsHolder>   {
 
-    private List<AllApplicationsModel> apps;
-    private List<AllApplicationsModel> fullList;
+    private List<String> apps;
+    private List<String> fullList;
     private Context context;
     private AppUtility appUtility;
-    private MainActivity mainActivity;
-    private Db db;
+     private Db db;
+    private Utils utils;
 
 
     @SuppressLint("NewApi")
@@ -55,7 +50,7 @@ public class FastChargeAllAppsAdapter extends RecyclerView.Adapter<FastChargeAll
 
      }
 
-     public void setList(List<AllApplicationsModel> apps,Db db){
+     public void setList(List<String> apps,Db db){
         this.apps.clear();
          this.fullList.clear();
         this.apps = apps;
@@ -73,10 +68,9 @@ public class FastChargeAllAppsAdapter extends RecyclerView.Adapter<FastChargeAll
     @SuppressLint("NewApi")
     @Override
     public void onBindViewHolder(@NonNull AllAppsHolder holder, final int position) {
-
-         mainActivity = new MainActivity();
-        String appName = apps.get( position ).getAppName();
-        final String appPackage = apps.get( position ).getPackageName();
+            utils = new Utils(context);
+         String appName = utils.GetAppName(apps.get( position ));
+        final String appPackage = apps.get( position );
 
         holder.fastChargeAllAppName_Tv.setText( appName );
 
@@ -98,7 +92,7 @@ public class FastChargeAllAppsAdapter extends RecyclerView.Adapter<FastChargeAll
 
              }
          }
-        Glide.with(context).load( UsageUtils.parsePackageIcon(apps.get( position ).getPackageName(), R.mipmap.ic_launcher))
+        Glide.with(context).load( UsageUtils.parsePackageIcon(apps.get( position ), R.mipmap.ic_launcher))
                 .transition(new DrawableTransitionOptions().crossFade()).into(holder.fastChargeAllAppImage_Iv);
 
 
@@ -107,7 +101,7 @@ public class FastChargeAllAppsAdapter extends RecyclerView.Adapter<FastChargeAll
         holder.fastChargeAllApp_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                String packageName = apps.get( position ).getPackageName();
+                String packageName = apps.get( position ) ;
 
                 if (isChecked)
                 {

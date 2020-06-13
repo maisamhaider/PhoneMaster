@@ -7,8 +7,10 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.app.ActivityManager;
+import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -21,6 +23,7 @@ import android.widget.Toast;
 
 import com.example.phonemaster.R;
 import com.example.phonemaster.permission.Permissions;
+import com.example.phonemaster.receivers.FastChargingChargerReceiver;
 import com.example.phonemaster.services.MyService;
 import com.example.phonemaster.utils.Utils;
 
@@ -51,19 +54,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button unInstallApp_btn = findViewById(R.id.unInstallApp_btn);
         Button deepClean_btn = findViewById(R.id.deepClean_btn);
         Button smartCharging_btn = findViewById(R.id.smartCharging_btn);
+        Button junkClean_btn = findViewById(R.id.junkClean_btn);
 
 
-//        if(Build.VERSION.SDK_INT >25){
-//            startForegroundService(new Intent(this, Service.class));
-//        }else{
-//            startService(new Intent(this, Service.class));
-//        }
-//        if (preferences.getBoolean("SMART_CHARGE",false))
-//        {
-//            FastChargingChargerReceiver fastChargingChargerReceiver = new FastChargingChargerReceiver();
-//            IntentFilter intentFilter = new IntentFilter( Intent.ACTION_BATTERY_CHANGED );
-//            getApplicationContext().registerReceiver( fastChargingChargerReceiver, intentFilter );
-//        }
+
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             startForegroundService(new Intent(this, MyService.class));
@@ -88,6 +82,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         unInstallApp_btn.setOnClickListener(this);
         deepClean_btn.setOnClickListener(this);
         smartCharging_btn.setOnClickListener(this);
+        junkClean_btn.setOnClickListener(this);
+
+
         ramAndStorageFun();
 
     }
@@ -128,6 +125,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     else
                         Toast.makeText(this, "Permission is not granted ", Toast.LENGTH_SHORT).show();
                     break;
+                case R.id.junkClean_btn:
+                    if (permissions.permission())
+                    {
+                        Intent cleanWhatsAppActIntent = new Intent(this, JunkFilesAct.class);
+                        startActivity(cleanWhatsAppActIntent);
+                    }
+                    else
+                        Toast.makeText(this, "Permission is not granted ", Toast.LENGTH_SHORT).show();
+                    break;
+
                 case R.id.cpuCooler_btn:
                     Intent cpuCoolerIntent = new Intent(this, CpuCooler.class);
                     startActivity(cpuCoolerIntent);

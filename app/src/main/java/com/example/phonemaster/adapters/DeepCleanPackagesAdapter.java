@@ -60,6 +60,7 @@ public class DeepCleanPackagesAdapter extends RecyclerView.Adapter<DeepCleanPack
 
         holder.deepCleanPkgName_tv.setText(pkgName);
 
+
         holder.selectPkg_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

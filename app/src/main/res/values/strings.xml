@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">PhoneMaster</string>
     <string name="clean">Clean</string>
+    <string name="clear">Clear</string>
 </resources>

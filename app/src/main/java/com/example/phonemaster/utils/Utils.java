@@ -1,6 +1,5 @@
 package com.example.phonemaster.utils;
 
-import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -22,13 +21,13 @@ import android.widget.Toast;
 import androidx.core.content.ContextCompat;
 
 import com.example.phonemaster.R;
+import com.example.phonemaster.models.CommonModel;
 import com.example.phonemaster.models.DeepCleanAudioModel;
 import com.example.phonemaster.models.DeepCleanDocsModel;
 import com.example.phonemaster.models.DeepCleanImagesModel;
 import com.example.phonemaster.models.DeepCleanPackagesModel;
 import com.example.phonemaster.models.DeepCleanVideosModel;
 import com.example.phonemaster.models.NumberAndNamesModel;
-import com.example.phonemaster.models.CommonModel;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -38,7 +37,6 @@ import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import static android.content.Context.ACTIVITY_SERVICE;
 
@@ -103,7 +101,6 @@ public class Utils {
 
     public List<ActivityManager.RunningServiceInfo> loadProcessInfo() {
 
-
           ActivityManager activityManager = (ActivityManager) context.getSystemService(ACTIVITY_SERVICE);
           List<ActivityManager.RunningServiceInfo> recentTasks = activityManager.getRunningServices(Integer.MAX_VALUE);
         return recentTasks;
@@ -123,9 +120,9 @@ public class Utils {
                 }
             }
         }
-
         return list;
     }
+
 
     public List<String> GetAllApkInfo() {
 
@@ -171,38 +168,6 @@ public class Utils {
         return ((resolveInfo.activityInfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0);
     }
 
-    public static String getApplicationLabel(Context context, String packageName) {
-
-        PackageManager packageManager = context.getPackageManager();
-        List<ApplicationInfo> packages = packageManager.getInstalledApplications(PackageManager.GET_META_DATA);
-        String label = null;
-
-        for (int i = 0; i < packages.size(); i++) {
-
-            ApplicationInfo temp = packages.get(i);
-
-            if (temp.packageName.equals(packageName))
-                label = packageManager.getApplicationLabel(temp).toString();
-        }
-
-        return label;
-    }
-
-    public Drawable getAppIconByPackageName(String ApkTempPackageName) {
-
-        Drawable drawable;
-
-        try {
-            drawable = context.getPackageManager().getApplicationIcon(ApkTempPackageName);
-
-        } catch (PackageManager.NameNotFoundException e) {
-
-            e.printStackTrace();
-
-            drawable = ContextCompat.getDrawable(context, R.mipmap.ic_launcher);
-        }
-        return drawable;
-    }
 
     public String GetAppName(String ApkPackageName) {
 
@@ -234,30 +199,30 @@ public class Utils {
         return (usedData * 100 / totalData);
     }
 
-    public static long getFolderSize(String dir) {
-
-        File f = new File(dir);
-
-        String listFiles[] = f.list();
-        long totalSize = 0;
-        long folderAmount = 0;
-        for (String file : listFiles) {
-
-            File folder = new File(dir + "/" + file);
-            if (folder.isDirectory()) {
-                totalSize += getFolderSize(folder.getAbsolutePath());
-                if (totalSize == 0) {
-                    folderAmount++;
-                }
-            } else {
-                totalSize += folder.length();
-            }
-            if (totalSize == 0) {
-                folderAmount++;
-            }
-        }
-        return folderAmount;
-    }
+//    public static long getFolderSize(String dir) {
+//
+//        File f = new File(dir);
+//
+//        String listFiles[] = f.list();
+//        long totalSize = 0;
+//        long folderAmount = 0;
+//        for (String file : listFiles) {
+//
+//            File folder = new File(dir + "/" + file);
+//            if (folder.isDirectory()) {
+//                totalSize += getFolderSize(folder.getAbsolutePath());
+//                if (totalSize == 0) {
+//                    folderAmount++;
+//                }
+//            } else {
+//                totalSize += folder.length();
+//            }
+//            if (totalSize == 0) {
+//                folderAmount++;
+//            }
+//        }
+//        return folderAmount;
+//    }
 
     public List<String> GetAllInstalledApkInfo() {
 
@@ -368,40 +333,40 @@ public class Utils {
         }
     }
 
-    public List<NumberAndNamesModel> getContactList() {
-        ContentResolver cr = context.getContentResolver();
-        Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI,
-                null, null, null, null);
-        List<NumberAndNamesModel> numberAndNamesModelList = new ArrayList<>();
-
-        if ((cur != null ? cur.getCount() : 0) > 0) {
-            while (cur != null && cur.moveToNext()) {
-                String id = cur.getString(
-                        cur.getColumnIndex(ContactsContract.Contacts._ID));
-                String name = cur.getString(cur.getColumnIndex(
-                        ContactsContract.Contacts.DISPLAY_NAME));
-
-                if (cur.getInt(cur.getColumnIndex(
-                        ContactsContract.Contacts.HAS_PHONE_NUMBER)) > 0) {
-                    Cursor pCur = cr.query(
-                            ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-                            null,
-                            ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?",
-                            new String[]{id}, null);
-                    while (pCur.moveToNext()) {
-                        String phoneNo = pCur.getString(pCur.getColumnIndex(
-                                ContactsContract.CommonDataKinds.Phone.NUMBER));
-                        numberAndNamesModelList.add(new NumberAndNamesModel(name, phoneNo));
-                    }
-                    pCur.close();
-                }
-            }
-        }
-        if (cur != null) {
-            cur.close();
-        }
-        return numberAndNamesModelList;
-    }
+//    public List<NumberAndNamesModel> getContactList() {
+//        ContentResolver cr = context.getContentResolver();
+//        Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI,
+//                null, null, null, null);
+//        List<NumberAndNamesModel> numberAndNamesModelList = new ArrayList<>();
+//
+//        if ((cur != null ? cur.getCount() : 0) > 0) {
+//            while (cur != null && cur.moveToNext()) {
+//                String id = cur.getString(
+//                        cur.getColumnIndex(ContactsContract.Contacts._ID));
+//                String name = cur.getString(cur.getColumnIndex(
+//                        ContactsContract.Contacts.DISPLAY_NAME));
+//
+//                if (cur.getInt(cur.getColumnIndex(
+//                        ContactsContract.Contacts.HAS_PHONE_NUMBER)) > 0) {
+//                    Cursor pCur = cr.query(
+//                            ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+//                            null,
+//                            ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?",
+//                            new String[]{id}, null);
+//                    while (pCur.moveToNext()) {
+//                        String phoneNo = pCur.getString(pCur.getColumnIndex(
+//                                ContactsContract.CommonDataKinds.Phone.NUMBER));
+//                        numberAndNamesModelList.add(new NumberAndNamesModel(name, phoneNo));
+//                    }
+//                    pCur.close();
+//                }
+//            }
+//        }
+//        if (cur != null) {
+//            cur.close();
+//        }
+//        return numberAndNamesModelList;
+//    }
 
     public List<DeepCleanImagesModel> getAllImagePaths() {
         List<DeepCleanImagesModel> list = new ArrayList<>();
