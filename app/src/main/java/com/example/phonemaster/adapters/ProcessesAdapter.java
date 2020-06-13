@@ -26,7 +26,7 @@ import java.util.List;
 
 import bot.box.appusage.utils.UsageUtils;
 
-public class processesAdapter extends RecyclerView.Adapter<processesAdapter.AllAppsHolder>   {
+public class ProcessesAdapter extends RecyclerView.Adapter<ProcessesAdapter.AllAppsHolder>   {
 
     private List<ActivityManager.RunningServiceInfo> apps;
     private List<String> fullList;
@@ -37,7 +37,7 @@ public class processesAdapter extends RecyclerView.Adapter<processesAdapter.AllA
 
 
     @SuppressLint("NewApi")
-    public processesAdapter(Context context,List<ActivityManager.RunningServiceInfo> apps) {
+    public ProcessesAdapter(Context context, List<ActivityManager.RunningServiceInfo> apps) {
 
         this.context = context;
         appUtility = new AppUtility( context );
