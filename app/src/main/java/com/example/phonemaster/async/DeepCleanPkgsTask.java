@@ -4,12 +4,10 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Environment;
 
-import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.phonemaster.adapters.DeepCleanAudioAdapter;
 import com.example.phonemaster.adapters.DeepCleanPackagesAdapter;
-import com.example.phonemaster.models.DeepCleanAudioModel;
 import com.example.phonemaster.models.DeepCleanPackagesModel;
 import com.example.phonemaster.utils.LoadingDialog;
 import com.example.phonemaster.utils.Utils;
@@ -57,7 +55,9 @@ public class DeepCleanPkgsTask extends AsyncTask<Void, Integer, String> {
 
     @Override
     protected void onPostExecute(String s) {
-        recyclerView.setLayoutManager(new GridLayoutManager(context,3));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
+        linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
+        recyclerView.setLayoutManager(linearLayoutManager);
         deepCleanPackagesAdapter.setFileList(list);
         recyclerView.setAdapter(deepCleanPackagesAdapter);
         deepCleanPackagesAdapter.notifyDataSetChanged();

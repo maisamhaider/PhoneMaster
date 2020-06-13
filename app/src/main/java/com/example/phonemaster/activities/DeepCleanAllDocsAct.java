@@ -9,9 +9,7 @@ import android.widget.Button;
 
 import com.example.phonemaster.R;
 import com.example.phonemaster.adapters.DeepCleanDocsAdapter;
-import com.example.phonemaster.adapters.DeepCleanVideosAdapter;
 import com.example.phonemaster.async.DeepCleanDocsTask;
-import com.example.phonemaster.async.DeepCleanVideosTask;
 import com.example.phonemaster.utils.Utils;
 
 import java.io.File;

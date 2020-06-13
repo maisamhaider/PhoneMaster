@@ -2,18 +2,11 @@ package com.example.phonemaster.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
-import android.app.ActivityManager;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 
 import android.widget.TextView;
 import com.example.phonemaster.R;
 import com.example.phonemaster.utils.Utils;
-
-
- import java.util.List;
 
 public class CpuCooler extends AppCompatActivity {
     Utils utils ;
@@ -29,7 +22,7 @@ public class CpuCooler extends AppCompatActivity {
         textView = findViewById(R.id.qwer);
         utils = new Utils(this);
 
-                for (int i = 0; i < utils.loadProcessInfo().size(); i++)
+        for (int i = 0; i < utils.loadProcessInfo().size(); i++)
         {
             textView.setText(textView.getText()  +utils.loadProcessInfo().get(i).process  +"\n\n" );
         }

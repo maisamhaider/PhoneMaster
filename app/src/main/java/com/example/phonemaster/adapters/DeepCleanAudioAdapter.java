@@ -12,10 +12,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.phonemaster.R;
 import com.example.phonemaster.models.DeepCleanAudioModel;
-import com.example.phonemaster.models.DeepCleanVideosModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +44,7 @@ public class DeepCleanAudioAdapter extends RecyclerView.Adapter<DeepCleanAudioAd
     @NonNull
     @Override
     public WhatsAppStatusHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.deep_clean_audio_rv_layout, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.common_rv_layout, parent, false);
 
         return new WhatsAppStatusHolder(view);
     }
@@ -57,7 +55,7 @@ public class DeepCleanAudioAdapter extends RecyclerView.Adapter<DeepCleanAudioAd
         final String audioString = fileList.get(position).getAudioPath();
         final String audioName = fileList.get(position).getAudioName();
 
-        holder.deepCleanAudioName_tv.setText(audioName);
+        holder.commonFileName_tv.setText(audioName);
 
         holder.selectAudio_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -82,16 +80,18 @@ public class DeepCleanAudioAdapter extends RecyclerView.Adapter<DeepCleanAudioAd
 
     class WhatsAppStatusHolder extends RecyclerView.ViewHolder {
 
-        ImageView deepCleanAudioRv_iv;
+        ImageView commonFileRv_iv,commonIsVideo_iv;
         CheckBox selectAudio_cb;
-        TextView deepCleanAudioName_tv;
+        TextView commonFileName_tv,commonFileSize_tv;
 
         public WhatsAppStatusHolder(@NonNull View itemView) {
             super(itemView);
 
-            deepCleanAudioRv_iv = itemView.findViewById(R.id.deepCleanAudioRv_iv);
-            selectAudio_cb = itemView.findViewById(R.id.selectAudio_cb);
-            deepCleanAudioName_tv = itemView.findViewById(R.id.deepCleanAudioName_tv);
+            commonIsVideo_iv = itemView.findViewById(R.id.commonIsVideo_iv);
+            commonFileRv_iv = itemView.findViewById(R.id.commonFileRv_iv);
+            selectAudio_cb = itemView.findViewById(R.id.selectCommon_cb);
+            commonFileName_tv = itemView.findViewById(R.id.commonFileName_tv);
+            commonFileSize_tv = itemView.findViewById(R.id.commonFileSize_tv);
 
         }
     }

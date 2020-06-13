@@ -23,6 +23,14 @@
     <uses-permission android:name="android.permission.WRITE_CONTACTS" />
     <uses-permission android:name="android.permission.PROCESS_INCOMING_CALLS" />
 
+    <!-- To use SMS based services -->
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+
+
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -32,6 +40,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".activities.ChargingLockedScreenAct"
             android:showOnLockScreen="true"
+            android:launchMode="singleInstance"
             android:screenOrientation="sensorPortrait"
 
         />
@@ -45,10 +54,10 @@
         <activity android:name=".activities.DeepCleanAllImagesAct" />
         <activity android:name=".activities.DeepCleanAct" />
         <activity android:name=".activities.UnInstallAppAct" />
+        <activity android:name=".activities.BatterySavingAct" />
         <activity android:name=".activities.HarassmentFilterAct" />
         <activity android:name=".activities.OnImageVideoAct" />
         <activity android:name=".activities.WhatsAppStatusAct" />
-        <activity android:name=".activities.BatterySavingAct" />
         <activity android:name=".activities.PhoneBoostAct" />
         <activity android:name=".activities.CpuCooler" />
         <activity android:name=".activities.WhatsAppDocumentsListAct" />
@@ -66,11 +75,18 @@
         </activity>
 
         <receiver android:name=".receivers.FastChargingChargerReceiver"
-             android:enabled="true">
+             android:enabled="true"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.PHONE_STATE"/>
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED"/>
+                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED"/>
             </intent-filter>
         </receiver>
+
+        <service android:name=".services.MyService"
+            android:enabled="true"
+            android:exported="false"/>
     </application>
 
 </manifest>

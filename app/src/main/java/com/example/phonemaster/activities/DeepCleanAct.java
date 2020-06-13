@@ -11,8 +11,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.phonemaster.R;
-import com.example.phonemaster.adapters.DeepCleanVideosAdapter;
-import com.example.phonemaster.async.DeepCleanPkgsTask;
 import com.example.phonemaster.permission.Permissions;
 import com.example.phonemaster.utils.Utils;
 
@@ -40,15 +38,23 @@ public class DeepCleanAct extends AppCompatActivity {
         deepCleanVideos_iv3 = findViewById(R.id.deepCleanVideos_iv3);
         deepCleanVideos_iv4 = findViewById(R.id.deepCleanVideos_iv4);
 
-        TextView deepCleanImagesSize_tv,deepCleanVideosSize_tv,deepCleanAudiosDataSize_tv,deepCleanLargeFileSize_tv,deepCleanInstallationPkgseSize_tv;
+        TextView deepCleanWhatsAppDataSize_tv,deepCleanImagesSize_tv,deepCleanVideosSize_tv,deepCleanAudiosDataSize_tv,deepCleanLargeFileSize_tv,deepCleanInstallationPkgseSize_tv;
         deepCleanImagesSize_tv = findViewById(R.id.deepCleanImagesSize_tv);
         deepCleanVideosSize_tv = findViewById(R.id.deepCleanVideosSize_tv);
         deepCleanAudiosDataSize_tv = findViewById(R.id.deepCleanAudiosDataSize_tv);
         deepCleanLargeFileSize_tv = findViewById(R.id.deepCleanLargeFileSize_tv);
         deepCleanInstallationPkgseSize_tv = findViewById(R.id.deepCleanInstallationPkgseSize_tv);
+        deepCleanWhatsAppDataSize_tv = findViewById(R.id.deepCleanWhatsAppDataSize_tv);
 
 
+        float  bUDataSize = utils.getAllSize(Environment.getExternalStorageDirectory().getPath()+"/WhatsApp/Databases");
+        float cHDataSize = utils.getAllSize(Environment.getExternalStorageDirectory().getPath()+"/WhatsApp/Backups");
+        float whatsAppAudioSize =  utils.getAllSize(Environment.getExternalStorageDirectory().getPath()+"/WhatsApp/Media/WhatsApp Audio");
+        float whatsAppVideoSize =  utils.getAllSize(Environment.getExternalStorageDirectory().getPath()+"/WhatsApp/Media/WhatsApp Video");
+        float whatsAppDocumentsSize =  utils.getAllSize(Environment.getExternalStorageDirectory().getPath()+"/WhatsApp/Media/WhatsApp Documents");
+        float whatsAppImagesSize = utils.getAllSize(Environment.getExternalStorageDirectory().getPath()+"/WhatsApp/Media/WhatsApp Images");
 
+        float whatsAppDataSize = bUDataSize+cHDataSize+whatsAppAudioSize+whatsAppVideoSize+whatsAppDocumentsSize+whatsAppImagesSize;
         float imagesSize = utils.getAllIAAsSize("images");
         float VideosSize = utils.getAllIAAsSize("videos");
         float audiosSize = utils.getAllIAAsSize("audios");
@@ -60,6 +66,8 @@ public class DeepCleanAct extends AppCompatActivity {
         deepCleanAudiosDataSize_tv.setText(utils.getCalculatedDataSize(audiosSize));
         deepCleanLargeFileSize_tv.setText(utils.getCalculatedDataSize(docSize));
         deepCleanInstallationPkgseSize_tv.setText(utils.getCalculatedDataSize(pkgSize));
+        deepCleanWhatsAppDataSize_tv.setText(utils.getCalculatedDataSize(whatsAppDataSize));
+
 
         Glide.with(this)
                 .load(utils.getAllImagePaths().get(utils.getAllImagePaths().size()-1).getImagePath())
@@ -88,7 +96,16 @@ public class DeepCleanAct extends AppCompatActivity {
                 .into(deepCleanVideos_iv4);
 
 
-
+        deepCleanWhatsAppDataSize_tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (permissions.permission())
+                {
+                    Intent intent = new Intent(DeepCleanAct.this,CleanWhatsAppAct.class);
+                    startActivity(intent);
+                }
+            }
+        });
         deepCleanImagesSize_tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

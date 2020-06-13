@@ -7,7 +7,6 @@ import android.os.AsyncTask;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.phonemaster.adapters.AllAppsAdapter;
 import com.example.phonemaster.adapters.FastChargeAllAppsAdapter;
 import com.example.phonemaster.database.Db;
 import com.example.phonemaster.models.AllApplicationsModel;

@@ -17,7 +17,6 @@ import android.os.Environment;
 import android.os.StatFs;
 import android.provider.ContactsContract;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.core.content.ContextCompat;
@@ -29,19 +28,15 @@ import com.example.phonemaster.models.DeepCleanImagesModel;
 import com.example.phonemaster.models.DeepCleanPackagesModel;
 import com.example.phonemaster.models.DeepCleanVideosModel;
 import com.example.phonemaster.models.NumberAndNamesModel;
+import com.example.phonemaster.models.CommonModel;
 
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FilenameFilter;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
@@ -55,74 +50,32 @@ public class Utils {
         this.context = context;
     }
 
-    public List<File> getListFiles(File parentDir, String extension) {
-        ArrayList<File> inFiles = new ArrayList<File>();
-        File[] files = parentDir.listFiles();
-        if (extension.matches("images")) {
-            for (File file : files) {
-                if (file.isDirectory()) {
-                    inFiles.addAll(getListFiles(file, "images"));
-                } else {
-                    if (file.getName().endsWith(".jpg")) {
-                        inFiles.add(file);
-                    } else if (file.getName().endsWith(".png")) {
-                        inFiles.add(file);
-                    } else if (file.getName().endsWith(".jpeg")) {
-                        inFiles.add(file);
-                    }
+    public List<CommonModel> getListFiles(File parentDir) {
+        File fold = new File(parentDir.getPath());
+        List<CommonModel> docList = new ArrayList<>();
+        File[] mlist = fold.listFiles();
+        File[] mFilelist = fold.listFiles();
+
+        {
+            for (File f : mlist) {
+                if (f.isDirectory()) {
+                    docList.addAll(getListFiles(new File(f.getAbsolutePath())));
+                }
+                else
+                {
+                    CommonModel data = new CommonModel();
+                    data.setName(f.getName());
+                    data.setPath(f.getPath());
+                    data.setSize(f.length());
+                    //                doc.setType(FileTypes.DocumentType);
+                    if (f.length() > 0)
+                        docList.add(data);
+                }
                 }
             }
-        } else if (extension.matches("audios")) {
 
-            for (File file : files) {
-                if (file.isDirectory()) {
-                    inFiles.addAll(getListFiles(file, "audios"));
-                } else {
-                    inFiles.add(file);
-                }
-            }
-        } else if (extension.matches("videos")) {
 
-            for (File file : files) {
-                if (file.isDirectory()) {
-                    inFiles.addAll(getListFiles(file, "videos"));
-                } else {
-
-                    inFiles.add(file);
-                }
-            }
-        } else if (extension.matches("backup")) {
-
-            for (File file : files) {
-                if (file.isDirectory()) {
-                    inFiles.addAll(getListFiles(file, "backup"));
-                } else {
-
-                    inFiles.add(file);
-                }
-            }
-        } else if (extension.matches("databases")) {
-
-            for (File file : files) {
-                if (file.isDirectory()) {
-                    inFiles.addAll(getListFiles(file, "databases"));
-                } else {
-
-                    inFiles.add(file);
-                }
-            }
-        } else if (extension.matches("doc")) {
-
-            for (File file : files) {
-                if (file.isDirectory()) {
-                    inFiles.addAll(getListFiles(file, "doc"));
-                } else {
-
-                    inFiles.add(file);
-                }
-            }
-        }
-        return inFiles;
+        return docList;
     }
 
     public float getTotalStorage() {
@@ -151,17 +104,27 @@ public class Utils {
     public List<ActivityManager.RunningServiceInfo> loadProcessInfo() {
 
 
-        final ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-        final List<ActivityManager.RunningServiceInfo> recentTasks = activityManager.getRunningServices(Integer.MAX_VALUE);
+          ActivityManager activityManager = (ActivityManager) context.getSystemService(ACTIVITY_SERVICE);
+          List<ActivityManager.RunningServiceInfo> recentTasks = activityManager.getRunningServices(Integer.MAX_VALUE);
         return recentTasks;
     }
 
-    public List<ActivityManager.RunningAppProcessInfo> recentApps() {
+    public List<String> getActiveApps( ) {
 
-        final ActivityManager activityManager = (ActivityManager)
-                context.getSystemService(Context.ACTIVITY_SERVICE);
-        final List<ActivityManager.RunningAppProcessInfo> recentTasks = Objects.requireNonNull(activityManager).getRunningAppProcesses();
-        return recentTasks;
+        PackageManager pm = context.getPackageManager();
+        List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
+        List<String> list = new ArrayList<>();
+
+        for (ApplicationInfo packageInfo : packages) {
+
+            if (!isSTOPPED(packageInfo)) {
+                if (!list.contains( packageInfo.packageName )) {
+                    list.add( packageInfo.packageName );
+                }
+            }
+        }
+
+        return list;
     }
 
     public List<String> GetAllApkInfo() {
@@ -194,13 +157,21 @@ public class Utils {
 
         return ((activityInfo.applicationInfo.flags & ApplicationInfo.FLAG_STOPPED) != 0);
     }
+    private static boolean isSTOPPED(ApplicationInfo pkgInfo) {
+
+        return ((pkgInfo.flags & ApplicationInfo.FLAG_STOPPED) != 0);
+    }
+    private static boolean isSYSTEM(ApplicationInfo pkgInfo) {
+
+        return ((pkgInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0);
+    }
 
     public boolean isSystemPackage(ResolveInfo resolveInfo) {
 
         return ((resolveInfo.activityInfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0);
     }
 
-    public String getApplicationLabel(Context context, String packageName) {
+    public static String getApplicationLabel(Context context, String packageName) {
 
         PackageManager packageManager = context.getPackageManager();
         List<ApplicationInfo> packages = packageManager.getInstalledApplications(PackageManager.GET_META_DATA);
@@ -287,25 +258,26 @@ public class Utils {
         }
         return folderAmount;
     }
+
     public List<String> GetAllInstalledApkInfo() {
 
         List<String> ApkPackageName = new ArrayList<>();
 
-        Intent intent = new Intent( Intent.ACTION_MAIN, null );
+        Intent intent = new Intent(Intent.ACTION_MAIN, null);
 
-        intent.addCategory( Intent.CATEGORY_LAUNCHER );
+        intent.addCategory(Intent.CATEGORY_LAUNCHER);
 
-        intent.setFlags( Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED );
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
 
-        List<ResolveInfo> resolveInfoList = context.getPackageManager().queryIntentActivities( intent, 0 );
+        List<ResolveInfo> resolveInfoList = context.getPackageManager().queryIntentActivities(intent, 0);
 
         for (ResolveInfo resolveInfo : resolveInfoList) {
 
             ActivityInfo activityInfo = resolveInfo.activityInfo;
 
-            if (isSystemPackage( resolveInfo ) || !isSystemPackage( resolveInfo )) {
-                if (!ApkPackageName.contains( activityInfo.applicationInfo.packageName )) {
-                    ApkPackageName.add( activityInfo.applicationInfo.packageName );
+            if (isSystemPackage(resolveInfo) || !isSystemPackage(resolveInfo)) {
+                if (!ApkPackageName.contains(activityInfo.applicationInfo.packageName)) {
+                    ApkPackageName.add(activityInfo.applicationInfo.packageName);
                 }
             }
         }
@@ -344,11 +316,11 @@ public class Utils {
 //        }
 //    }
 
-    public void copyFileOrDirectory(String srcDir ) {
+    public void copyFileOrDirectory(String srcDir) {
 
         try {
             File src = new File(srcDir);
-            String lastName = getRightStringToThePoint(srcDir,"/");
+            String lastName = getRightStringToThePoint(srcDir, "/");
             File dst = new File(Environment.getExternalStorageDirectory() + "/Phone Master/Status/", src.getName());
 
             if (src.isDirectory()) {
@@ -395,6 +367,7 @@ public class Utils {
             }
         }
     }
+
     public List<NumberAndNamesModel> getContactList() {
         ContentResolver cr = context.getContentResolver();
         Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI,
@@ -418,19 +391,19 @@ public class Utils {
                     while (pCur.moveToNext()) {
                         String phoneNo = pCur.getString(pCur.getColumnIndex(
                                 ContactsContract.CommonDataKinds.Phone.NUMBER));
-                        numberAndNamesModelList.add(new NumberAndNamesModel(name,phoneNo));
+                        numberAndNamesModelList.add(new NumberAndNamesModel(name, phoneNo));
                     }
                     pCur.close();
                 }
             }
         }
-        if(cur!=null){
+        if (cur != null) {
             cur.close();
         }
         return numberAndNamesModelList;
     }
 
-    public  List<DeepCleanImagesModel> getAllImagePaths() {
+    public List<DeepCleanImagesModel> getAllImagePaths() {
         List<DeepCleanImagesModel> list = new ArrayList<>();
         DeepCleanImagesModel file;
         Uri uri;
@@ -445,7 +418,7 @@ public class Utils {
         while (cursor.moveToNext()) {
             absolutePath = cursor.getString(column_index_data);
             String title = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.TITLE));
-             Long size = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.SIZE));
+            Long size = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.SIZE));
 //            Long size = (new File(absolutePathOfVideo)).length();
             file = new DeepCleanImagesModel();
             file.setImagePath(absolutePath);
@@ -457,8 +430,7 @@ public class Utils {
         return list;
     }
 
-    public List<DeepCleanVideosModel> getAllVideosPaths()
-    {
+    public List<DeepCleanVideosModel> getAllVideosPaths() {
         List<DeepCleanVideosModel> list = new ArrayList<>();
         DeepCleanVideosModel file;
         Uri uri;
@@ -482,11 +454,10 @@ public class Utils {
             if (/*isPhoto(absolutePathOfVideo) &&*/ size > 0)
                 list.add(file);
         }
-        return list ;
+        return list;
     }
 
-    public List<DeepCleanAudioModel> getAllAudiosPaths()
-    {
+    public List<DeepCleanAudioModel> getAllAudiosPaths() {
         List<DeepCleanAudioModel> list = new ArrayList<>();
         DeepCleanAudioModel file;
         Uri uri;
@@ -511,37 +482,35 @@ public class Utils {
             if (/*isPhoto(absolutePathOfVideo) &&*/ size > 0)
                 list.add(file);
         }
-        return list ;
+        return list;
     }
 
 
-        public List<DeepCleanDocsModel> getAllDocs( String path)
-        {
-            File fold = new File(path);
-            List<DeepCleanDocsModel> docList = new ArrayList<>();
-            File[] mlist = fold.listFiles();
-            File[] mFilelist = fold.listFiles(new AllDoFilter());
-            for (File f : mlist) {
-                if (f.isDirectory()) {
-                    List<DeepCleanDocsModel> fList = getAllDocs(f.getAbsolutePath());
-                    docList.addAll(fList);
-                }
+    public List<DeepCleanDocsModel> getAllDocs(String path) {
+        File fold = new File(path);
+        List<DeepCleanDocsModel> docList = new ArrayList<>();
+        File[] mlist = fold.listFiles();
+        File[] mFilelist = fold.listFiles(new AllDoFilter());
+        for (File f : mlist) {
+            if (f.isDirectory()) {
+                List<DeepCleanDocsModel> fList = getAllDocs(f.getAbsolutePath());
+                docList.addAll(fList);
             }
-            for (File f : mFilelist) {
-                DeepCleanDocsModel doc = new DeepCleanDocsModel();
-                doc.setDocName(f.getName());
+        }
+        for (File f : mFilelist) {
+            DeepCleanDocsModel doc = new DeepCleanDocsModel();
+            doc.setDocName(f.getName());
 //                doc.setSize(f.length());
 //                doc.setType(FileTypes.DocumentType);
-                doc.setDocPath(f.getAbsolutePath());
-                if (f.length() > 0)
-                    docList.add(doc);
-            }
-            return docList;
+            doc.setDocPath(f.getAbsolutePath());
+            if (f.length() > 0)
+                docList.add(doc);
+        }
+        return docList;
     }
 
 
-    public List<DeepCleanPackagesModel> getAllPackages(String path)
-    {
+    public List<DeepCleanPackagesModel> getAllPackages(String path) {
         File fold = new File(path);
         List<DeepCleanPackagesModel> docList = new ArrayList<>();
         File[] mlist = fold.listFiles();
@@ -563,8 +532,8 @@ public class Utils {
         }
         return docList;
     }
-    public float getAllSize( String path)
-    {
+
+    public float getAllSize(String path) {
         float docSize = 0;
         File fold = new File(path);
         File[] mlist = fold.listFiles();
@@ -578,12 +547,11 @@ public class Utils {
             DeepCleanDocsModel doc = new DeepCleanDocsModel();
             docSize = docSize + f.length();
         }
-        return  docSize;
+        return docSize;
     }
 
 
-    public float getAllDocSize( String path)
-    {
+    public float getAllDocSize(String path) {
         float docSize = 0;
         File fold = new File(path);
         File[] mlist = fold.listFiles();
@@ -597,10 +565,10 @@ public class Utils {
             DeepCleanDocsModel doc = new DeepCleanDocsModel();
             docSize = docSize + f.length();
         }
-        return  docSize;
+        return docSize;
     }
-    public float getAllPkgsSize( String path)
-    {
+
+    public float getAllPkgsSize(String path) {
         float docSize = 0;
         File fold = new File(path);
         File[] mlist = fold.listFiles();
@@ -612,28 +580,23 @@ public class Utils {
         }
         for (File f : mFilelist) {
             DeepCleanDocsModel doc = new DeepCleanDocsModel();
-            docSize =docSize + f.length();
+            docSize = docSize + f.length();
         }
-        return  docSize;
+        return docSize;
     }
+
     // return images audio videos size
-    public float getAllIAAsSize( String forWhat)
-    {
+    public float getAllIAAsSize(String forWhat) {
         Uri uri = null;
         Cursor cursor;
 
         float size = 0;
-        if (forWhat.matches("videos"))
-        {
+        if (forWhat.matches("videos")) {
             uri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
-        }
-        else if (forWhat.matches("images"))
-        {
+        } else if (forWhat.matches("images")) {
             uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
 
-        }
-        else if (forWhat.matches("audios"))
-        {
+        } else if (forWhat.matches("audios")) {
             uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
 
         }
@@ -641,19 +604,20 @@ public class Utils {
         String sortOrder = MediaStore.MediaColumns.DATE_MODIFIED + " DESC";
         cursor = context.getContentResolver().query(uri, null, null,
                 null, sortOrder);
-         while (cursor.moveToNext()) {
-               size = size+cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.SIZE));
+        while (cursor.moveToNext()) {
+            size = size + cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.SIZE));
 
         }
-        return size ;
+        return size;
     }
+
     public void scanaddedFile(String path) {
         try {
-            MediaScannerConnection.scanFile(context, new String[] { path },
+            MediaScannerConnection.scanFile(context, new String[]{path},
                     null, new MediaScannerConnection.OnScanCompletedListener() {
                         public void onScanCompleted(String path, Uri uri) {
 
-                           context. getContentResolver()
+                            context.getContentResolver()
                                     .delete(uri, null, null);
                         }
                     });
@@ -691,40 +655,65 @@ public class Utils {
                     || path.endsWith(".z") || path.endsWith(".zip"));
         }
     }
+
+    public static class AllImgFilter implements FileFilter {
+        @Override
+        public boolean accept(File pathname) {
+            String path = pathname.getPath();
+            return (path.endsWith(".jpeg") || path.endsWith(".jpg") || path.endsWith(".png"));
+        }
+    }
+    public static class AllAudioFilter implements FileFilter {
+        @Override
+        public boolean accept(File pathname) {
+            String path = pathname.getPath();
+            return (path.endsWith(".mp3") ||
+                    path.endsWith(".opus") ||
+                    path.endsWith(".m4a")||
+                    path.endsWith(".amr")||
+                    path.endsWith(".mpa") ||
+                    path.endsWith(".mid")||
+                    path.endsWith(".ogg")||
+                    path.endsWith(".wav")||
+                    path.endsWith(".wma")||
+                    path.endsWith(".wma")||
+                    path.endsWith(".wpl")||
+                    path.endsWith(".cda")||
+                    path.endsWith(".aif"));
+        }
+    }
+
     public static class AllPackagesFilter implements FileFilter {
         @Override
         public boolean accept(File pathname) {
             String path = pathname.getPath();
-            return (path.endsWith(".apk") );
+            return (path.endsWith(".apk"));
         }
     }
-    public String getCalculatedDataSize(float size)
-    {
-        float sizeBytes = size;
-        String sizePrefix = "Bytes";
-        float finalSize = size;
-        if (sizeBytes>=1024)
-        {
-            float sizeKb =  sizeBytes /1024;
-            sizePrefix = "KB";
-            finalSize = sizeKb   ;
-             if (sizeKb>=1024)
-            {
-                float sizeMB = sizeKb /1024;
-                sizePrefix = "MB";
-                finalSize = sizeMB ;
-                if (sizeMB>=1024)
-                {
-                    float sizeGb = sizeMB /1024;
-                    sizePrefix = "GB";
-                    finalSize = sizeGb  ;
+
+        public String getCalculatedDataSize(float size) {
+            float sizeBytes = size;
+            String sizePrefix = "Bytes";
+            float finalSize = size;
+            if (sizeBytes >= 1024) {
+                float sizeKb = sizeBytes / 1024;
+                sizePrefix = "KB";
+                finalSize = sizeKb;
+                if (sizeKb >= 1024) {
+                    float sizeMB = sizeKb / 1024;
+                    sizePrefix = "MB";
+                    finalSize = sizeMB;
+                    if (sizeMB >= 1024) {
+                        float sizeGb = sizeMB / 1024;
+                        sizePrefix = "GB";
+                        finalSize = sizeGb;
+
+                    }
 
                 }
-
             }
+            return String.format("%.2f", finalSize) + sizePrefix;
         }
-        return String.format("%.2f",finalSize)+sizePrefix;
-    }
 
 
 }

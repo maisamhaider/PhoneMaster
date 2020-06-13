@@ -1,41 +1,52 @@
 package com.example.phonemaster.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
-import android.util.Log;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.view.View;
+import android.widget.Button;
 
 import com.example.phonemaster.R;
- import com.example.phonemaster.utils.Utils;
+import com.example.phonemaster.adapters.CommonAdapter;
+import com.example.phonemaster.async.WhatsAppCommonTask;
+import com.example.phonemaster.utils.Utils;
 
 import java.io.File;
-import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
 
 public class WhatsAppAudioListAct extends AppCompatActivity {
 
     String[] fileNames;
     Utils utils;
+    private File file;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_whats_app_audio_list);
         utils = new Utils(this);
-        File file1 = new File(Environment.getExternalStorageDirectory().getPath()+"/WhatsApp/Media/WhatsApp Audio");
-        //list of selected folder images
-         utils.getListFiles(file1,"audios");
-        Log.i("size", String.valueOf(utils.getListFiles(file1,"audios").size()));
 
+        RecyclerView whatsAppAudioList_rv = findViewById(R.id.whatsAppAudioList_rv);
+        Button whatsAppAudioList_btn = findViewById(R.id.whatsAppAudioList_btn);
+
+        CommonAdapter commonAdapter = new CommonAdapter(this);
+        WhatsAppCommonTask whatsAppCommonTask = new WhatsAppCommonTask(this,commonAdapter,whatsAppAudioList_rv,"audios");
+        whatsAppCommonTask.execute();
+
+        whatsAppAudioList_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                List<String> imagePathList = commonAdapter.getList();
+                for (int i = 0; i < imagePathList.size(); i++) {
+                    try {
+                        file = new File(imagePathList.get(i));
+                        utils.scanaddedFile(imagePathList.get(i));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
 
     }
 

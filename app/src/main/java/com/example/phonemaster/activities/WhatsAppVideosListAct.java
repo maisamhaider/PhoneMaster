@@ -1,28 +1,51 @@
 package com.example.phonemaster.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.os.Environment;
+import android.view.View;
+import android.widget.Button;
 
 import com.example.phonemaster.R;
+import com.example.phonemaster.adapters.CommonAdapter;
+import com.example.phonemaster.async.WhatsAppCommonTask;
 import com.example.phonemaster.utils.Utils;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 public class WhatsAppVideosListAct extends AppCompatActivity {
 
     String[] fileNames;
     Utils utils;
+    private File file;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_whats_app_videos_list);
         utils = new Utils(this);
-        File file1 = new File(Environment.getExternalStorageDirectory().getPath()+"/WhatsApp/Media/WhatsApp Video");
-        //list of selected folder images
-         utils.getListFiles(file1,"videos");
-    }
+        RecyclerView whatsAppVideosList_rv = findViewById(R.id.whatsAppVideosList_rv);
+        Button whatsAppVideosList_btn = findViewById(R.id.whatsAppVideosList_btn);
+
+        CommonAdapter commonAdapter = new CommonAdapter(this);
+        WhatsAppCommonTask whatsAppCommonTask = new WhatsAppCommonTask(this,commonAdapter,whatsAppVideosList_rv,"videos");
+        whatsAppCommonTask.execute();
+
+        whatsAppVideosList_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                List<String> imagePathList = commonAdapter.getList();
+                for (int i = 0; i < imagePathList.size(); i++) {
+                    try {
+                        file = new File(imagePathList.get(i));
+                        utils.scanaddedFile(imagePathList.get(i));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
+      }
 }
