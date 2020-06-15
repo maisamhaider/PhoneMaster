@@ -66,7 +66,7 @@ public class DeepCleanAudioAdapter extends RecyclerView.Adapter<DeepCleanAudioAd
                 }
                 else
                 {
-                    list.remove(audioString);
+                    list.remove(position);
                 }
             }
         });

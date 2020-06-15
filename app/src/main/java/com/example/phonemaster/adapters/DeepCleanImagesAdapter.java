@@ -68,7 +68,7 @@ public class DeepCleanImagesAdapter extends RecyclerView.Adapter<DeepCleanImages
                 }
                 else
                 {
-                    list.remove(imageString);
+                    list.remove(position);
                 }
             }
         });

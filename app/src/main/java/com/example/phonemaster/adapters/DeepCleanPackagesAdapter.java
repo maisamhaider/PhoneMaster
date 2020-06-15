@@ -70,7 +70,7 @@ public class DeepCleanPackagesAdapter extends RecyclerView.Adapter<DeepCleanPack
                 }
                 else
                 {
-                    list.remove(pkgString);
+                    list.remove(position);
                 }
             }
         });

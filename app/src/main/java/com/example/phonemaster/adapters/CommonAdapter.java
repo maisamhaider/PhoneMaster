@@ -103,7 +103,7 @@ public class CommonAdapter extends RecyclerView.Adapter<CommonAdapter.WhatsAppSt
                 }
                 else
                 {
-                    list.remove(pathString);
+                    list.remove(position);
                 }
             }
         });

@@ -7,8 +7,7 @@
     tools:context=".activities.FullChargedRemindAct">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:background="@color/colorAccent"
-        android:id="@+id/fullChargedAlarm__cl"
+         android:id="@+id/fullChargedAlarm__cl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -48,8 +47,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:background="@color/colorAccent"
-        app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3">
@@ -76,8 +74,7 @@
         android:id="@+id/fullChargedRemindVibrate__cl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorAccent"
-        app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fullChargedRemindSound__cl">
@@ -103,8 +100,7 @@
         android:id="@+id/fullChargedRemindDoNotDisturb__cl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorAccent"
-        app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fullChargedRemindVibrate__cl">

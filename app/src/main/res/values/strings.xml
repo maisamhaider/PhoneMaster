@@ -2,4 +2,9 @@
     <string name="app_name">PhoneMaster</string>
     <string name="clean">Clean</string>
     <string name="clear">Clear</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="image_tab">IMAGE</string>
+    <string name="video_tab">VIDEO</string>
+    <string name="saved_tab">SAVED</string>
 </resources>

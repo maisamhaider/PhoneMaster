@@ -1,22 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.WhatsAppStatusAct">
-   <androidx.constraintlayout.widget.ConstraintLayout
-       android:id="@+id/cl"
-       android:layout_width="match_parent"
-       android:layout_height="56dp">
-
-   </androidx.constraintlayout.widget.ConstraintLayout>
-
-   <androidx.recyclerview.widget.RecyclerView
-       android:id="@+id/whatsAppStatus_rv"
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:layout_below="@+id/cl" />
 
 
-</RelativeLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/below_corners_corved_bg"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="9dp">
+
+        <com.google.android.material.tabs.TabLayout
+            android:background="@drawable/below_corners_corved_bg"
+            android:id="@+id/status_tl"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+              android:scrollbars="none"
+            app:tabIndicatorColor="@android:color/transparent"
+            app:tabInlineLabel="true"
+            app:tabSelectedTextColor="@color/standard_white"
+            app:tabTextColor="@color/gray"
+            app:layout_constraintBottom_toBottomOf="parent" >
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/ti_image"
+                android:layout_width="wrap_content"
+                android:text="Images"
+                android:icon="@drawable/ic_image_three"
+                android:layout_height="wrap_content">
+            </com.google.android.material.tabs.TabItem>
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/ti_video"
+                android:layout_width="wrap_content"
+                android:text="Videos"
+
+                android:icon="@drawable/ic_video_status"
+                android:layout_height="wrap_content">
+            </com.google.android.material.tabs.TabItem>
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/ti_saved"
+                android:layout_width="wrap_content"
+                android:text="Saved"
+                android:icon="@drawable/ic_saved"
+                android:layout_height="wrap_content">
+            </com.google.android.material.tabs.TabItem>
+        </com.google.android.material.tabs.TabLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <FrameLayout
+        android:id="@+id/whatsAppStatusFragContainer_fl"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline"
+        tools:layout_editor_absoluteX="10dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.3" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
