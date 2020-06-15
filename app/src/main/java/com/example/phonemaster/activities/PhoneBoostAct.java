@@ -19,7 +19,7 @@ public class PhoneBoostAct extends AppCompatActivity {
         setContentView(R.layout.activity_phone_boost);
         utils = new Utils(this);
 
-        textView = findViewById(R.id.uuu);
+//        textView = findViewById(R.id.uuu);
 //        for (int i = 0; i < utils.getActiveApps(PhoneBoostAct.this).size(); i++)
 //        {
 //            textView.setText(textView.getText()  +utils.getActiveApps(PhoneBoostAct.this).get(i)+"\n\n" );

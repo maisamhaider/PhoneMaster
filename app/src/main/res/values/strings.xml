@@ -1,4 +1,15 @@
 <resources>
     <string name="app_name">PhoneMaster</string>
     <string name="clean">Clean</string>
+    <string name="clear">Clear</string>
+    <string name="title_home">Home</string>
+    <string name="title_tool">Tools</string>
+    <string name="title_setting">Setting</string>
+    <string name="title_me">About us</string>
+    <string name="junk_files"><b>Junk</b> Files</string>
+    <string name="cpu_cooler"><b>CPU</b> Cooler</string>
+    <string name="boost_phone"><b>Boost</b> Phone</string>
+    <string name="power_saving"><b>Power</b> Saving</string>
+    <string name="status_saver"><b>Status</b> Saver</string>
+    <string name="app_cleanup"><b>App</b> Cleanup</string>
 </resources>
