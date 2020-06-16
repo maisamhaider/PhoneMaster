@@ -7,6 +7,8 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="fontFamily">@font/poppins</item>
+        <item name="android:textColor">@color/colorText</item>
+
     </style>
 
     <style name="AppThemeNoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
@@ -15,7 +17,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="fontFamily">@font/poppins</item>
-        <item name="android:textColor">@color/b_nav_selector</item>
+        <item name="android:textColor">@color/colorText</item>
     </style>
 
 </resources>
