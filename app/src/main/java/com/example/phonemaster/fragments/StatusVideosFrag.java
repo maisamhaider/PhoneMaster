@@ -50,7 +50,7 @@ public class StatusVideosFrag extends Fragment {
         list = utils.getListFiles(file1,"videos");
 
         statusVideos_rv.setLayoutManager(new GridLayoutManager(getContext(),2));
-        WhatsAppStatusAdapter statusAdapter = new WhatsAppStatusAdapter(getContext(),list);
+        WhatsAppStatusAdapter statusAdapter = new WhatsAppStatusAdapter(getContext(),list,false);
         statusVideos_rv.setAdapter(statusAdapter);
         statusAdapter.notifyDataSetChanged();
 

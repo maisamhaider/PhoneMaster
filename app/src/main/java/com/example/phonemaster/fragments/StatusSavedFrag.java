@@ -57,45 +57,19 @@ public class StatusSavedFrag extends Fragment {
         Utils utils = new Utils(getContext());
 
         RecyclerView statusSaved_rv = view.findViewById(R.id.statusSaved_rv);
-        LinearLayout saveStatusSaved_ll = view.findViewById(R.id.saveStatusSaved_ll);
-        TextView saveStatusSavedBtn_tv = view.findViewById(R.id.saveStatusSavedBtn_tv);
-
-        List<CommonModel> list  ;
 
 
         File file1 = new File(Environment.getExternalStorageDirectory().getPath() + "/Phone_Master_Status");
-        list = utils.getListFiles(file1);
+        List<CommonModel> list = utils.getListFiles(file1);
 
         statusSaved_rv.setLayoutManager(new GridLayoutManager(getContext(),2));
-        WhatsAppStatusAdapter statusAdapter = new WhatsAppStatusAdapter(getContext(),list);
+        WhatsAppStatusAdapter statusAdapter = new WhatsAppStatusAdapter(getContext(),list,true);
         statusSaved_rv.setAdapter(statusAdapter);
         statusAdapter.notifyDataSetChanged();
         List<String> data =  statusAdapter.getSendList();
-        if (data.size() > 1  )
-        {
-            saveStatusSavedBtn_tv.setText("DELETE SELECTED FILES");
-        }
-        else
-        {
-            saveStatusSavedBtn_tv.setText("DELETE SELECTED FILE");
-
-        }
 
 
-        saveStatusSaved_ll.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Permissions p = new Permissions(getContext());
-                if (p.permission()) {
-                    if (data.size() != 0) {
-                        for (int i = 0; i < data.size(); i++) {
-                           File file = new File(data.get(i));
-                           file.delete();
-                        }
-                    }
-                }
-            }
-        });
+
         return view;
     }
 }

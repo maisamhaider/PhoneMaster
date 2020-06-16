@@ -37,7 +37,18 @@ public class OnImageVideoAct extends AppCompatActivity {
 
         Intent intent = getIntent();
         final String data = intent.getStringExtra("imageOrVideoPath");
+        boolean isSaved = intent.getBooleanExtra("isSaved",false);
 
+        if (isSaved)
+        {
+            backFromImageVideo_iv.setVisibility(View.GONE);
+            saveImageVideo_tv.setVisibility(View.GONE);
+            shareImageVideo_iv.setVisibility(View.GONE);
+        }
+        else
+        {
+
+        }
         if (data.endsWith("mp4")) {
 
             videoPlayer_vv.setVideoPath(data);

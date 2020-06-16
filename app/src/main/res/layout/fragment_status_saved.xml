@@ -9,27 +9,7 @@
         android:id="@+id/statusSaved_rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/saveStatusSaved_ll"
-        android:layout_marginBottom="12dp" />
+         android:layout_marginBottom="12dp" />
 
-    <LinearLayout
-        android:id="@+id/saveStatusSaved_ll"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_alignParentBottom="true"
-        android:background="?android:attr/selectableItemBackground"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/saveStatusSavedBtn_tv"
-            android:gravity="center"
-            android:background="@drawable/below_button_bg"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="DELETE SELECTED FILES"
-            android:textColor="@color/standard_white" />
-
-    </LinearLayout>
 
 </RelativeLayout>

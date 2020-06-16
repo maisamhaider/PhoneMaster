@@ -23,11 +23,13 @@ public class WhatsAppStatusAdapter extends RecyclerView.Adapter<WhatsAppStatusAd
     Context context;
     List<CommonModel> fileList;
     List<String> sendList;
+    boolean isSaved;
 
-    public WhatsAppStatusAdapter(Context context, List<CommonModel> fileList) {
+    public WhatsAppStatusAdapter(Context context, List<CommonModel> fileList, boolean isSaved) {
         this.context = context;
         this.fileList = fileList;
         this.sendList = new ArrayList<>();
+        this.isSaved = isSaved;
 
     }
 
@@ -71,6 +73,15 @@ public class WhatsAppStatusAdapter extends RecyclerView.Adapter<WhatsAppStatusAd
             {
                 holder.isVideo_iv.setVisibility(View.GONE);
             }
+        if (isSaved)
+        {
+            holder.select_deselected_iv.setVisibility(View.GONE);
+        }
+        else
+        {
+            holder.select_deselected_iv.setVisibility(View.VISIBLE);
+
+        }
 
         Glide.with(context)
                 .load(imageVideoString)
@@ -84,6 +95,10 @@ public class WhatsAppStatusAdapter extends RecyclerView.Adapter<WhatsAppStatusAd
                 if (sendList.size()==0)
                 {
                     Intent intent = new Intent(context, OnImageVideoAct.class);
+                    if (isSaved)
+                    {
+                        intent.putExtra("isSaved",true);
+                    }
                     intent.putExtra("imageOrVideoPath",imageVideoString);
                     context.startActivity(intent);
 

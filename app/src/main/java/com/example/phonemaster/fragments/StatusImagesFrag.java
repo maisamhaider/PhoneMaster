@@ -46,7 +46,7 @@ public class StatusImagesFrag extends Fragment {
         list = utils.getListFiles(file1,"images");
 
         statusImages_rv.setLayoutManager(new GridLayoutManager(getContext(),2));
-        WhatsAppStatusAdapter statusAdapter = new WhatsAppStatusAdapter(getContext(),list);
+        WhatsAppStatusAdapter statusAdapter = new WhatsAppStatusAdapter(getContext(),list,false);
         statusImages_rv.setAdapter(statusAdapter);
         statusAdapter.notifyDataSetChanged();
 
