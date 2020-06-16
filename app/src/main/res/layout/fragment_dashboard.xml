@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include
+            layout="@layout/m_lt_items"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+        <ImageView
+            android:id="@+id/iv_junk_file"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/ic_junk_files"
+            app:layout_constraintEnd_toStartOf="@+id/iv_cpu_cooler"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+        <TextView
+            android:id="@+id/ramPercent_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="36dp"
+            android:elevation="8dp"
+            android:text="56%"
+            android:textColor="@color/colorWhite"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:elevation="8dp"
+            android:text="Memory used"
+            android:textColor="@color/colorWhite"
+            app:layout_constraintEnd_toEndOf="@+id/ramPercent_tv"
+            app:layout_constraintStart_toStartOf="@+id/ramPercent_tv"
+            app:layout_constraintTop_toBottomOf="@+id/ramPercent_tv" />
+
+        <TextView
+            android:id="@+id/storageUsagePercent_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="28dp"
+            android:elevation="8dp"
+            android:text="45%"
+            android:textColor="@color/colorWhite"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:elevation="8dp"
+            android:text="Storage used"
+            android:textColor="@color/colorWhite"
+            app:layout_constraintEnd_toEndOf="@+id/storageUsagePercent_tv"
+            app:layout_constraintStart_toStartOf="@+id/storageUsagePercent_tv"
+            app:layout_constraintTop_toBottomOf="@+id/storageUsagePercent_tv" />
+
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="0dp"
+            android:layout_height="260dp"
+            android:scaleType="fitXY"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_phone_master_main_header" />
+
+        <ImageView
+            android:id="@+id/iv_cpu_cooler"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/ic_cpu_cooler"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_junk_file"
+            app:layout_constraintEnd_toStartOf="@+id/iv_boost_phone"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/iv_junk_file"
+            app:layout_constraintTop_toTopOf="@+id/iv_junk_file" />
+
+        <ImageView
+            android:id="@+id/ic_power_saving"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="24dp"
+            android:src="@drawable/ic_power_saving"
+            app:layout_constraintEnd_toStartOf="@+id/ic_app_cleanup"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView7">
+
+        </ImageView>
+
+        <ImageView
+            android:id="@+id/ic_app_cleanup"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/ic_app_cleanup"
+            app:layout_constraintEnd_toStartOf="@+id/ic_status_saver"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/ic_power_saving"
+            app:layout_constraintTop_toTopOf="@+id/ic_power_saving">
+
+        </ImageView>
+
+        <ImageView
+            android:id="@+id/ic_status_saver"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/ic_whatsapp_status_saver"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/ic_app_cleanup"
+            app:layout_constraintTop_toTopOf="@+id/ic_app_cleanup">
+
+        </ImageView>
+
+        <ImageView
+            android:id="@+id/iv_boost_phone"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/ic_boost_phone"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_cpu_cooler"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/iv_cpu_cooler"
+            app:layout_constraintTop_toTopOf="@+id/iv_cpu_cooler">
+
+        </ImageView>
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/junk_files"
+            app:layout_constraintEnd_toEndOf="@+id/iv_junk_file"
+            app:layout_constraintStart_toStartOf="@+id/iv_junk_file"
+            app:layout_constraintTop_toBottomOf="@+id/iv_junk_file" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cpu_cooler"
+            app:layout_constraintEnd_toEndOf="@+id/iv_cpu_cooler"
+            app:layout_constraintStart_toStartOf="@+id/iv_cpu_cooler"
+            app:layout_constraintTop_toBottomOf="@+id/iv_cpu_cooler" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/boost_phone"
+            app:layout_constraintEnd_toEndOf="@+id/iv_boost_phone"
+            app:layout_constraintStart_toStartOf="@+id/iv_boost_phone"
+            app:layout_constraintTop_toBottomOf="@+id/iv_boost_phone" />
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/power_saving"
+            app:layout_constraintEnd_toEndOf="@+id/ic_power_saving"
+            app:layout_constraintStart_toStartOf="@+id/ic_power_saving"
+            app:layout_constraintTop_toBottomOf="@+id/ic_power_saving" />
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_cleanup"
+            app:layout_constraintEnd_toEndOf="@+id/ic_app_cleanup"
+            app:layout_constraintStart_toStartOf="@+id/ic_app_cleanup"
+            app:layout_constraintTop_toBottomOf="@+id/ic_app_cleanup" />
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/status_saver"
+            app:layout_constraintEnd_toEndOf="@+id/ic_status_saver"
+            app:layout_constraintStart_toStartOf="@+id/ic_status_saver"
+            app:layout_constraintTop_toBottomOf="@+id/ic_status_saver" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</ScrollView>

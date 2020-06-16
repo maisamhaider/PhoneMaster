@@ -36,7 +36,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.SettingActivity"></activity>
+        <activity android:name=".activities.SettingActivity" />
         <activity
             android:name=".activities.ChargingLockedScreenAct"
             android:launchMode="singleInstance"
@@ -64,7 +64,8 @@
         <activity android:name=".activities.WhatsAppImagesListAct" />
         <activity android:name=".activities.WhatsAppAudioListAct" />
         <activity android:name=".activities.CleanWhatsAppAct" />
-        <activity android:name=".activities.MainActivity">
+        <activity android:name=".activities.MainActivity"
+            android:theme="@style/AppThemeNoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -77,6 +78,7 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
+
         <receiver
             android:name=".receivers.FastChargingChargerReceiver"
             android:enabled="true"
@@ -92,6 +94,7 @@
             android:name=".services.MyService"
             android:enabled="true"
             android:exported="false" />
+
     </application>
 
 </manifest>
