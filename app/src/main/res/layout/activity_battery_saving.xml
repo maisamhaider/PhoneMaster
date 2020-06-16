@@ -5,33 +5,64 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.BatterySavingAct">
-    <ScrollView
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="vertical"
+        android:layout_height="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
+        <TextView
+            android:textStyle="bold"
+            android:id="@+id/batterySavingMode_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:text="Mode Apps to save power"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/batterySavingRunningApps_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="26 app are Running"
+            android:textColor="@color/colorTextTwo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/batterySavingMode_tv" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/_ll"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        android:background="?android:attr/selectableItemBackground"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="16dp">
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:background="@drawable/below_button_bg"
+            android:gravity="center"
+            android:text="OPTIMIZE BATTERY LIFE"
+            android:textColor="@color/standard_white"
+            tools:layout_editor_absoluteX="11dp"
+            tools:layout_editor_absoluteY="594dp" />
 
-            <TextView
-                android:id="@+id/bbb"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:textColor="#010101"
-                android:textSize="20dp" />
-            <TextView
-                android:id="@+id/bbb2"
-                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:textColor="#010101"
-                android:textSize="20dp" />
+    </LinearLayout>
 
-        </LinearLayout>
-    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

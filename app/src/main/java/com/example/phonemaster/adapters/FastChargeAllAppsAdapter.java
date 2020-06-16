@@ -32,6 +32,7 @@ public class FastChargeAllAppsAdapter extends RecyclerView.Adapter<FastChargeAll
 
     private List<String> apps;
     private List<String> fullList;
+    private List<String> checkList;
     private Context context;
     private AppUtility appUtility;
      private Db db;
@@ -46,6 +47,7 @@ public class FastChargeAllAppsAdapter extends RecyclerView.Adapter<FastChargeAll
         apps = new ArrayList<>(  );
         fullList = new ArrayList<>(  );
         db = new Db(context);
+        this.checkList = new ArrayList<>();
 
 
      }
@@ -56,6 +58,7 @@ public class FastChargeAllAppsAdapter extends RecyclerView.Adapter<FastChargeAll
         this.apps = apps;
          this.fullList.addAll( apps );
          this.db = db;
+         getDbList();
      }
 
     @NonNull
@@ -72,60 +75,70 @@ public class FastChargeAllAppsAdapter extends RecyclerView.Adapter<FastChargeAll
          String appName = utils.GetAppName(apps.get( position ));
         final String appPackage = apps.get( position );
 
+        if (checkList.contains(appPackage)){
+            holder.fastChargeAllApp_iv.setImageResource(R.drawable.ic_select);
+        }else{
+            holder.fastChargeAllApp_iv.setImageResource(R.drawable.ic_deselect);
+
+        }
+
+
         holder.fastChargeAllAppName_Tv.setText( appName );
 
-         Cursor cursor = db.getPkg(appPackage );
-         if (cursor.getCount()==0)
-         {
-
-         }
-         while (cursor.moveToNext())
-         {
-             String pgk = cursor.getString(0);
-             if (appPackage.matches(pgk))
-             {
-                 holder.fastChargeAllApp_cb.setChecked(true);
-             }
-             else
-             {
-                 holder.fastChargeAllApp_cb.setChecked(false);
-
-             }
-         }
         Glide.with(context).load( UsageUtils.parsePackageIcon(apps.get( position ), R.mipmap.ic_launcher))
                 .transition(new DrawableTransitionOptions().crossFade()).into(holder.fastChargeAllAppImage_Iv);
 
 
 
 
-        holder.fastChargeAllApp_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        holder.fastChargeAllApp_iv.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            public void onClick(View v) {
                 String packageName = apps.get( position ) ;
-
-                if (isChecked)
+                if (!checkList.contains(packageName))
                 {
-                   boolean isInserted =  db.insertPkgPath(packageName);
+                    boolean isInserted =  db.insertPkgPath(packageName);
                     if (isInserted)
                     {
+                        checkList.add(packageName);
                         Toast.makeText(context, "pkg Inserted", Toast.LENGTH_SHORT).show();
+                        holder.fastChargeAllApp_iv.setImageResource(R.drawable.ic_select);
+
                     }
                     else {
                         Toast.makeText(context, "pkg not Inserted", Toast.LENGTH_SHORT).show();
+
                     }
 
                 }else {
                     boolean isDeleted = db.deletePkgPath(packageName);
                     if (isDeleted)
                     {
+                        if (checkList.contains(packageName))
+                        {
+                            checkList.remove(packageName);
+                        }
                         Toast.makeText(context, "pkg Deleted", Toast.LENGTH_SHORT).show();
+                        holder.fastChargeAllApp_iv.setImageResource(R.drawable.ic_deselect);
                     }
                     else {
-                        Toast.makeText(context, "pkg Deleted", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "pkg not Deleted", Toast.LENGTH_SHORT).show();
                     }
                 }
+                getDbList();
             }
         });
+    }
+
+    public void getDbList(){
+
+        Cursor cursor = db.getAllPkg();
+
+        while (cursor.moveToNext())
+        {
+            checkList.add(cursor.getString(1));
+        }
+
     }
 
 
@@ -137,15 +150,14 @@ public class FastChargeAllAppsAdapter extends RecyclerView.Adapter<FastChargeAll
 
 
     class AllAppsHolder extends RecyclerView.ViewHolder {
-        TextView fastChargeAllAppName_Tv, appInstalledTime_Tv;
-        ImageView fastChargeAllAppImage_Iv;
-        CheckBox fastChargeAllApp_cb;
+        TextView fastChargeAllAppName_Tv;
+        ImageView fastChargeAllAppImage_Iv,fastChargeAllApp_iv;
 
         public AllAppsHolder(@NonNull View itemView) {
             super( itemView );
             fastChargeAllAppName_Tv = itemView.findViewById( R.id.fastChargeAllAppName_Tv );
             fastChargeAllAppImage_Iv = itemView.findViewById( R.id.fastChargeAllAppImage_Iv );
-            fastChargeAllApp_cb = itemView.findViewById( R.id.fastChargeAllApp_cb );
+            fastChargeAllApp_iv = itemView.findViewById( R.id.fastChargeAllApp_iv );
 
         }
     }
