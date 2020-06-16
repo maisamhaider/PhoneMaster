@@ -26,25 +26,28 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <ImageView
+            android:background="?android:attr/selectableItemBackgroundBorderless"
             android:id="@+id/backFromImageVideo_iv"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_margin="10dp"
-            android:background="@mipmap/ic_launcher" />
+            android:src="@drawable/ic_back" />
 
         <ImageView
+            android:src="@drawable/ic_save"
             android:id="@+id/saveImageVideo_tv"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_margin="10dp"
-            android:background="@mipmap/ic_launcher" />
+            android:background="?android:attr/selectableItemBackgroundBorderless" />
 
         <ImageView
+            android:src="@drawable/ic_share"
             android:id="@+id/shareImageVideo_iv"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_margin="10dp"
-            android:background="@mipmap/ic_launcher" />
+            android:background="?android:attr/selectableItemBackgroundBorderless" />
 
     </LinearLayout>
 

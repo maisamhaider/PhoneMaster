@@ -41,9 +41,9 @@ public class StatusImagesFrag extends Fragment {
         RecyclerView statusImages_rv = view.findViewById(R.id.statusImages_rv);
         LinearLayout saveStatusImages_ll = view.findViewById(R.id.saveStatusImages_ll);
 
-        List<CommonModel> list  ;
+
         File file1 = new File(Environment.getExternalStorageDirectory().getPath() + "/WhatsApp/Media/.Statuses");
-        list = utils.getListFiles(file1,"images");
+        List<CommonModel> list = utils.getListFiles(file1,"images");
 
         statusImages_rv.setLayoutManager(new GridLayoutManager(getContext(),2));
         WhatsAppStatusAdapter statusAdapter = new WhatsAppStatusAdapter(getContext(),list,false);

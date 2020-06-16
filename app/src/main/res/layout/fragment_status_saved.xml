@@ -6,6 +6,8 @@
     tools:context=".fragments.StatusImagesFrag">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:paddingEnd="10dp"
+        android:paddingStart="10dp"
         android:id="@+id/statusSaved_rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

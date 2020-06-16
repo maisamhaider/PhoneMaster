@@ -5,7 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/status_cv_bg"
-    android:layout_margin="8dp">
+    android:layout_marginStart="5dp"
+    android:layout_marginEnd="5dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp">
 
 
     <com.mikhaellopez.circularimageview.CircularImageView
@@ -32,8 +35,8 @@
 
     <ImageView
         android:id="@+id/isVideo_iv"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
         android:background="@drawable/ic_play"
         android:elevation="8dp"
         app:layout_constraintBottom_toBottomOf="parent"

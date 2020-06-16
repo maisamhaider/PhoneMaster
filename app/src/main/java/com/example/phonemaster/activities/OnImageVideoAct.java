@@ -37,18 +37,12 @@ public class OnImageVideoAct extends AppCompatActivity {
 
         Intent intent = getIntent();
         final String data = intent.getStringExtra("imageOrVideoPath");
-        boolean isSaved = intent.getBooleanExtra("isSaved",false);
+        boolean isSaved = intent.getBooleanExtra("isSaved", false);
 
-        if (isSaved)
-        {
-            backFromImageVideo_iv.setVisibility(View.GONE);
+        if (isSaved) {
             saveImageVideo_tv.setVisibility(View.GONE);
-            shareImageVideo_iv.setVisibility(View.GONE);
-        }
-        else
-        {
+         }
 
-        }
         if (data.endsWith("mp4")) {
 
             videoPlayer_vv.setVideoPath(data);
@@ -89,10 +83,10 @@ public class OnImageVideoAct extends AppCompatActivity {
                     oneImageArrayList.add(uriImage);
                     Intent sendIntent = new Intent();
                     sendIntent.setAction(Intent.ACTION_SEND);
-                    sendIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM,oneImageArrayList );
+                    sendIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, oneImageArrayList);
                     sendIntent.setType("video/*");
 
-                    startActivity(Intent.createChooser(sendIntent, "Share Image to"));
+                    startActivity(Intent.createChooser(sendIntent, "Share Video to"));
                     startActivity(sendIntent);
 
                 } else {
@@ -102,7 +96,7 @@ public class OnImageVideoAct extends AppCompatActivity {
                     oneImageArrayList.add(uriImage);
                     Intent sendIntent = new Intent();
                     sendIntent.setAction(Intent.ACTION_SEND);
-                    sendIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM,oneImageArrayList );
+                    sendIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, oneImageArrayList);
                     sendIntent.setType("image/*");
 
                     startActivity(Intent.createChooser(sendIntent, "Share Image to"));

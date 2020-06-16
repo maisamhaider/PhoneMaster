@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,74 +24,91 @@ import com.example.phonemaster.fragments.MainFrag;
 import com.example.phonemaster.fragments.StatusImagesFrag;
 import com.example.phonemaster.fragments.StatusSavedFrag;
 import com.example.phonemaster.fragments.StatusVideosFrag;
+import com.example.phonemaster.models.CommonModel;
 import com.example.phonemaster.utils.Utils;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 
 import java.io.File;
+import java.util.List;
 
 public class WhatsAppStatusAct extends AppCompatActivity {
     Utils utils;
     RecyclerView whatsAppStatus_rv;
 
     Fragment mFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_whats_app_status);
         utils = new Utils(this);
         MainFrag mf = new MainFrag();
-        loadmyfrag( mf );
+        loadmyfrag(mf);
 
         TabLayout tabLayout = findViewById(R.id.status_tl);
-        TabItem images_ti = findViewById(R.id.ti_image);
-        TabItem videos_ti = findViewById(R.id.ti_video);
-        TabItem saved_ti = findViewById(R.id.ti_saved);
+        ImageView statusSaverMain_iv = findViewById(R.id.statusSaverMain_iv);
+        TextView amountOfStatusImages_tv = findViewById(R.id.amountOfStatusImages_tv);
 
         StatusImagesFrag statusImagesFrag = new StatusImagesFrag();
         loadmyfrag(statusImagesFrag);
 
-         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-             @Override
-             public void onTabSelected(TabLayout.Tab tab) {
-                switch (tab.getPosition())
-                {
+        File file1 = new File(Environment.getExternalStorageDirectory().getPath() + "/WhatsApp/Media/.Statuses");
+        amountOfStatusImages_tv.setText(utils.getListFiles(file1, "images").size() + " images status found");
+        statusSaverMain_iv.setImageResource(R.drawable.ic_status_saver_image_header);
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                switch (tab.getPosition()) {
                     case 0:
                         StatusImagesFrag statusImagesFrag = new StatusImagesFrag();
-                loadmyfrag(statusImagesFrag);
-                         break;
+                        loadmyfrag(statusImagesFrag);
+                        amountOfStatusImages_tv.setText(utils.getListFiles(file1, "images").size() + " images status found");
+                        statusSaverMain_iv.setImageResource(R.drawable.ic_status_saver_image_header);
+                        break;
                     case 1:
                         StatusVideosFrag statusVideosFrag = new StatusVideosFrag();
-                loadmyfrag(statusVideosFrag);
+                        loadmyfrag(statusVideosFrag);
+                        File file2 = new File(Environment.getExternalStorageDirectory().getPath() + "/WhatsApp/Media/.Statuses");
+                        amountOfStatusImages_tv.setText(utils.getListFiles(file2, "images").size() + " videos status found");
+                        statusSaverMain_iv.setImageResource(R.drawable.ic_status_saver_video_header);
 
                         break;
                     case 2:
                         StatusSavedFrag statusSavedFrag = new StatusSavedFrag();
-                loadmyfrag(statusSavedFrag);
+                        loadmyfrag(statusSavedFrag);
+                        amountOfStatusImages_tv.setText("Status Saved");
+                        statusSaverMain_iv.setImageResource(R.drawable.ic_status_saver_saved_header);
                         break;
                 }
-             }
+            }
 
-             @Override
-             public void onTabUnselected(TabLayout.Tab tab) {
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
 
-             }
+            }
 
-             @Override
-             public void onTabReselected(TabLayout.Tab tab) {
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
 
-             }
-         });
-
+            }
+        });
 
 
     }
+
     public void loadmyfrag(Fragment fragment) {
         this.mFragment = fragment;
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.replace( R.id.whatsAppStatusFragContainer_fl, fragment );
+        fragmentTransaction.replace(R.id.whatsAppStatusFragContainer_fl, fragment);
         fragmentTransaction.commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }

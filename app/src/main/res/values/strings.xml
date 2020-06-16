@@ -7,4 +7,8 @@
     <string name="image_tab">IMAGE</string>
     <string name="video_tab">VIDEO</string>
     <string name="saved_tab">SAVED</string>
+    <string name="status_saver">STATUS SAVER</string>
+    <string name="images">Images</string>
+    <string name="videos">Videos</string>
+    <string name="saved">Saved</string>
 </resources>
