@@ -31,7 +31,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
-
                 android:maxWidth="150dp"/>
 
         </LinearLayout>
@@ -46,12 +45,12 @@
          android:orientation="horizontal">
 
         <ImageView
-            android:src="@mipmap/ic_launcher"
+            android:src="@drawable/ic_delete"
             android:background="?android:attr/selectableItemBackgroundBorderless"
              android:id="@+id/allAppSelected_deselect_Iv"
             android:layout_marginEnd="12dp"
-            android:layout_width="20dp"
-            android:layout_height="20dp" />
+            android:layout_width="32dp"
+            android:layout_height="32dp" />
 
     </LinearLayout>
 

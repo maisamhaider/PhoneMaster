@@ -9,6 +9,7 @@ import android.os.Bundle;
 import com.example.phonemaster.R;
 import com.example.phonemaster.adapters.AllAppsAdapter;
 import com.example.phonemaster.async.AllAppsTask;
+import com.example.phonemaster.utils.SimpleDividerItemDecoration;
 
 public class UnInstallAppAct extends AppCompatActivity {
     private AllAppsTask allAppsTsk;
@@ -22,6 +23,8 @@ public class UnInstallAppAct extends AppCompatActivity {
         allAppsUnInstallApp_rv =  findViewById( R.id.allAppsUnInstallApp_rv );
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this );
         linearLayoutManager.setOrientation( RecyclerView.VERTICAL );
+
+        allAppsUnInstallApp_rv.addItemDecoration(new SimpleDividerItemDecoration(this));
 
         allAppsAdapter = new AllAppsAdapter(this );
         allAppsTsk = new AllAppsTask(this,allAppsAdapter,allAppsUnInstallApp_rv);
