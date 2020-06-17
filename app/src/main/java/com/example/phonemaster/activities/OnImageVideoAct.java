@@ -3,7 +3,6 @@ package com.example.phonemaster.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -11,11 +10,9 @@ import android.widget.ImageView;
 import android.widget.MediaController;
 import android.widget.VideoView;
 
-import com.bumptech.glide.Glide;
 import com.example.phonemaster.R;
 import com.example.phonemaster.utils.Utils;
 
-import java.net.URI;
 import java.util.ArrayList;
 
 public class OnImageVideoAct extends AppCompatActivity {

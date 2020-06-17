@@ -3,14 +3,11 @@ package com.example.phonemaster.async;
 import android.content.Context;
 import android.os.AsyncTask;
 
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.phonemaster.adapters.DeepCleanAudioAdapter;
-import com.example.phonemaster.adapters.DeepCleanVideosAdapter;
 import com.example.phonemaster.models.DeepCleanAudioModel;
-import com.example.phonemaster.models.DeepCleanVideosModel;
 import com.example.phonemaster.utils.LoadingDialog;
 import com.example.phonemaster.utils.Utils;
 

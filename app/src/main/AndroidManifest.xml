@@ -38,6 +38,7 @@
         <activity android:name=".activities.JunkFilesAct" />
         <activity
             android:name=".activities.ChargingLockedScreenAct"
+            android:launchMode="singleInstance"
             android:screenOrientation="sensorPortrait"
             android:showOnLockScreen="true" />
         <activity android:name=".activities.FastChargeAct" />
@@ -70,6 +71,11 @@
             </intent-filter>
         </activity>
 
+        <receiver android:name=".receivers.BootUpReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
         <receiver
             android:name=".receivers.FastChargingChargerReceiver"
             android:enabled="true"

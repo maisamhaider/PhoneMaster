@@ -4,20 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.os.Environment;
 import android.view.View;
 import android.widget.Button;
 
 import com.example.phonemaster.R;
 import com.example.phonemaster.adapters.CommonAdapter;
-import com.example.phonemaster.adapters.DeepCleanDocsAdapter;
-import com.example.phonemaster.async.DeepCleanDocsTask;
 import com.example.phonemaster.async.WhatsAppCommonTask;
-import com.example.phonemaster.models.DeepCleanDocsModel;
 import com.example.phonemaster.utils.Utils;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 public class WhatsAppDocumentsListAct extends AppCompatActivity {

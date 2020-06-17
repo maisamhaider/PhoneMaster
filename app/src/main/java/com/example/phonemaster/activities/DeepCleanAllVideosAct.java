@@ -8,9 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.phonemaster.R;
-import com.example.phonemaster.adapters.DeepCleanImagesAdapter;
 import com.example.phonemaster.adapters.DeepCleanVideosAdapter;
-import com.example.phonemaster.async.DeepCleanImagesTask;
 import com.example.phonemaster.async.DeepCleanVideosTask;
 import com.example.phonemaster.utils.Utils;
 

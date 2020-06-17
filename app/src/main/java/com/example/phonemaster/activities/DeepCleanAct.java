@@ -11,12 +11,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.phonemaster.R;
-import com.example.phonemaster.adapters.DeepCleanVideosAdapter;
-import com.example.phonemaster.async.DeepCleanPkgsTask;
 import com.example.phonemaster.permission.Permissions;
 import com.example.phonemaster.utils.Utils;
-
-import java.io.File;
 
 public class DeepCleanAct extends AppCompatActivity {
 
