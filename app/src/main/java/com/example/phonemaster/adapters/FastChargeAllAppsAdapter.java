@@ -61,6 +61,8 @@ public class FastChargeAllAppsAdapter extends RecyclerView.Adapter<FastChargeAll
          getDbList();
      }
 
+
+
     @NonNull
     @Override
     public AllAppsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

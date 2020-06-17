@@ -40,9 +40,16 @@ public class BatterySavingAllAppsAdapter extends RecyclerView.Adapter<BatterySav
         this.context = context;
         appUtility = new AppUtility(context);
         this.apps = apps;
-        this.checkList = new ArrayList<>();
+        checkList = new ArrayList<>();
+        checkList.addAll(apps);
+    }
 
+    public List<String> getCheckList() {
+        return checkList;
+    }
 
+    public void setCheckList(List<String> checkList) {
+        this.checkList = checkList;
     }
 
     @NonNull
@@ -63,11 +70,10 @@ public class BatterySavingAllAppsAdapter extends RecyclerView.Adapter<BatterySav
             holder.batterySavingApp_iv.setImageResource(R.drawable.ic_select);
         } else {
             holder.batterySavingApp_iv.setImageResource(R.drawable.ic_deselect);
-
         }
 
 
-        holder.batterySavingAppName_Tv.setText(appName);
+        holder.batterySavingAppName_Tv.setText(appPackage);
 
         Glide.with(context).load(UsageUtils.parsePackageIcon(apps.get(position), R.mipmap.ic_launcher))
                 .transition(new DrawableTransitionOptions().crossFade()).into(holder.batterySavingAppImage_Iv);
@@ -77,20 +83,15 @@ public class BatterySavingAllAppsAdapter extends RecyclerView.Adapter<BatterySav
             @Override
             public void onClick(View v) {
                 String packageName = apps.get(position);
-                if (!checkList.contains(packageName)) {
 
-                    checkList.add(packageName);
-                    Toast.makeText(context, "pkg Inserted", Toast.LENGTH_SHORT).show();
-                    holder.batterySavingApp_iv.setImageResource(R.drawable.ic_select);
-
+                if (checkList.contains(packageName)) {
+                    checkList.remove(packageName);
+                    holder.batterySavingApp_iv.setImageResource(R.drawable.ic_deselect);
                 } else {
-
-                    if (checkList.contains(packageName)) {
-                        checkList.remove(packageName);
-                        Toast.makeText(context, "pkg Deleted", Toast.LENGTH_SHORT).show();
-                        holder.batterySavingApp_iv.setImageResource(R.drawable.ic_deselect);
-                    }
+                        checkList.add(packageName);
+                        holder.batterySavingApp_iv.setImageResource(R.drawable.ic_select);
                 }
+//                notifyDataSetChanged();
             }
         });
     }
