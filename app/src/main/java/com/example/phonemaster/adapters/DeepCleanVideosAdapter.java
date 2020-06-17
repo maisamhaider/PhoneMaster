@@ -69,7 +69,7 @@ public class DeepCleanVideosAdapter extends RecyclerView.Adapter<DeepCleanVideos
                 }
                 else
                 {
-                    list.remove(videoString);
+                    list.remove(position);
                 }
             }
         });

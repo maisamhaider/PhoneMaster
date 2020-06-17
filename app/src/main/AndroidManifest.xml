@@ -10,8 +10,6 @@
         android:name="android.permission.PACKAGE_USAGE_STATS"
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.GET_PACKAGE_SIZE" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission
         android:name="android.permission.CLEAR_APP_CACHE"
         tools:ignore="ProtectedPermissions" />
@@ -35,8 +33,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".activities.SettingActivity" />
+        android:theme="@style/AppThemeNoActionBar">
+        <activity android:name=".activities.FilesMoverAct"/>
+        <activity android:name=".activities.JunkFilesAct" />
         <activity
             android:name=".activities.ChargingLockedScreenAct"
             android:launchMode="singleInstance"
@@ -64,8 +63,7 @@
         <activity android:name=".activities.WhatsAppImagesListAct" />
         <activity android:name=".activities.WhatsAppAudioListAct" />
         <activity android:name=".activities.CleanWhatsAppAct" />
-        <activity android:name=".activities.MainActivity"
-            android:theme="@style/AppThemeNoActionBar">
+        <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

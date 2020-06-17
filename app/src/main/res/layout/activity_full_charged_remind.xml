@@ -3,42 +3,53 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/standard_white"
     android:layout_height="match_parent"
     tools:context=".activities.FullChargedRemindAct">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:background="@color/colorAccent"
-        android:id="@+id/fullChargedAlarm__cl"
+         android:id="@+id/fullChargedAlarm__cl"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="56dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="15dp"
+        android:background="@drawable/btn_boarder_bg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
+            android:textStyle="bold"
             android:id="@+id/fullChargedAlarm_tv1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:text="full Charged Alarm"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Switch
+        <com.suke.widget.SwitchButton
             android:id="@+id/fullChargedAlarm_switch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="16dp"
+            app:sb_uncheck_color="@color/colorBorderCL"
+            app:sb_checked_color="@color/colorHeader"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.517" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
         android:text="charge finish preference"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fullChargedAlarm__cl" />
@@ -46,85 +57,110 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/fullChargedRemindSound__cl"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="56dp"
+        android:layout_marginStart="15dp"
+         android:layout_marginEnd="15dp"
+        android:background="@drawable/btn_boarder_bg"
         android:layout_marginTop="8dp"
-        android:background="@color/colorAccent"
-        app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3">
 
         <TextView
+            android:textStyle="bold"
             android:id="@+id/fullChargedRemindSound_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:text="Sound"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Switch
+        <com.suke.widget.SwitchButton
             android:id="@+id/fullChargedRemindSound_switch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="16dp"
+            app:sb_uncheck_color="@color/colorBorderCL"
+            app:sb_checked_color="@color/colorHeader"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.517" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/fullChargedRemindVibrate__cl"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorAccent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="56dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="15dp"
+        android:background="@drawable/btn_boarder_bg"         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fullChargedRemindSound__cl">
 
         <TextView
+            android:textStyle="bold"
             android:id="@+id/fullChargedRemindVibrate_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:text="Vibrate"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Switch
+        <com.suke.widget.SwitchButton
             android:id="@+id/fullChargedRemindVibrate_switch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="16dp"
+            app:sb_uncheck_color="@color/colorBorderCL"
+            app:sb_checked_color="@color/colorHeader"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.517" />
     </androidx.constraintlayout.widget.ConstraintLayout>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/fullChargedRemindDoNotDisturb__cl"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorAccent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="56dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="15dp"
+        android:background="@drawable/btn_boarder_bg"         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fullChargedRemindVibrate__cl">
 
         <TextView
+            android:textStyle="bold"
             android:id="@+id/fullChargedRemindDoNotDisturb_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:text="Do Not Disturb"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.558" />
 
-        <Switch
+        <com.suke.widget.SwitchButton
             android:id="@+id/fullChargedRemindDoNotDisturb_switch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="16dp"
+            app:sb_uncheck_color="@color/colorBorderCL"
+            app:sb_checked_color="@color/colorHeader"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.551" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

@@ -9,6 +9,7 @@ import android.widget.CompoundButton;
 import android.widget.Switch;
 
 import com.example.phonemaster.R;
+import com.suke.widget.SwitchButton;
 
 public class FullChargedRemindAct extends AppCompatActivity {
 
@@ -19,16 +20,16 @@ public class FullChargedRemindAct extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences("myPref", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
 
-        Switch fullChargedAlarm_switch, fullChargedRemindSound_switch, fullChargedRemindVibrate_switch, fullChargedRemindDoNotDisturb_switch;
+        SwitchButton fullChargedAlarm_switch, fullChargedRemindSound_switch, fullChargedRemindVibrate_switch, fullChargedRemindDoNotDisturb_switch;
 
         fullChargedAlarm_switch = findViewById(R.id.fullChargedAlarm_switch);
         fullChargedRemindSound_switch = findViewById(R.id.fullChargedRemindSound_switch);
         fullChargedRemindVibrate_switch = findViewById(R.id.fullChargedRemindVibrate_switch);
         fullChargedRemindDoNotDisturb_switch = findViewById(R.id.fullChargedRemindDoNotDisturb_switch);
 
-        fullChargedAlarm_switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        fullChargedAlarm_switch.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            public void onCheckedChanged(SwitchButton view, boolean isChecked) {
                 if (isChecked) {
                     fullChargedRemindSound_switch.setChecked(true);
                     fullChargedRemindVibrate_switch.setChecked(true);
@@ -51,9 +52,9 @@ public class FullChargedRemindAct extends AppCompatActivity {
             }
         });
 
-        fullChargedRemindSound_switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        fullChargedRemindSound_switch.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            public void onCheckedChanged(SwitchButton view, boolean isChecked) {
                 if (isChecked) {
                     editor.putBoolean("FULL_CHARGED_SOUND", true).commit();
 
@@ -63,9 +64,9 @@ public class FullChargedRemindAct extends AppCompatActivity {
                 }
             }
         });
-        fullChargedRemindVibrate_switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        fullChargedRemindVibrate_switch.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            public void onCheckedChanged(SwitchButton view, boolean isChecked) {
                 if (isChecked) {
                     editor.putBoolean("FULL_CHARGED_VIBRATE", true).commit();
 
@@ -75,9 +76,9 @@ public class FullChargedRemindAct extends AppCompatActivity {
                 }
             }
         });
-        fullChargedRemindDoNotDisturb_switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        fullChargedRemindDoNotDisturb_switch.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            public void onCheckedChanged(SwitchButton view, boolean isChecked) {
                 if (isChecked) {
                     editor.putBoolean("FULL_CHARGED_DO_NOT_DISTURB", true).commit();
 

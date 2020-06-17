@@ -4,15 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp">
+    android:background="@drawable/status_cv_bg"
+    android:layout_marginStart="5dp"
+    android:layout_marginEnd="5dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp">
 
 
-
-    <ImageView
+    <com.mikhaellopez.circularimageview.CircularImageView
         android:id="@+id/whatsAppRv_iv"
-        android:layout_width="match_parent"
+        android:layout_width="120dp"
         android:layout_height="120dp"
-        android:src="@drawable/ic_launcher_background"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -20,14 +24,25 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:background="@mipmap/ic_launcher"
+        android:id="@+id/select_deselected_iv"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="6dp"
+        android:src="@drawable/ic_deselect"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
         android:id="@+id/isVideo_iv"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="5dp"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:background="@drawable/ic_play"
+        android:elevation="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/whatsAppRv_iv"
+        app:layout_constraintStart_toStartOf="@+id/whatsAppRv_iv"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

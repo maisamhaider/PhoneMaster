@@ -58,9 +58,7 @@ public class Utils {
             for (File f : mlist) {
                 if (f.isDirectory()) {
                     docList.addAll(getListFiles(new File(f.getAbsolutePath())));
-                }
-                else
-                {
+                } else {
                     CommonModel data = new CommonModel();
                     data.setName(f.getName());
                     data.setPath(f.getPath());
@@ -69,10 +67,55 @@ public class Utils {
                     if (f.length() > 0)
                         docList.add(data);
                 }
+            }
+        }
+
+        return docList;
+    }
+
+    public List<CommonModel> getListFiles(File parentDir, String forWhat) {
+        File fold = new File(parentDir.getPath());
+        List<CommonModel> docList = new ArrayList<>();
+        File[] mlist = fold.listFiles();
+        File[] mFilelist = fold.listFiles();
+
+
+        if (forWhat.matches("images")) {
+            for (File f : mlist) {
+                if (f.isDirectory()) {
+                    docList.addAll(getListFiles(new File(f.getAbsolutePath(), "images")));
+                } else {
+
+                    CommonModel data = new CommonModel();
+                    if (f.getAbsolutePath().endsWith(".jpeg") || f.getAbsolutePath().endsWith(".jpg") || f.getAbsolutePath().endsWith(".png")) {
+                        data.setName(f.getName());
+                        data.setPath(f.getPath());
+                        data.setSize(f.length());
+                        if (f.length() > 0)
+                            docList.add(data);
+                    }
+
+
                 }
             }
 
+        } else {
+            for (File f : mlist) {
+                if (f.isDirectory()) {
+                    docList.addAll(getListFiles(new File(f.getAbsolutePath(), "videos")));
+                } else {
+                    CommonModel data = new CommonModel();
+                    if (f.getAbsolutePath().endsWith("mp4")) {
+                        data.setName(f.getName());
+                        data.setPath(f.getPath());
+                        data.setSize(f.length());
 
+                        if (f.length() > 0)
+                            docList.add(data);
+                    }
+                }
+            }
+        }
         return docList;
     }
 
@@ -101,12 +144,12 @@ public class Utils {
 
     public List<ActivityManager.RunningServiceInfo> loadProcessInfo() {
 
-          ActivityManager activityManager = (ActivityManager) context.getSystemService(ACTIVITY_SERVICE);
-          List<ActivityManager.RunningServiceInfo> recentTasks = activityManager.getRunningServices(Integer.MAX_VALUE);
+        ActivityManager activityManager = (ActivityManager) context.getSystemService(ACTIVITY_SERVICE);
+        List<ActivityManager.RunningServiceInfo> recentTasks = activityManager.getRunningServices(Integer.MAX_VALUE);
         return recentTasks;
     }
 
-    public List<String> getActiveApps( ) {
+    public List<String> getActiveApps() {
 
         PackageManager pm = context.getPackageManager();
         List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
@@ -115,8 +158,8 @@ public class Utils {
         for (ApplicationInfo packageInfo : packages) {
 
             if (!isSTOPPED(packageInfo)) {
-                if (!list.contains( packageInfo.packageName )) {
-                    list.add( packageInfo.packageName );
+                if (!list.contains(packageInfo.packageName)) {
+                    list.add(packageInfo.packageName);
                 }
             }
         }
@@ -154,10 +197,12 @@ public class Utils {
 
         return ((activityInfo.applicationInfo.flags & ApplicationInfo.FLAG_STOPPED) != 0);
     }
+
     private static boolean isSTOPPED(ApplicationInfo pkgInfo) {
 
         return ((pkgInfo.flags & ApplicationInfo.FLAG_STOPPED) != 0);
     }
+
     private static boolean isSYSTEM(ApplicationInfo pkgInfo) {
 
         return ((pkgInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0);
@@ -285,8 +330,7 @@ public class Utils {
 
         try {
             File src = new File(srcDir);
-            String lastName = getRightStringToThePoint(srcDir, "/");
-            File dst = new File(Environment.getExternalStorageDirectory() + "/Phone Master/Status/", src.getName());
+             File dst = new File(Environment.getExternalStorageDirectory() + "/Phone_Master_Status", src.getName());
 
             if (src.isDirectory()) {
 
@@ -628,22 +672,23 @@ public class Utils {
             return (path.endsWith(".jpeg") || path.endsWith(".jpg") || path.endsWith(".png"));
         }
     }
+
     public static class AllAudioFilter implements FileFilter {
         @Override
         public boolean accept(File pathname) {
             String path = pathname.getPath();
             return (path.endsWith(".mp3") ||
                     path.endsWith(".opus") ||
-                    path.endsWith(".m4a")||
-                    path.endsWith(".amr")||
+                    path.endsWith(".m4a") ||
+                    path.endsWith(".amr") ||
                     path.endsWith(".mpa") ||
-                    path.endsWith(".mid")||
-                    path.endsWith(".ogg")||
-                    path.endsWith(".wav")||
-                    path.endsWith(".wma")||
-                    path.endsWith(".wma")||
-                    path.endsWith(".wpl")||
-                    path.endsWith(".cda")||
+                    path.endsWith(".mid") ||
+                    path.endsWith(".ogg") ||
+                    path.endsWith(".wav") ||
+                    path.endsWith(".wma") ||
+                    path.endsWith(".wma") ||
+                    path.endsWith(".wpl") ||
+                    path.endsWith(".cda") ||
                     path.endsWith(".aif"));
         }
     }
@@ -656,29 +701,29 @@ public class Utils {
         }
     }
 
-        public String getCalculatedDataSize(float size) {
-            float sizeBytes = size;
-            String sizePrefix = "Bytes";
-            float finalSize = size;
-            if (sizeBytes >= 1024) {
-                float sizeKb = sizeBytes / 1024;
-                sizePrefix = "KB";
-                finalSize = sizeKb;
-                if (sizeKb >= 1024) {
-                    float sizeMB = sizeKb / 1024;
-                    sizePrefix = "MB";
-                    finalSize = sizeMB;
-                    if (sizeMB >= 1024) {
-                        float sizeGb = sizeMB / 1024;
-                        sizePrefix = "GB";
-                        finalSize = sizeGb;
-
-                    }
+    public String getCalculatedDataSize(float size) {
+        float sizeBytes = size;
+        String sizePrefix = "Bytes";
+        float finalSize = size;
+        if (sizeBytes >= 1024) {
+            float sizeKb = sizeBytes / 1024;
+            sizePrefix = "KB";
+            finalSize = sizeKb;
+            if (sizeKb >= 1024) {
+                float sizeMB = sizeKb / 1024;
+                sizePrefix = "MB";
+                finalSize = sizeMB;
+                if (sizeMB >= 1024) {
+                    float sizeGb = sizeMB / 1024;
+                    sizePrefix = "GB";
+                    finalSize = sizeGb;
 
                 }
+
             }
-            return String.format("%.2f", finalSize) + sizePrefix;
         }
+        return String.format("%.2f", finalSize) + sizePrefix;
+    }
 
 
 }

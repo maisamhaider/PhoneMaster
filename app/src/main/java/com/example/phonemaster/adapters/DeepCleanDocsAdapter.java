@@ -66,7 +66,7 @@ public class DeepCleanDocsAdapter extends RecyclerView.Adapter<DeepCleanDocsAdap
                 if (isChecked) {
                     list.add(docsString);
                 } else {
-                    list.remove(docsString);
+                    list.remove(position);
                 }
             }
         });

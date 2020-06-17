@@ -93,7 +93,7 @@ public class ProcessesAdapter extends RecyclerView.Adapter<ProcessesAdapter.AllA
                 }
                 else
                 {
-                    sendList.remove(appPackage);
+                    sendList.remove(position);
                 }
             }
         });

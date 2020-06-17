@@ -2,6 +2,24 @@
     <string name="app_name">PhoneMaster</string>
     <string name="clean">Clean</string>
     <string name="clear">Clear</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="image_tab">IMAGE</string>
+    <string name="video_tab">VIDEO</string>
+    <string name="saved_tab">SAVED</string>
+    <string name="c_status_saver">STATUS SAVER</string>
+    <string name="images">Images</string>
+    <string name="videos">Videos</string>
+    <string name="saved">Saved</string>
+    <string name="optimized">OPTIMIZED</string>
+    <string name="show_charging_state_and_optimized_charging_process">show charging state and optimized charging process</string>
+    <string name="smart_charge">Smart charge</string>
+    <string name="fast_charge">Fast charge</string>
+    <string name="full_charged_remind">Full Charged Remind</string>
+    <string name="_2_real_time_reminder_to_help_you_avoid_overcharging">2. Real-Time reminder to help you avoid \n\t overcharging.</string>
+    <string name="_1_improve_your_charging_process">1. Improve your charging process.</string>
+    <string name="smart_charge_can_help_you">Smart charge can help you:</string>
+    <string name="enable_now">ENABLE NOW</string>
     <string name="title_home">Home</string>
     <string name="title_tool">Tools</string>
     <string name="title_setting">Setting</string>

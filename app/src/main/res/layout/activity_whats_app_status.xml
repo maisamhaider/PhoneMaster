@@ -1,22 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.WhatsAppStatusAct">
-   <androidx.constraintlayout.widget.ConstraintLayout
-       android:id="@+id/cl"
-       android:layout_width="match_parent"
-       android:layout_height="56dp">
-
-   </androidx.constraintlayout.widget.ConstraintLayout>
-
-   <androidx.recyclerview.widget.RecyclerView
-       android:id="@+id/whatsAppStatus_rv"
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:layout_below="@+id/cl" />
 
 
-</RelativeLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/below_corners_corved_bg"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="9dp">
+
+        <TextView
+            android:textStyle="bold"
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/status_saver"
+            android:textColor="@color/standard_white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/statusSaverMain_iv"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/ic_status_saver_image_header"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+        <TextView
+            android:id="@+id/amountOfStatusImages_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+             android:text="28 status images found"
+            android:textColor="@color/standard_white"
+            app:layout_constraintBottom_toTopOf="@+id/status_tl"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/statusSaverMain_iv" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/status_tl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/below_corners_corved_bg"
+            android:scrollbars="none"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:tabIndicatorColor="@android:color/transparent"
+            app:tabInlineLabel="true"
+             app:tabSelectedTextColor="@color/standard_white"
+            app:tabTextColor="@color/colorTextTwo">
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/ti_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/ic_image_three"
+                android:text="@string/images">
+
+            </com.google.android.material.tabs.TabItem>
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/ti_video"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/ic_video_status"
+                android:text="@string/videos">
+
+            </com.google.android.material.tabs.TabItem>
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/ti_saved"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/ic_saved"
+                android:text="@string/saved">
+
+            </com.google.android.material.tabs.TabItem>
+        </com.google.android.material.tabs.TabLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <FrameLayout
+        android:id="@+id/whatsAppStatusFragContainer_fl"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline"
+        tools:layout_editor_absoluteX="10dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.3" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

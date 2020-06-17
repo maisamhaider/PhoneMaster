@@ -1,15 +1,13 @@
 package com.example.phonemaster.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
 import com.example.phonemaster.R;
 import com.example.phonemaster.adapters.FastChargeAllAppsAdapter;
-import com.example.phonemaster.async.AllAppsTask;
-import com.example.phonemaster.async.FastAllAppsTask;
+ import com.example.phonemaster.async.FastAllAppsTask;
 import com.example.phonemaster.database.Db;
 
 public class FastChargeAct extends AppCompatActivity {
@@ -24,7 +22,6 @@ public class FastChargeAct extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fast_charge);
         fastCharge_rv = findViewById(R.id.fastCharge_rv);
-
 
         db = new Db(this);
         adapter = new FastChargeAllAppsAdapter(this);
