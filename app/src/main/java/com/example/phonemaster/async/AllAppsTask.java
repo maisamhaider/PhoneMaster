@@ -51,7 +51,6 @@ public class AllAppsTask extends AsyncTask<Void, Integer, String> {
     @Override
     protected String doInBackground(Void... voids) {
 
-
             list = utils.GetAllInstalledApkInfo();
             return null;
     }

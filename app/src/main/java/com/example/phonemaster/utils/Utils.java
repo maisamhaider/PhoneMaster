@@ -168,36 +168,36 @@ public class Utils {
     }
 
 
-    public List<String> GetAllApkInfo() {
+//    public List<String> GetAllApkInfo() {
+//
+//        List<String> ApkPackageName = new ArrayList<>();
+//
+//        Intent intent = new Intent(Intent.ACTION_MAIN, null);
+//
+//        intent.addCategory(Intent.CATEGORY_LAUNCHER);
+//
+//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+//
+//        List<ResolveInfo> resolveInfoList = context.getPackageManager().queryIntentActivities(intent, 0);
+//
+//        for (ResolveInfo resolveInfo : resolveInfoList) {
+//
+//            ActivityInfo activityInfo = resolveInfo.activityInfo;
+//            if (!isSTOPPED(activityInfo)) {
+//                if (!ApkPackageName.contains(activityInfo.applicationInfo.packageName)) {
+//                    ApkPackageName.add(activityInfo.applicationInfo.packageName);
+//                }
+//            }
+//
+//
+//        }
+//        return ApkPackageName;
+//    }
 
-        List<String> ApkPackageName = new ArrayList<>();
-
-        Intent intent = new Intent(Intent.ACTION_MAIN, null);
-
-        intent.addCategory(Intent.CATEGORY_LAUNCHER);
-
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
-
-        List<ResolveInfo> resolveInfoList = context.getPackageManager().queryIntentActivities(intent, 0);
-
-        for (ResolveInfo resolveInfo : resolveInfoList) {
-
-            ActivityInfo activityInfo = resolveInfo.activityInfo;
-            if (!isSTOPPED(activityInfo)) {
-                if (!ApkPackageName.contains(activityInfo.applicationInfo.packageName)) {
-                    ApkPackageName.add(activityInfo.applicationInfo.packageName);
-                }
-            }
-
-
-        }
-        return ApkPackageName;
-    }
-
-    public boolean isSTOPPED(ActivityInfo activityInfo) {
-
-        return ((activityInfo.applicationInfo.flags & ApplicationInfo.FLAG_STOPPED) != 0);
-    }
+//    public boolean isSTOPPED(ActivityInfo activityInfo) {
+//
+//        return ((activityInfo.applicationInfo.flags & ApplicationInfo.FLAG_STOPPED) != 0);
+//    }
 
     private static boolean isSTOPPED(ApplicationInfo pkgInfo) {
 
@@ -245,30 +245,30 @@ public class Utils {
         return (usedData * 100 / totalData);
     }
 
-//    public static long getFolderSize(String dir) {
-//
-//        File f = new File(dir);
-//
-//        String listFiles[] = f.list();
-//        long totalSize = 0;
-//        long folderAmount = 0;
-//        for (String file : listFiles) {
-//
-//            File folder = new File(dir + "/" + file);
-//            if (folder.isDirectory()) {
-//                totalSize += getFolderSize(folder.getAbsolutePath());
-//                if (totalSize == 0) {
-//                    folderAmount++;
-//                }
-//            } else {
-//                totalSize += folder.length();
-//            }
-//            if (totalSize == 0) {
-//                folderAmount++;
-//            }
-//        }
-//        return folderAmount;
-//    }
+    public static long getFolderSize(String dir) {
+
+        File f = new File(dir);
+
+        String listFiles[] = f.list();
+        long totalSize = 0;
+        long folderAmount = 0;
+        for (String file : listFiles) {
+
+            File folder = new File(dir + "/" + file);
+            if (folder.isDirectory()) {
+                totalSize += getFolderSize(folder.getAbsolutePath());
+                if (totalSize == 0) {
+                    folderAmount++;
+                }
+            } else {
+                totalSize += folder.length();
+            }
+            if (totalSize == 0) {
+                folderAmount++;
+            }
+        }
+        return folderAmount;
+    }
 
     public List<String> GetAllInstalledApkInfo() {
 
@@ -340,7 +340,6 @@ public class Utils {
                 for (int i = 0; i < filesLength; i++) {
                     String src1 = (new File(src, files[i]).getPath());
                     copyFileOrDirectory(src1);
-
                 }
             } else {
                 copyFile(src, dst);
