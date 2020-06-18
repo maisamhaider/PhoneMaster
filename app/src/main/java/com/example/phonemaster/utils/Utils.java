@@ -55,6 +55,7 @@ public class Utils {
         File[] mFilelist = fold.listFiles();
 
         {
+            if (mlist!=null)
             for (File f : mlist) {
                 if (f.isDirectory()) {
                     docList.addAll(getListFiles(new File(f.getAbsolutePath())));
@@ -547,11 +548,13 @@ public class Utils {
         File fold = new File(path);
         File[] mlist = fold.listFiles();
         File[] mFilelist = fold.listFiles();
+        if (mlist!=null)
         for (File f : mlist) {
             if (f.isDirectory()) {
                 getAllDocs(f.getAbsolutePath());
             }
         }
+        if (mlist!=null)
         for (File f : mFilelist) {
             DeepCleanDocsModel doc = new DeepCleanDocsModel();
             docSize = docSize + f.length();

@@ -30,4 +30,6 @@
     <string name="power_saving"><b>Power</b> Saving</string>
     <string name="status_saver"><b>Status</b> Saver</string>
     <string name="app_cleanup"><b>App</b> Cleanup</string>
+    <string name="clean_whatsapp">CLEAN WHATSAPP</string>
+    <string name="analyzing_usage">ANALYZING USAGE</string>
 </resources>

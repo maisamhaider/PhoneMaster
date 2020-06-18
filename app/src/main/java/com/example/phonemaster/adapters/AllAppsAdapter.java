@@ -97,9 +97,10 @@ public class AllAppsAdapter extends RecyclerView.Adapter<AllAppsAdapter.AllAppsH
 
                 if (appUtility.isSystemApp( packageName )) {
                     Toast.makeText( context, "Can not Uninstall system's application", Toast.LENGTH_SHORT ).show();
-                } else if (appUtility.isAppPreLoaded( packageName )) {
+                    return;
+                }
 
-                } else {
+                if (!appUtility.isAppPreLoaded( packageName )) {
                     Intent intent = new Intent( Intent.ACTION_DELETE );
                     intent.setData( Uri.parse( "package:" + packageName ) );
                     intent.setFlags( Intent.FLAG_ACTIVITY_NEW_TASK );
@@ -108,7 +109,6 @@ public class AllAppsAdapter extends RecyclerView.Adapter<AllAppsAdapter.AllAppsH
             }
         });
     }
-
 
     @Override
     public int getItemCount() {

@@ -13,5 +13,6 @@
     <color name="colorBorderCL">#BCCEFF</color>
     <color name="colorText">#404040</color>
     <color name="colorUnSelected">#4581FF</color>
+    <color name="colorWhite">#FFFFFF</color>
 
 </resources>

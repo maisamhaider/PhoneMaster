@@ -18,7 +18,9 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.app.adprogressbarlib.AdCircleProgress;
 import com.example.phonemaster.R;
+import com.example.phonemaster.activities.CleanWhatsAppAct;
 import com.example.phonemaster.activities.UnInstallAppAct;
+import com.example.phonemaster.activities.WhatsAppStatusAct;
 import com.example.phonemaster.permission.Permissions;
 import com.example.phonemaster.utils.Utils;
 
@@ -62,28 +64,13 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
         tvRamInfo = root.findViewById(R.id.tv_ram_info);
         tvStorageInfo = root.findViewById(R.id.tv_storage_info);
 
+        ImageView ivAppCleanup = root.findViewById(R.id.iv_app_cleanup);
+        ImageView ivPowerSaving = root.findViewById(R.id.iv_power_saving);
+        ImageView ivStatusSaver = root.findViewById(R.id.iv_status_saver);
 
-//        Button cleanWhatsApp_btn = root.findViewById(R.id.cleanWhatsApp_btn);
-//        Button cpuCooler_btn = root.findViewById(R.id.cpuCooler_btn);
-//        Button phoneBoost_btn = root.findViewById(R.id.phoneBoost_btn);
-//        Button batterySaving_btn = root.findViewById(R.id.batterySaving_btn);
-//        Button whatsAppStatusSaver_btn = root.findViewById(R.id.whatsAppStatusSaver_btn);
-//        Button harassmentFilter_btn = root.findViewById(R.id.harassmentFilter_btn);
-        ImageView unInstallApp_iv = root.findViewById(R.id.ic_app_cleanup);
-//        Button deepClean_btn = root.findViewById(R.id.deepClean_btn);
-//        Button smartCharging_btn = root.findViewById(R.id.smartCharging_btn);
-//        Button junkClean_btn = root.findViewById(R.id.junkClean_btn);
-
-//        cleanWhatsApp_btn.setOnClickListener(this);
-//        cpuCooler_btn.setOnClickListener(this);
-//        phoneBoost_btn.setOnClickListener(this);
-//        batterySaving_btn.setOnClickListener(this);
-//        whatsAppStatusSaver_btn.setOnClickListener(this);
-//        harassmentFilter_btn.setOnClickListener(this);
-        unInstallApp_iv.setOnClickListener(this);
-//        deepClean_btn.setOnClickListener(this);
-//        smartCharging_btn.setOnClickListener(this);
-//        junkClean_btn.setOnClickListener(this);
+        ivAppCleanup.setOnClickListener(this);
+        ivPowerSaving.setOnClickListener(this);
+        ivStatusSaver.setOnClickListener(this);
 
 
         ramAndStorageFun();
@@ -168,9 +155,17 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
 //                Intent harassmentFilterIntent = new Intent(getActivity(), HarassmentFilterAct.class);
 //                startActivity(harassmentFilterIntent);
 //                break;
-            case R.id.ic_app_cleanup:
+            case R.id.iv_app_cleanup:
                 Intent unInstallAppIntent = new Intent(getActivity(), UnInstallAppAct.class);
                 startActivity(unInstallAppIntent);
+                break;
+            case R.id.iv_power_saving:
+                Intent cwpInstallAppIntent = new Intent(getActivity(), CleanWhatsAppAct.class);
+                startActivity(cwpInstallAppIntent);
+                break;
+            case R.id.iv_status_saver:
+                Intent cSSInstallAppIntent = new Intent(getActivity(), WhatsAppStatusAct.class);
+                startActivity(cSSInstallAppIntent);
                 break;
 //            case R.id.deepClean_btn:
 //                Intent deepCleanIntent = new Intent(getActivity(), DeepCleanAct.class);

@@ -95,12 +95,12 @@
             app:layout_constraintTop_toTopOf="@+id/iv_junk_file" />
 
         <ImageView
-            android:id="@+id/ic_power_saving"
+            android:id="@+id/iv_power_saving"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_marginTop="24dp"
             android:src="@drawable/ic_power_saving"
-            app:layout_constraintEnd_toStartOf="@+id/ic_app_cleanup"
+            app:layout_constraintEnd_toStartOf="@+id/iv_app_cleanup"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView7">
@@ -108,26 +108,26 @@
         </ImageView>
 
         <ImageView
-            android:id="@+id/ic_app_cleanup"
+            android:id="@+id/iv_app_cleanup"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:src="@drawable/ic_app_cleanup"
-            app:layout_constraintEnd_toStartOf="@+id/ic_status_saver"
+            app:layout_constraintEnd_toStartOf="@+id/iv_status_saver"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/ic_power_saving"
-            app:layout_constraintTop_toTopOf="@+id/ic_power_saving">
+            app:layout_constraintStart_toEndOf="@+id/iv_power_saving"
+            app:layout_constraintTop_toTopOf="@+id/iv_power_saving">
 
         </ImageView>
 
         <ImageView
-            android:id="@+id/ic_status_saver"
+            android:id="@+id/iv_status_saver"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:src="@drawable/ic_whatsapp_status_saver"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/ic_app_cleanup"
-            app:layout_constraintTop_toTopOf="@+id/ic_app_cleanup">
+            app:layout_constraintStart_toEndOf="@+id/iv_app_cleanup"
+            app:layout_constraintTop_toTopOf="@+id/iv_app_cleanup">
 
         </ImageView>
 
@@ -176,27 +176,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/power_saving"
-            app:layout_constraintEnd_toEndOf="@+id/ic_power_saving"
-            app:layout_constraintStart_toStartOf="@+id/ic_power_saving"
-            app:layout_constraintTop_toBottomOf="@+id/ic_power_saving" />
+            app:layout_constraintEnd_toEndOf="@+id/iv_power_saving"
+            app:layout_constraintStart_toStartOf="@+id/iv_power_saving"
+            app:layout_constraintTop_toBottomOf="@+id/iv_power_saving" />
 
         <TextView
             android:id="@+id/textView11"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/app_cleanup"
-            app:layout_constraintEnd_toEndOf="@+id/ic_app_cleanup"
-            app:layout_constraintStart_toStartOf="@+id/ic_app_cleanup"
-            app:layout_constraintTop_toBottomOf="@+id/ic_app_cleanup" />
+            app:layout_constraintEnd_toEndOf="@+id/iv_app_cleanup"
+            app:layout_constraintStart_toStartOf="@+id/iv_app_cleanup"
+            app:layout_constraintTop_toBottomOf="@+id/iv_app_cleanup" />
 
         <TextView
             android:id="@+id/textView12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/status_saver"
-            app:layout_constraintEnd_toEndOf="@+id/ic_status_saver"
-            app:layout_constraintStart_toStartOf="@+id/ic_status_saver"
-            app:layout_constraintTop_toBottomOf="@+id/ic_status_saver" />
+            app:layout_constraintEnd_toEndOf="@+id/iv_status_saver"
+            app:layout_constraintStart_toStartOf="@+id/iv_status_saver"
+            app:layout_constraintTop_toBottomOf="@+id/iv_status_saver" />
 
         <TextView
             android:id="@+id/textView15"
