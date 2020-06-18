@@ -48,6 +48,7 @@ public class CleanWhatsAppAct extends AppCompatActivity implements View.OnClickL
         received_file_dataSize_Tv = findViewById(R.id.received_file_dataSize_Tv);
         pb = findViewById(R.id.progressBar);
 
+        startAnimation();
 
         //setting each folder size
         float bUDataSize = utils.getAllSize(Environment.getExternalStorageDirectory().getPath() + "/WhatsApp/Databases");
@@ -64,10 +65,10 @@ public class CleanWhatsAppAct extends AppCompatActivity implements View.OnClickL
                 utils.getAllSize(Environment.getExternalStorageDirectory().getPath() + "/WhatsApp/Media/WhatsApp Documents")));
 
         float totalSize =    bUDataSize + cHDataSize
-                                + utils.getAllSize(Environment.getExternalStorageDirectory().getPath() + "/WhatsApp/Media/WhatsApp Images")
-                                + utils.getAllSize(Environment.getExternalStorageDirectory().getPath() + "/WhatsApp/Media/WhatsApp Audio")
-                                + utils.getAllSize(Environment.getExternalStorageDirectory().getPath() + "/WhatsApp/Media/WhatsApp Video")
-                                + utils.getAllSize(Environment.getExternalStorageDirectory().getPath() + "/WhatsApp/Media/WhatsApp Documents");
+                + utils.getAllSize(Environment.getExternalStorageDirectory().getPath() + "/WhatsApp/Media/WhatsApp Images")
+                + utils.getAllSize(Environment.getExternalStorageDirectory().getPath() + "/WhatsApp/Media/WhatsApp Audio")
+                + utils.getAllSize(Environment.getExternalStorageDirectory().getPath() + "/WhatsApp/Media/WhatsApp Video")
+                + utils.getAllSize(Environment.getExternalStorageDirectory().getPath() + "/WhatsApp/Media/WhatsApp Documents");
 
         tvTotalSize.setText(utils.getCalculatedDataSize(totalSize).substring(0,utils.getCalculatedDataSize(totalSize).length()-2));
 
@@ -107,6 +108,9 @@ public class CleanWhatsAppAct extends AppCompatActivity implements View.OnClickL
     }
 
     private void startAnimation() {
+
+        cleanWpOne.setVisibility(View.VISIBLE);
+        cleanWpTwo.setVisibility(View.GONE);
 
         ValueAnimator animator = ValueAnimator.ofInt(0, 100);
         animator.setInterpolator(new LinearInterpolator());
