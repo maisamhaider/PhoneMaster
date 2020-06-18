@@ -81,11 +81,6 @@ public class JunkFilesAct extends AppCompatActivity {
         }
 
         //junk File Empty Folder
-        if (preferences.getBoolean("isEFolderClean", false)) {
-            junkFileEmptyFolderClear_iv.setImageResource(R.drawable.ic_deselect);
-        } else {
-            junkFileEmptyFolderClear_iv.setImageResource(R.drawable.ic_select);
-        }
 
         junkFileEmptyFolderClear_iv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,13 +97,6 @@ public class JunkFilesAct extends AppCompatActivity {
 
         //cache junks
 
-        if (preferences.getBoolean("isCacheJunkClean", false)) {
-            cacheJunkClear_iv.setImageResource(R.drawable.ic_deselect);
-
-        } else {
-            cacheJunkClear_iv.setImageResource(R.drawable.ic_select);
-        }
-
         cacheJunkClear_iv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,13 +109,6 @@ public class JunkFilesAct extends AppCompatActivity {
                 }
             }
         });
-
-        //installation pkg.s
-        if (preferences.getBoolean("isInstallationPkgClean", false)) {
-            installationPackages_iv.setImageResource(R.drawable.ic_deselect);
-        } else {
-            installationPackages_iv.setImageResource(R.drawable.ic_select);
-        }
 
         installationPackages_iv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -142,12 +123,7 @@ public class JunkFilesAct extends AppCompatActivity {
             }
         });
 
-        //residual junk
-        if (preferences.getBoolean("isResidualJunkClean", false)) {
-            residualJunk_iv.setImageResource(R.drawable.ic_deselect);
-        } else {
-            residualJunk_iv.setImageResource(R.drawable.ic_select);
-        }
+
 
         residualJunk_iv.setOnClickListener(new View.OnClickListener() {
             @Override

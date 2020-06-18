@@ -114,13 +114,13 @@
                         app:layout_constraintVertical_bias="0.529" />
 
                     <ImageView
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
                         android:id="@+id/cacheJunkClear_iv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="10dp"
                         android:src="@drawable/ic_select"
-                        android:text="@string/clear"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -155,6 +155,7 @@
 
 
                     <ImageView
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
                         android:id="@+id/residualJunk_iv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -205,6 +206,7 @@
 
 
                     <ImageView
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
                         android:id="@+id/installationPackages_iv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -259,7 +261,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="10dp"
                         android:src="@drawable/ic_select"
-                        android:text="Clear"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />

@@ -144,5 +144,6 @@
 
     <include layout="@layout/battery_savers_first_screen_layout"/>
 
+    <include layout="@layout/battery_savers_after_cleanclick_screen_layout"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
