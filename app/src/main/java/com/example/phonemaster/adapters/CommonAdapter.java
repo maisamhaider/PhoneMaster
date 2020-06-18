@@ -76,27 +76,27 @@ public class CommonAdapter extends RecyclerView.Adapter<CommonAdapter.WhatsAppSt
 
         }
         else
-            {
-                holder.commonIsVideo_iv.setVisibility(View.INVISIBLE);
-
-            }
-     if (pathString.endsWith(String.valueOf(new Utils.AllDoFilter())))
         {
-             Glide.with(context).load(R.drawable.ic_launcher_foreground).into(holder.commonFileRv_iv);
+            holder.commonIsVideo_iv.setVisibility(View.INVISIBLE);
+
+        }
+        if (pathString.endsWith(String.valueOf(new Utils.AllDoFilter())))
+        {
+            Glide.with(context).load(R.drawable.ic_launcher_foreground).into(holder.commonFileRv_iv);
         }
         else if (pathString.endsWith(String.valueOf(new Utils.AllImgFilter())))
         {
-             Glide.with(context).load(R.drawable.ic_launcher_foreground).into(holder.commonFileRv_iv);
+            Glide.with(context).load(R.drawable.ic_launcher_foreground).into(holder.commonFileRv_iv);
 
         }
         else if (pathString.endsWith(String.valueOf(new Utils.AllAudioFilter())))
         {
-             Glide.with(context).load(R.drawable.ic_launcher_background).into(holder.commonFileRv_iv);
+            Glide.with(context).load(R.drawable.ic_launcher_background).into(holder.commonFileRv_iv);
 
         }
         else if (pathString.endsWith(String.valueOf(new Utils.AllPackagesFilter())))
         {
-             Glide.with(context).load(R.drawable.ic_launcher_foreground).into(holder.commonFileRv_iv);
+            Glide.with(context).load(R.drawable.ic_launcher_foreground).into(holder.commonFileRv_iv);
 
         }
 
@@ -118,7 +118,7 @@ public class CommonAdapter extends RecyclerView.Adapter<CommonAdapter.WhatsAppSt
             }
         });
     }
-    
+
     @Override
     public int getItemCount() {
         return fileList.size();
