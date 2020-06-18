@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -35,6 +34,9 @@ public class CommonAdapter extends RecyclerView.Adapter<CommonAdapter.WhatsAppSt
 
     public void setFileList(List<CommonModel> fileList) {
         this.fileList = fileList;
+        for (CommonModel commonModel:fileList){
+            list.add(commonModel.getPath());
+        }
     }
 
     public List<String> getList() {
@@ -59,6 +61,12 @@ public class CommonAdapter extends RecyclerView.Adapter<CommonAdapter.WhatsAppSt
         final String pathString = fileList.get(position).getPath();
         final String name = fileList.get(position).getName();
         utils = new Utils(context);
+
+        if (list.contains(pathString)) {
+            holder.selection_iv.setImageResource(R.drawable.ic_select);
+        } else {
+            holder.selection_iv.setImageResource(R.drawable.ic_deselect);
+        }
 
         holder.commonFileName_tv.setText(name);
         if (pathString.endsWith("mp4"))
@@ -93,16 +101,19 @@ public class CommonAdapter extends RecyclerView.Adapter<CommonAdapter.WhatsAppSt
         }
 
 
-        holder.selectAudio_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        holder.selection_iv.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked)
+            public void onClick(View v) {
+                String pathString = fileList.get(position).getPath();
+                if (list.contains(pathString))
                 {
-                    list.add(pathString);
+                    list.remove(pathString);
+                    holder.selection_iv.setImageResource(R.drawable.ic_deselect);
                 }
                 else
                 {
-                    list.remove(position);
+                    list.add(pathString);
+                    holder.selection_iv.setImageResource(R.drawable.ic_select);
                 }
             }
         });
@@ -115,8 +126,7 @@ public class CommonAdapter extends RecyclerView.Adapter<CommonAdapter.WhatsAppSt
 
     class WhatsAppStatusHolder extends RecyclerView.ViewHolder {
 
-        ImageView commonFileRv_iv,commonIsVideo_iv;
-        CheckBox selectAudio_cb;
+        ImageView commonFileRv_iv,commonIsVideo_iv,selection_iv;
         TextView commonFileName_tv,commonFileSize_tv;
 
         public WhatsAppStatusHolder(@NonNull View itemView) {
@@ -124,7 +134,7 @@ public class CommonAdapter extends RecyclerView.Adapter<CommonAdapter.WhatsAppSt
 
             commonIsVideo_iv = itemView.findViewById(R.id.commonIsVideo_iv);
             commonFileRv_iv = itemView.findViewById(R.id.commonFileRv_iv);
-            selectAudio_cb = itemView.findViewById(R.id.selectCommon_cb);
+            selection_iv = itemView.findViewById(R.id.selection_iv);
             commonFileName_tv = itemView.findViewById(R.id.commonFileName_tv);
             commonFileSize_tv = itemView.findViewById(R.id.commonFileSize_tv);
 
