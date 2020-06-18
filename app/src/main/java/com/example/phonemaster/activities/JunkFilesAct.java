@@ -8,9 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
-import android.provider.ContactsContract;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -21,13 +19,16 @@ import com.example.phonemaster.models.DeepCleanPackagesModel;
 import com.example.phonemaster.utils.StorageUtils;
 import com.example.phonemaster.utils.Utils;
 
-import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import pl.droidsonroids.gif.GifImageView;
+
 public class JunkFilesAct extends AppCompatActivity {
+    boolean isFirstThreadDone;
+    TextView trashCleanLast_tv;
+    GifImageView junkCollecting_giv, junkBinDone_giv  ;
+    ConstraintLayout cacheJunkBin_cl;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +44,13 @@ public class JunkFilesAct extends AppCompatActivity {
         ImageView installationPackages_iv = findViewById(R.id.installationPackages_iv);
         ImageView junkFileEmptyFolderClear_iv = findViewById(R.id.junkFileEmptyFolderClear_iv);
 
-        ConstraintLayout cacheJunkBin_cl = findViewById(R.id.cacheJunkBin_cl);
+        ConstraintLayout constraintLayout = findViewById(R.id.junkFilesSecond_cl);
+          cacheJunkBin_cl = findViewById(R.id.cacheJunkBin_cl);
+
+          trashCleanLast_tv = findViewById(R.id.trashCleanLast_tv);
+          junkCollecting_giv = findViewById(R.id.junkCollecting_giv);
+          junkBinDone_giv = findViewById(R.id.junkBinDone_giv);
+
         cacheJunkBin_cl.setVisibility(View.GONE);
 
         //junk File Empty Folder
@@ -140,13 +147,17 @@ public class JunkFilesAct extends AppCompatActivity {
 
 
                 if (preferences.getLong("junkCleanTime", current.getTimeInMillis()) <= current.getTimeInMillis()) {
+
+                     junkCollecting_giv.setVisibility(View.VISIBLE);
+                    cacheJunkBin_cl.setVisibility(View.VISIBLE);
+
                     Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            cacheJunkBin_cl.setVisibility(View.VISIBLE);
-                        }
-                    }, 5000);
+                            lastView();
+                         }
+                    }, 3000);
 
 
                     if (preferences.getBoolean("isCacheJunkClean", false)) {
@@ -185,5 +196,18 @@ public class JunkFilesAct extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void lastView(){
+        junkBinDone_giv.setVisibility(View.VISIBLE);
+        junkCollecting_giv.setVisibility(View.GONE);
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                junkBinDone_giv.setVisibility(View.GONE);
+                cacheJunkBin_cl.setVisibility(View.GONE);
+            }
+        }, 3000);
     }
 }

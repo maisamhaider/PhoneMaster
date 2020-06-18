@@ -6,21 +6,20 @@
     android:layout_height="match_parent"
     android:background="@color/standard_white"
     tools:context=".activities.JunkFilesAct">
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/junkFilesSecond_cl"
-        android:layout_width="match_parent"
-        android:background="@color/standard_white"
-        android:layout_height="match_parent">
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout3"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="@drawable/ic_phone_master_header"
-            app:layout_constraintBottom_toTopOf="@+id/guideline3"
+             app:layout_constraintBottom_toTopOf="@+id/guideline3"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0"
             tools:layout_editor_absoluteX="30dp">
+            <ImageView
+                android:src="@drawable/ic_phone_master_header"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
 
             <TextView
                 android:textStyle="bold"
@@ -35,7 +34,11 @@
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/junkFilesSecond_cl"
+        android:layout_width="match_parent"
+        android:background="@color/standard_white"
+        android:layout_height="match_parent">
         <TextView
             android:id="@+id/textView13"
             android:layout_width="wrap_content"
