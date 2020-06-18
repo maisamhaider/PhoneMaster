@@ -27,8 +27,9 @@ import pl.droidsonroids.gif.GifImageView;
 public class JunkFilesAct extends AppCompatActivity {
     boolean isFirstThreadDone;
     TextView trashCleanLast_tv;
-    GifImageView junkCollecting_giv, junkBinDone_giv  ;
+    GifImageView junkCollecting_giv, junkBinDone_giv,junkGiv;
     ConstraintLayout cacheJunkBin_cl;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,13 +46,25 @@ public class JunkFilesAct extends AppCompatActivity {
         ImageView junkFileEmptyFolderClear_iv = findViewById(R.id.junkFileEmptyFolderClear_iv);
 
         ConstraintLayout constraintLayout = findViewById(R.id.junkFilesSecond_cl);
-          cacheJunkBin_cl = findViewById(R.id.cacheJunkBin_cl);
+        cacheJunkBin_cl = findViewById(R.id.cacheJunkBin_cl);
+        junkGiv = findViewById(R.id.junk_giv);
 
-          trashCleanLast_tv = findViewById(R.id.trashCleanLast_tv);
-          junkCollecting_giv = findViewById(R.id.junkCollecting_giv);
-          junkBinDone_giv = findViewById(R.id.junkBinDone_giv);
+        trashCleanLast_tv = findViewById(R.id.trashCleanLast_tv);
+        junkCollecting_giv = findViewById(R.id.junkCollecting_giv);
+        junkBinDone_giv = findViewById(R.id.junkBinDone_giv);
 
         cacheJunkBin_cl.setVisibility(View.GONE);
+        junkCollecting_giv.setVisibility(View.GONE);
+        Calendar current = Calendar.getInstance();
+
+
+        if (preferences.getLong("junkCleanTime", current.getTimeInMillis()) <= current.getTimeInMillis()) {
+            constraintLayout.setVisibility(View.VISIBLE);
+            junkGiv.setImageResource(R.drawable.junk_bin_white);
+        } else {
+            junkGiv.setImageResource(R.drawable.optimized);
+            constraintLayout.setVisibility(View.GONE);
+        }
 
         //junk File Empty Folder
         if (preferences.getBoolean("isEFolderClean", false)) {
@@ -77,6 +90,7 @@ public class JunkFilesAct extends AppCompatActivity {
 
         if (preferences.getBoolean("isCacheJunkClean", false)) {
             cacheJunkClear_iv.setImageResource(R.drawable.ic_deselect);
+
         } else {
             cacheJunkClear_iv.setImageResource(R.drawable.ic_select);
         }
@@ -143,20 +157,20 @@ public class JunkFilesAct extends AppCompatActivity {
         junkFileCleanBtn_ll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Calendar current = Calendar.getInstance();
 
 
                 if (preferences.getLong("junkCleanTime", current.getTimeInMillis()) <= current.getTimeInMillis()) {
 
-                     junkCollecting_giv.setVisibility(View.VISIBLE);
                     cacheJunkBin_cl.setVisibility(View.VISIBLE);
+                    junkCollecting_giv.setVisibility(View.VISIBLE);
+                    trashCleanLast_tv.setText("FINISHED CLEANING");
 
                     Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
                             lastView();
-                         }
+                        }
                     }, 3000);
 
 
@@ -188,9 +202,11 @@ public class JunkFilesAct extends AppCompatActivity {
                     long dateMilliSec = nextTime.getTimeInMillis();
 
                     editor.putLong("junkCleanTime", dateMilliSec).commit();
-                }
-                else {
-                    Toast.makeText(JunkFilesAct.this, "cleaned", Toast.LENGTH_SHORT).show();
+                    constraintLayout.setVisibility(View.GONE);
+                    junkGiv.setImageResource(R.drawable.optimized);
+
+                } else {
+                    Toast.makeText(JunkFilesAct.this, "Not cleaned", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -198,15 +214,16 @@ public class JunkFilesAct extends AppCompatActivity {
 
     }
 
-    public void lastView(){
-        junkBinDone_giv.setVisibility(View.VISIBLE);
+    public void lastView() {
+        junkBinDone_giv.setImageResource(R.drawable.junk_bin);
+        trashCleanLast_tv.setText("FINISHED CLEANING");
         junkCollecting_giv.setVisibility(View.GONE);
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                junkBinDone_giv.setVisibility(View.GONE);
                 cacheJunkBin_cl.setVisibility(View.GONE);
+                junkBinDone_giv.setVisibility(View.GONE);
             }
         }, 3000);
     }

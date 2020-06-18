@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -19,6 +20,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.app.adprogressbarlib.AdCircleProgress;
 import com.example.phonemaster.R;
 import com.example.phonemaster.activities.CleanWhatsAppAct;
+import com.example.phonemaster.activities.JunkFilesAct;
 import com.example.phonemaster.activities.UnInstallAppAct;
 import com.example.phonemaster.activities.WhatsAppStatusAct;
 import com.example.phonemaster.permission.Permissions;
@@ -67,10 +69,13 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
         ImageView ivAppCleanup = root.findViewById(R.id.iv_app_cleanup);
         ImageView ivPowerSaving = root.findViewById(R.id.iv_power_saving);
         ImageView ivStatusSaver = root.findViewById(R.id.iv_status_saver);
+        ImageView ivJunkFile = root.findViewById(R.id.iv_junk_file);
+
 
         ivAppCleanup.setOnClickListener(this);
         ivPowerSaving.setOnClickListener(this);
         ivStatusSaver.setOnClickListener(this);
+        ivJunkFile.setOnClickListener(this);
 
 
         ramAndStorageFun();
@@ -125,15 +130,15 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
 //                else
 //                    Toast.makeText(getActivity(), "Permission is not granted ", Toast.LENGTH_SHORT).show();
 //                break;
-//            case R.id.junkClean_btn:
-//                if (permissions.permission())
-//                {
-//                    Intent cleanWhatsAppActIntent = new Intent(getActivity(), JunkFilesAct.class);
-//                    startActivity(cleanWhatsAppActIntent);
-//                }
-//                else
-//                    Toast.makeText(getActivity(), "Permission is not granted ", Toast.LENGTH_SHORT).show();
-//                break;
+            case R.id.iv_junk_file:
+                if (permissions.permission())
+                {
+                    Intent cleanWhatsAppActIntent = new Intent(getActivity(), JunkFilesAct.class);
+                    startActivity(cleanWhatsAppActIntent);
+                }
+                else
+                    Toast.makeText(getActivity(), "Permission is not granted ", Toast.LENGTH_SHORT).show();
+                break;
 //
 //            case R.id.cpuCooler_btn:
 //                Intent cpuCoolerIntent = new Intent(getActivity(), CpuCooler.class);

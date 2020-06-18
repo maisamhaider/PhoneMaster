@@ -20,8 +20,7 @@
         android:id="@+id/junkBinDone_giv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/junk_bin"
-        tools:layout_editor_absoluteX="0dp"
+          tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp" />
 
     <TextView
