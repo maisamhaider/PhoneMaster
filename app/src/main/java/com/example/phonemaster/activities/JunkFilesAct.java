@@ -28,7 +28,8 @@ public class JunkFilesAct extends AppCompatActivity {
     boolean isFirstThreadDone;
     TextView trashCleanLast_tv;
     GifImageView junkCollecting_giv, junkBinDone_giv,junkGiv;
-    ConstraintLayout cacheJunkBin_cl;
+    ConstraintLayout cacheJunkBin_cl,whenJunkCleanedMain_cl;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,13 +40,16 @@ public class JunkFilesAct extends AppCompatActivity {
         SharedPreferences.Editor editor = preferences.edit();
 
         LinearLayout junkFileCleanBtn_ll = findViewById(R.id.junkFileCleanBtn_ll);
+        LinearLayout junkFileMoreApps_ll = findViewById(R.id.junkFileMoreApps_ll);
 
         ImageView cacheJunkClear_iv = findViewById(R.id.cacheJunkClear_iv);
         ImageView residualJunk_iv = findViewById(R.id.residualJunk_iv);
         ImageView installationPackages_iv = findViewById(R.id.installationPackages_iv);
         ImageView junkFileEmptyFolderClear_iv = findViewById(R.id.junkFileEmptyFolderClear_iv);
+        ImageView junkFileBack_iv = findViewById(R.id.junkFileBack_iv);
 
         ConstraintLayout constraintLayout = findViewById(R.id.junkFilesSecond_cl);
+        whenJunkCleanedMain_cl= findViewById(R.id.whenJunkCleanedMain_cl);
         cacheJunkBin_cl = findViewById(R.id.cacheJunkBin_cl);
         junkGiv = findViewById(R.id.junk_giv);
 
@@ -55,15 +59,25 @@ public class JunkFilesAct extends AppCompatActivity {
 
         cacheJunkBin_cl.setVisibility(View.GONE);
         junkCollecting_giv.setVisibility(View.GONE);
+        whenJunkCleanedMain_cl.setVisibility(View.GONE);
         Calendar current = Calendar.getInstance();
 
 
+
+        junkFileBack_iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         if (preferences.getLong("junkCleanTime", current.getTimeInMillis()) <= current.getTimeInMillis()) {
             constraintLayout.setVisibility(View.VISIBLE);
             junkGiv.setImageResource(R.drawable.junk_bin_white);
         } else {
             junkGiv.setImageResource(R.drawable.optimized);
             constraintLayout.setVisibility(View.GONE);
+            whenJunkCleanedMain_cl.setVisibility(View.VISIBLE);
+
         }
 
         //junk File Empty Folder
@@ -165,7 +179,7 @@ public class JunkFilesAct extends AppCompatActivity {
                     junkCollecting_giv.setVisibility(View.VISIBLE);
                     trashCleanLast_tv.setText("FINISHED CLEANING");
 
-                    Handler handler = new Handler();
+                     Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
@@ -212,6 +226,14 @@ public class JunkFilesAct extends AppCompatActivity {
             }
         });
 
+        junkFileMoreApps_ll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO
+                Toast.makeText(JunkFilesAct.this, "More Apps ", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     public void lastView() {
@@ -224,6 +246,7 @@ public class JunkFilesAct extends AppCompatActivity {
             public void run() {
                 cacheJunkBin_cl.setVisibility(View.GONE);
                 junkBinDone_giv.setVisibility(View.GONE);
+                whenJunkCleanedMain_cl.setVisibility(View.VISIBLE);
             }
         }, 3000);
     }

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/standard_white"
     tools:context=".activities.JunkFilesAct">
 
 
@@ -16,6 +17,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
         tools:layout_editor_absoluteX="30dp">
+
+
 
         <pl.droidsonroids.gif.GifImageView
             android:id="@+id/junk_giv"
@@ -42,7 +45,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-
+        <ImageView
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:id="@+id/junkFileBack_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/ic_baseline_arrow_back_white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -286,7 +298,7 @@
             android:layout_alignParentBottom="true"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="5dp"
             android:background="?android:attr/selectableItemBackground"
             android:gravity="center"
             android:orientation="vertical"
@@ -315,5 +327,66 @@
 
     <include layout="@layout/cache_junk_cleaning_layout" />
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/whenJunkCleanedMain_cl"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/standard_white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline3">
 
+
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/gifImageView3"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:src="@drawable/optimized_rocket"
+            app:layout_constraintBottom_toTopOf="@+id/textView27"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <TextView
+            android:id="@+id/textView27"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="Already Optimized"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/junkFileMoreApps_ll"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/gifImageView3" />
+
+        <LinearLayout
+            android:id="@+id/junkFileMoreApps_ll"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="10dp"
+            android:layout_marginBottom="117dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView27"
+            app:layout_constraintVertical_bias="0.98"
+            tools:layout_editor_absoluteX="10dp">
+
+            <TextView
+                android:id="@+id/junkFileMoreApp_tv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/below_button_bg"
+                android:gravity="center"
+                android:text="VISIT MORE APPS"
+                android:textColor="@color/standard_white" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

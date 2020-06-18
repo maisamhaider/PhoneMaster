@@ -17,6 +17,7 @@
         android:background="@color/colorBorderCL" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/visitToAppStore_cl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -26,30 +27,31 @@
         android:padding="8dp">
 
         <TextView
-            android:id="@+id/textView13"
+            android:id="@+id/visitToAppStore_tv1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:text="TextView"
+            android:text="Photo and Video Transfer"
             android:textSize="14sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/textView14"
-            app:layout_constraintStart_toEndOf="@+id/imageView2"
+            app:layout_constraintBottom_toTopOf="@+id/visitToAppStore_tv2"
+            app:layout_constraintStart_toEndOf="@+id/visitToAppStore_iv"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed" />
 
         <TextView
-            android:id="@+id/textView14"
+            android:id="@+id/visitToAppStore_tv2"
+            android:textColor="@color/colorTextTwo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView"
+            android:text="No data to share/backup files/SMS/Contact"
             android:textSize="10sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/textView13"
-            app:layout_constraintTop_toBottomOf="@+id/textView13" />
+            app:layout_constraintStart_toStartOf="@+id/visitToAppStore_tv1"
+            app:layout_constraintTop_toBottomOf="@+id/visitToAppStore_tv1" />
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/visitToAppStore_iv"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginStart="12dp"
@@ -61,6 +63,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/smartCharge_cl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -70,30 +73,31 @@
         android:padding="8dp">
 
         <TextView
-            android:id="@+id/textView13"
+            android:id="@+id/smartCharge_tv1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:text="TextView"
+            android:text="Smart Charge"
             android:textSize="14sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/textView14"
-            app:layout_constraintStart_toEndOf="@+id/imageView2"
+            app:layout_constraintBottom_toTopOf="@+id/smartCharge_tv2"
+            app:layout_constraintStart_toEndOf="@+id/smartCharge_iv"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed" />
 
         <TextView
-            android:id="@+id/textView14"
+            android:textColor="@color/colorTextTwo"
+            android:id="@+id/smartCharge_tv2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView"
+            android:text="Remind you charging state to avoid overcharging"
             android:textSize="10sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/textView13"
-            app:layout_constraintTop_toBottomOf="@+id/textView13" />
+            app:layout_constraintStart_toStartOf="@+id/smartCharge_tv1"
+            app:layout_constraintTop_toBottomOf="@+id/smartCharge_tv1" />
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/smartCharge_iv"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginStart="12dp"
@@ -101,10 +105,11 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_photo_and_video_transfer" />
+            app:srcCompat="@drawable/ic_smart_charge" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cleanWhatsApp_cl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -114,30 +119,31 @@
         android:padding="8dp">
 
         <TextView
-            android:id="@+id/textView13"
+            android:id="@+id/cleanWhatsApp_tv1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:text="TextView"
+            android:text="Clean WhatsApp"
             android:textSize="14sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/textView14"
-            app:layout_constraintStart_toEndOf="@+id/imageView2"
+            app:layout_constraintBottom_toTopOf="@+id/cleanWhatsApp_tv2"
+            app:layout_constraintStart_toEndOf="@+id/cleanWhatsApp_iv"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed" />
 
         <TextView
-            android:id="@+id/textView14"
+            android:textColor="@color/colorTextTwo"
+            android:id="@+id/cleanWhatsApp_tv2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView"
+            android:text="Delete useless file in WhatsApp"
             android:textSize="10sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/textView13"
-            app:layout_constraintTop_toBottomOf="@+id/textView13" />
+            app:layout_constraintStart_toStartOf="@+id/cleanWhatsApp_tv1"
+            app:layout_constraintTop_toBottomOf="@+id/cleanWhatsApp_tv1" />
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/cleanWhatsApp_iv"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginStart="12dp"

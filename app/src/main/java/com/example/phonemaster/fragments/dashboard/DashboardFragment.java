@@ -14,13 +14,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.app.adprogressbarlib.AdCircleProgress;
 import com.example.phonemaster.R;
+import com.example.phonemaster.activities.BatterySavingAct;
 import com.example.phonemaster.activities.CleanWhatsAppAct;
+import com.example.phonemaster.activities.CpuCooler;
 import com.example.phonemaster.activities.JunkFilesAct;
+import com.example.phonemaster.activities.PhoneBoostAct;
+import com.example.phonemaster.activities.SmartChargingAct;
 import com.example.phonemaster.activities.UnInstallAppAct;
 import com.example.phonemaster.activities.WhatsAppStatusAct;
 import com.example.phonemaster.permission.Permissions;
@@ -70,12 +75,22 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
         ImageView ivPowerSaving = root.findViewById(R.id.iv_power_saving);
         ImageView ivStatusSaver = root.findViewById(R.id.iv_status_saver);
         ImageView ivJunkFile = root.findViewById(R.id.iv_junk_file);
+        ImageView ivCpuCooler = root.findViewById(R.id.iv_cpu_cooler);
+        ImageView ivBoostPhone = root.findViewById(R.id.iv_boost_phone);
+
+        ConstraintLayout cleanWhatsApp_cl = root.findViewById(R.id.cleanWhatsApp_cl);
+        ConstraintLayout smartCharge_cl = root.findViewById(R.id.smartCharge_cl);
 
 
         ivAppCleanup.setOnClickListener(this);
         ivPowerSaving.setOnClickListener(this);
         ivStatusSaver.setOnClickListener(this);
         ivJunkFile.setOnClickListener(this);
+        ivCpuCooler.setOnClickListener(this);
+        ivBoostPhone.setOnClickListener(this);
+
+        cleanWhatsApp_cl.setOnClickListener(this);
+        smartCharge_cl.setOnClickListener(this);
 
 
         ramAndStorageFun();
@@ -87,33 +102,34 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
     private void ramAndStorageFun() {
 //        TextView ramPercent_tv = root.findViewById(R.id.ramPercent_tv);
 //        TextView storageUsagePercent_tv = root.findViewById(R.id.storageUsagePercent_tv);
+
 //for Ram
         ActivityManager activityManager = (ActivityManager) getActivity().getSystemService(Context.ACTIVITY_SERVICE);
         ActivityManager.MemoryInfo memoryInfo = new ActivityManager.MemoryInfo();
         activityManager.getMemoryInfo(memoryInfo);
-        float totalRam1 = memoryInfo.totalMem / 1024 / 1024;
-        float freeRam1 = memoryInfo.availMem / 1024 / 1024;
+        float totalRam1 = memoryInfo.totalMem;
+        float freeRam1 = memoryInfo.availMem ;
         float usedRam = totalRam1 - freeRam1;
 //        ramPercent_tv.setText( String.format( "%.1f",utils.getPercentage( totalRam1,usedRam ) )+"%" );
         cpbRam.setAdProgress((int) utils.getPercentage( totalRam1,usedRam ));
         pbRam.setProgress((int) utils.getPercentage( totalRam1,usedRam ));
-        tvRamInfo.setText(String.format("%.0fMB/%.0fMB",usedRam,totalRam1));
+        tvRamInfo.setText(String.format( utils.getCalculatedDataSize(usedRam)+"/"+utils.getCalculatedDataSize(totalRam1)));
 
 
         //for Storage
-        float totalStorageInGBs, availableStorageInGBs, usedStorageInGBs;
+        float totalStorageBytes, availableStorageBytes, usedStorageBytes;
 
-        totalStorageInGBs = (utils.getTotalStorage() / 1024) + 1;
-        availableStorageInGBs = utils.getAvailableStorage() / 1024;
+        totalStorageBytes =  utils.getTotalStorage();
+        availableStorageBytes = utils.getAvailableStorage();
 
-        usedStorageInGBs = totalStorageInGBs - availableStorageInGBs;
+        usedStorageBytes = totalStorageBytes - availableStorageBytes;
 
-        cpbStorage.setAdProgress((int) utils.getPercentage( totalStorageInGBs, usedStorageInGBs ));
-        pbStorage.setProgress((int) utils.getPercentage( totalStorageInGBs, usedStorageInGBs ));
-        tvStorageInfo.setText(String.format("%.0fGB/%.0fGB",usedStorageInGBs,totalStorageInGBs));
+        cpbStorage.setAdProgress((int) utils.getPercentage( totalStorageBytes, usedStorageBytes ));
+        pbStorage.setProgress((int) utils.getPercentage( totalStorageBytes, usedStorageBytes ));
+        tvStorageInfo.setText( utils.getCalculatedDataSize(usedStorageBytes)+"/"+utils.getCalculatedDataSize(totalStorageBytes));
 
 
-//        storageUsagePercent_tv.setText(String.format( "%.1f", utils.getPercentage( totalStorageInGBs, usedStorageInGBs )  )+ "%" );
+//        storageUsagePercent_tv.setText(String.format( "%.1f", utils.getPercentage( totalStorageBytes, usedStorageBytes )  )+ "%" );
 
     }
 
@@ -121,15 +137,15 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
     public void onClick(View v) {
         switch (v.getId())
         {
-//            case R.id.cleanWhatsApp_btn:
-//                if (permissions.permission())
-//                {
-//                    Intent cleanWhatsAppActIntent = new Intent(getActivity(), CleanWhatsAppAct.class);
-//                    startActivity(cleanWhatsAppActIntent);
-//                }
-//                else
-//                    Toast.makeText(getActivity(), "Permission is not granted ", Toast.LENGTH_SHORT).show();
-//                break;
+            case R.id.cleanWhatsApp_cl:
+                if (permissions.permission())
+                {
+                    Intent cleanWhatsAppActIntent = new Intent(getActivity(), CleanWhatsAppAct.class);
+                    startActivity(cleanWhatsAppActIntent);
+                }
+                else
+                    Toast.makeText(getActivity(), "Permission is not granted ", Toast.LENGTH_SHORT).show();
+                break;
             case R.id.iv_junk_file:
                 if (permissions.permission())
                 {
@@ -139,23 +155,36 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
                 else
                     Toast.makeText(getActivity(), "Permission is not granted ", Toast.LENGTH_SHORT).show();
                 break;
-//
-//            case R.id.cpuCooler_btn:
-//                Intent cpuCoolerIntent = new Intent(getActivity(), CpuCooler.class);
-//                startActivity(cpuCoolerIntent);
-//                break;
-//            case R.id.phoneBoost_btn:
-//                Intent phoneBoostIntent = new Intent(getActivity(), PhoneBoostAct.class);
-//                startActivity(phoneBoostIntent);
-//                break;
-//            case R.id.batterySaving_btn:
-//                Intent batterySavingIntent = new Intent(getActivity(), BatterySavingAct.class);
-//                startActivity(batterySavingIntent);
-//                break;
-//            case R.id.whatsAppStatusSaver_btn:
-//                Intent whatsAppStatusSaverIntent = new Intent(getActivity(), WhatsAppStatusAct.class);
-//                startActivity(whatsAppStatusSaverIntent);
-//                break;
+
+            case R.id.iv_cpu_cooler:
+
+                if (permissions.permission())
+                {
+                    Intent cpuCoolerIntent = new Intent(getActivity(), CpuCooler.class);
+                    startActivity(cpuCoolerIntent);
+                }
+                else
+                    Toast.makeText(getActivity(), "Permission is not granted ", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.iv_boost_phone:
+                if (permissions.permission())
+                {
+                    Intent phoneBoostIntent = new Intent(getActivity(), PhoneBoostAct.class);
+                    startActivity(phoneBoostIntent);
+                }
+                else
+                    Toast.makeText(getActivity(), "Permission is not granted ", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.iv_power_saving:
+
+                if (permissions.permission())
+                {
+                    Intent batterySavingIntent = new Intent(getActivity(), BatterySavingAct.class);
+                    startActivity(batterySavingIntent);
+                }
+                else
+                    Toast.makeText(getActivity(), "Permission is not granted ", Toast.LENGTH_SHORT).show();
+                break;
 //            case R.id.harassmentFilter_btn:
 //                Intent harassmentFilterIntent = new Intent(getActivity(), HarassmentFilterAct.class);
 //                startActivity(harassmentFilterIntent);
@@ -164,10 +193,10 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
                 Intent unInstallAppIntent = new Intent(getActivity(), UnInstallAppAct.class);
                 startActivity(unInstallAppIntent);
                 break;
-            case R.id.iv_power_saving:
-                Intent cwpInstallAppIntent = new Intent(getActivity(), CleanWhatsAppAct.class);
-                startActivity(cwpInstallAppIntent);
-                break;
+//            case R.id.iv_power_saving:
+//                Intent cwpInstallAppIntent = new Intent(getActivity(), CleanWhatsAppAct.class);
+//                startActivity(cwpInstallAppIntent);
+//                break;
             case R.id.iv_status_saver:
                 Intent cSSInstallAppIntent = new Intent(getActivity(), WhatsAppStatusAct.class);
                 startActivity(cSSInstallAppIntent);
@@ -176,10 +205,10 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
 //                Intent deepCleanIntent = new Intent(getActivity(), DeepCleanAct.class);
 //                startActivity(deepCleanIntent);
 //                break;
-//            case R.id.smartCharging_btn:
-//                Intent smartChargingIntent = new Intent(getActivity(), SmartChargingAct.class);
-//                startActivity(smartChargingIntent);
-//                break;
+            case R.id.smartCharge_cl:
+                Intent smartChargingIntent = new Intent(getActivity(), SmartChargingAct.class);
+                startActivity(smartChargingIntent);
+                break;
 //
         }
     }

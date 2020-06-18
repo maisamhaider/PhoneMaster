@@ -23,13 +23,14 @@ public class ToolsFragment extends Fragment {
         toolsViewModel =
                 ViewModelProviders.of(this).get(ToolsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_tool, container, false);
-        final TextView textView = root.findViewById(R.id.text_home);
-        toolsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+         toolsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
-                textView.setText(s);
+
             }
         });
+
+
         return root;
     }
 }

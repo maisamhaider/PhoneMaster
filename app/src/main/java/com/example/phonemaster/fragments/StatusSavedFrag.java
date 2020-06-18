@@ -44,7 +44,6 @@ public class StatusSavedFrag extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-
         }
     }
 
@@ -66,7 +65,6 @@ public class StatusSavedFrag extends Fragment {
         WhatsAppStatusAdapter statusAdapter = new WhatsAppStatusAdapter(getContext(),list,true);
         statusSaved_rv.setAdapter(statusAdapter);
         statusAdapter.notifyDataSetChanged();
-        List<String> data =  statusAdapter.getSendList();
 
 
 

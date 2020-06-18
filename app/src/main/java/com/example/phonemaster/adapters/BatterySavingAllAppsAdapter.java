@@ -66,7 +66,7 @@ public class BatterySavingAllAppsAdapter extends RecyclerView.Adapter<BatterySav
         String appName = utils.GetAppName(apps.get(position));
         final String appPackage = apps.get(position);
 
-        if (checkList.contains(appPackage)) {
+        if (checkList.contains(appName)) {
             holder.batterySavingApp_iv.setImageResource(R.drawable.ic_select);
         } else {
             holder.batterySavingApp_iv.setImageResource(R.drawable.ic_deselect);

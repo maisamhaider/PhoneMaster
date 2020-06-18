@@ -126,7 +126,7 @@ public class Utils {
         StatFs statFs = new StatFs(Environment.getExternalStorageDirectory().getPath());
         totalStorage = (statFs.getBlockSizeLong() * statFs.getBlockCountLong());
 
-        return (totalStorage / (1024 * 1024));//in Mbs
+        return totalStorage ;//in Mbs
     }
 
 
@@ -137,7 +137,7 @@ public class Utils {
         long bytesAvailable;
 
         bytesAvailable = stat.getAvailableBlocksLong() * stat.getBlockSizeLong();
-        megAvailable = bytesAvailable / (1024 * 1024);
+        megAvailable = bytesAvailable;
         return megAvailable;
     }
 

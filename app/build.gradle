@@ -81,5 +81,8 @@ dependencies {
     // view dependency used for Gif
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.19'
 
+    //horizontal progress  bar
+    implementation 'com.sasank.roundedhorizontalprogress:roundedhorizontalprogress:1.0.1'
+
 
 }
