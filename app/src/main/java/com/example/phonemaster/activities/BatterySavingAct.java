@@ -23,10 +23,7 @@ import android.widget.TextView;
 
 import com.example.phonemaster.R;
 import com.example.phonemaster.adapters.BatterySavingAllAppsAdapter;
-import com.example.phonemaster.adapters.ProcessesAdapter;
-import com.example.phonemaster.async.ProcessesCommonTask;
 import com.example.phonemaster.utils.Utils;
-import com.sasank.roundedhorizontalprogress.RoundedHorizontalProgressBar;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -36,11 +33,11 @@ public class BatterySavingAct extends AppCompatActivity {
     Utils utils;
 
     ConstraintLayout hibernatingAppsPkgMain_cl;
-    TextView hibernatingAppsPkg_tv;
+    TextView hibernatingAppsPkg_tv, powerSavingMainAppsAmount_tv;
     ProgressBar hibernatingAppsPkg_pb;
     ImageView hibernatingAppsPkgBack_iv;
     private BatterySavingAllAppsAdapter allAppsAdapter;
-    ConstraintLayout powerSavingSecond_cl,powerSavingLastScreenMain_cl,noDrainingApp_cl;
+    ConstraintLayout powerSavingSecond_cl, powerSavingLastScreenMain_cl, noDrainingApp_cl;
     SharedPreferences preferences;
 
     @Override
@@ -55,7 +52,7 @@ public class BatterySavingAct extends AppCompatActivity {
         RecyclerView powerSavingApp_rv = findViewById(R.id.powerSavingApp_rv);
         LinearLayout powerSavingBtn_ll = findViewById(R.id.powerSavingBtn_ll);
         TextView batterySavingRunningApps_tv = findViewById(R.id.batterySavingRunningApps_tv);
-        TextView powerSavingMainAppsAmount_tv = findViewById(R.id.powerSavingMainAppsAmount_tv);
+        powerSavingMainAppsAmount_tv = findViewById(R.id.powerSavingMainAppsAmount_tv);
         ImageView powerSavingBack_iv = findViewById(R.id.powerSavingBack_iv);
         noDrainingApp_cl = findViewById(R.id.noDrainingApp_cl);
 
@@ -82,7 +79,7 @@ public class BatterySavingAct extends AppCompatActivity {
         ValueAnimator animator = ValueAnimator.ofInt(0, 100);
         animator.setInterpolator(new LinearInterpolator());
         animator.setStartDelay(0);
-        animator.setDuration(5_000);
+        animator.setDuration(4_000);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
@@ -93,29 +90,22 @@ public class BatterySavingAct extends AppCompatActivity {
         animator.start();
         List<String> list = utils.getActiveApps();
         Calendar current = Calendar.getInstance();
-        if (preferences.getLong("lastBatterSaveTime",current.getTimeInMillis())>current.getTimeInMillis())
-        {
-             powerSavingSecond_cl.setVisibility(View.GONE);
+        if (preferences.getLong("lastBatterSaveTime", current.getTimeInMillis()) > current.getTimeInMillis()) {
+            powerSavingSecond_cl.setVisibility(View.GONE);
             powerSavingMainAppsAmount_tv.setText("0");
             noDrainingApp_cl.setVisibility(View.VISIBLE);
 
+        } else {
+            noDrainingApp_cl.setVisibility(View.GONE);
+            powerSavingSecond_cl.setVisibility(View.VISIBLE);
+            powerSavingMainAppsAmount_tv.setText("No Draining");
+            batterySavingRunningApps_tv.setText(list.size() + " app are Running");
         }
-        else
-            {
-                noDrainingApp_cl.setVisibility(View.GONE);
-                powerSavingSecond_cl.setVisibility(View.VISIBLE);
-                powerSavingMainAppsAmount_tv.setText("No Draining apps");
-                batterySavingRunningApps_tv.setText(list.size() + " app are Running");
-                powerSavingMainAppsAmount_tv.setText(String.valueOf(list.size()));
-            }
 
         powerSavingBack_iv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
-
-            }
-        });
+                finish();}});
 
 
         powerSavingFirstScreenBack_iv.setOnClickListener(new View.OnClickListener() {
@@ -124,13 +114,26 @@ public class BatterySavingAct extends AppCompatActivity {
                 finish();
             }
         });
+
+        ValueAnimator animatorText = ValueAnimator.ofInt(0, 100);
+        animatorText.setInterpolator(new LinearInterpolator());
+        animatorText.setStartDelay(0);
+        animatorText.setDuration(4_000);
+
+        animatorText.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                int value = (int) valueAnimator.getAnimatedValue();
+                analyzingBatteryStatusPercent_tv.setText(value + "%");
+            }
+        });
+        animatorText.start();
+
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                powerSavingFirstScreenMain_cl.setVisibility(View.GONE);
-            }
-        }, 4000);
+                powerSavingFirstScreenMain_cl.setVisibility(View.GONE);}}, 4000);
 
 
         allAppsAdapter = new BatterySavingAllAppsAdapter(this, list);
@@ -139,9 +142,6 @@ public class BatterySavingAct extends AppCompatActivity {
         powerSavingApp_rv.setLayoutManager(linearLayoutManager);
         powerSavingApp_rv.setAdapter(allAppsAdapter);
         allAppsAdapter.notifyDataSetChanged();
-
-
-
 
 
         powerSavingBtn_ll.setOnClickListener(new View.OnClickListener() {
@@ -183,8 +183,7 @@ public class BatterySavingAct extends AppCompatActivity {
         protected void onProgressUpdate(Integer... values) {
             super.onProgressUpdate(values);
             hibernatingAppsPkg_pb.setProgress(values[0]);
-            hibernatingAppsPkg_tv.setText(String.format("%s/%s",values[0], packageName.size()));
-
+            hibernatingAppsPkg_tv.setText(String.format("%s/%s", values[0], packageName.size()));
 
 
         }
@@ -197,19 +196,19 @@ public class BatterySavingAct extends AppCompatActivity {
             powerSavingSecond_cl.setVisibility(View.GONE);
             powerSavingLastScreenMain_cl.setVisibility(View.VISIBLE);
             Calendar nextTime = Calendar.getInstance();
-            nextTime.add(Calendar.MINUTE,5);
+            nextTime.add(Calendar.MINUTE, 5);
             SharedPreferences.Editor editor = preferences.edit();
-            editor.putLong("lastBatterSaveTime",nextTime.getTimeInMillis()).commit();
+            editor.putLong("lastBatterSaveTime", nextTime.getTimeInMillis()).commit();
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
+                    powerSavingMainAppsAmount_tv.setText("0");
                     powerSavingLastScreenMain_cl.setVisibility(View.GONE);
                     noDrainingApp_cl.setVisibility(View.VISIBLE);
 
                 }
-            },2000);
-
+            }, 2000);
 
 
         }
