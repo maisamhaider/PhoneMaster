@@ -66,14 +66,14 @@ public class BatterySavingAllAppsAdapter extends RecyclerView.Adapter<BatterySav
         String appName = utils.GetAppName(apps.get(position));
         final String appPackage = apps.get(position);
 
-        if (checkList.contains(appName)) {
+        if (checkList.contains(appPackage)) {
             holder.batterySavingApp_iv.setImageResource(R.drawable.ic_select);
         } else {
             holder.batterySavingApp_iv.setImageResource(R.drawable.ic_deselect);
         }
 
 
-        holder.batterySavingAppName_Tv.setText(appPackage);
+        holder.batterySavingAppName_Tv.setText(appName);
 
         Glide.with(context).load(UsageUtils.parsePackageIcon(apps.get(position), R.mipmap.ic_launcher))
                 .transition(new DrawableTransitionOptions().crossFade()).into(holder.batterySavingAppImage_Iv);
