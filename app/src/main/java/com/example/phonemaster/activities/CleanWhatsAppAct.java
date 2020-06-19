@@ -121,8 +121,10 @@ public class CleanWhatsAppAct extends AppCompatActivity implements View.OnClickL
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
                 int value = (int) valueAnimator.getAnimatedValue();
                 pb.setProgress(value);
+                if (value==100){
                 cleanWpOne.setVisibility(View.GONE);
                 cleanWpTwo.setVisibility(View.VISIBLE);
+                }
             }
         });
 

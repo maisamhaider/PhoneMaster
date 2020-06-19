@@ -18,7 +18,7 @@
         android:layout_marginEnd="24dp"
         android:background="?android:attr/selectableItemBackgroundBorderless"
         android:src="@drawable/ic_deselect"
-        app:layout_constraintBottom_toBottomOf="@+id/commonFileRv_iv"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/commonFileRv_iv" />
 
@@ -53,15 +53,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/commonFileRv_iv"
         app:layout_constraintTop_toBottomOf="@+id/commonFileRv_iv" />
-
-    <TextView
-        android:id="@+id/commonFileSize_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="file"
-        app:layout_constraintBottom_toBottomOf="@+id/commonFileName_tv"
-        app:layout_constraintStart_toStartOf="@+id/selection_iv"
-        app:layout_constraintTop_toBottomOf="@+id/selection_iv" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
