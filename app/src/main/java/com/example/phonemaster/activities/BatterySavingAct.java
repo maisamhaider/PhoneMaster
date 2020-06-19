@@ -40,7 +40,7 @@ public class BatterySavingAct extends AppCompatActivity {
     ProgressBar hibernatingAppsPkg_pb;
     ImageView hibernatingAppsPkgBack_iv;
     private BatterySavingAllAppsAdapter allAppsAdapter;
-    ConstraintLayout powerSavingSecond_cl,powerSavingLastScreenMain_cl;
+    ConstraintLayout powerSavingSecond_cl,powerSavingLastScreenMain_cl,noDrainingApp_cl;
     SharedPreferences preferences;
 
     @Override
@@ -50,18 +50,15 @@ public class BatterySavingAct extends AppCompatActivity {
         utils = new Utils(this);
         preferences = getSharedPreferences("myPref", Context.MODE_PRIVATE);
 
-        Calendar current = Calendar.getInstance();
-        if (preferences.getLong("lastBatterSaveTime",current.getTimeInMillis())>current.getTimeInMillis())
-        {
-            //TODO
 
-        }
         powerSavingSecond_cl = findViewById(R.id.powerSavingSecond_cl);
         RecyclerView powerSavingApp_rv = findViewById(R.id.powerSavingApp_rv);
         LinearLayout powerSavingBtn_ll = findViewById(R.id.powerSavingBtn_ll);
         TextView batterySavingRunningApps_tv = findViewById(R.id.batterySavingRunningApps_tv);
         TextView powerSavingMainAppsAmount_tv = findViewById(R.id.powerSavingMainAppsAmount_tv);
         ImageView powerSavingBack_iv = findViewById(R.id.powerSavingBack_iv);
+        noDrainingApp_cl = findViewById(R.id.noDrainingApp_cl);
+
 
         //analyzing apps
         ConstraintLayout powerSavingFirstScreenMain_cl = findViewById(R.id.powerSavingFirstScreenMain_cl);
@@ -94,6 +91,23 @@ public class BatterySavingAct extends AppCompatActivity {
             }
         });
         animator.start();
+        List<String> list = utils.getActiveApps();
+        Calendar current = Calendar.getInstance();
+        if (preferences.getLong("lastBatterSaveTime",current.getTimeInMillis())>current.getTimeInMillis())
+        {
+             powerSavingSecond_cl.setVisibility(View.GONE);
+            powerSavingMainAppsAmount_tv.setText("0");
+            noDrainingApp_cl.setVisibility(View.VISIBLE);
+
+        }
+        else
+            {
+                noDrainingApp_cl.setVisibility(View.GONE);
+                powerSavingSecond_cl.setVisibility(View.VISIBLE);
+                powerSavingMainAppsAmount_tv.setText("No Draining apps");
+                batterySavingRunningApps_tv.setText(list.size() + " app are Running");
+                powerSavingMainAppsAmount_tv.setText(String.valueOf(list.size()));
+            }
 
         powerSavingBack_iv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,10 +130,9 @@ public class BatterySavingAct extends AppCompatActivity {
             public void run() {
                 powerSavingFirstScreenMain_cl.setVisibility(View.GONE);
             }
-        }, 5000);
+        }, 4000);
 
 
-        List<String> list = utils.getActiveApps();
         allAppsAdapter = new BatterySavingAllAppsAdapter(this, list);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
@@ -128,8 +141,7 @@ public class BatterySavingAct extends AppCompatActivity {
         allAppsAdapter.notifyDataSetChanged();
 
 
-        batterySavingRunningApps_tv.setText(list.size() + " app are Running");
-        powerSavingMainAppsAmount_tv.setText(String.valueOf(list.size()));
+
 
 
         powerSavingBtn_ll.setOnClickListener(new View.OnClickListener() {
@@ -193,6 +205,8 @@ public class BatterySavingAct extends AppCompatActivity {
                 @Override
                 public void run() {
                     powerSavingLastScreenMain_cl.setVisibility(View.GONE);
+                    noDrainingApp_cl.setVisibility(View.VISIBLE);
+
                 }
             },2000);
 
