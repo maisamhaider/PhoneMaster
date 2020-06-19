@@ -29,11 +29,13 @@ import com.example.phonemaster.models.DeepCleanPackagesModel;
 import com.example.phonemaster.models.DeepCleanVideosModel;
 import com.example.phonemaster.models.NumberAndNamesModel;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.List;
@@ -143,12 +145,7 @@ public class Utils {
 
 //
 
-    public List<ActivityManager.RunningServiceInfo> loadProcessInfo() {
 
-        ActivityManager activityManager = (ActivityManager) context.getSystemService(ACTIVITY_SERVICE);
-        List<ActivityManager.RunningServiceInfo> recentTasks = activityManager.getRunningServices(Integer.MAX_VALUE);
-        return recentTasks;
-    }
 
     public List<String> getActiveApps() {
 
@@ -159,6 +156,23 @@ public class Utils {
         for (ApplicationInfo packageInfo : packages) {
 
             if (!isSTOPPED(packageInfo)) {
+                if (!list.contains(packageInfo.packageName)) {
+                    list.add(packageInfo.packageName);
+                }
+            }
+        }
+        return list;
+    }
+
+    public List<String> getSystemActiveApps() {
+
+        PackageManager pm = context.getPackageManager();
+        List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
+        List<String> list = new ArrayList<>();
+
+        for (ApplicationInfo packageInfo : packages) {
+
+            if (!isSTOPPED(packageInfo)&&isSYSTEM(packageInfo)) {
                 if (!list.contains(packageInfo.packageName)) {
                     list.add(packageInfo.packageName);
                 }
@@ -725,6 +739,32 @@ public class Utils {
             }
         }
         return String.format("%.2f", finalSize) + sizePrefix;
+    }
+
+    public float cpuTemperature()
+    {
+        Process process;
+        try {
+            process = Runtime.getRuntime().exec("cat sys/class/thermal/thermal_zone0/temp");
+            process.waitFor();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            String line = reader.readLine();
+            if(line!=null) {
+                float temp = Float.parseFloat(line);
+                return getFahrenheitToCelsius( temp / 1000.0f);
+            }else{
+                return getFahrenheitToCelsius( 51.0f);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return getFahrenheitToCelsius(0.0f);
+        }
+    }
+
+    public   float getFahrenheitToCelsius(float fahren)
+    {
+        return (fahren - 32)* 5/9;
+
     }
 
 

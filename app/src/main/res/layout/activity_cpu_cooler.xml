@@ -6,26 +6,200 @@
     android:layout_height="match_parent"
     tools:context=".activities.CpuCooler">
 
-    <ScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="0dp"
+        android:background="@drawable/below_corners_corved_bg"
+        app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="CPU COOLING"
+            android:textColor="@color/standard_white"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/cpuCoolingMainBack_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_baseline_arrow_back_white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/cpuTemp_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="30.3"
+            android:textColor="@color/standard_white"
+            android:textSize="60sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="°C"
+            android:textColor="@color/standard_white"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/cpuTemp_tv"
+            app:layout_constraintTop_toTopOf="@+id/cpuTemp_tv" />
+
+        <TextView
+             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="your CPU temperature is normal"
+            android:textColor="@color/standard_white"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/cpuTemp_tv"
+            app:layout_constraintHorizontal_bias="0.47"
+            app:layout_constraintStart_toStartOf="@+id/cpuTemp_tv"
+            app:layout_constraintTop_toBottomOf="@+id/cpuTemp_tv" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cpuCoolerSecond_cl"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline4">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout2"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="0dp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/cpuCoolBtn_ll"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.498">
 
             <TextView
-                android:id="@+id/qwer"
+                android:id="@+id/cupAppsConsuming_tv"
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="4dp"
+                android:text="10 apps Consuming your system resources"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/cpuCoolerApps_rv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/cupAppsConsuming_tv"
+                tools:layout_editor_absoluteX="0dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:id="@+id/cpuCoolBtn_ll"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="5dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:layout_editor_absoluteX="16dp">
+
+            <TextView
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                 android:textColor="#010101"
-                android:textSize="20dp" />
+                android:background="@drawable/below_button_bg"
+                android:gravity="center"
+                android:text="COOL DOWN "
+                android:textColor="@color/standard_white"
+                tools:layout_editor_absoluteX="11dp"
+                tools:layout_editor_absoluteY="594dp" />
 
         </LinearLayout>
-    </ScrollView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.35" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cpuCooled_cl"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline4">
+
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/gifImageView9"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:src="@drawable/cooled"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.43" />
+
+        <TextView
+            android:id="@+id/textView32"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="250dp"
+            android:layout_marginBottom="106dp"
+            android:gravity="center"
+            android:text="COOLED"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/gifImageView9" />
+
+        <TextView
+            android:textColor="@color/colorTextTwo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No App heating problems"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView32" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <include layout="@layout/cpu_cooler_first_screen_layout" />
+
+    <include layout="@layout/cpu_cooler_last_screen_layout" />
+    <include layout="@layout/cpu_cooler_after_coolclick_screen_layout" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

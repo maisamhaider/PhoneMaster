@@ -189,6 +189,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
 
                 if (permissions.permission())
                 {
+
                     Intent cpuCoolerIntent = new Intent(getActivity(), CpuCooler.class);
                     startActivity(cpuCoolerIntent);
                 }
