@@ -12,7 +12,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.phonemaster.R;
+import com.example.phonemaster.models.CommonModel;
 import com.example.phonemaster.models.DeepCleanAudioModel;
 
 import java.util.ArrayList;
@@ -31,6 +33,9 @@ public class DeepCleanAudioAdapter extends RecyclerView.Adapter<DeepCleanAudioAd
 
     public void setFileList(List<DeepCleanAudioModel> fileList) {
         this.fileList = fileList;
+        for (DeepCleanAudioModel cleanAudioModel:fileList){
+            list.add(cleanAudioModel.getAudioPath());
+        }
     }
 
     public List<String> getList() {
@@ -55,18 +60,28 @@ public class DeepCleanAudioAdapter extends RecyclerView.Adapter<DeepCleanAudioAd
         final String audioString = fileList.get(position).getAudioPath();
         final String audioName = fileList.get(position).getAudioName();
 
-        holder.commonFileName_tv.setText(audioName);
+        if (list.contains(audioString)) {
+            holder.selection_iv.setImageResource(R.drawable.ic_select);
+        } else {
+            holder.selection_iv.setImageResource(R.drawable.ic_deselect);
+        }
 
-        holder.selectAudio_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        holder.commonFileName_tv.setText(audioName);
+        Glide.with(context).load(R.drawable.ic_audio).into(holder.commonFileRv_iv);
+
+        holder.selection_iv.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked)
+            public void onClick(View v) {
+                String audioString = fileList.get(position).getAudioPath();
+                if (list.contains(audioString))
                 {
-                    list.add(audioString);
+                    list.remove(audioString);
+                    holder.selection_iv.setImageResource(R.drawable.ic_deselect);
                 }
                 else
                 {
-                    list.remove(position);
+                    list.add(audioString);
+                    holder.selection_iv.setImageResource(R.drawable.ic_select);
                 }
             }
         });
@@ -80,8 +95,7 @@ public class DeepCleanAudioAdapter extends RecyclerView.Adapter<DeepCleanAudioAd
 
     class WhatsAppStatusHolder extends RecyclerView.ViewHolder {
 
-        ImageView commonFileRv_iv,commonIsVideo_iv;
-        CheckBox selectAudio_cb;
+        ImageView commonFileRv_iv,commonIsVideo_iv,selection_iv;
         TextView commonFileName_tv,commonFileSize_tv;
 
         public WhatsAppStatusHolder(@NonNull View itemView) {
@@ -89,7 +103,7 @@ public class DeepCleanAudioAdapter extends RecyclerView.Adapter<DeepCleanAudioAd
 
             commonIsVideo_iv = itemView.findViewById(R.id.commonIsVideo_iv);
             commonFileRv_iv = itemView.findViewById(R.id.commonFileRv_iv);
-            selectAudio_cb = itemView.findViewById(R.id.selectCommon_cb);
+            selection_iv = itemView.findViewById(R.id.selection_iv);
             commonFileName_tv = itemView.findViewById(R.id.commonFileName_tv);
             commonFileSize_tv = itemView.findViewById(R.id.commonFileSize_tv);
 
