@@ -9,6 +9,7 @@ import android.animation.ValueAnimator;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -28,30 +29,59 @@ import com.example.phonemaster.utils.Utils;
 import com.sasank.roundedhorizontalprogress.RoundedHorizontalProgressBar;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class BatterySavingAct extends AppCompatActivity {
     Utils utils;
-    TextView bbb , bbb2;
+
+    ConstraintLayout hibernatingAppsPkgMain_cl;
+    TextView hibernatingAppsPkg_tv;
+    ProgressBar hibernatingAppsPkg_pb;
+    ImageView hibernatingAppsPkgBack_iv;
+    private BatterySavingAllAppsAdapter allAppsAdapter;
+    ConstraintLayout powerSavingSecond_cl,powerSavingLastScreenMain_cl;
+    SharedPreferences preferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_battery_saving);
         utils = new Utils(this);
-        SharedPreferences preferences = getSharedPreferences("myPref",Context.MODE_PRIVATE);
+        preferences = getSharedPreferences("myPref", Context.MODE_PRIVATE);
 
+        Calendar current = Calendar.getInstance();
+        if (preferences.getLong("lastBatterSaveTime",current.getTimeInMillis())>current.getTimeInMillis())
+        {
+            //TODO
+
+        }
+        powerSavingSecond_cl = findViewById(R.id.powerSavingSecond_cl);
         RecyclerView powerSavingApp_rv = findViewById(R.id.powerSavingApp_rv);
         LinearLayout powerSavingBtn_ll = findViewById(R.id.powerSavingBtn_ll);
         TextView batterySavingRunningApps_tv = findViewById(R.id.batterySavingRunningApps_tv);
         TextView powerSavingMainAppsAmount_tv = findViewById(R.id.powerSavingMainAppsAmount_tv);
         ImageView powerSavingBack_iv = findViewById(R.id.powerSavingBack_iv);
 
-        ConstraintLayout powerSavingFirstScreenMain_cl= findViewById(R.id.powerSavingFirstScreenMain_cl);
+        //analyzing apps
+        ConstraintLayout powerSavingFirstScreenMain_cl = findViewById(R.id.powerSavingFirstScreenMain_cl);
         ProgressBar progressBar = findViewById(R.id.roundedHorizontalPSF_pb);
-        TextView analyzingBatteryStatusPercent_tv= findViewById(R.id.analyzingBatteryStatusPercent_tv);
-        ImageView powerSavingFirstScreenBack_iv= findViewById(R.id.powerSavingFirstScreenBack_iv);
-        progressBar.setMax(100);
+        TextView analyzingBatteryStatusPercent_tv = findViewById(R.id.analyzingBatteryStatusPercent_tv);
+        ImageView powerSavingFirstScreenBack_iv = findViewById(R.id.powerSavingFirstScreenBack_iv);
 
+        //hibernating apps
+        hibernatingAppsPkgMain_cl = findViewById(R.id.hibernatingAppsPkgMain_cl);
+        hibernatingAppsPkg_tv = findViewById(R.id.hibernatingAppsPkg_tv);
+        hibernatingAppsPkg_pb = findViewById(R.id.hibernatingAppsPkg_pb);
+        hibernatingAppsPkgBack_iv = findViewById(R.id.hibernatingAppsPkgBack_iv);
+        hibernatingAppsPkgMain_cl.setVisibility(View.GONE);
+
+        //last screen
+        powerSavingLastScreenMain_cl = findViewById(R.id.powerSavingLastScreenMain_cl);
+        powerSavingLastScreenMain_cl.setVisibility(View.GONE);
+
+        //analyzing apps
+        progressBar.setMax(100);
         ValueAnimator animator = ValueAnimator.ofInt(0, 100);
         animator.setInterpolator(new LinearInterpolator());
         animator.setStartDelay(0);
@@ -86,33 +116,88 @@ public class BatterySavingAct extends AppCompatActivity {
             public void run() {
                 powerSavingFirstScreenMain_cl.setVisibility(View.GONE);
             }
-        },5000);
+        }, 5000);
 
 
-        List<String> list =  utils.getActiveApps();
-        BatterySavingAllAppsAdapter allAppsAdapter = new BatterySavingAllAppsAdapter(this,list);
-        LinearLayoutManager linearLayoutManager  = new LinearLayoutManager(this);
+        List<String> list = utils.getActiveApps();
+        allAppsAdapter = new BatterySavingAllAppsAdapter(this, list);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         powerSavingApp_rv.setLayoutManager(linearLayoutManager);
         powerSavingApp_rv.setAdapter(allAppsAdapter);
         allAppsAdapter.notifyDataSetChanged();
 
 
-        batterySavingRunningApps_tv.setText( list.size()+" app are Running");
+        batterySavingRunningApps_tv.setText(list.size() + " app are Running");
         powerSavingMainAppsAmount_tv.setText(String.valueOf(list.size()));
 
 
         powerSavingBtn_ll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ActivityManager am = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-                List<String> packageName = allAppsAdapter.getCheckList();
 
-                for (int i = 0; i < packageName.size(); i++) {
-                    am.killBackgroundProcesses(packageName.get(i));
-                }
+                KillAppsTask appsTask = new KillAppsTask();
+                appsTask.execute();
+
             }
         });
 
+    }
+
+    class KillAppsTask extends AsyncTask<Void, Integer, String> {
+        List<String> packageName;
+        ActivityManager am = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            packageName = allAppsAdapter.getCheckList();
+            hibernatingAppsPkgMain_cl.setVisibility(View.VISIBLE);
+            hibernatingAppsPkg_pb.setMax(packageName.size());
+
+        }
+
+        @Override
+        protected String doInBackground(Void... voids) {
+            for (int i = 0; i < packageName.size(); i++) {
+                am.killBackgroundProcesses(packageName.get(i));
+                publishProgress(i);
+            }
+            return null;
+        }
+
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
+            hibernatingAppsPkg_pb.setProgress(values[0]);
+            hibernatingAppsPkg_tv.setText(String.format("%s/%s",values[0], packageName.size()));
+
+
+
+        }
+
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            hibernatingAppsPkgMain_cl.setVisibility(View.GONE);
+            powerSavingSecond_cl.setVisibility(View.GONE);
+            powerSavingLastScreenMain_cl.setVisibility(View.VISIBLE);
+            Calendar nextTime = Calendar.getInstance();
+            nextTime.add(Calendar.MINUTE,5);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putLong("lastBatterSaveTime",nextTime.getTimeInMillis()).commit();
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    powerSavingLastScreenMain_cl.setVisibility(View.GONE);
+                }
+            },2000);
+
+
+
+        }
     }
 }
