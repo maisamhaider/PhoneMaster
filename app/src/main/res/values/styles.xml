@@ -19,5 +19,17 @@
         <item name="fontFamily">@font/poppins</item>
         <item name="android:textColor">@color/colorText</item>
     </style>
+        <style name="AppTheme.Button" parent="Widget.AppCompat.Button.Colored">
+<!--            <item name="colorButtonNormal">@color/Red</item>-->
+            <item name="android:textColor">@color/standard_white</item>
+            <item name="android:textSize">16sp</item>
+            <item name="android:textStyle">bold</item>
+            <item name="android:background">@color/colorPrimary</item>
+        </style>
+
+<!--        android:textColor="@color/standard_white"-->
+<!--        android:textStyle="bold"-->
+<!--        android:textSize="16sp"-->
+<!--        android:backgroundTint="@color/colorPrimary"-->
 
 </resources>

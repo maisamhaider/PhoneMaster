@@ -1,5 +1,6 @@
 package com.example.phonemaster.fragments.dashboard;
 
+import android.animation.ValueAnimator;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -92,7 +94,6 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
         cleanWhatsApp_cl.setOnClickListener(this);
         smartCharge_cl.setOnClickListener(this);
 
-
         ramAndStorageFun();
 
 
@@ -115,6 +116,21 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
         pbRam.setProgress((int) utils.getPercentage( totalRam1,usedRam ));
         tvRamInfo.setText(String.format( utils.getCalculatedDataSize(usedRam)+"/"+utils.getCalculatedDataSize(totalRam1)));
 
+        // animation start
+        ValueAnimator ramAnimator = ValueAnimator.ofInt(0,(int) utils.getPercentage( totalRam1,usedRam ) );
+        ramAnimator.setInterpolator(new LinearInterpolator());
+        ramAnimator.setStartDelay(0);
+        ramAnimator.setDuration(1_500);
+        ramAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                int value = (int) valueAnimator.getAnimatedValue();
+                cpbRam.setProgress(value);
+                pbRam.setProgress(value);
+            }
+        });
+        ramAnimator.start();
+        // animation end
 
         //for Storage
         float totalStorageBytes, availableStorageBytes, usedStorageBytes;
@@ -128,8 +144,21 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
         pbStorage.setProgress((int) utils.getPercentage( totalStorageBytes, usedStorageBytes ));
         tvStorageInfo.setText( utils.getCalculatedDataSize(usedStorageBytes)+"/"+utils.getCalculatedDataSize(totalStorageBytes));
 
-
-//        storageUsagePercent_tv.setText(String.format( "%.1f", utils.getPercentage( totalStorageBytes, usedStorageBytes )  )+ "%" );
+        // animation start
+        ValueAnimator storageAnimator = ValueAnimator.ofInt(0, (int) utils.getPercentage( totalStorageBytes, usedStorageBytes ));
+        storageAnimator.setInterpolator(new LinearInterpolator());
+        storageAnimator.setStartDelay(0);
+        storageAnimator.setDuration(1_500);
+        storageAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                int value = (int) valueAnimator.getAnimatedValue();
+                cpbStorage.setProgress(value);
+                pbStorage.setProgress(value);
+            }
+        });
+        storageAnimator.start();
+        // animation end
 
     }
 

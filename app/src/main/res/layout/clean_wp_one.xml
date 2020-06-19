@@ -30,10 +30,11 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/iv_back_one"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
+        android:onClick="backHandler"
         app:layout_constraintBottom_toBottomOf="@+id/tv_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tv_title"
@@ -55,7 +56,7 @@
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="220dp"
-        android:layout_height="wrap_content"
+        android:layout_height="10dp"
         android:progress="30"
         android:progressDrawable="@drawable/customprogress"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -29,7 +29,7 @@ public class WhatsAppAudioListAct extends AppCompatActivity {
         RecyclerView whatsAppAudioList_rv = findViewById(R.id.whatsAppAudioList_rv);
         Button whatsAppAudioList_btn = findViewById(R.id.whatsAppAudioList_btn);
 
-        CommonAdapter commonAdapter = new CommonAdapter(this);
+        CommonAdapter commonAdapter = new CommonAdapter(this,CommonAdapter.AUDIO);
         WhatsAppCommonTask whatsAppCommonTask = new WhatsAppCommonTask(this,commonAdapter,whatsAppAudioList_rv,"audios");
         whatsAppCommonTask.execute();
 

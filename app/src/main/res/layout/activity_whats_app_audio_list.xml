@@ -17,6 +17,7 @@
         android:id="@+id/whatsAppAudioList_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        style="@style/AppTheme.Button"
         android:layout_alignParentBottom="true"
         android:text="@string/clean" />
 

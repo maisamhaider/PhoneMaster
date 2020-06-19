@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,9 +23,16 @@ public class CommonAdapter extends RecyclerView.Adapter<CommonAdapter.WhatsAppSt
     List<CommonModel> fileList;
     List<String> list;
     Utils utils;
+    private int fileType=0;
+    public static final int AUDIO=1;
+    public static final int VIDEO=2;
+    public static final int IMAGE=3;
+    public static final int DOCUMENT=4;
+    public static final int BACKUP=5;
 
-    public CommonAdapter(Context context) {
+    public CommonAdapter(Context context,int fileType) {
         this.context = context;
+        this.fileType = fileType;
         list = new ArrayList<>();
 
     }
@@ -67,39 +73,18 @@ public class CommonAdapter extends RecyclerView.Adapter<CommonAdapter.WhatsAppSt
         } else {
             holder.selection_iv.setImageResource(R.drawable.ic_deselect);
         }
-
         holder.commonFileName_tv.setText(name);
-        if (pathString.endsWith("mp4"))
+
+        if (fileType == VIDEO || fileType == IMAGE)
         {
-            holder.commonIsVideo_iv.setVisibility(View.VISIBLE);
             Glide.with(context).load(pathString).into(holder.commonFileRv_iv);
-
+        } else if (fileType==AUDIO) {
+            holder.commonFileRv_iv.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_audio));
+        } else if (fileType==DOCUMENT) {
+            holder.commonFileRv_iv.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_received_file));
+        } else if (fileType==BACKUP) {
+            holder.commonFileRv_iv.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_backup_conversation));
         }
-        else
-        {
-            holder.commonIsVideo_iv.setVisibility(View.INVISIBLE);
-
-        }
-        if (pathString.endsWith(String.valueOf(new Utils.AllDoFilter())))
-        {
-            Glide.with(context).load(R.drawable.ic_launcher_foreground).into(holder.commonFileRv_iv);
-        }
-        else if (pathString.endsWith(String.valueOf(new Utils.AllImgFilter())))
-        {
-            Glide.with(context).load(R.drawable.ic_launcher_foreground).into(holder.commonFileRv_iv);
-
-        }
-        else if (pathString.endsWith(String.valueOf(new Utils.AllAudioFilter())))
-        {
-            Glide.with(context).load(R.drawable.ic_launcher_background).into(holder.commonFileRv_iv);
-
-        }
-        else if (pathString.endsWith(String.valueOf(new Utils.AllPackagesFilter())))
-        {
-            Glide.with(context).load(R.drawable.ic_launcher_foreground).into(holder.commonFileRv_iv);
-
-        }
-
 
         holder.selection_iv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,13 +111,12 @@ public class CommonAdapter extends RecyclerView.Adapter<CommonAdapter.WhatsAppSt
 
     class WhatsAppStatusHolder extends RecyclerView.ViewHolder {
 
-        ImageView commonFileRv_iv,commonIsVideo_iv,selection_iv;
+        ImageView commonFileRv_iv,selection_iv;
         TextView commonFileName_tv;
 
         public WhatsAppStatusHolder(@NonNull View itemView) {
             super(itemView);
 
-            commonIsVideo_iv = itemView.findViewById(R.id.commonIsVideo_iv);
             commonFileRv_iv = itemView.findViewById(R.id.commonFileRv_iv);
             selection_iv = itemView.findViewById(R.id.selection_iv);
             commonFileName_tv = itemView.findViewById(R.id.commonFileName_tv);

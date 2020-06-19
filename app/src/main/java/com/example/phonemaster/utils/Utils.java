@@ -728,4 +728,19 @@ public class Utils {
     }
 
 
+    public float getCalculatedDataSizeMB(float size) {
+        float sizeBytes = size;
+        float finalSize = size;
+        if (sizeBytes >= 1024) {
+            float sizeKb = sizeBytes / 1024;
+            finalSize = sizeKb;
+            if (sizeKb >= 1024) {
+                float sizeMB = sizeKb / 1024;
+                finalSize = sizeMB;
+            }
+        }
+        return finalSize;
+    }
+
+
 }

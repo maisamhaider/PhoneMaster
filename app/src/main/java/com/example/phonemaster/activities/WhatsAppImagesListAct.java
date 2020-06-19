@@ -28,7 +28,7 @@ public class WhatsAppImagesListAct extends AppCompatActivity {
         RecyclerView whatsAppImagesList_rv = findViewById(R.id.whatsAppImagesList_rv);
         Button whatsAppImagesList_btn = findViewById(R.id.whatsAppImagesList_btn);
 
-        CommonAdapter commonAdapter = new CommonAdapter(this);
+        CommonAdapter commonAdapter = new CommonAdapter(this,CommonAdapter.IMAGE);
         WhatsAppCommonTask whatsAppCommonTask = new WhatsAppCommonTask(this,commonAdapter,whatsAppImagesList_rv,"images");
         whatsAppCommonTask.execute();
 

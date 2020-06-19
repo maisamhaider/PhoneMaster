@@ -32,4 +32,6 @@
     <string name="app_cleanup"><b>App</b> Cleanup</string>
     <string name="clean_whatsapp">CLEAN WHATSAPP</string>
     <string name="analyzing_usage">ANALYZING USAGE</string>
+    <string name="uninstall_apps">Uninstall apps</string>
+    <string name="setting">Setting</string>
 </resources>

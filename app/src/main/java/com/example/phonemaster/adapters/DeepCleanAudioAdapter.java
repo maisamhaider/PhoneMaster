@@ -95,13 +95,11 @@ public class DeepCleanAudioAdapter extends RecyclerView.Adapter<DeepCleanAudioAd
 
     class WhatsAppStatusHolder extends RecyclerView.ViewHolder {
 
-        ImageView commonFileRv_iv,commonIsVideo_iv,selection_iv;
+        ImageView commonFileRv_iv,selection_iv;
         TextView commonFileName_tv;
 
         public WhatsAppStatusHolder(@NonNull View itemView) {
             super(itemView);
-
-            commonIsVideo_iv = itemView.findViewById(R.id.commonIsVideo_iv);
             commonFileRv_iv = itemView.findViewById(R.id.commonFileRv_iv);
             selection_iv = itemView.findViewById(R.id.selection_iv);
             commonFileName_tv = itemView.findViewById(R.id.commonFileName_tv);

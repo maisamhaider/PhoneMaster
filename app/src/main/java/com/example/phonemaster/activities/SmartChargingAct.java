@@ -35,7 +35,6 @@ public class SmartChargingAct extends AppCompatActivity {
         ConstraintLayout fullChargedRemind_cl = findViewById(R.id.fullChargedRemind_cl);
         ConstraintLayout fastCharge_cl = findViewById(R.id.fastCharge_cl);
 
-
         boolean isEnable = preferences.getBoolean("IS_SMART_CHARGE_ENABLED",false);
         if (preferences.getBoolean("SMART_CHARGE",false))
         {

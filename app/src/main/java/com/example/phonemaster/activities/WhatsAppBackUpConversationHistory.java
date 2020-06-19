@@ -31,7 +31,7 @@ public class WhatsAppBackUpConversationHistory extends AppCompatActivity {
         RecyclerView whatsAppBUCHList_rv = findViewById(R.id.whatsAppBUCHList_rv);
         Button whatsAppBUCHList_btn = findViewById(R.id.whatsAppBUCHList_btn);
 
-         CommonAdapter  commonAdapter = new CommonAdapter(this);
+         CommonAdapter  commonAdapter = new CommonAdapter(this,CommonAdapter.BACKUP);
         WhatsAppCommonTask whatsAppCommonTask = new WhatsAppCommonTask(this,commonAdapter,whatsAppBUCHList_rv,"BUCH");
         whatsAppCommonTask.execute();
 

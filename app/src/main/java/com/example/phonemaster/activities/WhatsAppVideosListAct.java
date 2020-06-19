@@ -28,7 +28,7 @@ public class WhatsAppVideosListAct extends AppCompatActivity {
         RecyclerView whatsAppVideosList_rv = findViewById(R.id.whatsAppVideosList_rv);
         Button whatsAppVideosList_btn = findViewById(R.id.whatsAppVideosList_btn);
 
-        CommonAdapter commonAdapter = new CommonAdapter(this);
+        CommonAdapter commonAdapter = new CommonAdapter(this,CommonAdapter.VIDEO);
         WhatsAppCommonTask whatsAppCommonTask = new WhatsAppCommonTask(this,commonAdapter,whatsAppVideosList_rv,"videos");
         whatsAppCommonTask.execute();
 

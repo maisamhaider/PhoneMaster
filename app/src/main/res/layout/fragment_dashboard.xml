@@ -14,19 +14,19 @@
 
         <com.app.adprogressbarlib.AdCircleProgress
             android:id="@+id/pgb_ram"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:backgroundTintMode="add"
             android:elevation="8dp"
             app:adpgb_background_color="#00ffffff"
-            app:adpgb_finished_color="@color/colorStopScanning"
+            app:adpgb_finished_color="@color/colorBoarder"
             app:adpgb_max="100"
             app:adpgb_text_color="@color/colorWhite"
             app:adpgb_text_size="12dp"
-            app:adpgb_unfinished_color="@color/colorBoarder"
+            app:adpgb_unfinished_color="@color/colorStopScanning"
             app:layout_constraintBottom_toBottomOf="@+id/imageView"
             app:layout_constraintEnd_toEndOf="@+id/imageView"
-            app:layout_constraintStart_toEndOf="@+id/textView15"
+            app:layout_constraintStart_toEndOf="@+id/tv_num"
             app:layout_constraintTop_toTopOf="@+id/imageView"
             app:layout_constraintVertical_bias="0.32"
             custom:adpgb_finished_stroke_width="5dp"
@@ -35,20 +35,20 @@
 
         <com.app.adprogressbarlib.AdCircleProgress
             android:id="@+id/pgb_storage"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:backgroundTintMode="add"
             android:elevation="8dp"
             app:adpgb_max="100"
-            app:layout_constraintEnd_toStartOf="@+id/textView15"
+            app:layout_constraintEnd_toStartOf="@+id/tv_num"
             app:layout_constraintVertical_bias="0.32"
             custom:adpgb_background_color="#00ffffff"
-            custom:adpgb_finished_color="@color/colorStopScanning"
+            custom:adpgb_finished_color="@color/colorBoarder"
             custom:adpgb_finished_stroke_width="5dp"
             custom:adpgb_show_text="true"
             custom:adpgb_text_color="@color/colorWhite"
             custom:adpgb_text_size="12dp"
-            custom:adpgb_unfinished_color="@color/colorBoarder"
+            custom:adpgb_unfinished_color="@color/colorStopScanning"
             custom:adpgb_unfinished_stroke_width="5dp"
             custom:layout_constraintBottom_toBottomOf="@+id/imageView"
             custom:layout_constraintStart_toStartOf="parent"
@@ -68,6 +68,7 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:src="@drawable/ic_junk_files"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView"
             app:layout_constraintEnd_toStartOf="@+id/iv_cpu_cooler"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -77,9 +78,10 @@
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="0dp"
-            android:layout_height="290dp"
+            android:layout_height="340dp"
             android:scaleType="fitXY"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_phone_master_main_header" />
 
@@ -199,20 +201,19 @@
             app:layout_constraintTop_toBottomOf="@+id/iv_status_saver" />
 
         <TextView
-            android:id="@+id/textView15"
+            android:id="@+id/tv_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:elevation="8dp"
             android:text="89"
             android:textColor="@color/colorWhite"
-            android:textSize="38sp"
+            android:textSize="55sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/textView"
+            app:layout_constraintBottom_toTopOf="@+id/b_optimize"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/imageView"
-            app:layout_constraintVertical_bias="0.35000002"
+            app:layout_constraintTop_toBottomOf="@+id/textView16"
+            app:layout_constraintVertical_bias="0.110000014"
             app:layout_constraintVertical_chainStyle="packed" />
 
         <TextView
@@ -236,33 +237,37 @@
             android:text="Optimize Suggestion"
             android:textColor="@color/colorWhite"
             android:textSize="10sp"
-            app:layout_constraintBottom_toTopOf="@+id/b_optimize"
-            app:layout_constraintEnd_toEndOf="@+id/textView15"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_num"
+            app:layout_constraintEnd_toEndOf="@+id/tv_num"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="@+id/textView15"
-            app:layout_constraintTop_toBottomOf="@+id/textView15" />
+            app:layout_constraintStart_toStartOf="@+id/tv_num"
+            app:layout_constraintTop_toBottomOf="@+id/tv_num" />
 
         <Button
             android:id="@+id/b_optimize"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
             android:backgroundTint="@color/colorWhite"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:text="Optimize"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView"
+            app:layout_constraintBottom_toTopOf="@+id/iv_cpu_cooler"
             app:layout_constraintEnd_toEndOf="@+id/textView"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="@+id/textView"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_num" />
 
         <ProgressBar
             android:id="@+id/pb_storage"
             style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="70dp"
+            android:layout_height="5dp"
+            android:layout_marginTop="4dp"
             android:max="100"
+            android:progressDrawable="@drawable/maincustomprogress"
             app:layout_constraintEnd_toEndOf="@+id/pgb_storage"
             app:layout_constraintStart_toStartOf="@+id/pgb_storage"
             app:layout_constraintTop_toBottomOf="@+id/pgb_storage" />
@@ -270,9 +275,11 @@
         <ProgressBar
             android:id="@+id/pb_ram"
             style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="70dp"
+            android:layout_height="5dp"
+            android:layout_marginTop="4dp"
             android:max="100"
+            android:progressDrawable="@drawable/maincustomprogress"
             app:layout_constraintEnd_toEndOf="@+id/pgb_ram"
             app:layout_constraintStart_toStartOf="@+id/pgb_ram"
             app:layout_constraintTop_toBottomOf="@+id/pgb_ram" />
@@ -281,9 +288,10 @@
             android:id="@+id/tv_storage_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:text="1532MB/3.7GB"
             android:textColor="@color/colorWhite"
-            android:textSize="10sp"
+            android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/pb_storage"
             app:layout_constraintStart_toStartOf="@+id/pb_storage"
@@ -293,16 +301,14 @@
             android:id="@+id/tv_ram_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:text="1532MB/3.7GB"
             android:textColor="@color/colorWhite"
-            android:textSize="10sp"
+            android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/pb_ram"
             app:layout_constraintStart_toStartOf="@+id/pb_ram"
             app:layout_constraintTop_toBottomOf="@+id/pb_ram" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
 </ScrollView>

@@ -31,7 +31,7 @@ public class WhatsAppDocumentsListAct extends AppCompatActivity {
         RecyclerView whatsAppDocList_rv = findViewById(R.id.whatsAppDocList_rv);
         Button whatsAppDocList_btn = findViewById(R.id.whatsAppDocList_btn);
 
-        CommonAdapter commonAdapter = new CommonAdapter(this);
+        CommonAdapter commonAdapter = new CommonAdapter(this,CommonAdapter.DOCUMENT);
         WhatsAppCommonTask whatsAppCommonTask = new WhatsAppCommonTask(this,commonAdapter,whatsAppDocList_rv,"doc");
         whatsAppCommonTask.execute();
 
