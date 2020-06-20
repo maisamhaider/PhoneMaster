@@ -259,30 +259,30 @@ public class Utils {
         return (usedData * 100 / totalData);
     }
 
-    public static long getFolderSize(String dir) {
-
-        File f = new File(dir);
-
-        String listFiles[] = f.list();
-        long totalSize = 0;
-        long folderAmount = 0;
-        for (String file : listFiles) {
-
-            File folder = new File(dir + "/" + file);
-            if (folder.isDirectory()) {
-                totalSize += getFolderSize(folder.getAbsolutePath());
-                if (totalSize == 0) {
-                    folderAmount++;
-                }
-            } else {
-                totalSize += folder.length();
-            }
-            if (totalSize == 0) {
-                folderAmount++;
-            }
-        }
-        return folderAmount;
-    }
+//    public  long getFolderSize(String dir) {
+//
+//        File f = new File(dir);
+//
+//        String listFiles[] = f.list();
+//        long totalSize = 0;
+//        long folderAmount = 0;
+//        for (String file : listFiles) {
+//
+//            File folder = new File(dir + "/" + file);
+//            if (folder.isDirectory()) {
+//                totalSize += getFolderSize(folder.getAbsolutePath());
+//                if (totalSize == 0) {
+//                    folderAmount++;
+//                }
+//            } else {
+//                totalSize += folder.length();
+//            }
+//            if (totalSize == 0) {
+//                folderAmount++;
+//            }
+//        }
+//        return folderAmount;
+//    }
 
     public List<String> GetAllInstalledApkInfo() {
 

@@ -72,7 +72,8 @@ public class BatterySavingAct extends AppCompatActivity {
 
         //last screen
         powerSavingLastScreenMain_cl = findViewById(R.id.powerSavingLastScreenMain_cl);
-        powerSavingLastScreenMain_cl.setVisibility(View.GONE);
+         powerSavingLastScreenMain_cl.setVisibility(View.GONE);
+
 
         //analyzing apps
         progressBar.setMax(100);

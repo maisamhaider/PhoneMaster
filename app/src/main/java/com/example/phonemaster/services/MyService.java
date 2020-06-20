@@ -48,17 +48,24 @@ public class MyService extends Service {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
             String channelId = Build.VERSION.SDK_INT >= Build.VERSION_CODES.O ? createNotificationChannel(notificationManager) : "Apps Protected";
-            NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, channelId).setSmallIcon(R.drawable.ic_launcher_foreground).setContentTitle("Apps Protected").setContentText("Apps Protection is on. If you want to turn off protection go to app and remove it.").setStyle(new NotificationCompat.BigTextStyle().bigText("Apps Protection is on. If you want to turn off protection go to app and remove it.")).setPriority(NotificationCompat.PRIORITY_DEFAULT);
-            Notification notification = notificationBuilder.setOngoing(true).setSmallIcon(R.drawable.ic_launcher_foreground).setContentInfo("Apps Protected. Apps Protection is on. If you want to turn off protection go to app and remove it.").setCategory(NotificationCompat.CATEGORY_SERVICE).build();
+            NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, channelId).setSmallIcon(R.drawable.ic_launcher_foreground)
+                    .setContentTitle("Apps Protected")
+                    .setContentText("Apps Protection is on. If you want to turn off protection go to app and remove it.")
+                    .setStyle(new NotificationCompat.BigTextStyle()
+                            .bigText("Apps Protection is on. If you want to turn off protection go to app and remove it."))
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+            Notification notification = notificationBuilder.setOngoing(true).setSmallIcon(R.drawable.ic_launcher_foreground)
+                    .setContentInfo("Apps Protected. Apps Protection is on. If you want to turn off protection go to app and remove it.")
+                    .setCategory(NotificationCompat.CATEGORY_SERVICE).build();
             startForeground(100, notification);
         }
 
 
-            FastChargingChargerReceiver fastChargingChargerReceiver = new FastChargingChargerReceiver();
-            IntentFilter intentFilter = new IntentFilter( Intent.ACTION_BATTERY_CHANGED );
-            getApplicationContext().registerReceiver( fastChargingChargerReceiver, intentFilter );
+        FastChargingChargerReceiver fastChargingChargerReceiver = new FastChargingChargerReceiver();
+        IntentFilter intentFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+        getApplicationContext().registerReceiver(fastChargingChargerReceiver, intentFilter);
 
-        Log.d("Custom","service");
+        Log.d("Custom", "service");
         return START_STICKY;
     }
 

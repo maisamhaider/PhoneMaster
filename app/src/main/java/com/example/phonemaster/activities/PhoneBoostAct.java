@@ -201,7 +201,6 @@ public class PhoneBoostAct extends AppCompatActivity {
             float freeRam2 = memoryInfo.availMem;
             float usedRam1 = totalRam2 - freeRam2;
             phoneBoostingPercent_tv.setText(utils.getPercentage(totalRam2, usedRam1) + "%");
-            phoneBoostRamDetail_tv.setText(utils.getCalculatedDataSize(usedRam1) + "/" + utils.getCalculatedDataSize(totalRam2));
 
             editor.putLong("lastPhoneBoostTime", nextTime.getTimeInMillis()).commit();
             Handler handler = new Handler();
@@ -209,6 +208,7 @@ public class PhoneBoostAct extends AppCompatActivity {
                 @Override
                 public void run() {
                     phoneBoostUsedPercent_tv.setText(String.format("%.0f", utils.getPercentage(totalRam2, usedRam1)));
+                    phoneBoostRamDetail_tv.setText(utils.getCalculatedDataSize(usedRam1) + "/" + utils.getCalculatedDataSize(totalRam2));
                     phoneBoostedLastMain_cl.setVisibility(View.GONE);
                     phoneBoostedMain1_cl.setVisibility(View.VISIBLE);
 
