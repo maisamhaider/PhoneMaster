@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.animation.ValueAnimator;
+import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -80,14 +81,14 @@ public class CpuCooler extends AppCompatActivity {
         Calendar current = Calendar.getInstance();
         if (preferences.getLong("lastCpuCooledTime", current.getTimeInMillis()) > current.getTimeInMillis()) {
             cpuCoolerSecond_cl.setVisibility(View.GONE);
-            String temp1 = String.format("%.1f",utils.cpuTemperature());
+            @SuppressLint("DefaultLocale") String temp1 = String.format("%.1f",utils.cpuTemperature());
             cpuTemp_tv.setText(temp1);
             cpuCooled_cl.setVisibility(View.VISIBLE);
 
         } else {
             cpuCooled_cl.setVisibility(View.GONE);
             cpuCoolerSecond_cl.setVisibility(View.VISIBLE);
-            String temp2 = String.format("%.1f",utils.cpuTemperature());
+            @SuppressLint("DefaultLocale") String temp2 = String.format("%.1f",utils.cpuTemperature());
             cpuTemp_tv.setText(temp2);
          }
 
@@ -137,6 +138,7 @@ public class CpuCooler extends AppCompatActivity {
 
     }
 
+    @SuppressLint("StaticFieldLeak")
     class KillAppsTask extends AsyncTask<Void, Integer, String> {
         List<String> packageName;
         ActivityManager am = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
@@ -184,7 +186,7 @@ public class CpuCooler extends AppCompatActivity {
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    String temp4 = String.format("%.1f",utils.cpuTemperature());
+                    @SuppressLint("DefaultLocale") String temp4 = String.format("%.1f",utils.cpuTemperature());
                     cpuTemp_tv.setText( temp4);
                     cpuCoolerMain_cl.setVisibility(View.GONE);
                     cpuCooled_cl.setVisibility(View.VISIBLE);

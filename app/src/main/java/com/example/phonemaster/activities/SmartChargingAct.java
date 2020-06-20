@@ -7,12 +7,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.Layout;
-import android.view.View;
-import android.widget.CompoundButton;
-import android.widget.ImageView;
+ import android.view.View;
+ import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Switch;
 
 import com.example.phonemaster.R;
 import com.suke.widget.SwitchButton;

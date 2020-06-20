@@ -5,8 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
-import android.view.View;
-import android.widget.ImageView;
+ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -16,8 +15,7 @@ import com.example.phonemaster.utils.Utils;
 
 public class DeepCleanAct extends AppCompatActivity {
 
-    private static final int PICK_IMAGES = 1;
-    private Permissions permissions;
+     private Permissions permissions;
 
     Utils utils;
     @Override
@@ -96,64 +94,46 @@ public class DeepCleanAct extends AppCompatActivity {
                 .into(deepCleanVideos_iv4);
 
 
-        deepCleanWhatsAppDataSize_tv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (permissions.permission())
-                {
-                    Intent intent = new Intent(DeepCleanAct.this,CleanWhatsAppAct.class);
-                    startActivity(intent);
-                }
+        deepCleanWhatsAppDataSize_tv.setOnClickListener(v -> {
+            if (permissions.permission())
+            {
+                Intent intent = new Intent(DeepCleanAct.this,CleanWhatsAppAct.class);
+                startActivity(intent);
             }
         });
-        deepCleanImagesSize_tv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (permissions.permission())
-                {
-                    Intent intent = new Intent(DeepCleanAct.this,DeepCleanAllImagesAct.class);
-                    startActivity(intent);
-                }
+        deepCleanImagesSize_tv.setOnClickListener(v -> {
+            if (permissions.permission())
+            {
+                Intent intent = new Intent(DeepCleanAct.this,DeepCleanAllImagesAct.class);
+                startActivity(intent);
             }
         });
-        deepCleanVideosSize_tv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (permissions.permission())
-                {
-                    Intent intent = new Intent(DeepCleanAct.this, DeepCleanAllVideosAct.class);
-                    startActivity(intent);
-                }
+        deepCleanVideosSize_tv.setOnClickListener(v -> {
+            if (permissions.permission())
+            {
+                Intent intent = new Intent(DeepCleanAct.this, DeepCleanAllVideosAct.class);
+                startActivity(intent);
             }
         });
-        deepCleanAudiosDataSize_tv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (permissions.permission())
-                {
-                    Intent intent = new Intent(DeepCleanAct.this, DeepCleanAllAudiosAct.class);
-                    startActivity(intent);
-                }
+        deepCleanAudiosDataSize_tv.setOnClickListener(v -> {
+            if (permissions.permission())
+            {
+                Intent intent = new Intent(DeepCleanAct.this, DeepCleanAllAudiosAct.class);
+                startActivity(intent);
             }
         });
-        deepCleanLargeFileSize_tv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (permissions.permission())
-                {
-                    Intent intent = new Intent(DeepCleanAct.this, DeepCleanAllDocsAct.class);
-                    startActivity(intent);
-                }
+        deepCleanLargeFileSize_tv.setOnClickListener(v -> {
+            if (permissions.permission())
+            {
+                Intent intent = new Intent(DeepCleanAct.this, DeepCleanAllDocsAct.class);
+                startActivity(intent);
             }
         });
-        deepCleanInstallationPkgseSize_tv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (permissions.permission())
-                {
-                    Intent intent = new Intent(DeepCleanAct.this, DeepCleanAllPackagesAct.class);
-                    startActivity(intent);
-                }
+        deepCleanInstallationPkgseSize_tv.setOnClickListener(v -> {
+            if (permissions.permission())
+            {
+                Intent intent = new Intent(DeepCleanAct.this, DeepCleanAllPackagesAct.class);
+                startActivity(intent);
             }
         });
     }
