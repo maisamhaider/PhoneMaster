@@ -31,9 +31,15 @@ public class FullChargedRemindAct extends AppCompatActivity {
             @Override
             public void onCheckedChanged(SwitchButton view, boolean isChecked) {
                 if (isChecked) {
+                    fullChargedRemindSound_switch.setEnabled(true);
+                    fullChargedRemindVibrate_switch.setEnabled(true);
+                    fullChargedRemindDoNotDisturb_switch.setEnabled(true);
+
                     fullChargedRemindSound_switch.setChecked(true);
                     fullChargedRemindVibrate_switch.setChecked(true);
                     fullChargedRemindDoNotDisturb_switch.setChecked(true);
+
+
                     editor.putBoolean("FULL_CHARGED_ALARM", true).commit();
                     editor.putBoolean("FULL_CHARGED_SOUND", true).commit();
                     editor.putBoolean("FULL_CHARGED_VIBRATE", true).commit();
@@ -43,6 +49,11 @@ public class FullChargedRemindAct extends AppCompatActivity {
                     fullChargedRemindSound_switch.setChecked(false);
                     fullChargedRemindVibrate_switch.setChecked(false);
                     fullChargedRemindDoNotDisturb_switch.setChecked(false);
+
+                    fullChargedRemindSound_switch.setEnabled(false);
+                    fullChargedRemindVibrate_switch.setEnabled(false);
+                    fullChargedRemindDoNotDisturb_switch.setEnabled(false);
+
                     editor.putBoolean("FULL_CHARGED_ALARM", false).commit();
                     editor.putBoolean("FULL_CHARGED_SOUND", false).commit();
                     editor.putBoolean("FULL_CHARGED_VIBRATE", false).commit();

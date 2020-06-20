@@ -254,7 +254,7 @@ public class Utils {
     }
 
 
-    public static float getPercentage(float totalData, float usedData) {
+    public float getPercentage(float totalData, float usedData) {
 
         return (usedData * 100 / totalData);
     }

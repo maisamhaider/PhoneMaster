@@ -33,7 +33,6 @@ import java.util.List;
 
 public class CpuCooler extends AppCompatActivity {
     Utils utils;
-
     TextView coolingTemp_tv;
     ProgressBar cooling_pb;
     ImageView coolingBack_iv;
@@ -179,16 +178,17 @@ public class CpuCooler extends AppCompatActivity {
             Calendar nextTime = Calendar.getInstance();
             nextTime.add(Calendar.MINUTE, 5);
             SharedPreferences.Editor editor = preferences.edit();
-            String temp4 = String.format("%.1f",utils.cpuTemperature());
-            coolingTemp_tv.setText(String.format(temp4));
+
             editor.putLong("lastCpuCooledTime", nextTime.getTimeInMillis()).commit();
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    cpuTemp_tv.setText("0");
+                    String temp4 = String.format("%.1f",utils.cpuTemperature());
+                    cpuTemp_tv.setText( temp4);
                     cpuCoolerMain_cl.setVisibility(View.GONE);
                     cpuCooled_cl.setVisibility(View.VISIBLE);
+                    coolingTemp_tv.setText(temp4);
 
                 }
             }, 2000);
