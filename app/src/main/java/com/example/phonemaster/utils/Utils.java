@@ -57,20 +57,20 @@ public class Utils {
         File[] mFilelist = fold.listFiles();
 
         {
-            if (mlist!=null)
-            for (File f : mlist) {
-                if (f.isDirectory()) {
-                    docList.addAll(getListFiles(new File(f.getAbsolutePath())));
-                } else {
-                    CommonModel data = new CommonModel();
-                    data.setName(f.getName());
-                    data.setPath(f.getPath());
-                    data.setSize(f.length());
-                    //                doc.setType(FileTypes.DocumentType);
-                    if (f.length() > 0)
-                        docList.add(data);
+            if (mlist != null)
+                for (File f : mlist) {
+                    if (f.isDirectory()) {
+                        docList.addAll(getListFiles(new File(f.getAbsolutePath())));
+                    } else {
+                        CommonModel data = new CommonModel();
+                        data.setName(f.getName());
+                        data.setPath(f.getPath());
+                        data.setSize(f.length());
+                        //                doc.setType(FileTypes.DocumentType);
+                        if (f.length() > 0)
+                            docList.add(data);
+                    }
                 }
-            }
         }
 
         return docList;
@@ -128,7 +128,7 @@ public class Utils {
         StatFs statFs = new StatFs(Environment.getExternalStorageDirectory().getPath());
         totalStorage = (statFs.getBlockSizeLong() * statFs.getBlockCountLong());
 
-        return totalStorage ;//in Mbs
+        return totalStorage;//in Mbs
     }
 
 
@@ -144,7 +144,6 @@ public class Utils {
     }
 
 //
-
 
 
     public List<String> getActiveApps() {
@@ -172,7 +171,7 @@ public class Utils {
 
         for (ApplicationInfo packageInfo : packages) {
 
-            if (!isSTOPPED(packageInfo)&&isSYSTEM(packageInfo)) {
+            if (!isSTOPPED(packageInfo) && isSYSTEM(packageInfo)) {
                 if (!list.contains(packageInfo.packageName)) {
                     list.add(packageInfo.packageName);
                 }
@@ -345,7 +344,7 @@ public class Utils {
 
         try {
             File src = new File(srcDir);
-             File dst = new File(Environment.getExternalStorageDirectory() + "/Phone_Master_Status", src.getName());
+            File dst = new File(Environment.getExternalStorageDirectory() + "/Phone_Master_Status", src.getName());
 
             if (src.isDirectory()) {
 
@@ -561,17 +560,17 @@ public class Utils {
         File fold = new File(path);
         File[] mlist = fold.listFiles();
         File[] mFilelist = fold.listFiles();
-        if (mlist!=null)
-        for (File f : mlist) {
-            if (f.isDirectory()) {
-                getAllDocs(f.getAbsolutePath());
+        if (mlist != null)
+            for (File f : mlist) {
+                if (f.isDirectory()) {
+                    getAllDocs(f.getAbsolutePath());
+                }
             }
-        }
-        if (mlist!=null)
-        for (File f : mFilelist) {
-            DeepCleanDocsModel doc = new DeepCleanDocsModel();
-            docSize = docSize + f.length();
-        }
+        if (mlist != null)
+            for (File f : mFilelist) {
+                DeepCleanDocsModel doc = new DeepCleanDocsModel();
+                docSize = docSize + f.length();
+            }
         return docSize;
     }
 
@@ -741,19 +740,18 @@ public class Utils {
         return String.format("%.2f", finalSize) + sizePrefix;
     }
 
-    public float cpuTemperature()
-    {
+    public float cpuTemperature() {
         Process process;
         try {
             process = Runtime.getRuntime().exec("cat sys/class/thermal/thermal_zone0/temp");
             process.waitFor();
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
             String line = reader.readLine();
-            if(line!=null) {
+            if (line != null) {
                 float temp = Float.parseFloat(line);
-                return getFahrenheitToCelsius( temp / 1000.0f);
-            }else{
-                return getFahrenheitToCelsius( 51.0f);
+                return getFahrenheitToCelsius(temp / 1000.0f);
+            } else {
+                return getFahrenheitToCelsius(51.0f);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -761,9 +759,8 @@ public class Utils {
         }
     }
 
-    public   float getFahrenheitToCelsius(float fahren)
-    {
-        return (fahren - 32)* 5/9;
+    public float getFahrenheitToCelsius(float fahren) {
+        return (fahren - 32) * 5 / 9;
 
     }
 
