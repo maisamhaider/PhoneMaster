@@ -25,6 +25,7 @@ import com.example.phonemaster.R;
 import com.example.phonemaster.activities.BatterySavingAct;
 import com.example.phonemaster.activities.CleanWhatsAppAct;
 import com.example.phonemaster.activities.CpuCooler;
+import com.example.phonemaster.activities.DeepCleanAct;
 import com.example.phonemaster.activities.JunkFilesAct;
 import com.example.phonemaster.activities.PhoneBoostAct;
 import com.example.phonemaster.activities.SmartChargingAct;
@@ -82,6 +83,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
 
         ConstraintLayout cleanWhatsApp_cl = root.findViewById(R.id.cleanWhatsApp_cl);
         ConstraintLayout smartCharge_cl = root.findViewById(R.id.smartCharge_cl);
+        ConstraintLayout deepClean_cl = root.findViewById(R.id.deepClean_cl);
 
 
         ivAppCleanup.setOnClickListener(this);
@@ -93,6 +95,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
 
         cleanWhatsApp_cl.setOnClickListener(this);
         smartCharge_cl.setOnClickListener(this);
+        deepClean_cl.setOnClickListener(this);
 
         ramAndStorageFun();
 
@@ -109,15 +112,15 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
         ActivityManager.MemoryInfo memoryInfo = new ActivityManager.MemoryInfo();
         activityManager.getMemoryInfo(memoryInfo);
         float totalRam1 = memoryInfo.totalMem;
-        float freeRam1 = memoryInfo.availMem ;
+        float freeRam1 = memoryInfo.availMem;
         float usedRam = totalRam1 - freeRam1;
 //        ramPercent_tv.setText( String.format( "%.1f",utils.getPercentage( totalRam1,usedRam ) )+"%" );
-        cpbRam.setAdProgress((int) utils.getPercentage( totalRam1,usedRam ));
-        pbRam.setProgress((int) utils.getPercentage( totalRam1,usedRam ));
-        tvRamInfo.setText(String.format( utils.getCalculatedDataSize(usedRam)+"/"+utils.getCalculatedDataSize(totalRam1)));
+        cpbRam.setAdProgress((int) utils.getPercentage(totalRam1, usedRam));
+        pbRam.setProgress((int) utils.getPercentage(totalRam1, usedRam));
+        tvRamInfo.setText(String.format(utils.getCalculatedDataSize(usedRam) + "/" + utils.getCalculatedDataSize(totalRam1)));
 
         // animation start
-        ValueAnimator ramAnimator = ValueAnimator.ofInt(0,(int) utils.getPercentage( totalRam1,usedRam ) );
+        ValueAnimator ramAnimator = ValueAnimator.ofInt(0, (int) utils.getPercentage(totalRam1, usedRam));
         ramAnimator.setInterpolator(new LinearInterpolator());
         ramAnimator.setStartDelay(0);
         ramAnimator.setDuration(1_500);
@@ -135,17 +138,17 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
         //for Storage
         float totalStorageBytes, availableStorageBytes, usedStorageBytes;
 
-        totalStorageBytes =  utils.getTotalStorage();
+        totalStorageBytes = utils.getTotalStorage();
         availableStorageBytes = utils.getAvailableStorage();
 
         usedStorageBytes = totalStorageBytes - availableStorageBytes;
 
-        cpbStorage.setAdProgress((int) utils.getPercentage( totalStorageBytes, usedStorageBytes ));
-        pbStorage.setProgress((int) utils.getPercentage( totalStorageBytes, usedStorageBytes ));
-        tvStorageInfo.setText( utils.getCalculatedDataSize(usedStorageBytes)+"/"+utils.getCalculatedDataSize(totalStorageBytes));
+        cpbStorage.setAdProgress((int) utils.getPercentage(totalStorageBytes, usedStorageBytes));
+        pbStorage.setProgress((int) utils.getPercentage(totalStorageBytes, usedStorageBytes));
+        tvStorageInfo.setText(utils.getCalculatedDataSize(usedStorageBytes) + "/" + utils.getCalculatedDataSize(totalStorageBytes));
 
         // animation start
-        ValueAnimator storageAnimator = ValueAnimator.ofInt(0, (int) utils.getPercentage( totalStorageBytes, usedStorageBytes ));
+        ValueAnimator storageAnimator = ValueAnimator.ofInt(0, (int) utils.getPercentage(totalStorageBytes, usedStorageBytes));
         storageAnimator.setInterpolator(new LinearInterpolator());
         storageAnimator.setStartDelay(0);
         storageAnimator.setDuration(1_500);
@@ -164,80 +167,82 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
 
     @Override
     public void onClick(View v) {
-        switch (v.getId())
-        {
+        switch (v.getId()) {
             case R.id.cleanWhatsApp_cl:
-                if (permissions.permission())
-                {
+                if (permissions.permission()) {
                     Intent cleanWhatsAppActIntent = new Intent(getActivity(), CleanWhatsAppAct.class);
                     startActivity(cleanWhatsAppActIntent);
-                }
-                else
+                } else
                     Toast.makeText(getActivity(), "Permission is not granted ", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.iv_junk_file:
-                if (permissions.permission())
-                {
+                if (permissions.permission()) {
                     Intent cleanWhatsAppActIntent = new Intent(getActivity(), JunkFilesAct.class);
                     startActivity(cleanWhatsAppActIntent);
-                }
-                else
+                } else
                     Toast.makeText(getActivity(), "Permission is not granted ", Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.iv_cpu_cooler:
 
-                if (permissions.permission())
-                {
+                if (permissions.permission()) {
 
                     Intent cpuCoolerIntent = new Intent(getActivity(), CpuCooler.class);
                     startActivity(cpuCoolerIntent);
-                }
-                else
+                } else
                     Toast.makeText(getActivity(), "Permission is not granted ", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.iv_boost_phone:
-                if (permissions.permission())
-                {
+                if (permissions.permission()) {
                     Intent phoneBoostIntent = new Intent(getActivity(), PhoneBoostAct.class);
                     startActivity(phoneBoostIntent);
-                }
-                else
+                } else
                     Toast.makeText(getActivity(), "Permission is not granted ", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.iv_power_saving:
 
-                if (permissions.permission())
-                {
+                if (permissions.permission()) {
                     Intent batterySavingIntent = new Intent(getActivity(), BatterySavingAct.class);
                     startActivity(batterySavingIntent);
-                }
-                else
+                } else {
                     Toast.makeText(getActivity(), "Permission is not granted ", Toast.LENGTH_SHORT).show();
+                }
                 break;
-//            case R.id.harassmentFilter_btn:
-//                Intent harassmentFilterIntent = new Intent(getActivity(), HarassmentFilterAct.class);
-//                startActivity(harassmentFilterIntent);
-//                break;
+
             case R.id.iv_app_cleanup:
-                Intent unInstallAppIntent = new Intent(getActivity(), UnInstallAppAct.class);
-                startActivity(unInstallAppIntent);
+
+                if (permissions.permission()) {
+                    Intent unInstallAppIntent = new Intent(getActivity(), UnInstallAppAct.class);
+                    startActivity(unInstallAppIntent);
+                } else {
+                    Toast.makeText(getActivity(), "Permission is not granted ", Toast.LENGTH_SHORT).show();
+                }
                 break;
-//            case R.id.iv_power_saving:
-//                Intent cwpInstallAppIntent = new Intent(getActivity(), CleanWhatsAppAct.class);
-//                startActivity(cwpInstallAppIntent);
-//                break;
             case R.id.iv_status_saver:
-                Intent cSSInstallAppIntent = new Intent(getActivity(), WhatsAppStatusAct.class);
-                startActivity(cSSInstallAppIntent);
+
+                if (permissions.permission()) {
+                    Intent cSSInstallAppIntent = new Intent(getActivity(), WhatsAppStatusAct.class);
+                    startActivity(cSSInstallAppIntent);
+                } else {
+                    Toast.makeText(getActivity(), "Permission is not granted ", Toast.LENGTH_SHORT).show();
+                }
                 break;
-//            case R.id.deepClean_btn:
-//                Intent deepCleanIntent = new Intent(getActivity(), DeepCleanAct.class);
-//                startActivity(deepCleanIntent);
-//                break;
             case R.id.smartCharge_cl:
-                Intent smartChargingIntent = new Intent(getActivity(), SmartChargingAct.class);
-                startActivity(smartChargingIntent);
+
+                if (permissions.permission()) {
+                    Intent smartChargingIntent = new Intent(getActivity(), SmartChargingAct.class);
+                    startActivity(smartChargingIntent);
+                } else {
+                    Toast.makeText(getActivity(), "Permission is not granted ", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case R.id.deepClean_cl:
+                if (permissions.permission()) {
+                    Intent deepCleanIntent = new Intent(getActivity(), DeepCleanAct.class);
+                    startActivity(deepCleanIntent);
+                } else {
+                    Toast.makeText(getActivity(), "Permission is not granted ", Toast.LENGTH_SHORT).show();
+                }
                 break;
 //
         }
