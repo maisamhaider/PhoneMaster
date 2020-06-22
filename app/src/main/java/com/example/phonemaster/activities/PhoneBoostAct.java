@@ -5,17 +5,16 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.animation.ValueAnimator;
-import android.annotation.SuppressLint;
+ import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
-import android.view.animation.LinearInterpolator;
-import android.widget.ImageView;
+ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -44,9 +43,10 @@ public class PhoneBoostAct extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phone_boost);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         utils = new Utils(this);
         preferences = getSharedPreferences("myPref", Context.MODE_PRIVATE);
-
 
         phoneBoostSecond_cl = findViewById(R.id.phoneBoostSecond_cl);
         RecyclerView phoneBoostApps_rv = findViewById(R.id.phoneBoostApps_rv);

@@ -55,21 +55,27 @@ public class DeepCleanAudioAdapter extends RecyclerView.Adapter<DeepCleanAudioAd
         final String audioString = fileList.get(position).getAudioPath();
         final String audioName = fileList.get(position).getAudioName();
 
+        if (list.contains(audioString)) {
+            holder.selection_iv.setImageResource(R.drawable.ic_select);
+        } else {
+            holder.selection_iv.setImageResource(R.drawable.ic_deselect);
+        }
         holder.commonFileName_tv.setText(audioName);
 
-        holder.selectAudio_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+        holder.selection_iv.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked)
-                {
+            public void onClick(View v) {
+                if (!list.contains(audioString)) {
                     list.add(audioString);
-                }
-                else
-                {
+                    holder.selection_iv.setImageResource(R.drawable.ic_select);
+                } else {
                     list.remove(position);
+                    holder.selection_iv.setImageResource(R.drawable.ic_deselect);
                 }
             }
         });
+
     }
 
 
@@ -78,20 +84,17 @@ public class DeepCleanAudioAdapter extends RecyclerView.Adapter<DeepCleanAudioAd
         return fileList.size();
     }
 
-    class WhatsAppStatusHolder extends RecyclerView.ViewHolder {
+    static class WhatsAppStatusHolder extends RecyclerView.ViewHolder {
 
-        ImageView commonFileRv_iv,commonIsVideo_iv;
-        CheckBox selectAudio_cb;
-        TextView commonFileName_tv,commonFileSize_tv;
+        ImageView commonFileRv_iv, selection_iv;
+        TextView commonFileName_tv;
 
         public WhatsAppStatusHolder(@NonNull View itemView) {
             super(itemView);
 
-            commonIsVideo_iv = itemView.findViewById(R.id.commonIsVideo_iv);
             commonFileRv_iv = itemView.findViewById(R.id.commonFileRv_iv);
-            selectAudio_cb = itemView.findViewById(R.id.selectCommon_cb);
             commonFileName_tv = itemView.findViewById(R.id.commonFileName_tv);
-            commonFileSize_tv = itemView.findViewById(R.id.commonFileSize_tv);
+            selection_iv = itemView.findViewById(R.id.selection_iv);
 
         }
     }

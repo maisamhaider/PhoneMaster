@@ -16,6 +16,7 @@ public class ChargingLockedScreenAct extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_charging_locked_screen);
         setRequestedOrientation( ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD|
                 WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED|

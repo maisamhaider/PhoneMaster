@@ -216,7 +216,7 @@
 
     <include layout="@layout/phone_booster_first_screen_layout" />
 
-    <include layout="@layout/phone_boost_after_coolclick_screen_layout" />
+    <include layout="@layout/phone_boost_after_boosclick_screen_layout" />
 
     <include layout="@layout/phone_boost_last_screen_layout" />
 

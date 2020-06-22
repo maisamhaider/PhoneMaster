@@ -55,21 +55,33 @@ public class DeepCleanVideosAdapter extends RecyclerView.Adapter<DeepCleanVideos
 
         final String videoString = fileList.get(position).getVideoPath();
 
+        if (list.contains(videoString))
+        {
+            holder.selectVideo_iv.setImageResource(R.drawable.ic_select);
 
+        }else
+        {
+            holder.selectVideo_iv.setImageResource(R.drawable.ic_deselect);
+
+        }
         Glide.with(context)
                 .load(videoString)
                 .into(holder.deepCleanVideosRv_iv);
 
-        holder.selectVideo_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+        holder.selectVideo_iv.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked)
+            public void onClick(View v) {
+                if (!list.contains(videoString))
                 {
                     list.add(videoString);
+                    holder.selectVideo_iv.setImageResource(R.drawable.ic_select);
                 }
                 else
                 {
-                    list.remove(position);
+                    list.remove(videoString);
+                    holder.selectVideo_iv.setImageResource(R.drawable.ic_deselect);
+
                 }
             }
         });
@@ -83,14 +95,13 @@ public class DeepCleanVideosAdapter extends RecyclerView.Adapter<DeepCleanVideos
 
     class WhatsAppStatusHolder extends RecyclerView.ViewHolder {
 
-        ImageView deepCleanVideosRv_iv;
-        CheckBox selectVideo_cb;
+        ImageView deepCleanVideosRv_iv,selectVideo_iv;
 
         public WhatsAppStatusHolder(@NonNull View itemView) {
             super(itemView);
 
             deepCleanVideosRv_iv = itemView.findViewById(R.id.deepCleanVideosRv_iv);
-            selectVideo_cb = itemView.findViewById(R.id.selectVideo_cb);
+            selectVideo_iv = itemView.findViewById(R.id.selectVideo_iv);
         }
     }
 }

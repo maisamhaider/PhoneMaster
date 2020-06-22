@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.widget.CompoundButton;
 import android.widget.Switch;
@@ -17,6 +18,8 @@ public class FullChargedRemindAct extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_full_charged_remind);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         SharedPreferences preferences = getSharedPreferences("myPref", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
 

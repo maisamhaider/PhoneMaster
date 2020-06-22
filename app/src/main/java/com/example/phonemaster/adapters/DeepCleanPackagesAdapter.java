@@ -57,20 +57,23 @@ public class DeepCleanPackagesAdapter extends RecyclerView.Adapter<DeepCleanPack
         final String pkgString = fileList.get(position).getPkgPath();
         final String pkgName = fileList.get(position).getPkgName();
 
-
+        if (list.contains(pkgString)) {
+            holder.selectPkg_iv.setImageResource(R.drawable.ic_select);
+        } else {
+            holder.selectPkg_iv.setImageResource(R.drawable.ic_deselect);
+        }
         holder.deepCleanPkgName_tv.setText(pkgName);
 
 
-        holder.selectPkg_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        holder.selectPkg_iv.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked)
-                {
+            public void onClick(View v) {
+                if (!list.contains(pkgString)) {
                     list.add(pkgString);
-                }
-                else
-                {
+                    holder.selectPkg_iv.setImageResource(R.drawable.ic_select);
+                } else {
                     list.remove(position);
+                    holder.selectPkg_iv.setImageResource(R.drawable.ic_deselect);
                 }
             }
         });
@@ -82,17 +85,16 @@ public class DeepCleanPackagesAdapter extends RecyclerView.Adapter<DeepCleanPack
         return fileList.size();
     }
 
-    class WhatsAppStatusHolder extends RecyclerView.ViewHolder {
+    static class WhatsAppStatusHolder extends RecyclerView.ViewHolder {
 
-        ImageView deepCleanPgksRv_iv;
-        CheckBox selectPkg_cb;
-        TextView deepCleanPkgName_tv;
+        ImageView deepCleanPgksRv_iv,selectPkg_iv;
+         TextView deepCleanPkgName_tv;
 
         public WhatsAppStatusHolder(@NonNull View itemView) {
             super(itemView);
 
             deepCleanPgksRv_iv = itemView.findViewById(R.id.deepCleanPgksRv_iv);
-            selectPkg_cb = itemView.findViewById(R.id.selectPkg_cb);
+            selectPkg_iv = itemView.findViewById(R.id.selectPkg_iv);
             deepCleanPkgName_tv = itemView.findViewById(R.id.deepCleanPkgName_tv);
 
         }

@@ -746,6 +746,24 @@ public class Utils {
         }
         return String.format("%.2f", finalSize) + sizePrefix;
     }
+    public float getCalculatedDataSizeFloat(float size) {
+         float finalSize = size;
+        if (size >= 1024) {
+            float sizeKb = size / 1024;
+             finalSize = sizeKb;
+            if (sizeKb >= 1024) {
+                float sizeMB = sizeKb / 1024;
+                 finalSize = sizeMB;
+                if (sizeMB >= 1024) {
+                    float sizeGb = sizeMB / 1024;
+                     finalSize = sizeGb;
+
+                }
+
+            }
+        }
+        return finalSize;
+    }
 
     public float cpuTemperature() {
         Process process;

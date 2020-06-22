@@ -5,6 +5,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -35,6 +36,8 @@ public class JunkFilesAct extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_junk_files_atc);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         SharedPreferences preferences = getSharedPreferences("myPref", Context.MODE_PRIVATE);
         StorageUtils storageUtils = new StorageUtils();
         SharedPreferences.Editor editor = preferences.edit();

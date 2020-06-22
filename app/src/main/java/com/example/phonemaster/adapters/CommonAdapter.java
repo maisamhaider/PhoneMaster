@@ -122,12 +122,8 @@ public class CommonAdapter extends RecyclerView.Adapter<CommonAdapter.WhatsAppSt
         public WhatsAppStatusHolder(@NonNull View itemView) {
             super(itemView);
 
-            commonIsVideo_iv = itemView.findViewById(R.id.commonIsVideo_iv);
-            commonFileRv_iv = itemView.findViewById(R.id.commonFileRv_iv);
-            selectAudio_cb = itemView.findViewById(R.id.selectCommon_cb);
-            commonFileName_tv = itemView.findViewById(R.id.commonFileName_tv);
-            commonFileSize_tv = itemView.findViewById(R.id.commonFileSize_tv);
-
+             commonFileRv_iv = itemView.findViewById(R.id.commonFileRv_iv);
+             commonFileName_tv = itemView.findViewById(R.id.commonFileName_tv);
         }
     }
 }
