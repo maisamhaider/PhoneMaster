@@ -15,6 +15,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.phonemaster.R;
+import com.example.phonemaster.activities.FilesMoverAct;
 import com.example.phonemaster.activities.InternetSpeedAct;
 import com.example.phonemaster.activities.MainActivity;
 
@@ -29,6 +30,8 @@ public class ToolsFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_tool, container, false);
         ImageView ivTool = root.findViewById(R.id.iv_t_back);
         ConstraintLayout speedTest_cl = root.findViewById(R.id.speedTest_cl);
+        ConstraintLayout fileMoverBtn_cl = root.findViewById(R.id.fileMoverBtn_cl);
+
         ivTool.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -36,19 +39,19 @@ public class ToolsFragment extends Fragment {
             }
         });
 
-        speedTest_cl.setOnClickListener(new View.OnClickListener() {
+
+        fileMoverBtn_cl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), FilesMoverAct.class));
+            }
+        });speedTest_cl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(), InternetSpeedAct.class));
             }
         });
 
-         toolsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-
-            }
-        });
         return root;
     }
 

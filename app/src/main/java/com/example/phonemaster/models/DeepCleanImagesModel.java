@@ -4,6 +4,7 @@ import android.graphics.drawable.Drawable;
 
 public class DeepCleanImagesModel {
     String imagePath;
+    String imageName;
 
     public DeepCleanImagesModel() {
     }
@@ -20,5 +21,11 @@ public class DeepCleanImagesModel {
         this.imagePath = imagePath;
     }
 
+    public String getImageName() {
+        return imageName;
+    }
 
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
+    }
 }

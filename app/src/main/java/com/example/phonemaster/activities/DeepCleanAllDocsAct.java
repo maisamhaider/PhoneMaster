@@ -74,6 +74,7 @@ public class DeepCleanAllDocsAct extends AppCompatActivity {
                             try {
                                 file = new File(pathList.get(i));
                                 file.delete();
+                                finish();
                              } catch (Exception e) {
                                 e.printStackTrace();
                             }
