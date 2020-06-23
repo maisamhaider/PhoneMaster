@@ -3,6 +3,7 @@ package com.example.phonemaster.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -25,6 +26,7 @@ public class WhatsAppAudioListAct extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_whats_app_audio_list);
         utils = new Utils(this);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         RecyclerView whatsAppAudioList_rv = findViewById(R.id.whatsAppAudioList_rv);
         Button whatsAppAudioList_btn = findViewById(R.id.whatsAppAudioList_btn);

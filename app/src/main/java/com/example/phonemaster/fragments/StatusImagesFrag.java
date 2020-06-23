@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.example.phonemaster.R;
+import com.example.phonemaster.activities.MainActivity;
 import com.example.phonemaster.adapters.WhatsAppStatusAdapter;
 import com.example.phonemaster.models.CommonModel;
 import com.example.phonemaster.permission.Permissions;
@@ -31,6 +32,7 @@ public class StatusImagesFrag extends Fragment {
 
     }
 
+    MainActivity mainActivity = (MainActivity)getActivity();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -66,7 +68,5 @@ public class StatusImagesFrag extends Fragment {
         });
 
         return view;
-
-
     }
 }

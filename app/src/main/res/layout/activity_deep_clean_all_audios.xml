@@ -11,14 +11,32 @@
         android:id="@+id/deepCleanAllAudio_rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/deepCleanAudio_btn" />
+        android:layout_above="@+id/deepCleanAudiosClean_ll" />
 
-
-    <Button
-        android:id="@+id/deepCleanAudio_btn"
+    <LinearLayout
+        android:id="@+id/deepCleanAudiosClean_ll"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="56dp"
         android:layout_alignParentBottom="true"
-        android:text="Clean" />
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/main_button_bg"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="16dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:text="CLEAN"
+            android:textColor="@color/standard_white"
+            tools:layout_editor_absoluteX="11dp"
+            tools:layout_editor_absoluteY="594dp" />
+    </LinearLayout>
 
 </RelativeLayout>

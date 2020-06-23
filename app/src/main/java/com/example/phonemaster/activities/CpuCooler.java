@@ -6,9 +6,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.animation.ValueAnimator;
+import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -33,7 +35,6 @@ import java.util.List;
 
 public class CpuCooler extends AppCompatActivity {
     Utils utils;
-
     TextView coolingTemp_tv;
     ProgressBar cooling_pb;
     ImageView coolingBack_iv;
@@ -46,6 +47,8 @@ public class CpuCooler extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cpu_cooler);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         utils = new Utils(this);
         preferences = getSharedPreferences("myPref", Context.MODE_PRIVATE);
 
@@ -81,14 +84,14 @@ public class CpuCooler extends AppCompatActivity {
         Calendar current = Calendar.getInstance();
         if (preferences.getLong("lastCpuCooledTime", current.getTimeInMillis()) > current.getTimeInMillis()) {
             cpuCoolerSecond_cl.setVisibility(View.GONE);
-            String temp1 = String.format("%.1f",utils.cpuTemperature());
+            @SuppressLint("DefaultLocale") String temp1 = String.format("%.1f",utils.cpuTemperature());
             cpuTemp_tv.setText(temp1);
             cpuCooled_cl.setVisibility(View.VISIBLE);
 
         } else {
             cpuCooled_cl.setVisibility(View.GONE);
             cpuCoolerSecond_cl.setVisibility(View.VISIBLE);
-            String temp2 = String.format("%.1f",utils.cpuTemperature());
+            @SuppressLint("DefaultLocale") String temp2 = String.format("%.1f",utils.cpuTemperature());
             cpuTemp_tv.setText(temp2);
          }
 
@@ -138,6 +141,7 @@ public class CpuCooler extends AppCompatActivity {
 
     }
 
+    @SuppressLint("StaticFieldLeak")
     class KillAppsTask extends AsyncTask<Void, Integer, String> {
         List<String> packageName;
         ActivityManager am = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
@@ -179,16 +183,17 @@ public class CpuCooler extends AppCompatActivity {
             Calendar nextTime = Calendar.getInstance();
             nextTime.add(Calendar.MINUTE, 5);
             SharedPreferences.Editor editor = preferences.edit();
-            String temp4 = String.format("%.1f",utils.cpuTemperature());
-            coolingTemp_tv.setText(String.format(temp4));
+
             editor.putLong("lastCpuCooledTime", nextTime.getTimeInMillis()).commit();
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    cpuTemp_tv.setText("0");
+                    @SuppressLint("DefaultLocale") String temp4 = String.format("%.1f",utils.cpuTemperature());
+                    cpuTemp_tv.setText( temp4);
                     cpuCoolerMain_cl.setVisibility(View.GONE);
                     cpuCooled_cl.setVisibility(View.VISIBLE);
+                    coolingTemp_tv.setText(temp4);
 
                 }
             }, 2000);

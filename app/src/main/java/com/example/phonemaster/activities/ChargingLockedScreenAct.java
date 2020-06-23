@@ -2,13 +2,7 @@ package com.example.phonemaster.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.KeyguardManager;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
-import android.os.BatteryManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.WindowManager;
@@ -22,6 +16,7 @@ public class ChargingLockedScreenAct extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_charging_locked_screen);
         setRequestedOrientation( ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD|
                 WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED|

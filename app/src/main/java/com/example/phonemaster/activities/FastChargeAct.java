@@ -3,6 +3,7 @@ package com.example.phonemaster.activities;
 import androidx.appcompat.app.AppCompatActivity;
  import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
 import com.example.phonemaster.R;
@@ -21,6 +22,8 @@ public class FastChargeAct extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fast_charge);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         fastCharge_rv = findViewById(R.id.fastCharge_rv);
 
         db = new Db(this);

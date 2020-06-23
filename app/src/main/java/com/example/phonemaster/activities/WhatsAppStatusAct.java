@@ -7,6 +7,8 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -34,14 +36,15 @@ import java.util.List;
 
 public class WhatsAppStatusAct extends AppCompatActivity {
     Utils utils;
-    RecyclerView whatsAppStatus_rv;
-
     Fragment mFragment;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_whats_app_status);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         utils = new Utils(this);
         MainFrag mf = new MainFrag();
         loadmyfrag(mf);
@@ -66,14 +69,15 @@ public class WhatsAppStatusAct extends AppCompatActivity {
                         amountOfStatusImages_tv.setText(utils.getListFiles(file1, "images").size() + " images status found");
                         statusSaverMain_iv.setImageResource(R.drawable.ic_status_saver_image_header);
                         break;
+
                     case 1:
                         StatusVideosFrag statusVideosFrag = new StatusVideosFrag();
                         loadmyfrag(statusVideosFrag);
                         File file2 = new File(Environment.getExternalStorageDirectory().getPath() + "/WhatsApp/Media/.Statuses");
                         amountOfStatusImages_tv.setText(utils.getListFiles(file2, "images").size() + " videos status found");
                         statusSaverMain_iv.setImageResource(R.drawable.ic_status_saver_video_header);
-
                         break;
+
                     case 2:
                         StatusSavedFrag statusSavedFrag = new StatusSavedFrag();
                         loadmyfrag(statusSavedFrag);
@@ -85,16 +89,12 @@ public class WhatsAppStatusAct extends AppCompatActivity {
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-
             }
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-
             }
         });
-
-
     }
 
     public void loadmyfrag(Fragment fragment) {
@@ -109,6 +109,5 @@ public class WhatsAppStatusAct extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        finish();
     }
 }

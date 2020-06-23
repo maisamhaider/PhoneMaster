@@ -1,5 +1,6 @@
 package com.example.phonemaster.async;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
 
@@ -17,8 +18,10 @@ import java.util.List;
 
 public class AllAppsTask extends AsyncTask<Void, Integer, String> {
 
+    @SuppressLint("StaticFieldLeak")
     Context context;
     private AllAppsAdapter allAppsAdapter;
+    @SuppressLint("StaticFieldLeak")
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
     private List<String> list;
@@ -26,14 +29,13 @@ public class AllAppsTask extends AsyncTask<Void, Integer, String> {
     LoadingDialog loadingDialog;
 
     public AllAppsTask(Context context, AllAppsAdapter allAppsAdapter,
-                       RecyclerView recyclerView  ) {
+                       RecyclerView recyclerView) {
         this.context = context;
         this.allAppsAdapter = allAppsAdapter;
         this.recyclerView = recyclerView;
-         this.list = new ArrayList<>();
+        this.list = new ArrayList<>();
         utils = new Utils(context);
         loadingDialog = new LoadingDialog(context);
-
     }
 
     @Override
@@ -41,18 +43,16 @@ public class AllAppsTask extends AsyncTask<Void, Integer, String> {
         linearLayoutManager = new LinearLayoutManager(context);
         try {
             loadingDialog.show();
-
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-
     @Override
     protected String doInBackground(Void... voids) {
 
-            list = utils.GetAllInstalledApkInfo();
-            return null;
+        list = utils.GetAllInstalledApkInfo();
+        return null;
     }
 
     @Override
@@ -63,9 +63,6 @@ public class AllAppsTask extends AsyncTask<Void, Integer, String> {
         recyclerView.setAdapter(allAppsAdapter);
         allAppsAdapter.notifyDataSetChanged();
         loadingDialog.dismiss();
-
-
     }
-
 
 }

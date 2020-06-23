@@ -4,13 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/btn_boarder_bg"
     android:layout_margin="8dp">
 
 
-    <ImageView
+    <com.mikhaellopez.circularimageview.CircularImageView
         android:id="@+id/deepCleanVideosRv_iv"
-        android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_margin="10dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:src="@drawable/ic_launcher_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -19,17 +21,18 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:src="@mipmap/ic_launcher"
         android:layout_width="30dp"
         android:layout_height="30dp"
+        android:src="@drawable/ic_play"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <CheckBox
-        android:id="@+id/selectVideo_cb"
+    <ImageView
+        android:src="@drawable/ic_deselect"
+        android:id="@+id/selectVideo_iv"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginEnd="5dp"

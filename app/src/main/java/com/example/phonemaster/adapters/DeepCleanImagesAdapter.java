@@ -54,22 +54,33 @@ public class DeepCleanImagesAdapter extends RecyclerView.Adapter<DeepCleanImages
 
         final String imageString = fileList.get(position).getImagePath();
 
+        if (list.contains(imageString))
+        {
+            holder.selectImage_iv.setImageResource(R.drawable.ic_select);
+        }
+        else
+        {
+         holder.selectImage_iv.setImageResource(R.drawable.ic_deselect);
+        }
+
 
         Glide.with(context)
                 .load(imageString)
                 .into(holder.deepCleanRv_iv);
 
-        holder.selectImage_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        holder.selectImage_iv.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked)
-                {
-                    list.add(imageString);
-                }
-                else
-                {
-                    list.remove(position);
-                }
+            public void onClick(View v) {
+               if (list.contains(imageString))
+               {
+                   list.remove(imageString);
+                   holder.selectImage_iv.setImageResource(R.drawable.ic_deselect);
+               }
+               else
+               {
+                   list.add(imageString);
+                   holder.selectImage_iv.setImageResource(R.drawable.ic_select);
+               }
             }
         });
     }
@@ -81,15 +92,13 @@ public class DeepCleanImagesAdapter extends RecyclerView.Adapter<DeepCleanImages
     }
 
     class WhatsAppStatusHolder extends RecyclerView.ViewHolder {
-
-        ImageView deepCleanRv_iv;
-        CheckBox selectImage_cb;
+        ImageView deepCleanRv_iv,selectImage_iv;
 
         public WhatsAppStatusHolder(@NonNull View itemView) {
             super(itemView);
 
             deepCleanRv_iv = itemView.findViewById(R.id.deepCleanRv_iv);
-            selectImage_cb = itemView.findViewById(R.id.selectImage_cb);
-        }
+            selectImage_iv = itemView.findViewById(R.id.selectImage_iv);
+         }
     }
 }

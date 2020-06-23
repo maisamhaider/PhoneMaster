@@ -57,19 +57,26 @@ public class DeepCleanDocsAdapter extends RecyclerView.Adapter<DeepCleanDocsAdap
         final String docsString = fileList.get(position).getDocPath();
         final String docName = fileList.get(position).getDocName();
 
-
+        if (list.contains(docsString)) {
+            holder.selectDocs_iv.setImageResource(R.drawable.ic_select);
+        } else {
+            holder.selectDocs_iv.setImageResource(R.drawable.ic_deselect);
+        }
         holder.deepCleanDocName_tv.setText(docName);
 
-        holder.selectDocs_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        holder.selectDocs_iv.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
+            public void onClick(View v) {
+                if (!list.contains(docsString)) {
                     list.add(docsString);
+                    holder.selectDocs_iv.setImageResource(R.drawable.ic_select);
                 } else {
                     list.remove(position);
+                    holder.selectDocs_iv.setImageResource(R.drawable.ic_deselect);
                 }
             }
         });
+
     }
 
 
@@ -80,15 +87,14 @@ public class DeepCleanDocsAdapter extends RecyclerView.Adapter<DeepCleanDocsAdap
 
     class WhatsAppStatusHolder extends RecyclerView.ViewHolder {
 
-        ImageView deepCleanDocsRv_iv;
-        CheckBox selectDocs_cb;
-        TextView deepCleanDocName_tv;
+        ImageView deepCleanDocsRv_iv,selectDocs_iv;
+         TextView deepCleanDocName_tv;
 
         public WhatsAppStatusHolder(@NonNull View itemView) {
             super(itemView);
 
             deepCleanDocsRv_iv = itemView.findViewById(R.id.deepCleanDocsRv_iv);
-            selectDocs_cb = itemView.findViewById(R.id.selectDocs_cb);
+            selectDocs_iv = itemView.findViewById(R.id.selectDocs_iv);
             deepCleanDocName_tv = itemView.findViewById(R.id.deepCleanDocName_tv);
 
         }

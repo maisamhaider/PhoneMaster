@@ -30,13 +30,14 @@
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:layout_alignParentBottom="true"
-        android:background="?android:attr/selectableItemBackground"
+        android:background="@drawable/main_button_bg"
         android:gravity="center"
         android:orientation="vertical">
 
         <TextView
+            android:textStyle="bold"
             android:gravity="center"
-            android:background="@drawable/below_button_bg"
+            android:background="@android:color/transparent"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="YES,SAVE WHATS APP IMAGES STATUS"

@@ -25,6 +25,7 @@ import com.example.phonemaster.R;
 import com.example.phonemaster.activities.BatterySavingAct;
 import com.example.phonemaster.activities.CleanWhatsAppAct;
 import com.example.phonemaster.activities.CpuCooler;
+import com.example.phonemaster.activities.DeepCleanAct;
 import com.example.phonemaster.activities.JunkFilesAct;
 import com.example.phonemaster.activities.PhoneBoostAct;
 import com.example.phonemaster.activities.SmartChargingAct;
@@ -54,7 +55,9 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
                 ViewModelProviders.of(this).get(DashboardViewModel.class);
         root = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
-        init();
+        TextView smartCharge_tv2 = root.findViewById(R.id.smartCharge_tv2);
+        smartCharge_tv2.setSelected(true);
+                init();
 
         return root;
     }
@@ -82,6 +85,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
 
         ConstraintLayout cleanWhatsApp_cl = root.findViewById(R.id.cleanWhatsApp_cl);
         ConstraintLayout smartCharge_cl = root.findViewById(R.id.smartCharge_cl);
+        ConstraintLayout deepClean_cl = root.findViewById(R.id.deepClean_cl);
 
 
         ivAppCleanup.setOnClickListener(this);
@@ -93,6 +97,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
 
         cleanWhatsApp_cl.setOnClickListener(this);
         smartCharge_cl.setOnClickListener(this);
+        deepClean_cl.setOnClickListener(this);
 
         ramAndStorageFun();
 
@@ -231,10 +236,11 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
                 Intent cSSInstallAppIntent = new Intent(getActivity(), WhatsAppStatusAct.class);
                 startActivity(cSSInstallAppIntent);
                 break;
-//            case R.id.deepClean_btn:
-//                Intent deepCleanIntent = new Intent(getActivity(), DeepCleanAct.class);
-//                startActivity(deepCleanIntent);
-//                break;
+            case R.id.deepClean_cl:
+                Intent deepCleanIntent = new Intent(getActivity(), DeepCleanAct.class);
+                startActivity(deepCleanIntent);
+                break;
+
             case R.id.smartCharge_cl:
                 Intent smartChargingIntent = new Intent(getActivity(), SmartChargingAct.class);
                 startActivity(smartChargingIntent);

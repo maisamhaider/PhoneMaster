@@ -86,13 +86,15 @@
             app:layout_constraintVertical_chainStyle="packed" />
 
         <TextView
-            android:textColor="@color/colorTextTwo"
             android:id="@+id/smartCharge_tv2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Remind you charging state to avoid overcharging"
+            android:textColor="@color/colorTextTwo"
             android:textSize="10sp"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/smartCharge_tv1"
             app:layout_constraintTop_toBottomOf="@+id/smartCharge_tv1" />
 
@@ -155,6 +157,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/deepClean_cl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"

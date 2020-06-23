@@ -35,10 +35,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:textColor="@color/colorTextTwo"
         android:id="@+id/commonFileName_tv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
+        android:maxLines="1"
+        android:maxLength="30"
         android:text="file"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/selection_iv"

@@ -3,6 +3,7 @@ package com.example.phonemaster.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -24,6 +25,8 @@ public class WhatsAppImagesListAct extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_whats_app_images_list);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         utils = new Utils(this);
         RecyclerView whatsAppImagesList_rv = findViewById(R.id.whatsAppImagesList_rv);
         Button whatsAppImagesList_btn = findViewById(R.id.whatsAppImagesList_btn);
