@@ -14,5 +14,6 @@
     <color name="colorText">#404040</color>
     <color name="colorUnSelected">#4581FF</color>
     <color name="colorWhite">#FFFFFF</color>
+    <color name="colorBPG">#D9E5FF</color>
 
 </resources>
