@@ -3,6 +3,9 @@ package com.example.phonemaster.async;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,6 +18,8 @@ import com.example.phonemaster.utils.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
+import pl.droidsonroids.gif.GifImageView;
+
 
 public class AllAppsTask extends AsyncTask<Void, Integer, String> {
 
@@ -25,8 +30,9 @@ public class AllAppsTask extends AsyncTask<Void, Integer, String> {
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
     private List<String> list;
-    Utils utils;
-    LoadingDialog loadingDialog;
+    private Utils utils;
+    private LoadingDialog loadingDialog;
+
 
     public AllAppsTask(Context context, AllAppsAdapter allAppsAdapter,
                        RecyclerView recyclerView) {
@@ -50,7 +56,6 @@ public class AllAppsTask extends AsyncTask<Void, Integer, String> {
 
     @Override
     protected String doInBackground(Void... voids) {
-
         list = utils.GetAllInstalledApkInfo();
         return null;
     }

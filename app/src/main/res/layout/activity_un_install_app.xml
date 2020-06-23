@@ -19,6 +19,33 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view" />
 
+
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/uninstall_gif"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:elevation="8dp"
+        android:background="@color/colorHeader"
+        android:src="@drawable/cleaning"
+        app:layout_constraintBottom_toBottomOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view" />
+
+    <ImageView
+        android:id="@+id/uninstall_iv"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:elevation="8dp"
+        android:src="@drawable/group"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view" />
+
     <View
         android:id="@+id/view"
         android:layout_width="0dp"
@@ -45,5 +72,20 @@
         android:layout_alignParentBottom="true"
         android:text="@string/uninstall_apps"
         app:layout_constraintBottom_toBottomOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_total_apps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="00"
+        android:visibility="gone"
+        android:elevation="8dp"
+        android:textStyle="bold"
+        android:textSize="50sp"
+        android:textColor="@color/standard_white"
+        app:layout_constraintBottom_toBottomOf="@+id/uninstall_gif"
+        app:layout_constraintEnd_toEndOf="@+id/uninstall_gif"
+        app:layout_constraintStart_toStartOf="@+id/uninstall_gif"
+        app:layout_constraintTop_toTopOf="@+id/uninstall_gif" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

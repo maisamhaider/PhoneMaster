@@ -47,12 +47,9 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
     private ProgressBar pbRam, pbStorage;
     private TextView tvRamInfo, tvStorageInfo;
 
-    private DashboardViewModel dashboardViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        dashboardViewModel =
-                ViewModelProviders.of(this).get(DashboardViewModel.class);
         root = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
         init();

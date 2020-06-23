@@ -18,14 +18,12 @@ import com.example.phonemaster.activities.MainActivity;
 
 public class AboutUsFragment extends Fragment {
 
-    private AboutUsViewModel aboutUsViewModel;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        aboutUsViewModel =
-                ViewModelProviders.of(this).get(AboutUsViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_setting, container, false);
 
+        View root = inflater.inflate(R.layout.fragment_setting, container, false);
         ImageView ivTool = root.findViewById(R.id.iv_s_back);
         ivTool.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,12 +32,6 @@ public class AboutUsFragment extends Fragment {
             }
         });
 
-        aboutUsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-//                textView.setText(s);
-            }
-        });
         return root;
     }
 }

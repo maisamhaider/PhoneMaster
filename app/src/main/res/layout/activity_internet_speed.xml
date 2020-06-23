@@ -13,7 +13,7 @@
         android:gravity="center|top"
         android:layout_weight="4"
         android:weightSum="10"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/below_corners_corved_bg"
         android:layout_width="match_parent"
         android:layout_height="0dp">
 
@@ -41,18 +41,19 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:padding="20dp"
-            android:layout_weight="8"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_weight="8"
+            android:layout_marginBottom="40dp"
+            android:padding="20dp">
 
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_alignParentEnd="true"
                 android:layout_alignParentStart="true"
-                app:srcCompat="@drawable/ic_internet_speed_base" />
+                android:layout_alignParentEnd="true"
+                app:srcCompat="@drawable/ic_internet_speed" />
 
 
             <ImageView
@@ -61,9 +62,8 @@
                 android:layout_height="match_parent"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="40dp"
-                android:tint="@color/colorWhite"
-                android:src="@drawable/bar" />
+                android:src="@drawable/ic_pointer"
+                android:tint="@color/colorWhite" />
 
         </RelativeLayout>
 
@@ -80,124 +80,130 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <LinearLayout
-                android:padding="5dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="30dp"
-                android:layout_marginStart="30dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:gravity="center"
-                    android:id="@+id/startButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:text="Start"
-                    android:textSize="16sp" />
-            </LinearLayout>
-        </LinearLayout>
-
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:baselineAligned="false"
-            android:orientation="horizontal"
-            android:weightSum="10">
-
-            <LinearLayout
-                android:padding="16dp"
-                android:orientation="vertical"
-                android:layout_weight="5"
-                android:layout_marginBottom="50dp"
-                android:layout_marginTop="40dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="5dp"
-                android:weightSum="10"
+            android:layout_marginTop="16dp"
+            android:orientation="vertical">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/download_cl"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/btn_boarder_bg">
 
-                <RelativeLayout
-                    android:layout_weight="2"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <ImageView
-                        android:layout_marginTop="5dp"
-                        android:src="@drawable/ic_download"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-
-                </RelativeLayout>
                 <TextView
-                    android:fontFamily="@font/poppins_medium"
-                    android:layout_marginStart="10dp"
-                    android:gravity="bottom"
-                    android:layout_weight="3"
-                    android:textSize="20sp"
+                    android:id="@+id/tvDownload"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
                     android:text="Download"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/downloadTextView"
+                    app:layout_constraintStart_toEndOf="@+id/imageView5"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="packed" />
+
                 <TextView
-                    android:layout_weight="2"
                     android:id="@+id/downloadTextView"
-                    android:layout_marginStart="10dp"
-                    android:text="0.0 Mb"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:text="0Mbps"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/tvDownload"
+                    app:layout_constraintTop_toBottomOf="@+id/tvDownload" />
 
+                <ImageView
+                    android:id="@+id/imageView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_download" />
 
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </LinearLayout>
-            <LinearLayout
-                android:padding="16dp"
-                android:orientation="vertical"
-                android:layout_weight="5"
-                android:layout_marginBottom="50dp"
-                android:layout_marginTop="40dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="20dp"
-                android:weightSum="10"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/upload_cl"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/btn_boarder_bg">
 
-                <RelativeLayout
-                    android:layout_weight="2"
+                <TextView
+                    android:id="@+id/textView23"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Upload"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/uploadTextView"
+                    app:layout_constraintStart_toEndOf="@+id/iv"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="packed" />
+
+                <TextView
+                    android:id="@+id/uploadTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:text="0Mbps"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/textView23"
+                    app:layout_constraintTop_toBottomOf="@+id/textView23" />
+
+                <ImageView
+                    android:id="@+id/iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_upload" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:padding="5dp"
                     android:layout_marginTop="20dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginStart="30dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                    <ImageView
-                        android:layout_marginTop="5dp"
-                        android:src="@drawable/ic_upload"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
 
-                </RelativeLayout>
-                <TextView
-                    android:fontFamily="@font/poppins_medium"
-                    android:layout_marginStart="10dp"
-                    android:gravity="bottom"
-                    android:layout_weight="3"
-                    android:textSize="20sp"
-                    android:text="Upload"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-                <TextView
-                    android:layout_weight="2"
-                    android:id="@+id/uploadTextView"
-                    android:layout_marginStart="10dp"
-                    android:text="0.0 Mb"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-
+                    <TextView
+                        android:id="@+id/startButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@drawable/below_button_bg"
+                        android:gravity="center"
+                        android:text="Begin"
+                        android:textColor="@color/standard_white"
+                        android:textSize="16sp" />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
+
+
     </LinearLayout>
 
 </LinearLayout>

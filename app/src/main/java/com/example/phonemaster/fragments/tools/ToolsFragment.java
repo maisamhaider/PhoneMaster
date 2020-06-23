@@ -8,27 +8,28 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.example.phonemaster.R;
+import com.example.phonemaster.activities.HarassmentFilterAct;
+import com.example.phonemaster.activities.DeviceInfoAct;
 import com.example.phonemaster.activities.InternetSpeedAct;
 import com.example.phonemaster.activities.MainActivity;
+import com.example.phonemaster.activities.UnInstallAppAct;
 
 public class ToolsFragment extends Fragment {
 
-    private ToolsViewModel toolsViewModel;
-
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        toolsViewModel =
-                ViewModelProviders.of(this).get(ToolsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_tool, container, false);
         ImageView ivTool = root.findViewById(R.id.iv_t_back);
+        ConstraintLayout appInstall_cl = root.findViewById(R.id.appInstall_cl);
+        ConstraintLayout fileMover_cl = root.findViewById(R.id.fileMover_cl);
+        ConstraintLayout hardwareInfo_cl = root.findViewById(R.id.hardwareInfo_cl);
         ConstraintLayout speedTest_cl = root.findViewById(R.id.speedTest_cl);
+        ConstraintLayout harassmentFiler_cl = root.findViewById(R.id.harassmentFiler_cl);
+
         ivTool.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -36,20 +37,36 @@ public class ToolsFragment extends Fragment {
             }
         });
 
+        appInstall_cl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), UnInstallAppAct.class));
+            }
+        });
+        fileMover_cl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), InternetSpeedAct.class));
+            }
+        });
+        hardwareInfo_cl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), DeviceInfoAct.class));
+            }
+        });
         speedTest_cl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(), InternetSpeedAct.class));
             }
         });
-
-         toolsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        harassmentFiler_cl.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onChanged(@Nullable String s) {
-
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), HarassmentFilterAct.class));
             }
         });
         return root;
     }
-
 }
