@@ -21,6 +21,7 @@ import com.example.phonemaster.models.DeepCleanDocsModel;
 import com.example.phonemaster.models.DeepCleanImagesModel;
 import com.example.phonemaster.models.DeepCleanPackagesModel;
 import com.example.phonemaster.models.DeepCleanVideosModel;
+import com.example.phonemaster.utils.speed_test.ExternalStorage;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -32,7 +33,10 @@ import java.io.InputStreamReader;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+
+import static com.example.phonemaster.utils.speed_test.GetSomething.getRightStringToThePoint;
 
 
 public class Utils {
@@ -305,35 +309,40 @@ public class Utils {
 
     }
 
-//    public void moveFile(String sourcePath) {
-//
-//        File folder = new File(Environment.getExternalStorageDirectory() + "/Phone Master/Status/");
-//        String lastName = getRightStringToThePoint(sourcePath,"/");
-//        String destinationPath = Environment.getExternalStorageDirectory() + "/Phone Master/Status/" + lastName;
-//
-//        if (!folder.exists()) {
-//            boolean isCreate = folder.mkdirs();
-//            if (isCreate)
-//            {
-//                Toast.makeText(context, "created", Toast.LENGTH_SHORT).show();
-//             }
-//            else
-//            {
-//                Toast.makeText(context, "not created", Toast.LENGTH_SHORT).show();
-//            }
-//
-//        }
-//        File sourceFile = new File(sourcePath);
-//
-//        File destinationFile = new File(destinationPath);
-//
-//        if (sourceFile.renameTo(destinationFile)) {
-//            Toast.makeText(context, "Moving file successful.", Toast.LENGTH_SHORT).show();
-//
-//        } else {
-//            Toast.makeText(context, "Moving file failed.", Toast.LENGTH_SHORT).show();
-//        }
-//    }
+    public void moveFile(String sourcePath,String finalDir) {
+
+         String lastName = getRightStringToThePoint(sourcePath,"/");
+
+        Map<String, File> externalLocations = ExternalStorage.getAllStorageLocations();
+//        File sdCard = externalLocations.get(ExternalStorage.SD_CARD);
+        File externalSdCard = externalLocations.get(ExternalStorage.EXTERNAL_SD_CARD);
+
+        String destinationPath = externalSdCard.getPath()+"/"+finalDir+lastName;
+        File folder = new File(externalSdCard.getPath());
+
+        if (!folder.exists()) {
+            boolean isCreate = folder.mkdirs();
+            if (isCreate)
+            {
+                Toast.makeText(context, "created", Toast.LENGTH_SHORT).show();
+             }
+            else
+            {
+                Toast.makeText(context, "not created", Toast.LENGTH_SHORT).show();
+            }
+
+        }
+        File sourceFile = new File(sourcePath);
+
+        File destinationFile = new File(destinationPath);
+
+        if (sourceFile.renameTo(destinationFile)) {
+            Toast.makeText(context, "Moving file successful.", Toast.LENGTH_SHORT).show();
+
+        } else {
+            Toast.makeText(context, "Moving file failed.", Toast.LENGTH_SHORT).show();
+        }
+    }
 
     public void copyFileOrDirectory(String srcDir) {
 

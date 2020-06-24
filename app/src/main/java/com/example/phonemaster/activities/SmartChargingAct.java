@@ -7,14 +7,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageView;
+ import android.view.View;
+ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.example.phonemaster.R;
-import com.example.phonemaster.services.MyService;
 import com.suke.widget.SwitchButton;
 
 public class SmartChargingAct extends AppCompatActivity {
