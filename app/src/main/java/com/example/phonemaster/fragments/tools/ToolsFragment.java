@@ -12,11 +12,13 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.example.phonemaster.R;
+import com.example.phonemaster.activities.FilesMoverAct;
 import com.example.phonemaster.activities.HarassmentFilterAct;
 import com.example.phonemaster.activities.DeviceInfoAct;
 import com.example.phonemaster.activities.InternetSpeedAct;
 import com.example.phonemaster.activities.MainActivity;
 import com.example.phonemaster.activities.UnInstallAppAct;
+import com.example.phonemaster.async.FileMoverTask;
 
 public class ToolsFragment extends Fragment {
 
@@ -30,43 +32,12 @@ public class ToolsFragment extends Fragment {
         ConstraintLayout speedTest_cl = root.findViewById(R.id.speedTest_cl);
         ConstraintLayout harassmentFiler_cl = root.findViewById(R.id.harassmentFiler_cl);
 
-        ivTool.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((MainActivity) requireActivity()).onBackPressed();
-            }
-        });
-
-        appInstall_cl.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(), UnInstallAppAct.class));
-            }
-        });
-        fileMover_cl.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(), InternetSpeedAct.class));
-            }
-        });
-        hardwareInfo_cl.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(), DeviceInfoAct.class));
-            }
-        });
-        speedTest_cl.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(), InternetSpeedAct.class));
-            }
-        });
-        harassmentFiler_cl.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(), HarassmentFilterAct.class));
-            }
-        });
+        ivTool.setOnClickListener(v -> requireActivity().onBackPressed());
+        appInstall_cl.setOnClickListener(v -> startActivity(new Intent(getActivity(), UnInstallAppAct.class)));
+        fileMover_cl.setOnClickListener(v -> startActivity(new Intent(getActivity(), FilesMoverAct.class)));
+        hardwareInfo_cl.setOnClickListener(v -> startActivity(new Intent(getActivity(), DeviceInfoAct.class)));
+        speedTest_cl.setOnClickListener(v -> startActivity(new Intent(getActivity(), InternetSpeedAct.class)));
+        harassmentFiler_cl.setOnClickListener(v -> startActivity(new Intent(getActivity(), HarassmentFilterAct.class)));
         return root;
     }
 }

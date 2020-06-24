@@ -46,7 +46,7 @@
 
 
     <ScrollView
-        android:id="@+id/scrollView3"
+        android:id="@+id/scrollViewFileMover"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -677,7 +677,30 @@
         </LinearLayout>
     </ScrollView>
 
+    <ImageView
+        android:src="@drawable/ic_baseline_sd_card"
+        android:textStyle="bold"
+         android:id="@+id/isSdCard_iv"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/isSdCard_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No SD card inserted"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/isSdCard_iv"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/isSdCard_iv"
+        app:layout_constraintTop_toBottomOf="@+id/isSdCard_iv"
+        app:layout_constraintVertical_bias="0.00999999" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

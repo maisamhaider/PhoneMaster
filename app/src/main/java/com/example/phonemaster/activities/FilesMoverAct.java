@@ -25,10 +25,11 @@ import com.example.phonemaster.utils.Utils;
 public class FilesMoverAct extends AppCompatActivity {
     private Permissions permissions;
     private ConstraintLayout fileMoverImages_cl, fileMoverVideos_cl, fileMoverAudios_cl, fileMoverLargeFiles_cl, fileMoverInstallationPkg_cl;
-    private ImageView fileMoverImagesNext_iv, fileMoverVideosNext_iv, fileMoverAudiosNext_iv, fileMoverLargeFilesNext_iv, fileMoverInstallationPkgsNext_iv;
-    private ScrollView scrollView;
+    private ImageView fileMoverImagesNext_iv, fileMoverVideosNext_iv, fileMoverAudiosNext_iv, fileMoverLargeFilesNext_iv, fileMoverInstallationPkgsNext_iv,isSdCard_iv;
+    private ScrollView scrollViewFileMover;
     Utils utils;
     StorageUtils storageUtils;
+    TextView isSdCard_tv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,14 +38,21 @@ public class FilesMoverAct extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         storageUtils = new StorageUtils();
-        scrollView = findViewById(R.id.scrollView3);
+        scrollViewFileMover = findViewById(R.id.scrollViewFileMover);
+        isSdCard_tv = findViewById(R.id.isSdCard_tv);
+        isSdCard_iv = findViewById(R.id.isSdCard_iv);
 
         if (!storageUtils.isSDCard())
         {
-            scrollView.setVisibility(View.GONE);
+            scrollViewFileMover.setVisibility(View.GONE);
+            isSdCard_tv.setVisibility(View.VISIBLE);
+            isSdCard_iv.setVisibility(View.VISIBLE);
+
         }
         else {
-            scrollView.setVisibility(View.VISIBLE);
+            isSdCard_tv.setVisibility(View.GONE);
+            isSdCard_iv.setVisibility(View.GONE);
+            scrollViewFileMover.setVisibility(View.VISIBLE);
         permissions = new Permissions(this);
         permissions.permission();
         utils = new Utils(this);

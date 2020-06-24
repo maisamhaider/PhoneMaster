@@ -75,10 +75,12 @@ public class SmartChargingAct extends AppCompatActivity {
                 if (isChecked)
                 {
                     editor.putBoolean("SMART_CHARGE",true).commit();
-                }
+                    editor.putBoolean("IS_SMART_CHARGE_ENABLED",true).commit();
+                 }
                 else
                 {
                     editor.putBoolean("SMART_CHARGE",false).commit();
+                    editor.putBoolean("IS_SMART_CHARGE_ENABLED",false).commit();
 
                 }
             }
