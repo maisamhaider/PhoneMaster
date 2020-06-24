@@ -84,7 +84,7 @@ public class BatterySavingAct extends AppCompatActivity {
         ValueAnimator animator = ValueAnimator.ofInt(0, 100);
         animator.setInterpolator(new LinearInterpolator());
         animator.setStartDelay(0);
-        animator.setDuration(4_000);
+        animator.setDuration(3_500);
         animator.addUpdateListener(valueAnimator -> {
             int value = (int) valueAnimator.getAnimatedValue();
             progressBar.setProgress(value);
@@ -100,7 +100,7 @@ public class BatterySavingAct extends AppCompatActivity {
         } else {
             noDrainingApp_cl.setVisibility(View.GONE);
             powerSavingSecond_cl.setVisibility(View.VISIBLE);
-            powerSavingMainAppsAmount_tv.setText("No Draining");
+            powerSavingMainAppsAmount_tv.setText(String.valueOf(list.size()));
             batterySavingRunningApps_tv.setText(list.size() + " app are Running");
         }
 
@@ -110,7 +110,7 @@ public class BatterySavingAct extends AppCompatActivity {
         ValueAnimator animatorText = ValueAnimator.ofInt(0, 100);
         animatorText.setInterpolator(new LinearInterpolator());
         animatorText.setStartDelay(0);
-        animatorText.setDuration(4_000);
+        animatorText.setDuration(3_500);
 
         animatorText.addUpdateListener(valueAnimator -> {
             int value = (int) valueAnimator.getAnimatedValue();
@@ -119,7 +119,7 @@ public class BatterySavingAct extends AppCompatActivity {
         animatorText.start();
 
         Handler handler = new Handler();
-        handler.postDelayed(() -> powerSavingFirstScreenMain_cl.setVisibility(View.GONE), 4000);
+        handler.postDelayed(() -> powerSavingFirstScreenMain_cl.setVisibility(View.GONE), 3500);
 
 
         allAppsAdapter = new BatterySavingAllAppsAdapter(this, list);

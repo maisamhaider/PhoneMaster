@@ -520,6 +520,52 @@ public class Utils {
     }
 
 
+    public List<DeepCleanVideosModel> getVideos(String path) {
+        File fold = new File(path);
+        List<DeepCleanVideosModel> docList = new ArrayList<>();
+        File[] mlist = fold.listFiles();
+        File[] mFilelist = fold.listFiles();
+        for (File f : mlist) {
+            if (f.isDirectory()) {
+                List<DeepCleanVideosModel> fList = getVideos( f.getAbsolutePath());
+                docList.addAll(fList);
+            }
+        }
+        for (File f : mFilelist) {
+            DeepCleanVideosModel doc = new DeepCleanVideosModel();
+            doc.setVideoName(f.getName());
+//                doc.setSize(f.length());
+//                doc.setType(FileTypes.DocumentType);
+            doc.setVideoPath(f.getAbsolutePath());
+            if (f.length() > 0)
+                docList.add(doc);
+        }
+        return docList;
+    }
+    public List<DeepCleanImagesModel> getImages(String path) {
+        File fold = new File(path);
+        List<DeepCleanImagesModel> docList = new ArrayList<>();
+        File[] mlist = fold.listFiles();
+        File[] mFilelist = fold.listFiles();
+        for (File f : mlist) {
+            if (f.isDirectory()) {
+                List<DeepCleanImagesModel> fList = getImages( f.getAbsolutePath());
+                docList.addAll(fList);
+            }
+        }
+        for (File f : mFilelist) {
+            DeepCleanImagesModel img = new DeepCleanImagesModel();
+            img.setImageName(f.getName());
+//                doc.setSize(f.length());
+//                doc.setType(FileTypes.DocumentType);
+            img.setImagePath(f.getAbsolutePath());
+            if (f.length() > 0)
+                docList.add(img);
+        }
+        return docList;
+    }
+
+
     public List<DeepCleanPackagesModel> getAllPackages(String path) {
         File fold = new File(path);
         List<DeepCleanPackagesModel> docList = new ArrayList<>();
@@ -551,14 +597,13 @@ public class Utils {
         if (mlist != null)
             for (File f : mlist) {
                 if (f.isDirectory()) {
-                    getAllDocs(f.getAbsolutePath());
+                    getAllSize(f.getAbsolutePath());
                 }
             }
         if (mlist != null)
             if (mFilelist != null) {
                 for (File f : mFilelist) {
-                    DeepCleanDocsModel doc = new DeepCleanDocsModel();
-                    docSize = docSize + f.length();
+                     docSize = docSize + f.length();
                 }
             }
         return docSize;
@@ -579,8 +624,7 @@ public class Utils {
         }
         if (mFilelist != null) {
             for (File f : mFilelist) {
-                DeepCleanDocsModel doc = new DeepCleanDocsModel();
-                docSize = docSize + f.length();
+                 docSize = docSize + f.length();
             }
         }
         return docSize;
@@ -598,8 +642,7 @@ public class Utils {
         }
         if (mFilelist != null) {
             for (File f : mFilelist) {
-                DeepCleanDocsModel doc = new DeepCleanDocsModel();
-                docSize = docSize + f.length();
+                 docSize = docSize + f.length();
             }
         }
         return docSize;

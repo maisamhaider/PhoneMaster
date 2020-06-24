@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.animation.ValueAnimator;
-import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -23,8 +22,8 @@ import com.example.phonemaster.utils.Utils;
 public class DeepCleanAct extends AppCompatActivity {
 
     private Permissions permissions;
-    private ConstraintLayout deepCleanWhatsApp_cl, deeCleanImages_cl, deeCleanVideos_cl, deeCleanAudios_cl, deeCleanAppData_cl, deeCleanInstallationPkg_cl;
-    private ImageView deepCleanWhatsAppNext_iv, deepCleanImagesNext_iv, deepCleanVideosNext_iv, deepCleanAudiosNext_iv, deeCleanAppDataNext_iv, deepCleanInstallationPkgsNext_iv;
+    private ConstraintLayout deepCleanWhatsApp_cl, deeCleanImages_cl, deeCleanVideos_cl, deeCleanAudios_cl, deeCleanAppData_cl, deepCleanLargeFiles_cl, deeCleanInstallationPkg_cl;
+    private ImageView deepCleanWhatsAppNext_iv, deepCleanImagesNext_iv, deepCleanVideosNext_iv, deepCleanAudiosNext_iv,deepCleanLargeFilesNext_iv, deepCleanAppDataNext_iv, deepCleanInstallationPkgsNext_iv;
 
     Utils utils;
 
@@ -42,13 +41,7 @@ public class DeepCleanAct extends AppCompatActivity {
         deeCleanImages_cl = findViewById(R.id.deeCleanImages_cl);
         deeCleanVideos_cl = findViewById(R.id.deeCleanVideos_cl);
         deeCleanAudios_cl = findViewById(R.id.deeCleanAudios_cl);
-        deeCleanAppData_cl = findViewById(R.id.deeCleanAppData_cl);
-        deeCleanInstallationPkg_cl = findViewById(R.id.deeCleanInstallationPkg_cl);
-
-        deepCleanWhatsApp_cl = findViewById(R.id.deepCleanWhatsApp_cl);
-        deeCleanImages_cl = findViewById(R.id.deeCleanImages_cl);
-        deeCleanVideos_cl = findViewById(R.id.deeCleanVideos_cl);
-        deeCleanAudios_cl = findViewById(R.id.deeCleanAudios_cl);
+        deepCleanLargeFiles_cl = findViewById(R.id.deeCleanLargeFiles_cl);
         deeCleanAppData_cl = findViewById(R.id.deeCleanAppData_cl);
         deeCleanInstallationPkg_cl = findViewById(R.id.deeCleanInstallationPkg_cl);
 
@@ -56,7 +49,8 @@ public class DeepCleanAct extends AppCompatActivity {
         deepCleanImagesNext_iv = findViewById(R.id.deepCleanImagesNext_iv);
         deepCleanVideosNext_iv = findViewById(R.id.deepCleanVideosNext_iv);
         deepCleanAudiosNext_iv = findViewById(R.id.deepCleanAudiosNext_iv);
-        deeCleanAppDataNext_iv = findViewById(R.id.deeCleanAppDataNext_iv);
+        deepCleanAppDataNext_iv = findViewById(R.id.deeCleanAppDataNext_iv);
+        deepCleanLargeFilesNext_iv = findViewById(R.id.deepCleanLargeFilesNext_iv);
         deepCleanInstallationPkgsNext_iv = findViewById(R.id.deepCleanInstallationPkgsNext_iv);
 
 
@@ -72,8 +66,8 @@ public class DeepCleanAct extends AppCompatActivity {
         deepCleanMainBack_iv = findViewById(R.id.deepCleanMainBack_iv);
 
         TextView deepCleanWhatsAppDataSize_tv, deepCleanImagesSize_tv, deepCleanVideosSize_tv,
-                deepCleanAudiosDataSize_tv, deepCleanLargeFileSize_tv, deepCleanInstallationPkgseSize_tv,
-                deepCleanProgress_tv,phoneBoostRamDetail_tv,deepCleanMainTotalDataSize_tv,deepCleanDataPrefix_tv;
+                deepCleanAudiosDataSize_tv,deepCleanAppDataSize_tv, deepCleanLargeFileSize_tv, deepCleanInstallationPkgseSize_tv,
+                deepCleanProgress_tv,deepCleanDetail_tv,deepCleanMainTotalDataSize_tv,deepCleanDataPrefix_tv;
 
         deepCleanMainTotalDataSize_tv = findViewById(R.id.deepCleanMainTotalDataSize_tv);
         deepCleanDataPrefix_tv = findViewById(R.id.deepCleanDataPrefix_tv);
@@ -84,7 +78,8 @@ public class DeepCleanAct extends AppCompatActivity {
         deepCleanInstallationPkgseSize_tv = findViewById(R.id.deepCleanInstallationPkgseSize_tv);
         deepCleanWhatsAppDataSize_tv = findViewById(R.id.deepCleanWhatsAppDataSize_tv);
         deepCleanProgress_tv = findViewById(R.id.deepCleanProgress_tv);
-        phoneBoostRamDetail_tv = findViewById(R.id.phoneBoostRamDetail_tv);
+        deepCleanDetail_tv = findViewById(R.id.deepCleanDetail_tv);
+        deepCleanAppDataSize_tv = findViewById(R.id.deepCleanAppDataSize_tv);
 
         ProgressBar deepClean_pb;
         deepClean_pb= findViewById(R.id.deepClean_pb);
@@ -96,6 +91,12 @@ public class DeepCleanAct extends AppCompatActivity {
         float whatsAppVideoSize = utils.getAllSize(Environment.getExternalStorageDirectory().getPath() + "/WhatsApp/Media/WhatsApp Video");
         float whatsAppDocumentsSize = utils.getAllSize(Environment.getExternalStorageDirectory().getPath() + "/WhatsApp/Media/WhatsApp Documents");
         float whatsAppImagesSize = utils.getAllSize(Environment.getExternalStorageDirectory().getPath() + "/WhatsApp/Media/WhatsApp Images");
+
+        float facebookSavedImagesSize = utils.getAllSize(Environment.getExternalStorageDirectory().getAbsolutePath() + "/DCIM/Facebook");
+        float messengerSavedImagesSize = utils.getAllSize(Environment.getExternalStorageDirectory().getAbsolutePath() + "/Pictures/Messenger");
+        float messengerSavedVideosSize = utils.getAllSize(Environment.getExternalStorageDirectory().getAbsolutePath() + "/Movies/Messenger");
+        float instagramSavedImagesSize = utils.getAllSize(Environment.getExternalStorageDirectory().getAbsolutePath() + "/Pictures/Instagram");
+        float instagramSavedVideosSize = utils.getAllSize(Environment.getExternalStorageDirectory().getAbsolutePath() + "/Movies/Instagram");
 
         float whatsAppDataSize = bUDataSize + cHDataSize + whatsAppAudioSize + whatsAppVideoSize + whatsAppDocumentsSize + whatsAppImagesSize;
         float imagesSize = utils.getAllIAAsSize("images");
@@ -115,7 +116,7 @@ public class DeepCleanAct extends AppCompatActivity {
         deepCleanLargeFileSize_tv.setText(utils.getCalculatedDataSize(docSize));
         deepCleanInstallationPkgseSize_tv.setText(utils.getCalculatedDataSize(pkgSize));
         deepCleanWhatsAppDataSize_tv.setText(utils.getCalculatedDataSize(whatsAppDataSize));
-
+        deepCleanAppDataSize_tv.setText(utils.getCalculatedDataSize(facebookSavedImagesSize+messengerSavedImagesSize+messengerSavedVideosSize+instagramSavedImagesSize+instagramSavedVideosSize));
 
         deepCleanWhatsApp_cl.setVisibility(View.GONE);
         deeCleanImages_cl.setVisibility(View.GONE);
@@ -171,6 +172,10 @@ public class DeepCleanAct extends AppCompatActivity {
             {
                 deeCleanAudios_cl.setVisibility(View.VISIBLE);
             }
+            if (value==70)
+            {
+                deepCleanLargeFiles_cl.setVisibility(View.VISIBLE);
+            }
             if (value==80)
             {
                 deeCleanAppData_cl.setVisibility(View.VISIBLE);
@@ -178,7 +183,7 @@ public class DeepCleanAct extends AppCompatActivity {
             if (value==100)
             {
                 deeCleanInstallationPkg_cl.setVisibility(View.VISIBLE);
-                phoneBoostRamDetail_tv.setText("Scan is completed");
+                deepCleanDetail_tv.setText("Scan is completed");
             }
             deepClean_pb.setProgress(value);
             deepCleanProgress_tv.setText("SCANNING"+"("+utils.getPercentage((float)100,(float)value)+"%)");
@@ -215,8 +220,9 @@ public class DeepCleanAct extends AppCompatActivity {
 
     }
 
-    private void intentFun(Class<?> cls) {
+    private void intentFun(Class<?> cls, boolean isSend) {
         Intent intent = new Intent(DeepCleanAct.this, cls);
+        intent.putExtra("isSend",isSend);
         startActivity(intent);
 
     }
@@ -225,32 +231,38 @@ public class DeepCleanAct extends AppCompatActivity {
         // Constraints
         deepCleanWhatsApp_cl.setOnClickListener(v -> {
             if (permissions.permission()) {
-                intentFun(CleanWhatsAppAct.class);
+                intentFun(CleanWhatsAppAct.class,false);
             }
         });
         deeCleanImages_cl.setOnClickListener(v -> {
             if (permissions.permission()) {
-                intentFun(DeepCleanAllImagesAct.class);
+                intentFun(DeepCleanAllImagesAct.class,false);
             }
         });
         deeCleanVideos_cl.setOnClickListener(v -> {
             if (permissions.permission()) {
-                intentFun(DeepCleanAllVideosAct.class);
+                intentFun(DeepCleanAllVideosAct.class,false);
             }
         });
         deeCleanAudios_cl.setOnClickListener(v -> {
             if (permissions.permission()) {
-                intentFun(DeepCleanAllAudiosAct.class);
+                intentFun(DeepCleanAllAudiosAct.class,false);
             }
         });
         deeCleanAppData_cl.setOnClickListener(v -> {
             if (permissions.permission()) {
-                intentFun(DeepCleanAllDocsAct.class);
+                intentFun(DeepCleanAppDataAct.class,false);
+            }
+        });
+
+        deepCleanLargeFiles_cl.setOnClickListener(v -> {
+            if (permissions.permission()) {
+                intentFun(DeepCleanAllDocsAct.class,false);
             }
         });
         deeCleanInstallationPkg_cl.setOnClickListener(v -> {
             if (permissions.permission()) {
-                intentFun(DeepCleanAllPackagesAct.class);
+                intentFun(DeepCleanAllPackagesAct.class,false);
             }
         });
 
@@ -258,35 +270,38 @@ public class DeepCleanAct extends AppCompatActivity {
 
         deepCleanWhatsAppNext_iv.setOnClickListener(v -> {
             if (permissions.permission()) {
-                intentFun(CleanWhatsAppAct.class);
+                intentFun(CleanWhatsAppAct.class,false);
             }
         });
         deepCleanImagesNext_iv.setOnClickListener(v -> {
             if (permissions.permission()) {
-                intentFun(DeepCleanAllImagesAct.class);
+                intentFun(DeepCleanAllImagesAct.class,false);
             }
         });
         deepCleanVideosNext_iv.setOnClickListener(v -> {
             if (permissions.permission()) {
-                intentFun(DeepCleanAllVideosAct.class);
+                intentFun(DeepCleanAllVideosAct.class,false);
             }
         });
         deepCleanAudiosNext_iv.setOnClickListener(v -> {
             if (permissions.permission()) {
-                intentFun(DeepCleanAllAudiosAct.class);
+                intentFun(DeepCleanAllAudiosAct.class,false);
             }
         });
-        deeCleanAppDataNext_iv.setOnClickListener(v -> {
+        deepCleanAppDataNext_iv.setOnClickListener(v -> {
             if (permissions.permission()) {
-                intentFun(DeepCleanAllDocsAct.class);
+                intentFun(DeepCleanAppDataAct.class,false);
+            }
+        });
+        deepCleanLargeFilesNext_iv.setOnClickListener(v -> {
+            if (permissions.permission()) {
+                intentFun(DeepCleanAllDocsAct.class,false);
             }
         });
         deepCleanInstallationPkgsNext_iv.setOnClickListener(v -> {
             if (permissions.permission()) {
-                intentFun(DeepCleanAllPackagesAct.class);
+                intentFun(DeepCleanAllPackagesAct.class,false);
             }
         });
-
     }
-
 }

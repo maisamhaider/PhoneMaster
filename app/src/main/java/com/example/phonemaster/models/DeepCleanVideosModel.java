@@ -2,6 +2,7 @@ package com.example.phonemaster.models;
 
 public class DeepCleanVideosModel {
     String videoPath;
+    String videoName;
 
     public DeepCleanVideosModel() {
     }
@@ -18,5 +19,11 @@ public class DeepCleanVideosModel {
         this.videoPath = imagePath;
     }
 
+    public String getVideoName() {
+        return videoName;
+    }
 
+    public void setVideoName(String videoName) {
+        this.videoName = videoName;
+    }
 }
