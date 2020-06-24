@@ -7,12 +7,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.os.Build;
 import android.os.Bundle;
- import android.view.View;
- import android.widget.ImageView;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.example.phonemaster.R;
+import com.example.phonemaster.services.MyService;
 import com.suke.widget.SwitchButton;
 
 public class SmartChargingAct extends AppCompatActivity {
@@ -35,22 +37,19 @@ public class SmartChargingAct extends AppCompatActivity {
         ConstraintLayout fullChargedRemind_cl = findViewById(R.id.fullChargedRemind_cl);
         ConstraintLayout fastCharge_cl = findViewById(R.id.fastCharge_cl);
 
-        boolean isEnable = preferences.getBoolean("IS_SMART_CHARGE_ENABLED",false);
-        if (preferences.getBoolean("SMART_CHARGE",false))
-        {
+        boolean isEnable = preferences.getBoolean("IS_SMART_CHARGE_ENABLED", false);
+        if (preferences.getBoolean("SMART_CHARGE", false)) {
             smartCharging_switch.setChecked(true);
         }
-        if (!isEnable)
-        {
+        if (!isEnable) {
             smart_charging_first_time.setVisibility(View.VISIBLE);
-        }
-        else if(isEnable) {
+        } else if (isEnable) {
             smart_charging_first_time.setVisibility(View.GONE);
         }
         smartChargeFirstTimeEnable_ll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                editor.putBoolean("IS_SMART_CHARGE_ENABLED",true).commit();
+                editor.putBoolean("IS_SMART_CHARGE_ENABLED", true).commit();
                 smart_charging_first_time.setVisibility(View.GONE);
             }
         });
@@ -72,13 +71,15 @@ public class SmartChargingAct extends AppCompatActivity {
         smartCharging_switch.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(SwitchButton view, boolean isChecked) {
-                if (isChecked)
-                {
-                    editor.putBoolean("SMART_CHARGE",true).commit();
-                }
-                else
-                {
-                    editor.putBoolean("SMART_CHARGE",false).commit();
+                if (isChecked) {
+                    editor.putBoolean("SMART_CHARGE", true).commit();
+                    if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        startForegroundService(new Intent(SmartChargingAct.this, MyService.class));
+                    } else {
+                        startService(new Intent(SmartChargingAct.this, MyService.class));
+                    }
+                } else {
+                    editor.putBoolean("SMART_CHARGE", false).commit();
 
                 }
             }
@@ -87,14 +88,14 @@ public class SmartChargingAct extends AppCompatActivity {
         fullChargedRemind_cl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SmartChargingAct.this,FullChargedRemindAct.class);
+                Intent intent = new Intent(SmartChargingAct.this, FullChargedRemindAct.class);
                 startActivity(intent);
             }
         });
         fastCharge_cl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SmartChargingAct.this,FastChargeAct.class);
+                Intent intent = new Intent(SmartChargingAct.this, FastChargeAct.class);
                 startActivity(intent);
             }
         });

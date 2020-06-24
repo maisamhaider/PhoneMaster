@@ -23,13 +23,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link StatusSavedFrag#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class StatusSavedFrag extends Fragment {
-
 
 
     public StatusSavedFrag() {

@@ -126,42 +126,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.517" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/fullChargedRemindDoNotDisturb__cl"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="15dp"
-        android:background="@drawable/btn_boarder_bg"         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fullChargedRemindVibrate__cl">
-
-        <TextView
-            android:textStyle="bold"
-            android:id="@+id/fullChargedRemindDoNotDisturb_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="Do Not Disturb"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.558" />
-
-        <com.suke.widget.SwitchButton
-            android:id="@+id/fullChargedRemindDoNotDisturb_switch"
-            android:layout_width="50dp"
-            android:layout_height="30dp"
-            android:layout_marginEnd="16dp"
-            app:sb_uncheck_color="@color/colorBorderCL"
-            app:sb_checked_color="@color/colorHeader"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.551" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
