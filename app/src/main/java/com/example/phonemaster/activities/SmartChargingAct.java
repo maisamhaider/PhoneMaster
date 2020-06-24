@@ -7,12 +7,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.os.Build;
 import android.os.Bundle;
  import android.view.View;
  import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.example.phonemaster.R;
+import com.example.phonemaster.services.MyService;
 import com.suke.widget.SwitchButton;
 
 public class SmartChargingAct extends AppCompatActivity {
@@ -49,6 +51,11 @@ public class SmartChargingAct extends AppCompatActivity {
             public void onClick(View v) {
                 editor.putBoolean("IS_SMART_CHARGE_ENABLED", true).commit();
                 smart_charging_first_time.setVisibility(View.GONE);
+                if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    startForegroundService(new Intent(SmartChargingAct.this, MyService.class));
+                } else {
+                    startService(new Intent(SmartChargingAct.this, MyService.class));
+                }
             }
         });
 
@@ -78,7 +85,11 @@ public class SmartChargingAct extends AppCompatActivity {
                     }
                 } else {
                     editor.putBoolean("SMART_CHARGE", false).commit();
-
+                    if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        stopService(new Intent(SmartChargingAct.this, MyService.class));
+                    } else {
+                        stopService(new Intent(SmartChargingAct.this, MyService.class));
+                    }
                 }
             }
         });
