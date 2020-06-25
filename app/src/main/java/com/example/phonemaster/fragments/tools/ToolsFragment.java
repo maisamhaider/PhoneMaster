@@ -12,6 +12,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.example.phonemaster.R;
+import com.example.phonemaster.activities.FilesMoverAct;
 import com.example.phonemaster.activities.HarassmentFilterAct;
 import com.example.phonemaster.activities.DeviceInfoAct;
 import com.example.phonemaster.activities.InternetSpeedAct;
@@ -46,7 +47,7 @@ public class ToolsFragment extends Fragment {
         fileMover_cl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), InternetSpeedAct.class));
+                startActivity(new Intent(getActivity(), FilesMoverAct.class));
             }
         });
         hardwareInfo_cl.setOnClickListener(new View.OnClickListener() {
