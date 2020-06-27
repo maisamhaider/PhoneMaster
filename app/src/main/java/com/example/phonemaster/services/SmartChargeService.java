@@ -114,4 +114,5 @@ public class SmartChargeService extends Service {
         super.onCreate();
         context = getApplicationContext();
     }
+
 }

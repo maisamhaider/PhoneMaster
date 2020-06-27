@@ -1,6 +1,11 @@
 package com.example.phonemaster.fragments.me;
 
+import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,10 +32,13 @@ public class AboutUsFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_setting, container, false);
+
         ImageView ivTool = root.findViewById(R.id.iv_s_back);
         ConstraintLayout shareCl = root.findViewById(R.id.share_cl);
         ConstraintLayout rateUsCl = root.findViewById(R.id.rateUs_cl);
         ConstraintLayout aboutUsCl = root.findViewById(R.id.aboutUs_cl);
+
+
 
         ivTool.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,6 +57,29 @@ public class AboutUsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 rateUs();
+            }
+        });
+
+        aboutUsCl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                View  view = getLayoutInflater().inflate(R.layout.about_us_dialog_layout,null,false);
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setCancelable(true).setView(view);
+
+                AlertDialog dialog =builder.create();
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+                TextView appVersion_tv = view.findViewById(R.id.appVersion_tv);
+
+                try {
+                    PackageInfo packageInfo = getActivity().getPackageManager().getPackageInfo(getActivity().getPackageName(),0);
+                    String versionName = packageInfo.versionName;
+                    appVersion_tv.setText(versionName);
+
+                } catch (PackageManager.NameNotFoundException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
