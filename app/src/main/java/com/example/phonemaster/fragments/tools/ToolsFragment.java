@@ -1,6 +1,7 @@
 package com.example.phonemaster.fragments.tools;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,7 +38,6 @@ public class ToolsFragment extends Fragment {
                 ((MainActivity) requireActivity()).onBackPressed();
             }
         });
-
         appInstall_cl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,12 +62,16 @@ public class ToolsFragment extends Fragment {
                 startActivity(new Intent(getActivity(), InternetSpeedAct.class));
             }
         });
-        harassmentFiler_cl.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(), HarassmentFilterAct.class));
-            }
-        });
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            harassmentFiler_cl.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(getActivity(), HarassmentFilterAct.class));
+                }
+            });
+        } else {
+            harassmentFiler_cl.setVisibility(View.GONE);
+        }
         return root;
     }
 }

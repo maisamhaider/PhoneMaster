@@ -80,6 +80,7 @@ public class SmartChargingAct extends AppCompatActivity {
                     }
                 } else {
                     editor.putBoolean("SMART_CHARGE", false).commit();
+                    stopService(new Intent(SmartChargingAct.this, MyService.class));
 
                 }
             }

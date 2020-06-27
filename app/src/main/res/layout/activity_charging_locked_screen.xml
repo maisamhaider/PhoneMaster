@@ -180,16 +180,18 @@
         app:layout_constraintBottom_toTopOf="@+id/view4"
         app:layout_constraintEnd_toStartOf="@+id/v_head"
         app:layout_constraintHorizontal_bias="0.5"
+        android:max="100"
+        android:progress="30"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view3"
         app:layout_constraintVertical_bias="0.612" />
 
+
     <View
         android:id="@+id/v_head"
         android:layout_width="18dp"
         android:layout_height="30dp"
-        android:layout_marginStart="4dp"
         android:background="@drawable/bg_head"
         app:layout_constraintBottom_toBottomOf="@+id/pb_battery"
         app:layout_constraintEnd_toEndOf="parent"
@@ -208,5 +210,27 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline9" />
+
+    <TextView
+        android:id="@+id/tv_charging"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Charging"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintBottom_toTopOf="@+id/guideline6"
+        app:layout_constraintEnd_toEndOf="@+id/pb_battery"
+        app:layout_constraintStart_toStartOf="@+id/pb_battery"
+        app:layout_constraintTop_toBottomOf="@+id/pb_battery" />
+
+    <TextView
+        android:id="@+id/tv_percentage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="50%"
+        android:textColor="#fff"
+        app:layout_constraintBottom_toBottomOf="@+id/pb_battery"
+        app:layout_constraintEnd_toEndOf="@+id/pb_battery"
+        app:layout_constraintStart_toStartOf="@+id/pb_battery"
+        app:layout_constraintTop_toTopOf="@+id/pb_battery" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

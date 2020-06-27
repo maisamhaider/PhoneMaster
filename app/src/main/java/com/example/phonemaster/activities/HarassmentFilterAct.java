@@ -15,6 +15,7 @@ import android.provider.ContactsContract;
 import android.telecom.TelecomManager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,7 +29,7 @@ public class HarassmentFilterAct extends AppCompatActivity {
     String cNumber;
     String name;
     TelecomManager telecomManager;
-    TextView nameHolder_tv;
+    ImageView ivBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +42,7 @@ public class HarassmentFilterAct extends AppCompatActivity {
 
         copyContact_btn = findViewById(R.id.copyContact_btn);
         block_unBlock_btn = findViewById(R.id.block_unBlock_btn);
-
+        ivBack = findViewById(R.id.iv_h_back);
 
         copyContact_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,6 +61,15 @@ public class HarassmentFilterAct extends AppCompatActivity {
             }
         });
 
+        ivBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+
+
     }
 
     //code
@@ -71,28 +81,32 @@ public class HarassmentFilterAct extends AppCompatActivity {
             case (PICK_CONTACT):
                 if (resultCode == RESULT_OK) {
 
-                    Uri contactData = data.getData();
-                    Cursor c = managedQuery(contactData, null, null, null, null);
-                    if (c.moveToFirst()) {
-                        String id = c.getString(c.getColumnIndexOrThrow(ContactsContract.Contacts._ID));
+                    try {
+                        Uri contactData = data.getData();
+                        Cursor c = managedQuery(contactData, null, null, null, null);
+                        if (c.moveToFirst()) {
+                            String id = c.getString(c.getColumnIndexOrThrow(ContactsContract.Contacts._ID));
 
-                        String hasPhone = c.getString(c.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER));
+                            String hasPhone = c.getString(c.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER));
 
-                        if (hasPhone.equalsIgnoreCase("1")) {
-                            Cursor phones = getContentResolver().query(
-                                    ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
-                                    ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = " + id,
-                                    null, null);
-                            phones.moveToFirst();
-                            cNumber = phones.getString(phones.getColumnIndex("data1"));
-                            System.out.println("number is:" + cNumber);
+                            if (hasPhone.equalsIgnoreCase("1")) {
+                                Cursor phones = getContentResolver().query(
+                                        ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
+                                        ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = " + id,
+                                        null, null);
+                                phones.moveToFirst();
+                                cNumber = phones.getString(phones.getColumnIndex("data1"));
+                                System.out.println("number is:" + cNumber);
+                            }
+                            name = c.getString(c.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+                            ClipboardManager clipboardManager = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                            ClipData clipData = ClipData.newPlainText(name, cNumber);
+                            clipboardManager.setPrimaryClip(clipData);
+                            Toast.makeText(this, "Number is copied"+cNumber, Toast.LENGTH_SHORT).show();
                         }
-                        name = c.getString(c.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
-                        ClipboardManager clipboardManager = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-                        ClipData clipData = ClipData.newPlainText(name, cNumber);
-                        clipboardManager.setPrimaryClip(clipData);
-                        Toast.makeText(this, "Number is copied"+cNumber, Toast.LENGTH_SHORT).show();
-
+                    } catch (IllegalArgumentException e) {
+                        e.printStackTrace();
+                        Toast.makeText(HarassmentFilterAct.this, "Please select number again", Toast.LENGTH_SHORT).show();
                     }
                 }
                 break;
