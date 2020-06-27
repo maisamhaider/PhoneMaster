@@ -108,7 +108,7 @@
         </receiver>
 
         <service
-            android:name=".services.MyService"
+            android:name=".services.SmartChargeService"
             android:enabled="true"
             android:exported="false" />
     </application>

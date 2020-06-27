@@ -14,7 +14,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.example.phonemaster.R;
-import com.example.phonemaster.services.MyService;
+import com.example.phonemaster.services.SmartChargeService;
 import com.suke.widget.SwitchButton;
 
 public class SmartChargingAct extends AppCompatActivity {
@@ -52,9 +52,9 @@ public class SmartChargingAct extends AppCompatActivity {
                 editor.putBoolean("IS_SMART_CHARGE_ENABLED", true).commit();
                 smart_charging_first_time.setVisibility(View.GONE);
                 if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    startForegroundService(new Intent(SmartChargingAct.this, MyService.class));
+                    startForegroundService(new Intent(SmartChargingAct.this, SmartChargeService.class));
                 } else {
-                    startService(new Intent(SmartChargingAct.this, MyService.class));
+                    startService(new Intent(SmartChargingAct.this, SmartChargeService.class));
                 }
             }
         });
@@ -79,13 +79,13 @@ public class SmartChargingAct extends AppCompatActivity {
                 if (isChecked) {
                     editor.putBoolean("SMART_CHARGE", true).commit();
                     if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        startForegroundService(new Intent(SmartChargingAct.this, MyService.class));
+                        startForegroundService(new Intent(SmartChargingAct.this, SmartChargeService.class));
                     } else {
-                        startService(new Intent(SmartChargingAct.this, MyService.class));
+                        startService(new Intent(SmartChargingAct.this, SmartChargeService.class));
                     }
                 } else {
                     editor.putBoolean("SMART_CHARGE", false).commit();
-                    stopService(new Intent(SmartChargingAct.this, MyService.class));
+                    stopService(new Intent(SmartChargingAct.this, SmartChargeService.class));
 
                 }
             }

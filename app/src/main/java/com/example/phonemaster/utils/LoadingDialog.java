@@ -24,7 +24,7 @@ public class LoadingDialog {
                 .setCancelable(false)
                 .setSpinnerClockwise(false)
                 .setMessageContentGravity(Gravity.END)
-                .setMessageContent("Loading")
+                .setMessageContent("Loading Data")
                 .build();
     }
 }

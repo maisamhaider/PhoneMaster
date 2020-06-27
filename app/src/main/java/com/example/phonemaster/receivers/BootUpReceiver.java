@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.util.Log;
 
-import com.example.phonemaster.services.MyService;
+import com.example.phonemaster.services.SmartChargeService;
 
 public class BootUpReceiver extends BroadcastReceiver {
 
@@ -25,9 +25,9 @@ public class BootUpReceiver extends BroadcastReceiver {
         // TODO add prefence
         /***** For start Service  ****/
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            context.startForegroundService(new Intent(context, MyService.class));
+            context.startForegroundService(new Intent(context, SmartChargeService.class));
         }else{
-            context.startService(new Intent(context, MyService.class));
+            context.startService(new Intent(context, SmartChargeService.class));
         }
     }   
 

@@ -27,7 +27,7 @@ import com.example.phonemaster.receivers.FastChargingChargerReceiver;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class MyService extends Service {
+public class SmartChargeService extends Service {
     public static final String TAG = "CustomService";
     private Context context;
 
@@ -54,9 +54,9 @@ public class MyService extends Service {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-            String channelId = Build.VERSION.SDK_INT >= Build.VERSION_CODES.O ? createNotificationChannel(notificationManager) : "Apps Protected";
+            String channelId = Build.VERSION.SDK_INT >= Build.VERSION_CODES.O ? createNotificationChannel(notificationManager) : "Phone Master";
             NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, channelId).setSmallIcon(R.drawable.ic_launcher_foreground)
-                    .setContentTitle("Apps Protected")
+                    .setContentTitle("Phone Master")
                     .setContentText("Apps Protection is on. If you want to turn off protection go to app and remove it.")
                     .setStyle(new NotificationCompat.BigTextStyle()
                             .bigText("Apps Protection is on. If you want to turn off protection go to app and remove it."))
@@ -86,11 +86,8 @@ public class MyService extends Service {
                 getApplicationContext().registerReceiver(fastChargingChargerReceiver, filter);
                 getApplicationContext().registerReceiver(fastChargingChargerReceiver, intentFilter);
                 getApplicationContext().registerReceiver(fastChargingChargerReceiver, intentChargingFilter);
-                Log.w(TAG, "onStartCommand: Thread running");
             }
-        },4_000,4_000);
-
-        Log.d("Custom", "service");
+        },4_000,6_000);
         return START_STICKY;
     }
 
@@ -99,7 +96,6 @@ public class MyService extends Service {
 
     @Override
     public void onTaskRemoved(Intent rootIntent) {
-        Log.i("CustomService", "onTaskRemoved");
         Intent restartService = new Intent(getApplicationContext(),
                 this.getClass());
         restartService.setPackage(getPackageName());
