@@ -10,15 +10,22 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Build;
+import android.os.Handler;
 import android.os.IBinder;
 import android.os.SystemClock;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
 import com.example.phonemaster.R;
+import com.example.phonemaster.activities.MainActivity;
 import com.example.phonemaster.receivers.FastChargingChargerReceiver;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MyService extends Service {
     public static final String TAG = "CustomService";
@@ -61,13 +68,34 @@ public class MyService extends Service {
         }
 
 
+        final IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_ON);
+        filter.addAction(Intent.ACTION_SCREEN_OFF);
+        filter.addAction(Intent.ACTION_USER_PRESENT);
         FastChargingChargerReceiver fastChargingChargerReceiver = new FastChargingChargerReceiver();
         IntentFilter intentFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+        IntentFilter intentChargingFilter = new IntentFilter(Intent.ACTION_POWER_CONNECTED);
+        getApplicationContext().registerReceiver(fastChargingChargerReceiver, filter);
         getApplicationContext().registerReceiver(fastChargingChargerReceiver, intentFilter);
+        getApplicationContext().registerReceiver(fastChargingChargerReceiver, intentChargingFilter);
+
+
+
+        new Timer().scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                getApplicationContext().registerReceiver(fastChargingChargerReceiver, filter);
+                getApplicationContext().registerReceiver(fastChargingChargerReceiver, intentFilter);
+                getApplicationContext().registerReceiver(fastChargingChargerReceiver, intentChargingFilter);
+                Log.w(TAG, "onStartCommand: Thread running");
+            }
+        },4_000,4_000);
 
         Log.d("Custom", "service");
         return START_STICKY;
     }
+
+
+
 
     @Override
     public void onTaskRemoved(Intent rootIntent) {

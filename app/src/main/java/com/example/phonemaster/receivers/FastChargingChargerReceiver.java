@@ -26,27 +26,22 @@ public class FastChargingChargerReceiver extends BroadcastReceiver {
 
             if (batterySource == BatteryManager.BATTERY_PLUGGED_AC) {
                 if(myKM!=null && myKM.inKeyguardRestrictedInputMode()) {
-
                     context.startActivity(i);
-
-                } else {
-                    //it is not locked
-                     }
+                }
 
             } else if (batterySource == BatteryManager.BATTERY_PLUGGED_USB) {
 
                 if(myKM!=null &&  myKM.inKeyguardRestrictedInputMode()) {
 
                     context.startActivity(i);
-                } else {
-                    //it is not locked
                 }
+//                else {
+//                    //it is not locked
+//                }
 
             } else if (batterySource == BatteryManager.BATTERY_PLUGGED_WIRELESS) {
                 if(myKM!=null &&  myKM.inKeyguardRestrictedInputMode()) {
                     context.startActivity(i);
-                } else {
-                    //it is not locked
                 }
                 }
         }

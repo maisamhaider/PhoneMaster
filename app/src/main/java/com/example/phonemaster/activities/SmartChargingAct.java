@@ -9,8 +9,8 @@ import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
- import android.view.View;
- import android.widget.ImageView;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.example.phonemaster.R;
@@ -85,11 +85,8 @@ public class SmartChargingAct extends AppCompatActivity {
                     }
                 } else {
                     editor.putBoolean("SMART_CHARGE", false).commit();
-                    if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        stopService(new Intent(SmartChargingAct.this, MyService.class));
-                    } else {
-                        stopService(new Intent(SmartChargingAct.this, MyService.class));
-                    }
+                    stopService(new Intent(SmartChargingAct.this, MyService.class));
+
                 }
             }
         });
