@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.LinearInterpolator;
@@ -35,7 +36,7 @@ import com.example.phonemaster.permission.Permissions;
 import com.example.phonemaster.utils.Utils;
 
 
-public class DashboardFragment extends Fragment implements View.OnClickListener {
+public class DashboardFragment extends Fragment implements View.OnClickListener,View.OnTouchListener {
 
     private static final int REQUEST_PERMISSION = 1000;
     private Permissions permissions;
@@ -95,6 +96,16 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
         deepClean_cl.setOnClickListener(this);
 
         ramAndStorageFun();
+
+
+
+
+        ivAppCleanup.setOnTouchListener(this);
+        ivPowerSaving.setOnTouchListener(this);
+        ivStatusSaver.setOnTouchListener(this);
+        ivJunkFile.setOnTouchListener(this);
+        ivCpuCooler.setOnTouchListener(this);
+        ivBoostPhone.setOnTouchListener(this);
 
 
     }
@@ -245,4 +256,18 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
         }
     }
 
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+
+        int paddingStart = view.getPaddingStart();
+        int paddingEnd = view.getPaddingEnd();
+        int paddingTop = view.getPaddingTop();
+        int paddingBottom = view.getPaddingBottom();
+        if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+            view.setPadding(paddingStart + 10, paddingTop + 10, paddingEnd + 10, paddingBottom + 10);
+        } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+            view.setPadding(paddingStart - 10, paddingTop - 10, paddingEnd - 10, paddingBottom - 10);
+        }
+        return false;
+    }
 }

@@ -1,8 +1,7 @@
 package com.example.phonemaster.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.animation.ValueAnimator;
+import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -18,12 +17,15 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Vibrator;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.phonemaster.R;
 import com.example.phonemaster.models.DeepCleanPackagesModel;
@@ -36,7 +38,7 @@ import java.util.List;
 
 import static com.example.phonemaster.R.raw.notification_sound;
 
-public class ChargingLockedScreenAct extends AppCompatActivity {
+public class ChargingLockedScreenAct extends AppCompatActivity implements View.OnTouchListener {
 
     private ProgressBar pbBattery;
     private TextView tvCharging, tvPercentage;
@@ -47,6 +49,7 @@ public class ChargingLockedScreenAct extends AppCompatActivity {
     private Utils utils;
     private String dirPath;
     private ActivityManager am;
+    private MediaPlayer mp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +82,7 @@ public class ChargingLockedScreenAct extends AppCompatActivity {
         ivJunkFile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selection=1;
+                selection = 1;
                 new BackgroundTask().execute();
 
             }
@@ -87,7 +90,7 @@ public class ChargingLockedScreenAct extends AppCompatActivity {
         ivCpuCooler.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selection=2;
+                selection = 2;
                 new BackgroundTask().execute();
             }
         });
@@ -95,10 +98,14 @@ public class ChargingLockedScreenAct extends AppCompatActivity {
         ivBoostPhone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selection=3;
+                selection = 3;
                 new BackgroundTask().execute();
             }
         });
+
+        ivJunkFile.setOnTouchListener(this);
+        ivCpuCooler.setOnTouchListener(this);
+        ivBoostPhone.setOnTouchListener(this);
 
         vHead.setBackground(getResources().getDrawable(R.drawable.s_bg_head));
         this.registerReceiver(this.mBatInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
@@ -139,10 +146,11 @@ public class ChargingLockedScreenAct extends AppCompatActivity {
 
             if (preferences.getBoolean("FULL_CHARGED_SOUND", false)) {
 
-                MediaPlayer mp = MediaPlayer.create(this, notification_sound);
+                mp = MediaPlayer.create(this, notification_sound);
                 try {
                     mp.prepare();
                     mp.start();
+                    mp.setLooping(false);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -167,7 +175,7 @@ public class ChargingLockedScreenAct extends AppCompatActivity {
     public void cpuCooler() {
         for (int i = 0; i < utils.getSystemActiveApps().size(); i++) {
             am.killBackgroundProcesses(utils.getSystemActiveApps().get(i));
-            Log.w("cpuCooler", "cpuCooler: "+ utils.getSystemActiveApps().size());
+            Log.w("cpuCooler", "cpuCooler: " + utils.getSystemActiveApps().size());
         }
     }
 
@@ -192,6 +200,21 @@ public class ChargingLockedScreenAct extends AppCompatActivity {
         }
     };
 
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        int paddingStart = view.getPaddingStart();
+        int paddingEnd = view.getPaddingEnd();
+        int paddingTop = view.getPaddingTop();
+        int paddingBottom = view.getPaddingBottom();
+        if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+            view.setPadding(paddingStart + 10, paddingTop + 10, paddingEnd + 10, paddingBottom + 10);
+        } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+            view.setPadding(paddingStart - 10, paddingTop - 10, paddingEnd - 10, paddingBottom - 10);
+        }
+        return false;
+    }
+
+    @SuppressLint("StaticFieldLeak")
     class BackgroundTask extends AsyncTask<Void, Void, Void> {
         @Override
         protected Void doInBackground(Void... voids) {
@@ -221,6 +244,10 @@ public class ChargingLockedScreenAct extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if (mp != null) {
+            mp.release();
+            mp = null;
+        }
         if (mBatInfoReceiver != null) {
             unregisterReceiver(mBatInfoReceiver);
         }
