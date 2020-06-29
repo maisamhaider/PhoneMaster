@@ -23,6 +23,7 @@ public class SmartChargingAct extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_smart_charging_act);
+        setContentView(R.layout.activity_smart_charging_act);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         SharedPreferences preferences = getSharedPreferences("myPref", Context.MODE_PRIVATE);
@@ -38,9 +39,10 @@ public class SmartChargingAct extends AppCompatActivity {
         ConstraintLayout fastCharge_cl = findViewById(R.id.fastCharge_cl);
 
         boolean isEnable = preferences.getBoolean("IS_SMART_CHARGE_ENABLED", false);
-        if (preferences.getBoolean("SMART_CHARGE", false)) {
+        if (preferences.getBoolean("IS_SMART_CHARGE_ENABLED", false)) {
             smartCharging_switch.setChecked(true);
         }
+
         if (!isEnable) {
             smart_charging_first_time.setVisibility(View.VISIBLE);
         } else {
@@ -50,7 +52,8 @@ public class SmartChargingAct extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 editor.putBoolean("IS_SMART_CHARGE_ENABLED", true).commit();
-                smart_charging_first_time.setVisibility(View.GONE);
+                smartCharging_switch.setChecked(true);
+                  smart_charging_first_time.setVisibility(View.GONE);
                 if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     startForegroundService(new Intent(SmartChargingAct.this, SmartChargeService.class));
                 } else {
@@ -77,16 +80,14 @@ public class SmartChargingAct extends AppCompatActivity {
             @Override
             public void onCheckedChanged(SwitchButton view, boolean isChecked) {
                 if (isChecked) {
-                    editor.putBoolean("SMART_CHARGE", true).commit();
                     editor.putBoolean("IS_SMART_CHARGE_ENABLED", true).commit();
-                    if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                     if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                         startForegroundService(new Intent(SmartChargingAct.this, SmartChargeService.class));
                     } else {
                         startService(new Intent(SmartChargingAct.this, SmartChargeService.class));
                     }
                 } else {
-                    editor.putBoolean("SMART_CHARGE", false).commit();
-                    editor.putBoolean("IS_SMART_CHARGE_ENABLED", false).commit();
+                     editor.putBoolean("IS_SMART_CHARGE_ENABLED", false).commit();
                     stopService(new Intent(SmartChargingAct.this, SmartChargeService.class));
 
                 }
