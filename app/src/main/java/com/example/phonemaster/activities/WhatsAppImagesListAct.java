@@ -1,8 +1,5 @@
 package com.example.phonemaster.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
@@ -13,9 +10,6 @@ import com.example.phonemaster.adapters.CommonAdapter;
 import com.example.phonemaster.async.WhatsAppCommonTask;
 import com.example.phonemaster.utils.Utils;
 
-import java.io.File;
-import java.util.List;
-
 public class WhatsAppImagesListAct extends WhatsAppBaseActivity {
 
     String[] fileNames;
@@ -24,12 +18,14 @@ public class WhatsAppImagesListAct extends WhatsAppBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_whats_app_images_list);
+        setContentView(R.layout.activity_whats_app_data_list);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         utils = new Utils(this);
-        rvCleanWhatsApp = findViewById(R.id.whatsAppImagesList_rv);
-        Button whatsAppImagesList_btn = findViewById(R.id.whatsAppImagesList_btn);
+        rvCleanWhatsApp = findViewById(R.id.whatsApp_rv);
+        Button whatsAppImagesList_btn = findViewById(R.id.clean_btn);
+        group = findViewById(R.id.group);
+        noDatatv = findViewById(R.id.no_data_tv);
         type = "images";
         commonAdapter = new CommonAdapter(this, CommonAdapter.IMAGE);
         WhatsAppCommonTask whatsAppCommonTask = new WhatsAppCommonTask(this, commonAdapter, rvCleanWhatsApp, type);
@@ -41,7 +37,9 @@ public class WhatsAppImagesListAct extends WhatsAppBaseActivity {
                 alertDialog();
             }
         });
-
-
     }
+    public void toggleVisibility(boolean isRvVisible){
+        super.toggleVisibility(isRvVisible);
+    }
+
 }

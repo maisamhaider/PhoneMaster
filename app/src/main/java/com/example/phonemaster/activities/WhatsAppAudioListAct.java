@@ -17,15 +17,18 @@ public class WhatsAppAudioListAct extends WhatsAppBaseActivity {
     String[] fileNames;
     Utils utils;
     private File file;
+    private Button whatsAppAudioList_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_whats_app_audio_list);
+        setContentView(R.layout.activity_whats_app_data_list);
         utils = new Utils(this);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        rvCleanWhatsApp = findViewById(R.id.whatsAppAudioList_rv);
-        Button whatsAppAudioList_btn = findViewById(R.id.whatsAppAudioList_btn);
+        rvCleanWhatsApp = findViewById(R.id.whatsApp_rv);
+        whatsAppAudioList_btn = findViewById(R.id.clean_btn);
+        group = findViewById(R.id.group);
+        noDatatv = findViewById(R.id.no_data_tv);
 
         type = "audios";
         commonAdapter = new CommonAdapter(this, CommonAdapter.AUDIO);
@@ -38,7 +41,9 @@ public class WhatsAppAudioListAct extends WhatsAppBaseActivity {
                 alertDialog();
             }
         });
-
+    }
+    public void toggleVisibility(boolean isRvVisible){
+        super.toggleVisibility(isRvVisible);
     }
 
 }

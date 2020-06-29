@@ -4,22 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.WhatsAppBackUpConversationHistory">
+    tools:context=".activities.WhatsAppAudioListAct">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/whatsAppBUCHList_rv"
-        android:layout_width="match_parent"
+        android:id="@+id/whatsApp_rv"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_above="@+id/whatsAppBUCHList_btn"
-        app:layout_constraintBottom_toTopOf="@+id/whatsAppBUCHList_btn"
+        android:layout_above="@+id/clean_btn"
+        app:layout_constraintBottom_toTopOf="@+id/clean_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/no_data_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="No Data"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <Button
-        android:id="@+id/whatsAppBUCHList_btn"
+        android:id="@+id/clean_btn"
         style="@style/AppTheme.Button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -29,4 +41,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="clean_btn,whatsApp_rv" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

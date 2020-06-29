@@ -4,6 +4,9 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+
+import androidx.constraintlayout.widget.Group;
 
 import com.example.phonemaster.R;
 import com.example.phonemaster.adapters.CommonAdapter;
@@ -16,18 +19,21 @@ public class WhatsAppBackUpConversationHistory extends WhatsAppBaseActivity {
 
     Utils utils;
     File file;
-
+    Button whatsAppBUCHList_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_back_up_conversation_history);
+        setContentView(R.layout.activity_whats_app_data_list);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         utils = new Utils(this);
 
-        rvCleanWhatsApp = findViewById(R.id.whatsAppBUCHList_rv);
-        Button whatsAppBUCHList_btn = findViewById(R.id.whatsAppBUCHList_btn);
+        rvCleanWhatsApp = findViewById(R.id.whatsApp_rv);
+        whatsAppBUCHList_btn = findViewById(R.id.clean_btn);
+        group = findViewById(R.id.group);
+        noDatatv = findViewById(R.id.no_data_tv);
+
         type = "BUCH";
 
         commonAdapter = new CommonAdapter(this, CommonAdapter.BACKUP);
@@ -41,7 +47,8 @@ public class WhatsAppBackUpConversationHistory extends WhatsAppBaseActivity {
             }
         });
     }
-
-
+    public void toggleVisibility(boolean isRvVisible){
+        super.toggleVisibility(isRvVisible);
+    }
 
 }

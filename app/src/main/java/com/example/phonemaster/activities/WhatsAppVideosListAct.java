@@ -1,8 +1,5 @@
 package com.example.phonemaster.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
@@ -13,22 +10,22 @@ import com.example.phonemaster.adapters.CommonAdapter;
 import com.example.phonemaster.async.WhatsAppCommonTask;
 import com.example.phonemaster.utils.Utils;
 
-import java.io.File;
-import java.util.List;
-
 public class WhatsAppVideosListAct extends WhatsAppBaseActivity {
 
     String[] fileNames;
     Utils utils;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_whats_app_videos_list);
+        setContentView(R.layout.activity_whats_app_data_list);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         utils = new Utils(this);
-        rvCleanWhatsApp = findViewById(R.id.whatsAppVideosList_rv);
-        Button whatsAppVideosList_btn = findViewById(R.id.whatsAppVideosList_btn);
+        rvCleanWhatsApp = findViewById(R.id.whatsApp_rv);
+        Button whatsAppVideosList_btn = findViewById(R.id.clean_btn);
+        group = findViewById(R.id.group);
+        noDatatv = findViewById(R.id.no_data_tv);
 
         type = "videos";
         CommonAdapter commonAdapter = new CommonAdapter(this,CommonAdapter.VIDEO);
@@ -41,6 +38,9 @@ public class WhatsAppVideosListAct extends WhatsAppBaseActivity {
               alertDialog();
             }
         });
-
       }
+      public void toggleVisibility(boolean isRvVisible){
+        super.toggleVisibility(isRvVisible);
+      }
+
 }
