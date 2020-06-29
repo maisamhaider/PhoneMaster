@@ -96,6 +96,8 @@ public class DeepCleanAllPackagesAct extends AppCompatActivity {
                                 }
                             }
                             dialog.dismiss();
+                            finish();
+
                         }
                     });
                 }

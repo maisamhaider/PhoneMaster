@@ -31,16 +31,15 @@ public class StorageUtils {
     public boolean isSDCard() {
 
         boolean isSdCard = false;
-        Boolean isSDPresent = android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED);
-        Boolean isSDSupportedDevice = Environment.isExternalStorageRemovable();
 
-        if (isSDSupportedDevice && isSDPresent) {
+        Boolean isSDPresent = android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED);
+
+        if (isSDPresent) {
             // yes SD-card is present
             isSdCard = true;
         }
         return isSdCard;
     }
-
 
 
     public  void deleteCache(Context context) {

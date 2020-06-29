@@ -388,6 +388,7 @@ public class DeepCleanAppDataAct extends AppCompatActivity {
                             }
                         }
                         dialog.dismiss();
+                        finish();
                     }
                 });
 

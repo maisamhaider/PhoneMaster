@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.LinearInterpolator;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -31,6 +32,7 @@ import com.example.phonemaster.activities.PhoneBoostAct;
 import com.example.phonemaster.activities.SmartChargingAct;
 import com.example.phonemaster.activities.UnInstallAppAct;
 import com.example.phonemaster.activities.WhatsAppStatusAct;
+import com.example.phonemaster.async.OptimizedAllTask;
 import com.example.phonemaster.permission.Permissions;
 import com.example.phonemaster.utils.Utils;
 
@@ -46,6 +48,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
     private AdCircleProgress cpbRam, cpbStorage;
     private ProgressBar pbRam, pbStorage;
     private TextView tvRamInfo, tvStorageInfo;
+//    private Button b_optimize;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -65,6 +68,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
 
         cpbRam = root.findViewById(R.id.pgb_ram);
         cpbStorage = root.findViewById(R.id.pgb_storage);
+//        b_optimize = root.findViewById(R.id.b_optimize);
 
         pbRam = root.findViewById(R.id.pb_ram);
         pbStorage = root.findViewById(R.id.pb_storage);
@@ -82,6 +86,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
         ConstraintLayout smartCharge_cl = root.findViewById(R.id.smartCharge_cl);
         ConstraintLayout deepClean_cl = root.findViewById(R.id.deepClean_cl);
 
+//        b_optimize.setOnClickListener(this);
 
         ivAppCleanup.setOnClickListener(this);
         ivPowerSaving.setOnClickListener(this);
@@ -237,6 +242,13 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
                 if (permissions.permission()) {
                     Intent deepCleanIntent = new Intent(getActivity(), DeepCleanAct.class);
                     startActivity(deepCleanIntent);
+                } else {
+                    Toast.makeText(getActivity(), "Permission is not granted ", Toast.LENGTH_SHORT).show();
+                }
+                break; case R.id.b_optimize:
+                if (permissions.permission()) {
+                    OptimizedAllTask optimizedAllTask = new OptimizedAllTask(getContext());
+                    optimizedAllTask.execute();
                 } else {
                     Toast.makeText(getActivity(), "Permission is not granted ", Toast.LENGTH_SHORT).show();
                 }

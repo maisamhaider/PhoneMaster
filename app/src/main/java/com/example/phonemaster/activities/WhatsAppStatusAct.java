@@ -109,5 +109,6 @@ public class WhatsAppStatusAct extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        finish();
     }
 }

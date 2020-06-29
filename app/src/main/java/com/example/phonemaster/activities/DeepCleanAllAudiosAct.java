@@ -90,6 +90,8 @@ public class DeepCleanAllAudiosAct extends AppCompatActivity {
                             }
                         }
                         dialog.dismiss();
+                        finish();
+
                     }
                 });
             }}

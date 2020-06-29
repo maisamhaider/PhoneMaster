@@ -1,6 +1,7 @@
 package com.example.phonemaster.utils;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -15,13 +16,14 @@ import android.os.StatFs;
 import android.provider.MediaStore;
 import android.widget.Toast;
 
+import androidx.core.content.ContextCompat;
+
 import com.example.phonemaster.models.CommonModel;
 import com.example.phonemaster.models.DeepCleanAudioModel;
 import com.example.phonemaster.models.DeepCleanDocsModel;
 import com.example.phonemaster.models.DeepCleanImagesModel;
 import com.example.phonemaster.models.DeepCleanPackagesModel;
 import com.example.phonemaster.models.DeepCleanVideosModel;
-import com.example.phonemaster.utils.speed_test.ExternalStorage;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -29,19 +31,20 @@ import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+import java.util.Locale;
 import java.util.Objects;
-
-import static com.example.phonemaster.utils.speed_test.GetSomething.getRightStringToThePoint;
 
 
 public class Utils {
 
     Context context;
+    String destinationPath;
+    File folder;
 
     public Utils(Context context) {
         this.context = context;
@@ -71,6 +74,15 @@ public class Utils {
         }
 
         return docList;
+    }
+
+    public static boolean externalMemoryAvailable(Activity context) {
+        File[] storages = ContextCompat.getExternalFilesDirs(context, null);
+        if (storages.length > 1 && storages[0] != null && storages[1] != null)
+            return true;
+        else
+            return false;
+
     }
 
     public List<CommonModel> getListFiles(File parentDir, String forWhat) {
@@ -180,37 +192,6 @@ public class Utils {
     }
 
 
-//    public List<String> GetAllApkInfo() {
-//
-//        List<String> ApkPackageName = new ArrayList<>();
-//
-//        Intent intent = new Intent(Intent.ACTION_MAIN, null);
-//
-//        intent.addCategory(Intent.CATEGORY_LAUNCHER);
-//
-//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
-//
-//        List<ResolveInfo> resolveInfoList = context.getPackageManager().queryIntentActivities(intent, 0);
-//
-//        for (ResolveInfo resolveInfo : resolveInfoList) {
-//
-//            ActivityInfo activityInfo = resolveInfo.activityInfo;
-//            if (!isSTOPPED(activityInfo)) {
-//                if (!ApkPackageName.contains(activityInfo.applicationInfo.packageName)) {
-//                    ApkPackageName.add(activityInfo.applicationInfo.packageName);
-//                }
-//            }
-//
-//
-//        }
-//        return ApkPackageName;
-//    }
-
-//    public boolean isSTOPPED(ActivityInfo activityInfo) {
-//
-//        return ((activityInfo.applicationInfo.flags & ApplicationInfo.FLAG_STOPPED) != 0);
-//    }
-
     private boolean isSTOPPED(ApplicationInfo pkgInfo) {
 
         return ((pkgInfo.flags & ApplicationInfo.FLAG_STOPPED) == 0);
@@ -257,30 +238,6 @@ public class Utils {
         return (usedData * 100 / totalData);
     }
 
-//    public  long getFolderSize(String dir) {
-//
-//        File f = new File(dir);
-//
-//        String listFiles[] = f.list();
-//        long totalSize = 0;
-//        long folderAmount = 0;
-//        for (String file : listFiles) {
-//
-//            File folder = new File(dir + "/" + file);
-//            if (folder.isDirectory()) {
-//                totalSize += getFolderSize(folder.getAbsolutePath());
-//                if (totalSize == 0) {
-//                    folderAmount++;
-//                }
-//            } else {
-//                totalSize += folder.length();
-//            }
-//            if (totalSize == 0) {
-//                folderAmount++;
-//            }
-//        }
-//        return folderAmount;
-//    }
 
     public List<String> GetAllInstalledApkInfo() {
 
@@ -309,26 +266,29 @@ public class Utils {
 
     }
 
-    public void moveFile(String sourcePath,String finalDir) {
+    // return left string from first ,
+    public static String getRightStringToThePoint(String s, String pointString) {
+        String d = s;
+        String ssDate = d.substring(d.lastIndexOf(pointString));
+        return ssDate;
+    }
 
-         String lastName = getRightStringToThePoint(sourcePath,"/");
+    public void moveFile(String sourcePath, String finalDir) {
 
-        Map<String, File> externalLocations = ExternalStorage.getAllStorageLocations();
-//        File sdCard = externalLocations.get(ExternalStorage.SD_CARD);
-        File externalSdCard = externalLocations.get(ExternalStorage.EXTERNAL_SD_CARD);
+        String lastName = getRightStringToThePoint(sourcePath, "/");
 
-        String destinationPath = externalSdCard.getPath()+"/"+finalDir+lastName;
-        File folder = new File(externalSdCard.getPath());
+        for (String path : getExternalMounts()) {
+            destinationPath = path + "/" + finalDir + lastName;
+            folder = new File(path + "/" + finalDir);
+        }
+
 
         if (!folder.exists()) {
             boolean isCreate = folder.mkdirs();
-            if (isCreate)
-            {
-                Toast.makeText(context, "created", Toast.LENGTH_SHORT).show();
-             }
-            else
-            {
-                Toast.makeText(context, "not created", Toast.LENGTH_SHORT).show();
+            if (isCreate) {
+//                Toast.makeText(context, "created", Toast.LENGTH_SHORT).show();
+            } else {
+//                Toast.makeText(context, "not created", Toast.LENGTH_SHORT).show();
             }
 
         }
@@ -336,12 +296,43 @@ public class Utils {
 
         File destinationFile = new File(destinationPath);
 
-        if (sourceFile.renameTo(destinationFile)) {
-            Toast.makeText(context, "Moving file successful.", Toast.LENGTH_SHORT).show();
+        sourceFile.renameTo(destinationFile);
 
-        } else {
-            Toast.makeText(context, "Moving file failed.", Toast.LENGTH_SHORT).show();
+    }
+
+    public static ArrayList<String> getExternalMounts() {
+        final ArrayList<String> out = new ArrayList<>();
+        String reg = "(?i).*vold.*(vfat|ntfs|exfat|fat32|ext3|ext4).*rw.*";
+        String s = "";
+        try {
+            final Process process = new ProcessBuilder().command("mount")
+                    .redirectErrorStream(true).start();
+            process.waitFor();
+            final InputStream is = process.getInputStream();
+            final byte[] buffer = new byte[1024];
+            while (is.read(buffer) != -1) {
+                s = s + new String(buffer);
+            }
+            is.close();
+        } catch (final Exception e) {
+            e.printStackTrace();
         }
+
+        // parse output
+        final String[] lines = s.split("\n");
+        for (String line : lines) {
+            if (!line.toLowerCase(Locale.US).contains("asec")) {
+                if (line.matches(reg)) {
+                    String[] parts = line.split(" ");
+                    for (String part : parts) {
+                        if (part.startsWith("/"))
+                            if (!part.toLowerCase(Locale.US).contains("vold"))
+                                out.add(part);
+                    }
+                }
+            }
+        }
+        return out;
     }
 
     public void copyFileOrDirectory(String srcDir) {
@@ -384,41 +375,6 @@ public class Utils {
             destination.transferFrom(source, 0, source.size());
         }
     }
-
-//    public List<NumberAndNamesModel> getContactList() {
-//        ContentResolver cr = context.getContentResolver();
-//        Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI,
-//                null, null, null, null);
-//        List<NumberAndNamesModel> numberAndNamesModelList = new ArrayList<>();
-//
-//        if ((cur != null ? cur.getCount() : 0) > 0) {
-//            while (cur != null && cur.moveToNext()) {
-//                String id = cur.getString(
-//                        cur.getColumnIndex(ContactsContract.Contacts._ID));
-//                String name = cur.getString(cur.getColumnIndex(
-//                        ContactsContract.Contacts.DISPLAY_NAME));
-//
-//                if (cur.getInt(cur.getColumnIndex(
-//                        ContactsContract.Contacts.HAS_PHONE_NUMBER)) > 0) {
-//                    Cursor pCur = cr.query(
-//                            ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-//                            null,
-//                            ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?",
-//                            new String[]{id}, null);
-//                    while (pCur.moveToNext()) {
-//                        String phoneNo = pCur.getString(pCur.getColumnIndex(
-//                                ContactsContract.CommonDataKinds.Phone.NUMBER));
-//                        numberAndNamesModelList.add(new NumberAndNamesModel(name, phoneNo));
-//                    }
-//                    pCur.close();
-//                }
-//            }
-//        }
-//        if (cur != null) {
-//            cur.close();
-//        }
-//        return numberAndNamesModelList;
-//    }
 
     @SuppressLint("Recycle")
     public List<DeepCleanImagesModel> getAllImagePaths() {
@@ -536,7 +492,7 @@ public class Utils {
         File[] mFilelist = fold.listFiles();
         for (File f : mlist) {
             if (f.isDirectory()) {
-                List<DeepCleanVideosModel> fList = getVideos( f.getAbsolutePath());
+                List<DeepCleanVideosModel> fList = getVideos(f.getAbsolutePath());
                 docList.addAll(fList);
             }
         }
@@ -551,6 +507,7 @@ public class Utils {
         }
         return docList;
     }
+
     public List<DeepCleanImagesModel> getImages(String path) {
         File fold = new File(path);
         List<DeepCleanImagesModel> docList = new ArrayList<>();
@@ -558,7 +515,7 @@ public class Utils {
         File[] mFilelist = fold.listFiles();
         for (File f : mlist) {
             if (f.isDirectory()) {
-                List<DeepCleanImagesModel> fList = getImages( f.getAbsolutePath());
+                List<DeepCleanImagesModel> fList = getImages(f.getAbsolutePath());
                 docList.addAll(fList);
             }
         }
@@ -612,7 +569,7 @@ public class Utils {
         if (mlist != null)
             if (mFilelist != null) {
                 for (File f : mFilelist) {
-                     docSize = docSize + f.length();
+                    docSize = docSize + f.length();
                 }
             }
         return docSize;
@@ -633,7 +590,7 @@ public class Utils {
         }
         if (mFilelist != null) {
             for (File f : mFilelist) {
-                 docSize = docSize + f.length();
+                docSize = docSize + f.length();
             }
         }
         return docSize;
@@ -651,7 +608,7 @@ public class Utils {
         }
         if (mFilelist != null) {
             for (File f : mFilelist) {
-                 docSize = docSize + f.length();
+                docSize = docSize + f.length();
             }
         }
         return docSize;
@@ -699,23 +656,11 @@ public class Utils {
     }
 
 
-    // return Right string from first
-//    public String getRightStringToThePoint(String s, String pointString) {
-//        return s.substring(s.lastIndexOf(pointString) + 1);
-//    }
-
-//    public String returnLeftOfString(String s, String pointString) {
-//        String d = s;
-//        String ssDate = d.substring(d.lastIndexOf(pointString));
-//        d = d.replace(ssDate, "");
-//        return d;
-//    }
-
     public static class AllDoFilter implements FileFilter {
         @Override
         public boolean accept(File pathname) {
             String path = pathname.getPath();
-            return ( path.endsWith(".ods")
+            return (path.endsWith(".ods")
                     || path.endsWith(".xls")
                     || path.endsWith(".xlsx")
                     || path.endsWith(".doc")
@@ -752,7 +697,7 @@ public class Utils {
         public boolean accept(File pathname) {
             String path = pathname.getPath();
             return (path.endsWith(".mp3") ||
-                    path.endsWith(".opus")||
+                    path.endsWith(".opus") ||
                     path.endsWith(".m4a") ||
                     path.endsWith(".amr") ||
                     path.endsWith(".mpa") ||
@@ -798,17 +743,18 @@ public class Utils {
         }
         return String.format("%.2f", finalSize) + sizePrefix;
     }
+
     public float getCalculatedDataSizeFloat(float size) {
-         float finalSize = size;
+        float finalSize = size;
         if (size >= 1024) {
             float sizeKb = size / 1024;
-             finalSize = sizeKb;
+            finalSize = sizeKb;
             if (sizeKb >= 1024) {
                 float sizeMB = sizeKb / 1024;
-                 finalSize = sizeMB;
+                finalSize = sizeMB;
                 if (sizeMB >= 1024) {
                     float sizeGb = sizeMB / 1024;
-                     finalSize = sizeGb;
+                    finalSize = sizeGb;
 
                 }
 

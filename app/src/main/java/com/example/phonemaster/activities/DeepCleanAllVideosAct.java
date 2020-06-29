@@ -89,6 +89,7 @@ public class DeepCleanAllVideosAct extends AppCompatActivity {
                                 }
                             }
                             dialog.dismiss();
+                            finish();
                         }
                     });
                 }
