@@ -34,11 +34,12 @@ import com.example.phonemaster.utils.StorageUtils;
 import com.example.phonemaster.utils.Utils;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.List;
 
 import static com.example.phonemaster.R.raw.notification_sound;
 
-public class ChargingLockedScreenAct extends AppCompatActivity implements View.OnTouchListener {
+public class ChargingLockedScreenAct extends AppCompatActivity {
 
     private ProgressBar pbBattery;
     private TextView tvCharging, tvPercentage;
@@ -50,6 +51,8 @@ public class ChargingLockedScreenAct extends AppCompatActivity implements View.O
     private String dirPath;
     private ActivityManager am;
     private MediaPlayer mp;
+    SharedPreferences preferences;
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +64,8 @@ public class ChargingLockedScreenAct extends AppCompatActivity implements View.O
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD |
                 WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED |
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        preferences = getSharedPreferences("myPref", Context.MODE_PRIVATE);
+        editor = preferences.edit();
 
         mLoadingDialog = new LoadingDialog(this);
 
@@ -102,10 +107,6 @@ public class ChargingLockedScreenAct extends AppCompatActivity implements View.O
                 new BackgroundTask().execute();
             }
         });
-
-        ivJunkFile.setOnTouchListener(this);
-        ivCpuCooler.setOnTouchListener(this);
-        ivBoostPhone.setOnTouchListener(this);
 
         vHead.setBackground(getResources().getDrawable(R.drawable.s_bg_head));
         this.registerReceiver(this.mBatInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
@@ -200,19 +201,6 @@ public class ChargingLockedScreenAct extends AppCompatActivity implements View.O
         }
     };
 
-    @Override
-    public boolean onTouch(View view, MotionEvent motionEvent) {
-        int paddingStart = view.getPaddingStart();
-        int paddingEnd = view.getPaddingEnd();
-        int paddingTop = view.getPaddingTop();
-        int paddingBottom = view.getPaddingBottom();
-        if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-            view.setPadding(paddingStart + 10, paddingTop + 10, paddingEnd + 10, paddingBottom + 10);
-        } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
-            view.setPadding(paddingStart - 10, paddingTop - 10, paddingEnd - 10, paddingBottom - 10);
-        }
-        return false;
-    }
 
     @SuppressLint("StaticFieldLeak")
     class BackgroundTask extends AsyncTask<Void, Void, Void> {
@@ -244,6 +232,9 @@ public class ChargingLockedScreenAct extends AppCompatActivity implements View.O
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        editor.putLong("lock_charge_delay", Calendar.getInstance().getTimeInMillis()).commit();
+        editor.putBoolean("first_lock_charge", false).commit();
+
         if (mp != null) {
             mp.release();
             mp = null;

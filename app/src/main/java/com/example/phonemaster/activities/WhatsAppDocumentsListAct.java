@@ -1,8 +1,5 @@
 package com.example.phonemaster.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
@@ -16,11 +13,8 @@ import com.example.phonemaster.utils.Utils;
 import java.io.File;
 import java.util.List;
 
-public class WhatsAppDocumentsListAct extends AppCompatActivity {
+public class WhatsAppDocumentsListAct extends WhatsAppBaseActivity {
     Utils utils;
-    File file;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,25 +25,17 @@ public class WhatsAppDocumentsListAct extends AppCompatActivity {
         //list of selected folder images
 
 
-        RecyclerView whatsAppDocList_rv = findViewById(R.id.whatsAppDocList_rv);
+         rvCleanWhatsApp = findViewById(R.id.whatsAppDocList_rv);
         Button whatsAppDocList_btn = findViewById(R.id.whatsAppDocList_btn);
-
-        CommonAdapter commonAdapter = new CommonAdapter(this,CommonAdapter.DOCUMENT);
-        WhatsAppCommonTask whatsAppCommonTask = new WhatsAppCommonTask(this,commonAdapter,whatsAppDocList_rv,"doc");
+        type = "doc";
+        commonAdapter = new CommonAdapter(this,CommonAdapter.DOCUMENT);
+        WhatsAppCommonTask whatsAppCommonTask = new WhatsAppCommonTask(this,commonAdapter,rvCleanWhatsApp,type);
         whatsAppCommonTask.execute();
 
         whatsAppDocList_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                List<String> imagePathList = commonAdapter.getList();
-                for (int i = 0; i < imagePathList.size(); i++) {
-                    try {
-                        file = new File(imagePathList.get(i));
-                        utils.scanaddedFile(imagePathList.get(i));
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
+               alertDialog();
             }
         });
     }

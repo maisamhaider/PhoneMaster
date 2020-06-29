@@ -16,11 +16,11 @@ import com.example.phonemaster.utils.Utils;
 import java.io.File;
 import java.util.List;
 
-public class WhatsAppImagesListAct extends AppCompatActivity {
+public class WhatsAppImagesListAct extends WhatsAppBaseActivity {
 
     String[] fileNames;
     Utils utils;
-    private File file;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,25 +28,17 @@ public class WhatsAppImagesListAct extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         utils = new Utils(this);
-        RecyclerView whatsAppImagesList_rv = findViewById(R.id.whatsAppImagesList_rv);
+        rvCleanWhatsApp = findViewById(R.id.whatsAppImagesList_rv);
         Button whatsAppImagesList_btn = findViewById(R.id.whatsAppImagesList_btn);
-
-        CommonAdapter commonAdapter = new CommonAdapter(this,CommonAdapter.IMAGE);
-        WhatsAppCommonTask whatsAppCommonTask = new WhatsAppCommonTask(this,commonAdapter,whatsAppImagesList_rv,"images");
+        type = "images";
+        commonAdapter = new CommonAdapter(this, CommonAdapter.IMAGE);
+        WhatsAppCommonTask whatsAppCommonTask = new WhatsAppCommonTask(this, commonAdapter, rvCleanWhatsApp, type);
         whatsAppCommonTask.execute();
 
         whatsAppImagesList_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                List<String> imagePathList = commonAdapter.getList();
-                for (int i = 0; i < imagePathList.size(); i++) {
-                    try {
-                        file = new File(imagePathList.get(i));
-                        utils.scanaddedFile(imagePathList.get(i));
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
+                alertDialog();
             }
         });
 

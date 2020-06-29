@@ -67,12 +67,14 @@
             android:id="@+id/iv_junk_file"
             android:layout_width="60dp"
             android:layout_height="60dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/ic_junk_files"
             app:layout_constraintBottom_toBottomOf="@+id/imageView"
             app:layout_constraintEnd_toStartOf="@+id/iv_cpu_cooler"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
 
 
         <ImageView
@@ -89,6 +91,7 @@
             android:id="@+id/iv_cpu_cooler"
             android:layout_width="60dp"
             android:layout_height="60dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/ic_cpu_cooler"
             app:layout_constraintBottom_toBottomOf="@+id/iv_junk_file"
             app:layout_constraintEnd_toStartOf="@+id/iv_boost_phone"
@@ -101,6 +104,7 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_marginTop="24dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/ic_power_saving"
             app:layout_constraintEnd_toStartOf="@+id/iv_app_cleanup"
             app:layout_constraintHorizontal_bias="0.5"
@@ -113,6 +117,7 @@
             android:id="@+id/iv_app_cleanup"
             android:layout_width="60dp"
             android:layout_height="60dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/ic_app_cleanup"
             app:layout_constraintEnd_toStartOf="@+id/iv_status_saver"
             app:layout_constraintHorizontal_bias="0.5"
@@ -125,6 +130,7 @@
             android:id="@+id/iv_status_saver"
             android:layout_width="60dp"
             android:layout_height="60dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/ic_whatsapp_status_saver"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -137,6 +143,7 @@
             android:id="@+id/iv_boost_phone"
             android:layout_width="60dp"
             android:layout_height="60dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/ic_boost_phone"
             app:layout_constraintBottom_toBottomOf="@+id/iv_cpu_cooler"
             app:layout_constraintEnd_toEndOf="parent"

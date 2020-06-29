@@ -9,6 +9,7 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
@@ -24,12 +25,14 @@ import com.example.phonemaster.R;
 import com.example.phonemaster.activities.MainActivity;
 import com.example.phonemaster.receivers.FastChargingChargerReceiver;
 
+import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class SmartChargeService extends Service {
     public static final String TAG = "CustomService";
     private Context context;
+    private SharedPreferences preferences;
 
 
     @Override
@@ -83,11 +86,22 @@ public class SmartChargeService extends Service {
         new Timer().scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                getApplicationContext().registerReceiver(fastChargingChargerReceiver, filter);
-                getApplicationContext().registerReceiver(fastChargingChargerReceiver, intentFilter);
-                getApplicationContext().registerReceiver(fastChargingChargerReceiver, intentChargingFilter);
+                preferences = getSharedPreferences("myPref", Context.MODE_PRIVATE);
+                if ((preferences.getLong("lock_charge_delay", Calendar.getInstance().getTimeInMillis())+6_000)==Calendar.getInstance().getTimeInMillis()) {
+                    getApplicationContext().registerReceiver(fastChargingChargerReceiver, filter);
+                    getApplicationContext().registerReceiver(fastChargingChargerReceiver, intentFilter);
+                    getApplicationContext().registerReceiver(fastChargingChargerReceiver, intentChargingFilter);
+                }
+               if (preferences.getBoolean("first_lock_charge",true)) {
+                    getApplicationContext().registerReceiver(fastChargingChargerReceiver, filter);
+                    getApplicationContext().registerReceiver(fastChargingChargerReceiver, intentFilter);
+                    getApplicationContext().registerReceiver(fastChargingChargerReceiver, intentChargingFilter);
+                }
+
+
+
             }
-        },4_000,6_000);
+        },4_000,1_000);
         return START_STICKY;
     }
 

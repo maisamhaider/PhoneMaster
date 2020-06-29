@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.LinearInterpolator;
@@ -19,7 +18,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.app.adprogressbarlib.AdCircleProgress;
 import com.example.phonemaster.R;
@@ -36,7 +34,7 @@ import com.example.phonemaster.permission.Permissions;
 import com.example.phonemaster.utils.Utils;
 
 
-public class DashboardFragment extends Fragment implements View.OnClickListener,View.OnTouchListener {
+public class DashboardFragment extends Fragment implements View.OnClickListener {
 
     private static final int REQUEST_PERMISSION = 1000;
     private Permissions permissions;
@@ -47,7 +45,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
     private AdCircleProgress cpbRam, cpbStorage;
     private ProgressBar pbRam, pbStorage;
     private TextView tvRamInfo, tvStorageInfo;
-
+    boolean isPressed = false;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -96,17 +94,6 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
         deepClean_cl.setOnClickListener(this);
 
         ramAndStorageFun();
-
-
-
-
-        ivAppCleanup.setOnTouchListener(this);
-        ivPowerSaving.setOnTouchListener(this);
-        ivStatusSaver.setOnTouchListener(this);
-        ivJunkFile.setOnTouchListener(this);
-        ivCpuCooler.setOnTouchListener(this);
-        ivBoostPhone.setOnTouchListener(this);
-
 
     }
 
@@ -254,20 +241,5 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
                 break;
 //
         }
-    }
-
-    @Override
-    public boolean onTouch(View view, MotionEvent motionEvent) {
-
-        int paddingStart = view.getPaddingStart();
-        int paddingEnd = view.getPaddingEnd();
-        int paddingTop = view.getPaddingTop();
-        int paddingBottom = view.getPaddingBottom();
-        if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-            view.setPadding(paddingStart + 10, paddingTop + 10, paddingEnd + 10, paddingBottom + 10);
-        } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
-            view.setPadding(paddingStart - 10, paddingTop - 10, paddingEnd - 10, paddingBottom - 10);
-        }
-        return false;
     }
 }

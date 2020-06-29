@@ -78,13 +78,7 @@
         <activity android:name=".activities.WhatsAppAudioListAct" />
         <activity android:name=".activities.CleanWhatsAppAct" />
         <activity android:name=".activities.InternetSpeedAct" />
-        <activity android:name=".activities.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".activities.MainActivity" />
 
         <receiver
             android:name=".receivers.BootUpReceiver"

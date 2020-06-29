@@ -1,8 +1,5 @@
 package com.example.phonemaster.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
@@ -14,12 +11,12 @@ import com.example.phonemaster.async.WhatsAppCommonTask;
 import com.example.phonemaster.utils.Utils;
 
 import java.io.File;
-import java.util.List;
 
-public class WhatsAppBackUpConversationHistory extends AppCompatActivity {
+public class WhatsAppBackUpConversationHistory extends WhatsAppBaseActivity {
 
     Utils utils;
     File file;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,28 +26,22 @@ public class WhatsAppBackUpConversationHistory extends AppCompatActivity {
 
         utils = new Utils(this);
 
-        //list of selected folder images
-
-        RecyclerView whatsAppBUCHList_rv = findViewById(R.id.whatsAppBUCHList_rv);
+        rvCleanWhatsApp = findViewById(R.id.whatsAppBUCHList_rv);
         Button whatsAppBUCHList_btn = findViewById(R.id.whatsAppBUCHList_btn);
+        type = "BUCH";
 
-         CommonAdapter  commonAdapter = new CommonAdapter(this,CommonAdapter.BACKUP);
-        WhatsAppCommonTask whatsAppCommonTask = new WhatsAppCommonTask(this,commonAdapter,whatsAppBUCHList_rv,"BUCH");
+        commonAdapter = new CommonAdapter(this, CommonAdapter.BACKUP);
+        WhatsAppCommonTask whatsAppCommonTask = new WhatsAppCommonTask(this, commonAdapter, rvCleanWhatsApp, type );
         whatsAppCommonTask.execute();
 
         whatsAppBUCHList_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                List<String> imagePathList = commonAdapter.getList();
-                for (int i = 0; i < imagePathList.size(); i++) {
-                    try {
-                        file = new File(imagePathList.get(i));
-                        utils.scanaddedFile(imagePathList.get(i));
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
+                alertDialog();
             }
         });
     }
+
+
+
 }

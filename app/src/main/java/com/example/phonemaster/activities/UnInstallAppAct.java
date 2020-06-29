@@ -27,7 +27,7 @@ public class UnInstallAppAct extends AppCompatActivity {
 
     private GifImageView uninstall_gif;
     private ImageView uninstall_iv;
-    private TextView totalNumber_tv;
+    private TextView totalNumber_tv,msg_tv;
     AllAppsAdapter allAppsAdapter;
 
     @Override
@@ -40,6 +40,7 @@ public class UnInstallAppAct extends AppCompatActivity {
         uninstall_gif = findViewById(R.id.uninstall_gif);
         uninstall_iv = findViewById(R.id.uninstall_iv);
         totalNumber_tv = findViewById(R.id.tv_total_apps);
+        msg_tv = findViewById(R.id.msg_tv);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
 
@@ -64,6 +65,7 @@ public class UnInstallAppAct extends AppCompatActivity {
         uninstall_gif.setVisibility(View.VISIBLE);
         uninstall_iv.setVisibility(View.GONE);
         totalNumber_tv.setVisibility(View.GONE);
+        msg_tv.setVisibility(View.GONE);
 
         ValueAnimator animator = ValueAnimator.ofInt(0, allAppsAdapter.getItemCount());
         animator.setInterpolator(new LinearInterpolator());
@@ -78,6 +80,7 @@ public class UnInstallAppAct extends AppCompatActivity {
                     uninstall_gif.setVisibility(View.GONE);
                     uninstall_iv.setVisibility(View.VISIBLE);
                     totalNumber_tv.setVisibility(View.VISIBLE);
+                    msg_tv.setVisibility(View.VISIBLE);
                 }
             }
         });
