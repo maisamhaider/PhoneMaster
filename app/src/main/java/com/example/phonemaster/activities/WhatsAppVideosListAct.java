@@ -39,8 +39,4 @@ public class WhatsAppVideosListAct extends WhatsAppBaseActivity {
             }
         });
       }
-      public void toggleVisibility(boolean isRvVisible){
-        super.toggleVisibility(isRvVisible);
-      }
-
 }

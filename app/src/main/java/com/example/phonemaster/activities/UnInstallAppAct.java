@@ -27,8 +27,9 @@ public class UnInstallAppAct extends AppCompatActivity {
 
     private GifImageView uninstall_gif;
     private ImageView uninstall_iv;
-    private TextView totalNumber_tv,msg_tv;
-    AllAppsAdapter allAppsAdapter;
+    private TextView totalNumber_tv, msg_tv;
+    private AllAppsAdapter allAppsAdapter;
+    private RecyclerView allAppsUnInstallApp_rv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +37,7 @@ public class UnInstallAppAct extends AppCompatActivity {
         setContentView(R.layout.activity_un_install_app);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        RecyclerView allAppsUnInstallApp_rv = findViewById(R.id.allAppsUnInstallApp_rv);
+        allAppsUnInstallApp_rv = findViewById(R.id.allAppsUnInstallApp_rv);
         uninstall_gif = findViewById(R.id.uninstall_gif);
         uninstall_iv = findViewById(R.id.uninstall_iv);
         totalNumber_tv = findViewById(R.id.tv_total_apps);
@@ -47,8 +48,8 @@ public class UnInstallAppAct extends AppCompatActivity {
         allAppsUnInstallApp_rv.addItemDecoration(new SimpleDividerItemDecoration(this));
 
         allAppsAdapter = new AllAppsAdapter(this);
-        AllAppsTask allAppsTsk = new AllAppsTask(this, allAppsAdapter, allAppsUnInstallApp_rv);
-        allAppsTsk.execute();
+
+        loadData();
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -57,6 +58,13 @@ public class UnInstallAppAct extends AppCompatActivity {
             }
         }, 1_000);
 
+    }
+
+    public void loadData() {
+        AllAppsTask allAppsTsk = new AllAppsTask(this, allAppsAdapter, allAppsUnInstallApp_rv);
+        allAppsTsk.execute();
+        totalNumber_tv.setText(String.valueOf(allAppsAdapter.getItemCount()));
+//        startAnimation();
     }
 
 

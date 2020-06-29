@@ -39,8 +39,4 @@ public class WhatsAppDocumentsListAct extends WhatsAppBaseActivity {
             }
         });
     }
-    public void toggleVisibility(boolean isRvVisible){
-        super.toggleVisibility(isRvVisible);
-    }
-
 }

@@ -21,7 +21,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.example.phonemaster.R;
 import com.example.phonemaster.activities.MainActivity;
- import com.example.phonemaster.utils.AppUtility;
+import com.example.phonemaster.activities.UnInstallAppAct;
+import com.example.phonemaster.utils.AppUtility;
 import com.example.phonemaster.utils.Utils;
 
 
@@ -104,7 +105,15 @@ public class AllAppsAdapter extends RecyclerView.Adapter<AllAppsAdapter.AllAppsH
                     Intent intent = new Intent( Intent.ACTION_DELETE );
                     intent.setData( Uri.parse( "package:" + packageName ) );
                     intent.setFlags( Intent.FLAG_ACTIVITY_NEW_TASK );
+                    try {
+                        apps.remove(position);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    notifyDataSetChanged();
                     context.startActivity( intent );
+                    if (context instanceof UnInstallAppAct)
+                    ((UnInstallAppAct)context).loadData();
                 }
             }
         });

@@ -42,8 +42,4 @@ public class WhatsAppAudioListAct extends WhatsAppBaseActivity {
             }
         });
     }
-    public void toggleVisibility(boolean isRvVisible){
-        super.toggleVisibility(isRvVisible);
-    }
-
 }

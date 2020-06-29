@@ -47,8 +47,5 @@ public class WhatsAppBackUpConversationHistory extends WhatsAppBaseActivity {
             }
         });
     }
-    public void toggleVisibility(boolean isRvVisible){
-        super.toggleVisibility(isRvVisible);
-    }
 
 }
