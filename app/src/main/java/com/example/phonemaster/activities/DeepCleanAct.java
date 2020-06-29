@@ -102,12 +102,20 @@ public class DeepCleanAct extends AppCompatActivity {
         float imagesSize = utils.getAllIAAsSize("images");
         float VideosSize = utils.getAllIAAsSize("videos");
         float audiosSize = utils.getAllIAAsSize("audios");
-        float docSize = utils.getAllDocSize(String.valueOf(Environment.getExternalStorageDirectory()));
-        float pkgSize = utils.getAllPkgsSize(String.valueOf(Environment.getExternalStorageDirectory()));
+        float docSize = utils.getAllDocSize( Environment.getExternalStorageDirectory().getAbsolutePath());
+        float pkgSize = utils.getAllPkgsSize(Environment.getExternalStorageDirectory().getAbsolutePath());
 
         float totalSize = whatsAppDataSize+imagesSize+VideosSize+audiosSize+docSize+pkgSize;
         int size = utils.getCalculatedDataSize(totalSize).length();
-        String dataPrefix = utils.getCalculatedDataSize(totalSize).substring(size-2,size);
+        String dataPrefix;
+        if (utils.getCalculatedDataSize(totalSize).contains("Bytes"))
+         {
+            dataPrefix = utils.getCalculatedDataSize(totalSize).substring(size-5,size);
+        }
+        else {
+            dataPrefix = utils.getCalculatedDataSize(totalSize).substring(size-2,size);
+
+        }
 
         deepCleanDataPrefix_tv.setText(dataPrefix);
         deepCleanImagesSize_tv.setText(utils.getCalculatedDataSize(imagesSize));

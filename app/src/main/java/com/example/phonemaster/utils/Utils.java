@@ -45,6 +45,8 @@ public class Utils {
     Context context;
     String destinationPath;
     File folder;
+    float docSize = 0;
+    float size = 0;
 
     public Utils(Context context) {
         this.context = context;
@@ -577,41 +579,35 @@ public class Utils {
 
 
     public float getAllDocSize(String path) {
-        float docSize = 0;
+
         File fold = new File(path);
         File[] mlist = fold.listFiles();
         File[] mFilelist = fold.listFiles(new AllDoFilter());
-        if (mlist != null) {
             for (File f : mlist) {
                 if (f.isDirectory()) {
                     getAllDocSize(f.getAbsolutePath());
                 }
-            }
         }
-        if (mFilelist != null) {
             for (File f : mFilelist) {
                 docSize = docSize + f.length();
-            }
         }
         return docSize;
     }
 
     public float getAllPkgsSize(String path) {
-        float docSize = 0;
         File fold = new File(path);
         File[] mlist = fold.listFiles();
         File[] mFilelist = fold.listFiles(new AllPackagesFilter());
-        for (File f : mlist != null ? mlist : new File[0]) {
+        for (File f : mlist ) {
             if (f.isDirectory()) {
                 getAllPkgsSize(f.getAbsolutePath());
             }
         }
-        if (mFilelist != null) {
+
             for (File f : mFilelist) {
-                docSize = docSize + f.length();
-            }
+                size = size + f.length();
         }
-        return docSize;
+        return size;
     }
 
     // return images audio videos size
