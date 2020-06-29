@@ -76,7 +76,6 @@
             app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
 
-
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="0dp"
@@ -108,6 +107,7 @@
             android:src="@drawable/ic_power_saving"
             app:layout_constraintEnd_toStartOf="@+id/iv_app_cleanup"
             app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView7">
 
@@ -249,7 +249,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-             android:id="@+id/textView"
+            android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Cpu Tempereture"
@@ -263,7 +263,6 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_num" />
 
         <Button
-            android:visibility="gone"
             android:id="@+id/b_optimize"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -273,6 +272,7 @@
             android:paddingEnd="16dp"
             android:text="Optimize"
             android:textStyle="bold"
+            android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@+id/iv_cpu_cooler"
             app:layout_constraintEnd_toEndOf="@+id/textView"
             app:layout_constraintHorizontal_bias="0.5"
@@ -328,6 +328,26 @@
             app:layout_constraintEnd_toEndOf="@+id/pb_ram"
             app:layout_constraintStart_toStartOf="@+id/pb_ram"
             app:layout_constraintTop_toBottomOf="@+id/pb_ram" />
+
+        <TextView
+            android:id="@+id/textView52"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ram"
+            android:textColor="@color/standard_white"
+            app:layout_constraintEnd_toEndOf="@+id/tv_ram_info"
+            app:layout_constraintStart_toStartOf="@+id/tv_ram_info"
+            app:layout_constraintTop_toBottomOf="@+id/tv_ram_info" />
+
+        <TextView
+            android:id="@+id/textView53"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Storage"
+            android:textColor="@color/standard_white"
+            app:layout_constraintEnd_toEndOf="@+id/tv_storage_info"
+            app:layout_constraintStart_toStartOf="@+id/tv_storage_info"
+            app:layout_constraintTop_toBottomOf="@+id/tv_storage_info" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

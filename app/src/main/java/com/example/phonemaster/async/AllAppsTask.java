@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.example.phonemaster.activities.UnInstallAppAct;
 import com.example.phonemaster.adapters.AllAppsAdapter;
 import com.example.phonemaster.utils.LoadingDialog;
 import com.example.phonemaster.utils.Utils;
@@ -67,6 +68,9 @@ public class AllAppsTask extends AsyncTask<Void, Integer, String> {
         allAppsAdapter.setList(list);
         recyclerView.setAdapter(allAppsAdapter);
         allAppsAdapter.notifyDataSetChanged();
+        if (context instanceof UnInstallAppAct){
+            ((UnInstallAppAct)context).startAnimation();
+        }
         loadingDialog.dismiss();
     }
 

@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -64,6 +65,7 @@ public class AboutUsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 View view = getLayoutInflater().inflate(R.layout.about_us_dialog_layout, null, false);
+                Button closebtn = view.findViewById(R.id.aboutUsMoreApp_btn);
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 builder.setCancelable(true).setView(view);
 
@@ -71,6 +73,15 @@ public class AboutUsFragment extends Fragment {
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
                 TextView appVersion_tv = view.findViewById(R.id.appVersion_tv);
+
+                closebtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(dialog.isShowing()){
+                            dialog.cancel();
+                        }
+                    }
+                });
 
                 try {
                     PackageInfo packageInfo = getActivity().getPackageManager().getPackageInfo(getActivity().getPackageName(), 0);

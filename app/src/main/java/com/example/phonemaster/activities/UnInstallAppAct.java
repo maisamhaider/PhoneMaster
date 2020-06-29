@@ -68,7 +68,7 @@ public class UnInstallAppAct extends AppCompatActivity {
     }
 
 
-    private void startAnimation() {
+    public void startAnimation() {
 
         uninstall_gif.setVisibility(View.VISIBLE);
         uninstall_iv.setVisibility(View.GONE);
