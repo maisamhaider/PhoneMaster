@@ -102,8 +102,8 @@ public class DeepCleanAct extends AppCompatActivity {
         float imagesSize = utils.getAllIAAsSize("images");
         float VideosSize = utils.getAllIAAsSize("videos");
         float audiosSize = utils.getAllIAAsSize("audios");
-        float docSize = utils.getAllDocSize( Environment.getExternalStorageDirectory().getAbsolutePath());
-        float pkgSize = utils.getAllPkgsSize(Environment.getExternalStorageDirectory().getAbsolutePath());
+        float docSize = utils.getAllDocSize(String.valueOf( Environment.getExternalStorageDirectory()));
+        float pkgSize = utils.getAllPkgsSize(String.valueOf(Environment.getExternalStorageDirectory()));
 
         float totalSize = whatsAppDataSize+imagesSize+VideosSize+audiosSize+docSize+pkgSize;
         int size = utils.getCalculatedDataSize(totalSize).length();
