@@ -1,6 +1,7 @@
 package com.example.phonemaster.fragments.dashboard;
 
 import android.animation.ValueAnimator;
+import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
@@ -46,7 +47,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
     private View root;
     private AdCircleProgress cpbRam, cpbStorage;
     private ProgressBar pbRam, pbStorage;
-    private TextView tvRamInfo, tvStorageInfo;
+    private TextView tvRamInfo, tvStorageInfo,tv_num;
 //    private Button b_optimize;
 
 
@@ -73,6 +74,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
         pbStorage = root.findViewById(R.id.pb_storage);
         tvRamInfo = root.findViewById(R.id.tv_ram_info);
         tvStorageInfo = root.findViewById(R.id.tv_storage_info);
+        tv_num = root.findViewById(R.id.tv_num);
 
         ImageView ivAppCleanup = root.findViewById(R.id.iv_app_cleanup);
         ImageView ivPowerSaving = root.findViewById(R.id.iv_power_saving);
@@ -86,6 +88,9 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
         ConstraintLayout deepClean_cl = root.findViewById(R.id.deepClean_cl);
 
 //        b_optimize.setOnClickListener(this);
+
+        @SuppressLint("DefaultLocale") String temp1 = String.format("%d",(int)utils.cpuTemperature());
+        tv_num.setText(temp1);
 
         ivAppCleanup.setOnClickListener(this);
         ivPowerSaving.setOnClickListener(this);

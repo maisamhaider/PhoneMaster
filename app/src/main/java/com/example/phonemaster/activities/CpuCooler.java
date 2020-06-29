@@ -35,8 +35,7 @@ import java.util.List;
 
 public class CpuCooler extends AppCompatActivity {
     Utils utils;
-    TextView coolingTemp_tv;
-    ProgressBar cooling_pb;
+     ProgressBar cooling_pb;
     ImageView coolingBack_iv;
     private BatterySavingAllAppsAdapter allAppsAdapter;
     ConstraintLayout cpuCoolerSecond_cl, cpuCoolerMain_cl,cpuCooled_cl, coolingMain_cl;
@@ -69,8 +68,7 @@ public class CpuCooler extends AppCompatActivity {
 
         //Cooling apps
         coolingMain_cl = findViewById(R.id.coolingMain_cl);
-        coolingTemp_tv = findViewById(R.id.coolingTemp_tv);
-        cooling_pb = findViewById(R.id.cooling_pb);
+         cooling_pb = findViewById(R.id.cooling_pb);
         coolingBack_iv = findViewById(R.id.coolingBack_iv);
         coolingMain_cl.setVisibility(View.GONE);
 
@@ -137,8 +135,6 @@ public class CpuCooler extends AppCompatActivity {
 
             }
         });
-
-
     }
 
     @SuppressLint("StaticFieldLeak")
@@ -193,7 +189,6 @@ public class CpuCooler extends AppCompatActivity {
                     cpuTemp_tv.setText( temp4);
                     cpuCoolerMain_cl.setVisibility(View.GONE);
                     cpuCooled_cl.setVisibility(View.VISIBLE);
-                    coolingTemp_tv.setText(temp4);
 
                 }
             }, 2000);

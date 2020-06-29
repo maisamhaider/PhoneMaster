@@ -214,7 +214,7 @@
             android:elevation="8dp"
             android:text="89"
             android:textColor="@color/colorWhite"
-            android:textSize="55sp"
+            android:textSize="65sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/b_optimize"
             app:layout_constraintEnd_toEndOf="parent"
@@ -222,6 +222,17 @@
             app:layout_constraintTop_toBottomOf="@+id/textView16"
             app:layout_constraintVertical_bias="0.110000014"
             app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="°C"
+            android:textColor="@color/standard_white"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/textView"
+            app:layout_constraintStart_toEndOf="@+id/tv_num"
+            app:layout_constraintTop_toTopOf="@+id/tv_num"
+            app:layout_constraintVertical_bias="0.803" />
 
         <TextView
             android:id="@+id/textView16"
@@ -238,10 +249,10 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView"
+             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Optimize Suggestion"
+            android:text="Cpu Tempereture"
             android:textColor="@color/colorWhite"
             android:textSize="10sp"
             android:textStyle="bold"

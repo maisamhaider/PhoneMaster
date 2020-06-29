@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -42,32 +44,44 @@ public class StatusVideosFrag extends Fragment {
 
         Utils utils = new Utils(getContext());
 
+        RelativeLayout statusVideos_rl = view.findViewById(R.id.statusVideos_rl);
         RecyclerView statusVideos_rv = view.findViewById(R.id.statusVideos_rv);
         LinearLayout saveStatusVideos_ll = view.findViewById(R.id.saveStatusVideos_ll);
+        TextView statusNoVideo_tv = view.findViewById(R.id.statusNoVideo_tv);
+        statusNoVideo_tv.setVisibility(View.GONE);
 
         List<CommonModel> list  ;
         File file1 = new File(Environment.getExternalStorageDirectory().getPath() + "/WhatsApp/Media/.Statuses");
         list = utils.getListFiles(file1,"videos");
+        if (list.size()==0)
+        {
+            statusNoVideo_tv.setVisibility(View.VISIBLE);
+            statusVideos_rl.setVisibility(View.GONE);
 
-        statusVideos_rv.setLayoutManager(new GridLayoutManager(getContext(),2));
-        WhatsAppStatusAdapter statusAdapter = new WhatsAppStatusAdapter(getContext(),list,false);
-        statusVideos_rv.setAdapter(statusAdapter);
-        statusAdapter.notifyDataSetChanged();
+        }
+else {
+            statusNoVideo_tv.setVisibility(View.GONE);
+            statusVideos_rl.setVisibility(View.VISIBLE);
+            statusVideos_rv.setLayoutManager(new GridLayoutManager(getContext(), 2));
+            WhatsAppStatusAdapter statusAdapter = new WhatsAppStatusAdapter(getContext(), list, false);
+            statusVideos_rv.setAdapter(statusAdapter);
+            statusAdapter.notifyDataSetChanged();
 
-        saveStatusVideos_ll.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                List<String> data = statusAdapter.getSendList();
-                Permissions p = new Permissions(getContext());
-                if (p.permission()) {
-                    if (data.size() != 0) {
-                        for (int i = 0; i < data.size(); i++) {
-                            utils.copyFileOrDirectory(data.get(i));
+            saveStatusVideos_ll.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    List<String> data = statusAdapter.getSendList();
+                    Permissions p = new Permissions(getContext());
+                    if (p.permission()) {
+                        if (data.size() != 0) {
+                            for (int i = 0; i < data.size(); i++) {
+                                utils.copyFileOrDirectory(data.get(i));
+                            }
                         }
                     }
                 }
-            }
-        });
-        return view;
+            });
+        }
+return view;
     }
 }
