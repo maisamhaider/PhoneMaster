@@ -2,8 +2,13 @@ package com.example.phonemaster.async;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
+import android.os.Build;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ProgressBar;
 
 import com.example.phonemaster.R;
@@ -16,7 +21,6 @@ public class FileMoverTask extends AsyncTask<Void,Integer,String> {
     Utils utils ;
     Context context;
     String disDirName;
-    AlertDialog.Builder builder;
     List<String> sourcePathList;
     ProgressBar progressBar;
     AlertDialog dialog;
@@ -30,12 +34,23 @@ public class FileMoverTask extends AsyncTask<Void,Integer,String> {
     @Override
     protected void onPreExecute() {
         utils = new Utils(context);
-        builder = new AlertDialog.Builder(context);
-        View view = View.inflate(context,R.layout.loading_progressbar_dialog_layout,null);
+        AlertDialog.Builder builder = new AlertDialog.Builder(context.getApplicationContext());
+
+        View view = LayoutInflater.from(context).inflate(R.layout.loading_progressbar_dialog_layout,null);
+
         builder.setView(view);
         progressBar = view.findViewById(R.id.loading_pb);
+        progressBar.setMax(sourcePathList.size());
         dialog = builder.create();
+//        /if device is Oreo or latter
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY);
+        } else {
+            dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_PHONE);
+        }
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
+        dialog.show();
         super.onPreExecute();
     }
 
@@ -44,9 +59,9 @@ public class FileMoverTask extends AsyncTask<Void,Integer,String> {
         for (int i = 0; i<sourcePathList.size(); i++)
         {
             utils.moveFile(sourcePathList.get(i),disDirName);
+            publishProgress(i);
         }
-        publishProgress();
-        dialog.show();
+
         return null;
     }
 

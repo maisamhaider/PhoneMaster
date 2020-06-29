@@ -3,6 +3,7 @@ package com.example.phonemaster.utils;
 import android.content.Context;
 import android.view.Gravity;
 
+import com.example.phonemaster.R;
 import com.gmail.samehadar.iosdialog.IOSDialog;
 
 public class LoadingDialog {
@@ -24,7 +25,19 @@ public class LoadingDialog {
                 .setCancelable(false)
                 .setSpinnerClockwise(false)
                 .setMessageContentGravity(Gravity.END)
+                .setBackgroundColor(context.getResources().getColor(R.color.colorPrimary))
+                .setMessageColor(context.getResources().getColor(R.color.standard_white))
                 .setMessageContent("Loading Data")
                 .build();
     }
+    public LoadingDialog(Context context,String msg) {
+        iosDialog = new IOSDialog.Builder(context)
+                .setCancelable(false)
+                .setSpinnerClockwise(false)
+                .setMessageContentGravity(Gravity.END)
+                .setMessageContent(msg)
+                .build();
+    }
+
+
 }

@@ -9,6 +9,8 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
     <uses-permission
         android:name="android.permission.PACKAGE_USAGE_STATS"
         tools:ignore="ProtectedPermissions" />
@@ -78,7 +80,8 @@
         <activity android:name=".activities.WhatsAppAudioListAct" />
         <activity android:name=".activities.CleanWhatsAppAct" />
         <activity android:name=".activities.InternetSpeedAct" />
-        <activity android:name=".activities.MainActivity" />
+        <activity android:name=".activities.MainActivity">
+        </activity>
 
         <receiver
             android:name=".receivers.BootUpReceiver"

@@ -6,6 +6,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,7 +28,6 @@ import com.example.phonemaster.activities.MainActivity;
 public class AboutUsFragment extends Fragment {
 
 
-
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -37,7 +37,6 @@ public class AboutUsFragment extends Fragment {
         ConstraintLayout shareCl = root.findViewById(R.id.share_cl);
         ConstraintLayout rateUsCl = root.findViewById(R.id.rateUs_cl);
         ConstraintLayout aboutUsCl = root.findViewById(R.id.aboutUs_cl);
-
 
 
         ivTool.setOnClickListener(new View.OnClickListener() {
@@ -56,24 +55,25 @@ public class AboutUsFragment extends Fragment {
         rateUsCl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                rateUs();
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + getActivity().getPackageName())));
+
             }
         });
 
         aboutUsCl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                View  view = getLayoutInflater().inflate(R.layout.about_us_dialog_layout,null,false);
+                View view = getLayoutInflater().inflate(R.layout.about_us_dialog_layout, null, false);
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 builder.setCancelable(true).setView(view);
 
-                AlertDialog dialog =builder.create();
+                AlertDialog dialog = builder.create();
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
                 TextView appVersion_tv = view.findViewById(R.id.appVersion_tv);
 
                 try {
-                    PackageInfo packageInfo = getActivity().getPackageManager().getPackageInfo(getActivity().getPackageName(),0);
+                    PackageInfo packageInfo = getActivity().getPackageManager().getPackageInfo(getActivity().getPackageName(), 0);
                     String versionName = packageInfo.versionName;
                     appVersion_tv.setText(versionName);
 
@@ -86,7 +86,7 @@ public class AboutUsFragment extends Fragment {
         return root;
     }
 
-    public void rateUs(){
+    public void rateUs() {
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
         sendIntent.putExtra(Intent.EXTRA_TEXT,

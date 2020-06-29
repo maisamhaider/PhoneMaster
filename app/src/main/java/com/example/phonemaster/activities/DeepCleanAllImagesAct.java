@@ -54,8 +54,11 @@ public class DeepCleanAllImagesAct extends AppCompatActivity {
             List<String> pathList = deepCleanImagesAdapter.getList();
             if (isSend)
             {
+               String hgg = String.valueOf(utils.getExternalMounts());
+
                 FileMoverTask fileMoverTask = new FileMoverTask(getApplicationContext(),pathList,"Images");
                 fileMoverTask.execute();
+
 
             }else {
                 View view = getLayoutInflater().inflate(R.layout.are_you_sure_to_delete_dialog_layout, null, false);
@@ -86,6 +89,7 @@ public class DeepCleanAllImagesAct extends AppCompatActivity {
                             }
                         }
                         dialog.dismiss();
+                        finish();
                     }
                 });
             }

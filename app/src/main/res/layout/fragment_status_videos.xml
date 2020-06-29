@@ -8,7 +8,7 @@
         android:id="@+id/statusVideos_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SELECT VIDEOS STATUS TO SAVE"
+        android:text="SELECT VIDEOS :"
         android:textColor="@color/colorTextOne"
         />
 

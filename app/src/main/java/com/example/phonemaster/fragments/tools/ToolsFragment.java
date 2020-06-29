@@ -27,7 +27,7 @@ public class ToolsFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_tool, container, false);
         ImageView ivTool = root.findViewById(R.id.iv_t_back);
         ConstraintLayout appInstall_cl = root.findViewById(R.id.appInstall_cl);
-        ConstraintLayout fileMover_cl = root.findViewById(R.id.fileMover_cl);
+//        ConstraintLayout fileMover_cl = root.findViewById(R.id.fileMover_cl);
         ConstraintLayout hardwareInfo_cl = root.findViewById(R.id.hardwareInfo_cl);
         ConstraintLayout speedTest_cl = root.findViewById(R.id.speedTest_cl);
         ConstraintLayout harassmentFiler_cl = root.findViewById(R.id.harassmentFiler_cl);
@@ -44,12 +44,12 @@ public class ToolsFragment extends Fragment {
                 startActivity(new Intent(getActivity(), UnInstallAppAct.class));
             }
         });
-        fileMover_cl.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(), FilesMoverAct.class));
-            }
-        });
+//        fileMover_cl.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(getActivity(), FilesMoverAct.class));
+//            }
+//        });
         hardwareInfo_cl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

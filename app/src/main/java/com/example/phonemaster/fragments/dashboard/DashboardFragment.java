@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.LinearInterpolator;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.app.adprogressbarlib.AdCircleProgress;
 import com.example.phonemaster.R;
@@ -45,7 +47,8 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
     private AdCircleProgress cpbRam, cpbStorage;
     private ProgressBar pbRam, pbStorage;
     private TextView tvRamInfo, tvStorageInfo;
-    boolean isPressed = false;
+//    private Button b_optimize;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -64,6 +67,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
 
         cpbRam = root.findViewById(R.id.pgb_ram);
         cpbStorage = root.findViewById(R.id.pgb_storage);
+//        b_optimize = root.findViewById(R.id.b_optimize);
 
         pbRam = root.findViewById(R.id.pb_ram);
         pbStorage = root.findViewById(R.id.pb_storage);
@@ -81,6 +85,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
         ConstraintLayout smartCharge_cl = root.findViewById(R.id.smartCharge_cl);
         ConstraintLayout deepClean_cl = root.findViewById(R.id.deepClean_cl);
 
+//        b_optimize.setOnClickListener(this);
 
         ivAppCleanup.setOnClickListener(this);
         ivPowerSaving.setOnClickListener(this);
@@ -94,6 +99,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
         deepClean_cl.setOnClickListener(this);
 
         ramAndStorageFun();
+
 
     }
 
@@ -242,4 +248,5 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
 //
         }
     }
+
 }
