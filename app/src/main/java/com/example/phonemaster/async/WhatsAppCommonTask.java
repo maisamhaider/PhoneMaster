@@ -1,5 +1,6 @@
 package com.example.phonemaster.async;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Environment;
@@ -7,6 +8,7 @@ import android.os.Environment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.phonemaster.activities.WhatsAppBaseActivity;
 import com.example.phonemaster.adapters.CommonAdapter;
 import com.example.phonemaster.models.CommonModel;
 import com.example.phonemaster.utils.LoadingDialog;
@@ -103,6 +105,11 @@ public class WhatsAppCommonTask extends AsyncTask<Void, Integer, String> {
         commonAdapter.setFileList(list);
         recyclerView.setAdapter(commonAdapter);
         commonAdapter.notifyDataSetChanged();
-            loadingDialog.dismiss();
+        loadingDialog.dismiss();
+        if (list.size()>0){
+             ((WhatsAppBaseActivity)context).toggleVisibility(true);
+        }else{
+             ((WhatsAppBaseActivity)context).toggleVisibility(false);
+        }
         }
 }

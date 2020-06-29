@@ -5,9 +5,11 @@ import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.Group;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.phonemaster.R;
@@ -17,11 +19,13 @@ import com.example.phonemaster.async.WhatsAppCommonTask;
 import java.io.File;
 import java.util.List;
 
-abstract class WhatsAppBaseActivity extends AppCompatActivity {
+public abstract class WhatsAppBaseActivity extends AppCompatActivity {
 
     CommonAdapter commonAdapter;
     RecyclerView rvCleanWhatsApp;
     String type;
+    Group group;
+    TextView noDatatv;
 
 
     public void alertDialog() {
@@ -68,6 +72,15 @@ abstract class WhatsAppBaseActivity extends AppCompatActivity {
         WhatsAppCommonTask whatsAppCommonTask = new WhatsAppCommonTask(this, commonAdapter, rvCleanWhatsApp, type);
         whatsAppCommonTask.execute();
         commonAdapter.notifyDataSetChanged();
+    }
+    public void toggleVisibility(boolean isRvVisible) {
+        if (isRvVisible){
+            group.setVisibility(View.VISIBLE);
+            noDatatv.setVisibility(View.GONE);
+        }else{
+            group.setVisibility(View.GONE);
+            noDatatv.setVisibility(View.VISIBLE);
+        }
     }
 
 
