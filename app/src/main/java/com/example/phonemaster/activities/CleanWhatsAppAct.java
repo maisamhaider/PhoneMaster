@@ -143,8 +143,13 @@ public class CleanWhatsAppAct extends AppCompatActivity implements View.OnClickL
                             int value = (int) valueAnimator.getAnimatedValue();
                             tvTotalSize.setText(String.valueOf(value));
                             if (value==dataSize){
+                                if (utils.getCalculatedDataSize(totalSize).contains("Bytes"))
+                                {
+                                    tvTotalSize.setText(utils.getCalculatedDataSize(totalSize).substring(0, utils.getCalculatedDataSize(totalSize).length() - 5));
+                                }
+                                else {
                                 tvTotalSize.setText(utils.getCalculatedDataSize(totalSize).substring(0, utils.getCalculatedDataSize(totalSize).length() - 2));
-                            }
+                            }}
                         }
                     });
                     tvAnimator.start();

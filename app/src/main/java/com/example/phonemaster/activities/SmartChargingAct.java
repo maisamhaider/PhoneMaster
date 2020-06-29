@@ -43,7 +43,7 @@ public class SmartChargingAct extends AppCompatActivity {
         }
         if (!isEnable) {
             smart_charging_first_time.setVisibility(View.VISIBLE);
-        } else if (isEnable) {
+        } else {
             smart_charging_first_time.setVisibility(View.GONE);
         }
         smartChargeFirstTimeEnable_ll.setOnClickListener(new View.OnClickListener() {
@@ -78,6 +78,7 @@ public class SmartChargingAct extends AppCompatActivity {
             public void onCheckedChanged(SwitchButton view, boolean isChecked) {
                 if (isChecked) {
                     editor.putBoolean("SMART_CHARGE", true).commit();
+                    editor.putBoolean("IS_SMART_CHARGE_ENABLED", true).commit();
                     if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                         startForegroundService(new Intent(SmartChargingAct.this, SmartChargeService.class));
                     } else {
@@ -85,6 +86,7 @@ public class SmartChargingAct extends AppCompatActivity {
                     }
                 } else {
                     editor.putBoolean("SMART_CHARGE", false).commit();
+                    editor.putBoolean("IS_SMART_CHARGE_ENABLED", false).commit();
                     stopService(new Intent(SmartChargingAct.this, SmartChargeService.class));
 
                 }

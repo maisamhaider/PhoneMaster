@@ -736,11 +736,7 @@ public class Utils {
                     float sizeGb = sizeMB / 1024;
                     sizePrefix = "GB";
                     finalSize = sizeGb;
-
-                }
-
-            }
-        }
+                } } }
         return String.format("%.2f", finalSize) + sizePrefix;
     }
 
