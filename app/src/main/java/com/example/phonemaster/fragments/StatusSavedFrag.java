@@ -50,16 +50,21 @@ public class StatusSavedFrag extends Fragment {
         Utils utils = new Utils(getContext());
 
         RecyclerView statusSaved_rv = view.findViewById(R.id.statusSaved_rv);
-
+        TextView noStatusData_tv = view.findViewById(R.id.noStatusData_tv);
+        noStatusData_tv.setVisibility(View.GONE);
 
         File file1 = new File(Environment.getExternalStorageDirectory().getPath() + "/Phone_Master_Status");
         List<CommonModel> list = utils.getListFiles(file1);
-
-        statusSaved_rv.setLayoutManager(new GridLayoutManager(getContext(),2));
-        WhatsAppStatusAdapter statusAdapter = new WhatsAppStatusAdapter(getContext(),list,true);
-        statusSaved_rv.setAdapter(statusAdapter);
-        statusAdapter.notifyDataSetChanged();
-
+        if (list.size()==0){
+            noStatusData_tv.setVisibility(View.VISIBLE);
+        }
+        else {
+            noStatusData_tv.setVisibility(View.GONE);
+            statusSaved_rv.setLayoutManager(new GridLayoutManager(getContext(), 2));
+            WhatsAppStatusAdapter statusAdapter = new WhatsAppStatusAdapter(getContext(), list, true);
+            statusSaved_rv.setAdapter(statusAdapter);
+            statusAdapter.notifyDataSetChanged();
+        }
 
 
         return view;

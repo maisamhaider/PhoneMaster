@@ -182,6 +182,7 @@ public class PhoneBoostAct extends AppCompatActivity {
         protected void onProgressUpdate(Integer... values) {
             super.onProgressUpdate(values);
             phoneBoosting_pb.setProgress(values[0]);
+            phoneBoostingPercent_tv.setText(String.format("%s/%s", values[0], packageName.size()));
 
 
         }
