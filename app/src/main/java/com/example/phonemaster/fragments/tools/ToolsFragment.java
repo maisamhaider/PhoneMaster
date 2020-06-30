@@ -18,6 +18,9 @@ import com.example.phonemaster.activities.HarassmentFilterAct;
 import com.example.phonemaster.activities.DeviceInfoAct;
 import com.example.phonemaster.activities.InternetSpeedAct;
 import com.example.phonemaster.activities.MainActivity;
+import com.example.phonemaster.activities.ProcessorDetailAct;
+import com.example.phonemaster.activities.RootCheckerAct;
+import com.example.phonemaster.activities.SensorListAct;
 import com.example.phonemaster.activities.UnInstallAppAct;
 
 public class ToolsFragment extends Fragment {
@@ -31,6 +34,9 @@ public class ToolsFragment extends Fragment {
         ConstraintLayout hardwareInfo_cl = root.findViewById(R.id.hardwareInfo_cl);
         ConstraintLayout speedTest_cl = root.findViewById(R.id.speedTest_cl);
         ConstraintLayout harassmentFiler_cl = root.findViewById(R.id.harassmentFiler_cl);
+        ConstraintLayout rootchecker_cl = root.findViewById(R.id.rootchecker_cl);
+        ConstraintLayout sensorlist_cl = root.findViewById(R.id.sensorlist_cl);
+        ConstraintLayout processesor_cl = root.findViewById(R.id.processesor_cl);
 
         ivTool.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,6 +66,24 @@ public class ToolsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(), InternetSpeedAct.class));
+            }
+        });
+        rootchecker_cl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), RootCheckerAct.class));
+            }
+        });
+        sensorlist_cl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), SensorListAct.class));
+            }
+        });
+        processesor_cl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), ProcessorDetailAct.class));
             }
         });
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {

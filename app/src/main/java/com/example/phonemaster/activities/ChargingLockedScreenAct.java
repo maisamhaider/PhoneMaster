@@ -24,6 +24,7 @@ import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -34,8 +35,11 @@ import com.example.phonemaster.utils.StorageUtils;
 import com.example.phonemaster.utils.Utils;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import static com.example.phonemaster.R.raw.notification_sound;
 
@@ -53,6 +57,7 @@ public class ChargingLockedScreenAct extends AppCompatActivity {
     private MediaPlayer mp;
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
+    TextView tvTime,tvDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,9 +85,14 @@ public class ChargingLockedScreenAct extends AppCompatActivity {
         tvCharging = findViewById(R.id.tv_charging);
         pbBattery = findViewById(R.id.pb_battery);
         vHead = findViewById(R.id.v_head);
+        tvTime = findViewById(R.id.tv_time);
+        tvDate = findViewById(R.id.tv_date);
         am = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
         storageUtils = new StorageUtils();
         dirPath = String.valueOf(Environment.getExternalStorageDirectory());
+
+        tvTime.setText(getTime());
+        tvDate.setText(getDate());
 
         ivJunkFile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -226,6 +236,15 @@ public class ChargingLockedScreenAct extends AppCompatActivity {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             mLoadingDialog.dismiss();
+            String msg = "";
+            if (selection == 1) {
+                msg = "Junk files is deleted successfully";
+            } else if (selection == 2) {
+                msg = "CPU Cool successfully";
+            } else if (selection == 3) {
+                msg = "Phone Boost successfully";
+            }
+            Toast.makeText(ChargingLockedScreenAct.this, msg, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -243,4 +262,15 @@ public class ChargingLockedScreenAct extends AppCompatActivity {
             unregisterReceiver(mBatInfoReceiver);
         }
     }
+
+    public String getTime() {
+        Calendar calendar = Calendar.getInstance();
+        return new SimpleDateFormat( "h:mm a" ).format( calendar.getTime() );
+    }
+
+    public String getDate() {
+        Calendar calendar = Calendar.getInstance();
+        return new SimpleDateFormat( "dd MMM yyyy" ).format( calendar.getTime() );
+    }
+
 }

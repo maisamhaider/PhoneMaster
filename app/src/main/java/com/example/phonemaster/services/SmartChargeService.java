@@ -60,9 +60,9 @@ public class SmartChargeService extends Service {
             String channelId = Build.VERSION.SDK_INT >= Build.VERSION_CODES.O ? createNotificationChannel(notificationManager) : "Phone Master";
             NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, channelId).setSmallIcon(R.drawable.ic_launcher_foreground)
                     .setContentTitle("Phone Master")
-                    .setContentText("Apps Protection is on. If you want to turn off protection go to app and remove it.")
+                    .setContentText("Apps service run to perform function correctly.")
                     .setStyle(new NotificationCompat.BigTextStyle()
-                            .bigText("Apps Protection is on. If you want to turn off protection go to app and remove it."))
+                            .bigText("Apps service run to perform function correctly"))
                     .setPriority(NotificationCompat.PRIORITY_DEFAULT);
             Notification notification = notificationBuilder.setOngoing(true).setSmallIcon(R.drawable.ic_launcher_foreground)
                     .setContentInfo("Apps Protected. Apps Protection is on. If you want to turn off protection go to app and remove it.")
