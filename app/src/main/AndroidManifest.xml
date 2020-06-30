@@ -5,12 +5,11 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-<!--    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />-->
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /> -->
     <uses-permission
         android:name="android.permission.PACKAGE_USAGE_STATS"
         tools:ignore="ProtectedPermissions" />
@@ -38,9 +37,11 @@
         android:theme="@style/AppThemeNoActionBar"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-
+        <activity android:name=".activities.BluetoothInfoAct"></activity>
+        <activity android:name=".activities.FeaturesAct" />
         <activity android:name=".activities.DeviceInfoAct" />
-        <activity android:name=".activities.SplashActivity"
+        <activity
+            android:name=".activities.SplashActivity"
             android:theme="@style/SplashNoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -52,9 +53,9 @@
         <activity android:name=".activities.JunkFilesAct" />
         <activity
             android:name=".activities.ChargingLockedScreenAct"
+            android:excludeFromRecents="true"
             android:launchMode="singleInstance"
             android:screenOrientation="sensorPortrait"
-            android:excludeFromRecents="true"
             android:showOnLockScreen="true" />
         <activity android:name=".activities.FastChargeAct" />
         <activity android:name=".activities.FullChargedRemindAct" />
@@ -80,8 +81,9 @@
         <activity android:name=".activities.WhatsAppAudioListAct" />
         <activity android:name=".activities.CleanWhatsAppAct" />
         <activity android:name=".activities.InternetSpeedAct" />
-        <activity android:name=".activities.MainActivity">
-        </activity>
+        <activity android:name=".activities.HardwareTest" />
+        <activity android:name=".activities.DrawingAct" />
+        <activity android:name=".activities.MainActivity" />
 
         <receiver
             android:name=".receivers.BootUpReceiver"
