@@ -5,10 +5,13 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /> -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+<!--    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />-->
+
     <uses-permission
         android:name="android.permission.PACKAGE_USAGE_STATS"
         tools:ignore="ProtectedPermissions" />
@@ -42,9 +45,12 @@
         <activity
             android:name=".activities.DeviceInfoAct"
             android:launchMode="singleInstance" />
+
+        <activity android:name=".activities.FeaturesAct" />
+        <activity android:name=".activities.BluetoothInfoAct"></activity>
+        <activity android:name=".activities.DeviceInfoAct" />
         <activity
             android:name=".activities.SplashActivity"
-            android:launchMode="singleInstance"
             android:theme="@style/SplashNoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -52,93 +58,40 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".activities.FilesMoverAct"
-            android:launchMode="singleInstance" />
-        <activity
-            android:name=".activities.JunkFilesAct"
-            android:launchMode="singleInstance" />
+        <activity android:name=".activities.FilesMoverAct" />
+        <activity android:name=".activities.JunkFilesAct" />
         <activity
             android:name=".activities.ChargingLockedScreenAct"
-            android:excludeFromRecents="true"
             android:launchMode="singleInstance"
             android:screenOrientation="sensorPortrait"
+            android:excludeFromRecents="true"
             android:showOnLockScreen="true" />
-        <activity
-            android:name=".activities.FastChargeAct"
-            android:launchMode="singleInstance" />
-        <activity
-            android:name=".activities.FullChargedRemindAct"
-            android:launchMode="singleInstance" />
-        <activity
-            android:name=".activities.SmartChargingAct"
-            android:launchMode="singleInstance" />
-        <activity
-            android:name=".activities.DeepCleanAllPackagesAct"
-            android:launchMode="singleInstance" />
-        <activity
-            android:name=".activities.DeepCleanAllDocsAct"
-            android:launchMode="singleInstance" />
-        <activity
-            android:name=".activities.DeepCleanAllAudiosAct"
-            android:launchMode="singleInstance" />
-        <activity
-            android:name=".activities.DeepCleanAllVideosAct"
-            android:launchMode="singleInstance" />
-        <activity
-            android:name=".activities.DeepCleanAllImagesAct"
-            android:launchMode="singleInstance" />
-        <activity
-            android:name=".activities.DeepCleanAppDataAct"
-            android:launchMode="singleInstance" />
-        <activity
-            android:name=".activities.DeepCleanAct"
-            android:launchMode="singleInstance" />
-        <activity
-            android:name=".activities.UnInstallAppAct"
-            android:launchMode="singleInstance" />
-        <activity
-            android:name=".activities.BatterySavingAct"
-            android:launchMode="singleInstance" />
-        <activity
-            android:name=".activities.HarassmentFilterAct"
-            android:launchMode="singleInstance" />
-        <activity
-            android:name=".activities.OnImageVideoAct"
-            android:launchMode="singleInstance" />
-        <activity
-            android:name=".activities.WhatsAppStatusAct"
-            android:launchMode="singleInstance" />
-        <activity
-            android:name=".activities.PhoneBoostAct"
-            android:launchMode="singleInstance" />
-        <activity
-            android:name=".activities.CpuCooler"
-            android:launchMode="singleInstance" />
-        <activity
-            android:name=".activities.WhatsAppDocumentsListAct"
-            android:launchMode="singleInstance" />
-        <activity
-            android:name=".activities.WhatsAppBackUpConversationHistory"
-            android:launchMode="singleInstance" />
-        <activity
-            android:name=".activities.WhatsAppVideosListAct"
-            android:launchMode="singleInstance" />
-        <activity
-            android:name=".activities.WhatsAppImagesListAct"
-            android:launchMode="singleInstance" />
-        <activity
-            android:name=".activities.WhatsAppAudioListAct"
-            android:launchMode="singleInstance" />
-        <activity
-            android:name=".activities.CleanWhatsAppAct"
-            android:launchMode="singleInstance" />
-        <activity
-            android:name=".activities.InternetSpeedAct"
-            android:launchMode="singleInstance" />
-        <activity
-            android:name=".activities.MainActivity"
-            android:launchMode="singleInstance" />
+        <activity android:name=".activities.FastChargeAct" />
+        <activity android:name=".activities.FullChargedRemindAct" />
+        <activity android:name=".activities.SmartChargingAct" />
+        <activity android:name=".activities.DeepCleanAllPackagesAct" />
+        <activity android:name=".activities.DeepCleanAllDocsAct" />
+        <activity android:name=".activities.DeepCleanAllAudiosAct" />
+        <activity android:name=".activities.DeepCleanAllVideosAct" />
+        <activity android:name=".activities.DeepCleanAllImagesAct" />
+        <activity android:name=".activities.DeepCleanAppDataAct" />
+        <activity android:name=".activities.DeepCleanAct" />
+        <activity android:name=".activities.UnInstallAppAct" />
+        <activity android:name=".activities.BatterySavingAct" />
+        <activity android:name=".activities.HarassmentFilterAct" />
+        <activity android:name=".activities.OnImageVideoAct" />
+        <activity android:name=".activities.WhatsAppStatusAct" />
+        <activity android:name=".activities.PhoneBoostAct" />
+        <activity android:name=".activities.CpuCooler" />
+        <activity android:name=".activities.WhatsAppDocumentsListAct" />
+        <activity android:name=".activities.WhatsAppBackUpConversationHistory" />
+        <activity android:name=".activities.WhatsAppVideosListAct" />
+        <activity android:name=".activities.WhatsAppImagesListAct" />
+        <activity android:name=".activities.WhatsAppAudioListAct" />
+        <activity android:name=".activities.CleanWhatsAppAct" />
+        <activity android:name=".activities.InternetSpeedAct" />
+        <activity android:name=".activities.MainActivity">
+        </activity>
 
         <receiver
             android:name=".receivers.BootUpReceiver"

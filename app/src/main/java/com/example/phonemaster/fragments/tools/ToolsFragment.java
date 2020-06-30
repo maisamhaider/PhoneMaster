@@ -13,9 +13,11 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.example.phonemaster.R;
+import com.example.phonemaster.activities.BluetoothInfoAct;
 import com.example.phonemaster.activities.FilesMoverAct;
 import com.example.phonemaster.activities.HarassmentFilterAct;
 import com.example.phonemaster.activities.DeviceInfoAct;
+import com.example.phonemaster.activities.HardwareTest;
 import com.example.phonemaster.activities.InternetSpeedAct;
 import com.example.phonemaster.activities.MainActivity;
 import com.example.phonemaster.activities.ProcessorDetailAct;
@@ -37,55 +39,21 @@ public class ToolsFragment extends Fragment {
         ConstraintLayout rootchecker_cl = root.findViewById(R.id.rootchecker_cl);
         ConstraintLayout sensorlist_cl = root.findViewById(R.id.sensorlist_cl);
         ConstraintLayout processesor_cl = root.findViewById(R.id.processesor_cl);
+        ConstraintLayout hrdTest_cl = root.findViewById(R.id.hrdTest_cl);
+        ConstraintLayout blueInfo_cl = root.findViewById(R.id.blueInfo_cl);
 
-        ivTool.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((MainActivity) requireActivity()).onBackPressed();
-            }
-        });
-        appInstall_cl.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(), UnInstallAppAct.class));
-            }
-        });
+        ivTool.setOnClickListener((View.OnClickListener) v -> ((MainActivity) requireActivity()).onBackPressed());
+        appInstall_cl.setOnClickListener(v -> startActivity(new Intent(getActivity(), UnInstallAppAct.class)));
 //        fileMover_cl.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
 //                startActivity(new Intent(getActivity(), FilesMoverAct.class));
 //            }
 //        });
-        hardwareInfo_cl.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(), DeviceInfoAct.class));
-            }
-        });
-        speedTest_cl.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(), InternetSpeedAct.class));
-            }
-        });
-        rootchecker_cl.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(), RootCheckerAct.class));
-            }
-        });
-        sensorlist_cl.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(), SensorListAct.class));
-            }
-        });
-        processesor_cl.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(), ProcessorDetailAct.class));
-            }
-        });
+        hardwareInfo_cl.setOnClickListener(v -> startActivity(new Intent(getActivity(), DeviceInfoAct.class)));
+        blueInfo_cl.setOnClickListener(v -> startActivity(new Intent(getActivity(), BluetoothInfoAct.class)));
+        hrdTest_cl.setOnClickListener(v -> startActivity(new Intent(getActivity(), HardwareTest.class)));
+        speedTest_cl.setOnClickListener(v -> startActivity(new Intent(getActivity(), InternetSpeedAct.class)));
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             harassmentFiler_cl.setOnClickListener(new View.OnClickListener() {
                 @Override
