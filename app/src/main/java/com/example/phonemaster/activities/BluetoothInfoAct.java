@@ -38,8 +38,9 @@ public class BluetoothInfoAct extends AppCompatActivity {
             {
                 blueOff_tv.setText("off");
             }
-            else {
+            else if (bluetoothAdapter.getState()==BluetoothAdapter.STATE_ON){
 
+                blueOff_tv.setText("on");
             }
 
             blueName_tv.setText(bluetoothAdapter.getName());

@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.phonemaster.R;
 import com.example.phonemaster.activities.BluetoothInfoAct;
+import com.example.phonemaster.activities.FeaturesAct;
 import com.example.phonemaster.activities.FilesMoverAct;
 import com.example.phonemaster.activities.HarassmentFilterAct;
 import com.example.phonemaster.activities.DeviceInfoAct;
@@ -41,6 +42,7 @@ public class ToolsFragment extends Fragment {
         ConstraintLayout processesor_cl = root.findViewById(R.id.processesor_cl);
         ConstraintLayout hrdTest_cl = root.findViewById(R.id.hrdTest_cl);
         ConstraintLayout blueInfo_cl = root.findViewById(R.id.blueInfo_cl);
+        ConstraintLayout deviceFeatures_cl = root.findViewById(R.id.deviceFeatures_cl);
 
         ivTool.setOnClickListener((View.OnClickListener) v -> ((MainActivity) requireActivity()).onBackPressed());
         appInstall_cl.setOnClickListener(v -> startActivity(new Intent(getActivity(), UnInstallAppAct.class)));
@@ -50,10 +52,14 @@ public class ToolsFragment extends Fragment {
 //                startActivity(new Intent(getActivity(), FilesMoverAct.class));
 //            }
 //        });
+        processesor_cl.setOnClickListener(v -> startActivity(new Intent(getActivity(), ProcessorDetailAct.class)));
+        rootchecker_cl.setOnClickListener(v -> startActivity(new Intent(getActivity(), RootCheckerAct.class)));
+        sensorlist_cl.setOnClickListener(v -> startActivity(new Intent(getActivity(), SensorListAct.class)));
         hardwareInfo_cl.setOnClickListener(v -> startActivity(new Intent(getActivity(), DeviceInfoAct.class)));
         blueInfo_cl.setOnClickListener(v -> startActivity(new Intent(getActivity(), BluetoothInfoAct.class)));
         hrdTest_cl.setOnClickListener(v -> startActivity(new Intent(getActivity(), HardwareTest.class)));
         speedTest_cl.setOnClickListener(v -> startActivity(new Intent(getActivity(), InternetSpeedAct.class)));
+        deviceFeatures_cl.setOnClickListener(v -> startActivity(new Intent(getActivity(), FeaturesAct.class)));
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             harassmentFiler_cl.setOnClickListener(new View.OnClickListener() {
                 @Override
