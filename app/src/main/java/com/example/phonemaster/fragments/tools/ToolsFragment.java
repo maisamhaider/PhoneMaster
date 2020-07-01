@@ -50,6 +50,9 @@ public class ToolsFragment extends Fragment {
 //                startActivity(new Intent(getActivity(), FilesMoverAct.class));
 //            }
 //        });
+        processesor_cl.setOnClickListener(v -> startActivity(new Intent(getActivity(), ProcessorDetailAct.class)));
+        rootchecker_cl.setOnClickListener(v -> startActivity(new Intent(getActivity(), RootCheckerAct.class)));
+        sensorlist_cl.setOnClickListener(v -> startActivity(new Intent(getActivity(), SensorListAct.class)));
         hardwareInfo_cl.setOnClickListener(v -> startActivity(new Intent(getActivity(), DeviceInfoAct.class)));
         blueInfo_cl.setOnClickListener(v -> startActivity(new Intent(getActivity(), BluetoothInfoAct.class)));
         hrdTest_cl.setOnClickListener(v -> startActivity(new Intent(getActivity(), HardwareTest.class)));

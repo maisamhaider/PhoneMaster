@@ -124,7 +124,6 @@
                     app:srcCompat="@drawable/ic_backup_conversation" />
 
                 <ImageView
-                    android:id="@+id/imageView6"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_marginTop="8dp"
@@ -151,7 +150,6 @@
                 android:background="@drawable/btn_boarder_bg">
 
                 <ImageView
-                    android:id="@+id/imageView11"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_marginTop="8dp"
@@ -212,7 +210,6 @@
                 android:background="@drawable/btn_boarder_bg">
 
                 <ImageView
-                    android:id="@+id/imageView12"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_marginTop="8dp"
@@ -273,7 +270,6 @@
                 android:background="@drawable/btn_boarder_bg">
 
                 <ImageView
-                    android:id="@+id/imageView13"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_marginTop="8dp"
@@ -334,7 +330,6 @@
                 android:background="@drawable/btn_boarder_bg">
 
                 <ImageView
-                    android:id="@+id/imageView14"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_marginTop="8dp"
@@ -417,7 +412,6 @@
         app:layout_constraintVertical_bias="0.65999997" />
 
     <TextView
-        android:id="@+id/textView22"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"

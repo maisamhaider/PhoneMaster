@@ -68,7 +68,6 @@
 
     <Button
         android:visibility="gone"
-        android:id="@+id/whatsAppBUCHList_btn"
         style="@style/AppTheme.Button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

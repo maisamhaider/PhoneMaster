@@ -2,23 +2,31 @@ package com.example.phonemaster.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.phonemaster.R;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 public class ProcessorDetailAct extends AppCompatActivity {
 
     TextView textView ;
     ProcessBuilder processBuilder;
-    String Holder = "";
+    String holder = "";
     String[] DATA = {"/system/bin/cat", "/proc/cpuinfo"};
     InputStream inputStream;
     Process process ;
     byte[] byteArray;
+    private int counter=0;
 
 
     @Override
@@ -26,8 +34,7 @@ public class ProcessorDetailAct extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_processor_detail);
 
-
-        textView = findViewById(R.id.textView);
+        LinearLayout llSensor = findViewById(R.id.ll_sensor);
 
         byteArray = new byte[1024];
         try{
@@ -35,12 +42,36 @@ public class ProcessorDetailAct extends AppCompatActivity {
             process = processBuilder.start();
             inputStream = process.getInputStream();
             while(inputStream.read(byteArray) != -1){
-                Holder = Holder + new String(byteArray);
+                holder = holder + new String(byteArray);
             }
             inputStream.close();
         } catch(IOException ex){
             ex.printStackTrace();
         }
-        textView.setText(Holder);
+        String[] infoList = holder.split("\n");
+        for (int i = 0; i < infoList.length; i++) {
+            if (infoList[i].contains("Hardware")){
+                counter = i+1;
+                break;
+            }
+        }
+
+
+        for (int i = 0; i < infoList.length; i++) {
+            View view = LayoutInflater.from(this).inflate(R.layout.processor_item, null);
+            TextView tvTitle = view.findViewById(R.id.tv_title);
+            TextView tvDesc = view.findViewById(R.id.tv_desc);
+
+            try {
+                String[] titleDetail = infoList[i].split(":");
+                tvTitle.setText(titleDetail[0]);
+                tvDesc.setText(titleDetail[1]);
+                llSensor.addView(view);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+
     }
 }

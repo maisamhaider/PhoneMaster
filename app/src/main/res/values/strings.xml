@@ -1,17 +1,10 @@
 <resources>
     <string name="app_name">PhoneMaster</string>
     <string name="clean">Clean</string>
-    <string name="clear">Clear</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="image_tab">IMAGE</string>
-    <string name="video_tab">VIDEO</string>
-    <string name="saved_tab">SAVED</string>
-    <string name="c_status_saver">STATUS SAVER</string>
     <string name="images">Images</string>
     <string name="videos">Videos</string>
     <string name="saved">Saved</string>
-    <string name="optimized">OPTIMIZED</string>
     <string name="show_charging_state_and_optimized_charging_process">show charging state and optimized charging process</string>
     <string name="smart_charge">Smart charge</string>
     <string name="fast_charge">Fast charge</string>
@@ -33,16 +26,12 @@
     <string name="clean_whatsapp">CLEAN WHATSAPP</string>
     <string name="analyzing_usage">ANALYZING USAGE</string>
     <string name="uninstall_apps">Uninstall apps</string>
-    <string name="setting">Setting</string>
 
     <string name="p_info_about"> In this application you will able to clean Ram, Junk Files, Cache and empty folders that are not usable. This app helps you to uninstall the application present in your phone, this app helps you to save status. This app shows the device info, Battery Info and also the Internet Speed, with the help of deep clean feature you can delete video images and other files. </string>
     <string name="p_info"> In this application you will able to clean Ram, Junk Files, Cache and empty folders that are not usable. This app helps you to uninstall the application present in your phone, this app helps you to save status. This app shows the device info, Battery Info and also the Internet Speed, with the help of deep clean feature you can delete video images and other files. To perform the above mentioned features we need to get permissions from the user. We neither collect any personal information nor do we host user\'s data.  </string>
     <string name="P_desc">\t\n1. Storage permission is required to get memory usage status.\n\n2. Network state permission is required to access internet data usage information.\n\n3. Contact permission is required to get information about camera.\n\n4. Phone State permission is required to get information about applications.\n\n5. Access wifi state is required to check wifi on/off state </string>
     <string name="accepting">By accepting you are agree to our <u><b>Terms and Conditions</b></u> </string>
-    <string name="yes">Yes</string>
-    <string name="no">No</string>
-    <string name="tc_title"><![CDATA[Term & Conditions]]></string>
-    <string name="share">Share</string>
-    <string name="sensors">Sensors</string>
+    <string name="repair_phone">Repairing Android</string>
+    <string name="analyzing_apps">Analyzing Apps</string>
 
 </resources>
