@@ -9,7 +9,6 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout3"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@drawable/ic_phone_master_header"
@@ -78,7 +77,6 @@
             app:layout_constraintVertical_bias="0.183" />
 
         <ScrollView
-            android:id="@+id/scrollView2"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="5dp"
@@ -126,7 +124,6 @@
 
 
                     <TextView
-                        android:id="@+id/textView4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
@@ -177,7 +174,6 @@
 
 
                     <TextView
-                        android:id="@+id/textView5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
@@ -240,7 +236,6 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/junkFileEmptyFolder_cl"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
                     android:layout_marginStart="16dp"
@@ -277,7 +272,6 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/textView6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
@@ -307,7 +301,6 @@
             app:layout_constraintBottom_toBottomOf="parent">
 
             <TextView
-                android:id="@+id/junkFileCleanBtn_tv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@android:color/transparent"
@@ -380,7 +373,6 @@
             tools:layout_editor_absoluteX="10dp">
 
             <TextView
-                android:id="@+id/junkFileMoreApp_tv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/main_button_bg"

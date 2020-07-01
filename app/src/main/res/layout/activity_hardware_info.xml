@@ -23,7 +23,6 @@
             android:gravity="center">
 
             <ImageView
-                android:id="@+id/iv_back_one2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
@@ -145,7 +144,6 @@
                     android:padding="5dp">
 
                     <TextView
-                        android:id="@+id/versionName_Tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
@@ -176,7 +174,6 @@
                     android:padding="5dp">
 
                     <TextView
-                        android:id="@+id/serial_Tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
@@ -207,7 +204,6 @@
                     android:padding="5dp">
 
                     <TextView
-                        android:id="@+id/id_Tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
@@ -238,7 +234,6 @@
                     android:padding="5dp">
 
                     <TextView
-                        android:id="@+id/brand_Tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
@@ -269,7 +264,6 @@
                     android:padding="5dp">
 
                     <TextView
-                        android:id="@+id/type_Tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
@@ -300,7 +294,6 @@
                     android:padding="5dp">
 
                     <TextView
-                        android:id="@+id/user_Tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
@@ -331,7 +324,6 @@
                     android:padding="5dp">
 
                     <TextView
-                        android:id="@+id/INCREMENTAL_Tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
@@ -362,7 +354,6 @@
                     android:padding="5dp">
 
                     <TextView
-                        android:id="@+id/SDK_Tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
@@ -393,7 +384,6 @@
                     android:padding="5dp">
 
                     <TextView
-                        android:id="@+id/BOARD_Tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
@@ -424,7 +414,6 @@
                     android:padding="5dp">
 
                     <TextView
-                        android:id="@+id/HOST_Tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
@@ -456,7 +445,6 @@
                     android:padding="5dp">
 
                     <TextView
-                        android:id="@+id/FINGERPRINT_Tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"

@@ -8,7 +8,6 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@drawable/below_corners_corved_bg"
@@ -63,7 +62,6 @@
             app:tabTextColor="@color/colorTextTwo">
 
             <com.google.android.material.tabs.TabItem
-                android:id="@+id/ti_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/ic_image_three"
@@ -72,7 +70,6 @@
             </com.google.android.material.tabs.TabItem>
 
             <com.google.android.material.tabs.TabItem
-                android:id="@+id/ti_video"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/ic_video_status"
@@ -81,7 +78,6 @@
             </com.google.android.material.tabs.TabItem>
 
             <com.google.android.material.tabs.TabItem
-                android:id="@+id/ti_saved"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/ic_saved"

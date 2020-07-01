@@ -39,6 +39,7 @@
         android:theme="@style/AppThemeNoActionBar"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
+        <activity android:name=".activities.RepairAct"></activity>
         <activity android:name=".activities.ProcessorDetailAct"></activity>
         <activity android:name=".activities.SensorListAct" />
         <activity android:name=".activities.RootCheckerAct" />
@@ -48,7 +49,7 @@
 
         <activity android:name=".activities.FeaturesAct" />
         <activity android:name=".activities.BluetoothInfoAct"></activity>
-
+        <activity android:name=".activities.DeviceInfoAct" />
         <activity
             android:name=".activities.SplashActivity"
             android:theme="@style/SplashNoActionBar">

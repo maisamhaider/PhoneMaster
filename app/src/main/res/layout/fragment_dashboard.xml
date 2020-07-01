@@ -199,7 +199,6 @@
             app:layout_constraintTop_toBottomOf="@+id/iv_app_cleanup" />
 
         <TextView
-            android:id="@+id/textView12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/status_saver"
@@ -330,7 +329,6 @@
             app:layout_constraintTop_toBottomOf="@+id/pb_ram" />
 
         <TextView
-            android:id="@+id/textView52"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Ram"

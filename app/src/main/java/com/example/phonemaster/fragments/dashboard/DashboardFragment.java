@@ -31,6 +31,7 @@ import com.example.phonemaster.activities.DeepCleanAct;
 import com.example.phonemaster.activities.InternetSpeedAct;
 import com.example.phonemaster.activities.JunkFilesAct;
 import com.example.phonemaster.activities.PhoneBoostAct;
+import com.example.phonemaster.activities.RepairAct;
 import com.example.phonemaster.activities.SmartChargingAct;
 import com.example.phonemaster.activities.UnInstallAppAct;
 import com.example.phonemaster.activities.WhatsAppStatusAct;
@@ -40,11 +41,8 @@ import com.example.phonemaster.utils.Utils;
 
 public class DashboardFragment extends Fragment implements View.OnClickListener {
 
-    private static final int REQUEST_PERMISSION = 1000;
     private Permissions permissions;
     private Utils utils;
-    private SharedPreferences preferences;
-    private int REQUEST_READ_PHONE_STATE = 5005;
     private View root;
     private AdCircleProgress cpbRam, cpbStorage;
     private ProgressBar pbRam, pbStorage;
@@ -65,7 +63,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
         permissions = new Permissions(getActivity());
         permissions.permission();
         utils = new Utils(getActivity());
-        preferences = getActivity().getSharedPreferences("myPref", Context.MODE_PRIVATE);
+        SharedPreferences preferences = getActivity().getSharedPreferences("myPref", Context.MODE_PRIVATE);
 
         cpbRam = root.findViewById(R.id.pgb_ram);
         cpbStorage = root.findViewById(R.id.pgb_storage);
@@ -84,6 +82,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
         ImageView ivCpuCooler = root.findViewById(R.id.iv_cpu_cooler);
         ImageView ivBoostPhone = root.findViewById(R.id.iv_boost_phone);
 
+        ConstraintLayout photoVideo_cl = root.findViewById(R.id.photoVideo_cl);
         ConstraintLayout cleanWhatsApp_cl = root.findViewById(R.id.cleanWhatsApp_cl);
         ConstraintLayout smartCharge_cl = root.findViewById(R.id.smartCharge_cl);
         ConstraintLayout deepClean_cl = root.findViewById(R.id.deepClean_cl);
@@ -101,6 +100,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
         ivCpuCooler.setOnClickListener(this);
         ivBoostPhone.setOnClickListener(this);
 
+        photoVideo_cl.setOnClickListener(this);
         cleanWhatsApp_cl.setOnClickListener(this);
         smartCharge_cl.setOnClickListener(this);
         deepClean_cl.setOnClickListener(this);
@@ -177,17 +177,19 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+
+            case R.id.photoVideo_cl:
+                    startActivity(new Intent(getActivity(), RepairAct.class));
+                break;
             case R.id.cleanWhatsApp_cl:
                 if (permissions.permission()) {
-                    Intent cleanWhatsAppActIntent = new Intent(getActivity(), CleanWhatsAppAct.class);
-                    startActivity(cleanWhatsAppActIntent);
+                    startActivity(new Intent(getActivity(), CleanWhatsAppAct.class));
                 } else
                     Toast.makeText(getActivity(), "Permission is not granted ", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.iv_junk_file:
                 if (permissions.permission()) {
-                    Intent cleanWhatsAppActIntent = new Intent(getActivity(), JunkFilesAct.class);
-                    startActivity(cleanWhatsAppActIntent);
+                    startActivity(new Intent(getActivity(), JunkFilesAct.class));
                 } else
                     Toast.makeText(getActivity(), "Permission is not granted ", Toast.LENGTH_SHORT).show();
                 break;
@@ -195,24 +197,20 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
             case R.id.iv_cpu_cooler:
 
                 if (permissions.permission()) {
-
-                    Intent cpuCoolerIntent = new Intent(getActivity(), CpuCooler.class);
-                    startActivity(cpuCoolerIntent);
+                    startActivity(new Intent(getActivity(), CpuCooler.class));
                 } else
                     Toast.makeText(getActivity(), "Permission is not granted ", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.iv_boost_phone:
                 if (permissions.permission()) {
-                    Intent phoneBoostIntent = new Intent(getActivity(), PhoneBoostAct.class);
-                    startActivity(phoneBoostIntent);
+                    startActivity(new Intent(getActivity(), PhoneBoostAct.class));
                 } else
                     Toast.makeText(getActivity(), "Permission is not granted ", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.iv_power_saving:
 
                 if (permissions.permission()) {
-                    Intent batterySavingIntent = new Intent(getActivity(), BatterySavingAct.class);
-                    startActivity(batterySavingIntent);
+                    startActivity(new Intent(getActivity(), BatterySavingAct.class));
                 } else {
                     Toast.makeText(getActivity(), "Permission is not granted ", Toast.LENGTH_SHORT).show();
                 }
@@ -221,8 +219,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
             case R.id.iv_app_cleanup:
 
                 if (permissions.permission()) {
-                    Intent unInstallAppIntent = new Intent(getActivity(), UnInstallAppAct.class);
-                    startActivity(unInstallAppIntent);
+                    startActivity(new Intent(getActivity(), UnInstallAppAct.class));
                 } else {
                     Toast.makeText(getActivity(), "Permission is not granted ", Toast.LENGTH_SHORT).show();
                 }
@@ -230,8 +227,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
             case R.id.iv_status_saver:
 
                 if (permissions.permission()) {
-                    Intent cSSInstallAppIntent = new Intent(getActivity(), WhatsAppStatusAct.class);
-                    startActivity(cSSInstallAppIntent);
+                    startActivity(new Intent(getActivity(), WhatsAppStatusAct.class));
                 } else {
                     Toast.makeText(getActivity(), "Permission is not granted ", Toast.LENGTH_SHORT).show();
                 }
@@ -239,16 +235,14 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
             case R.id.smartCharge_cl:
 
                 if (permissions.permission()) {
-                    Intent smartChargingIntent = new Intent(getActivity(), SmartChargingAct.class);
-                    startActivity(smartChargingIntent);
+                    startActivity(new Intent(getActivity(), SmartChargingAct.class));
                 } else {
                     Toast.makeText(getActivity(), "Permission is not granted ", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.deepClean_cl:
                 if (permissions.permission()) {
-                    Intent deepCleanIntent = new Intent(getActivity(), DeepCleanAct.class);
-                    startActivity(deepCleanIntent);
+                    startActivity(new Intent(getActivity(), DeepCleanAct.class));
                 } else {
                     Toast.makeText(getActivity(), "Permission is not granted ", Toast.LENGTH_SHORT).show();
                 }
@@ -260,7 +254,6 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
                     Toast.makeText(getActivity(), "Permission is not granted ", Toast.LENGTH_SHORT).show();
                 }
                 break;
-//
         }
     }
 
