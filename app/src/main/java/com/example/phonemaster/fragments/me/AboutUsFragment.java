@@ -16,11 +16,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.example.phonemaster.BuildConfig;
 import com.example.phonemaster.R;
@@ -50,7 +47,7 @@ public class AboutUsFragment extends Fragment {
         shareCl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                rateUs();
+                shareUs();
             }
         });
         rateUsCl.setOnClickListener(new View.OnClickListener() {
@@ -97,7 +94,7 @@ public class AboutUsFragment extends Fragment {
         return root;
     }
 
-    public void rateUs() {
+    public void shareUs() {
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
         sendIntent.putExtra(Intent.EXTRA_TEXT,
