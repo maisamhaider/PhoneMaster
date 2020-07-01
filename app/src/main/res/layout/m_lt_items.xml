@@ -110,7 +110,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_smart_charge" />
+            app:srcCompat="@drawable/ic_repair_phone" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
  <androidx.constraintlayout.widget.ConstraintLayout
@@ -295,7 +295,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_speed_test" />
+            app:srcCompat="@drawable/ic_internet_speed_one" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
