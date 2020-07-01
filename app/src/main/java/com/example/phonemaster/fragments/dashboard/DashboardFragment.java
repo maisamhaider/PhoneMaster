@@ -87,6 +87,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
         ConstraintLayout smartCharge_cl = root.findViewById(R.id.smartCharge_cl);
         ConstraintLayout deepClean_cl = root.findViewById(R.id.deepClean_cl);
         ConstraintLayout speedTest_cl = root.findViewById(R.id.speedTest_cl);
+        ConstraintLayout repair_cl = root.findViewById(R.id.repair_cl);
 
 //        b_optimize.setOnClickListener(this);
 
@@ -105,6 +106,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
         smartCharge_cl.setOnClickListener(this);
         deepClean_cl.setOnClickListener(this);
         speedTest_cl.setOnClickListener(this);
+        repair_cl.setOnClickListener(this);
 
         ramAndStorageFun();
 
@@ -179,6 +181,9 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
         switch (v.getId()) {
 
             case R.id.photoVideo_cl:
+                    startActivity(new Intent(getActivity(), RepairAct.class));
+                break;
+            case R.id.repair_cl:
                     startActivity(new Intent(getActivity(), RepairAct.class));
                 break;
             case R.id.cleanWhatsApp_cl:

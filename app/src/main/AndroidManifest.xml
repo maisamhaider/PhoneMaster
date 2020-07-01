@@ -49,7 +49,6 @@
 
         <activity android:name=".activities.FeaturesAct" />
         <activity android:name=".activities.BluetoothInfoAct"></activity>
-        <activity android:name=".activities.DeviceInfoAct" />
         <activity
             android:name=".activities.SplashActivity"
             android:theme="@style/SplashNoActionBar">

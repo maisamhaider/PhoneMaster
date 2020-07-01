@@ -29,7 +29,8 @@ public class RepairAct extends AppCompatActivity {
     private ImageView ivAppIcon,ivBack;
     private Utils untils;
     private TextView tvPackge;
-    List<String> packageName;
+    private List<String> packageName;
+    private boolean enabledBackPress = false;
 
 
     @Override
@@ -101,7 +102,7 @@ public class RepairAct extends AppCompatActivity {
 
         vRepairOne.setVisibility(View.VISIBLE);
         vRepairTwo.setVisibility(View.GONE);
-
+        enabledBackPress = false;
         ValueAnimator animator = ValueAnimator.ofInt(0, packageName.size()-1);
         animator.setInterpolator(new LinearInterpolator());
         animator.setStartDelay(0);
@@ -117,6 +118,7 @@ public class RepairAct extends AppCompatActivity {
                 if ((packageName.size()-1)==value){
                     vRepairOne.setVisibility(View.GONE);
                     vRepairTwo.setVisibility(View.VISIBLE);
+                    enabledBackPress = true;
                 }
             }
         });
@@ -127,6 +129,8 @@ public class RepairAct extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-
+        if (enabledBackPress) {
+            super.onBackPressed();
+        }
     }
 }
