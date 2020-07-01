@@ -35,8 +35,7 @@ public class ToolsFragment extends Fragment {
         ConstraintLayout appInstall_cl = root.findViewById(R.id.appInstall_cl);
 //        ConstraintLayout fileMover_cl = root.findViewById(R.id.fileMover_cl);
         ConstraintLayout hardwareInfo_cl = root.findViewById(R.id.hardwareInfo_cl);
-        ConstraintLayout speedTest_cl = root.findViewById(R.id.speedTest_cl);
-        ConstraintLayout harassmentFiler_cl = root.findViewById(R.id.harassmentFiler_cl);
+         ConstraintLayout harassmentFiler_cl = root.findViewById(R.id.harassmentFiler_cl);
         ConstraintLayout rootchecker_cl = root.findViewById(R.id.rootchecker_cl);
         ConstraintLayout sensorlist_cl = root.findViewById(R.id.sensorlist_cl);
         ConstraintLayout processesor_cl = root.findViewById(R.id.processesor_cl);
@@ -58,8 +57,7 @@ public class ToolsFragment extends Fragment {
         hardwareInfo_cl.setOnClickListener(v -> startActivity(new Intent(getActivity(), DeviceInfoAct.class)));
         blueInfo_cl.setOnClickListener(v -> startActivity(new Intent(getActivity(), BluetoothInfoAct.class)));
         hrdTest_cl.setOnClickListener(v -> startActivity(new Intent(getActivity(), HardwareTest.class)));
-        speedTest_cl.setOnClickListener(v -> startActivity(new Intent(getActivity(), InternetSpeedAct.class)));
-        deviceFeatures_cl.setOnClickListener(v -> startActivity(new Intent(getActivity(), FeaturesAct.class)));
+         deviceFeatures_cl.setOnClickListener(v -> startActivity(new Intent(getActivity(), FeaturesAct.class)));
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             harassmentFiler_cl.setOnClickListener(new View.OnClickListener() {
                 @Override

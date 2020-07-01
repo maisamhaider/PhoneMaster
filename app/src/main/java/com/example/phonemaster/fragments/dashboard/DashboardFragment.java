@@ -28,6 +28,7 @@ import com.example.phonemaster.activities.BatterySavingAct;
 import com.example.phonemaster.activities.CleanWhatsAppAct;
 import com.example.phonemaster.activities.CpuCooler;
 import com.example.phonemaster.activities.DeepCleanAct;
+import com.example.phonemaster.activities.InternetSpeedAct;
 import com.example.phonemaster.activities.JunkFilesAct;
 import com.example.phonemaster.activities.PhoneBoostAct;
 import com.example.phonemaster.activities.SmartChargingAct;
@@ -86,6 +87,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
         ConstraintLayout cleanWhatsApp_cl = root.findViewById(R.id.cleanWhatsApp_cl);
         ConstraintLayout smartCharge_cl = root.findViewById(R.id.smartCharge_cl);
         ConstraintLayout deepClean_cl = root.findViewById(R.id.deepClean_cl);
+        ConstraintLayout speedTest_cl = root.findViewById(R.id.speedTest_cl);
 
 //        b_optimize.setOnClickListener(this);
 
@@ -102,6 +104,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
         cleanWhatsApp_cl.setOnClickListener(this);
         smartCharge_cl.setOnClickListener(this);
         deepClean_cl.setOnClickListener(this);
+        speedTest_cl.setOnClickListener(this);
 
         ramAndStorageFun();
 
@@ -246,6 +249,13 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
                 if (permissions.permission()) {
                     Intent deepCleanIntent = new Intent(getActivity(), DeepCleanAct.class);
                     startActivity(deepCleanIntent);
+                } else {
+                    Toast.makeText(getActivity(), "Permission is not granted ", Toast.LENGTH_SHORT).show();
+                }
+                break;case R.id.speedTest_cl:
+                if (permissions.permission()) {
+                    Intent internetSpeedIntent = new Intent(getActivity(), InternetSpeedAct.class);
+                    startActivity(internetSpeedIntent);
                 } else {
                     Toast.makeText(getActivity(), "Permission is not granted ", Toast.LENGTH_SHORT).show();
                 }

@@ -3,6 +3,7 @@ package com.example.phonemaster.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.bluetooth.BluetoothAdapter;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
@@ -16,6 +17,7 @@ public class BluetoothInfoAct extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bluetooth_info);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         TextView blueOff_tv,blueName_tv,blueAddress_tv,blueMode_tv,blueDiscovery_tv;
         blueOff_tv = findViewById(R.id.blueOff_tv);
