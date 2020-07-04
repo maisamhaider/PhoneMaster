@@ -34,7 +34,8 @@ public class StatusImagesFrag extends Fragment {
 
     }
 
-    MainActivity mainActivity = (MainActivity)getActivity();
+    MainActivity mainActivity = (MainActivity) getActivity();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -49,15 +50,13 @@ public class StatusImagesFrag extends Fragment {
         statusNoImage_tv.setVisibility(View.GONE);
 
         File file1 = new File(Environment.getExternalStorageDirectory().getPath() + "/WhatsApp/Media/.Statuses");
-        List<CommonModel> list = utils.getListFiles(file1,"images");
+        List<CommonModel> list = utils.getListFiles(file1, "images");
 
-        if (list.size()==0)
-        {
+        if (list.size() == 0) {
             statusNoImage_tv.setVisibility(View.VISIBLE);
             statusImages_rl.setVisibility(View.GONE);
 
-        }
-else{
+        } else {
             statusNoImage_tv.setVisibility(View.GONE);
             statusImages_rl.setVisibility(View.VISIBLE);
             statusImages_rv.setLayoutManager(new GridLayoutManager(getContext(), 2));

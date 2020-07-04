@@ -225,6 +225,7 @@ public class Utils {
             if (applicationInfo != null) {
 
                 Name = (String) packageManager.getApplicationLabel(applicationInfo);
+
             }
 
         } catch (PackageManager.NameNotFoundException e) {
@@ -749,7 +750,6 @@ public class Utils {
                     finalSize = sizeGb;
 
                 }
-
             }
         }
         return finalSize;
