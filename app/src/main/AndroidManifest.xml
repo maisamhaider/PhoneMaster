@@ -90,9 +90,10 @@
         <activity android:name=".activities.WhatsAppAudioListAct" />
         <activity android:name=".activities.CleanWhatsAppAct" />
         <activity android:name=".activities.InternetSpeedAct" />
-        <activity android:name=".activities.MainActivity">
+         <activity android:name=".activities.MainActivity">
         </activity>
         <activity android:name=".activities.HardwareTest" />
+        <activity android:name=".activities.DrawingAct" />
 
         <receiver
             android:name=".receivers.BootUpReceiver"
