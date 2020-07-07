@@ -92,6 +92,7 @@
         <activity android:name=".activities.InternetSpeedAct" />
         <activity android:name=".activities.MainActivity">
         </activity>
+        <activity android:name=".activities.HardwareTest" />
 
         <receiver
             android:name=".receivers.BootUpReceiver"
