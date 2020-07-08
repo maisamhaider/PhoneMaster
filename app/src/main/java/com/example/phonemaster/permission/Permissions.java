@@ -27,7 +27,6 @@ public class Permissions {
         int phoneStatePer = ContextCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE);
         int callPer = ContextCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE);
         int readContactPer = ContextCompat.checkSelfPermission(context, Manifest.permission.READ_CONTACTS);
-        int writeContactPer = ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_CONTACTS);
         int accessNetwork = ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_NETWORK_STATE);
         int accessWifi = ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_WIFI_STATE);
 
@@ -36,7 +35,6 @@ public class Permissions {
                 && phoneStatePer == PackageManager.PERMISSION_GRANTED
                 && callPer == PackageManager.PERMISSION_GRANTED
                 && readContactPer == PackageManager.PERMISSION_GRANTED
-                && writeContactPer == PackageManager.PERMISSION_GRANTED
                 && accessNetwork == PackageManager.PERMISSION_GRANTED
                 && accessWifi == PackageManager.PERMISSION_GRANTED) {
             return true;
