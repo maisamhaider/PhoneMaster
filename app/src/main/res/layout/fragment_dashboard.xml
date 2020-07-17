@@ -10,6 +10,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:background="@android:color/white"
         android:layout_height="wrap_content">
 
         <com.app.adprogressbarlib.AdCircleProgress
@@ -81,7 +82,9 @@
             android:layout_width="0dp"
             android:layout_height="340dp"
             android:scaleType="fitXY"
+            app:layout_constraintBottom_toTopOf="@+id/iv_junk_file"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_artboard" />
