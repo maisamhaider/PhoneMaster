@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.phonemaster">
 
+    <uses-permission android:name="android.permission.PRE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
@@ -31,11 +32,12 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_luncher"
+        android:icon="@drawable/ic_main_icon_two"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/ic_luncher"
+        android:roundIcon="@drawable/ic_main_icon_two"
         android:supportsRtl="true"
         android:theme="@style/AppThemeNoActionBar"
+        android:requestLegacyExternalStorage="true"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity android:name=".activities.RepairAct" />

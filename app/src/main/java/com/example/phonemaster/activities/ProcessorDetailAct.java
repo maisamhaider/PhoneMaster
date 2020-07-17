@@ -2,11 +2,9 @@ package com.example.phonemaster.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.hardware.Sensor;
-import android.hardware.SensorManager;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
+ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -15,7 +13,7 @@ import com.example.phonemaster.R;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
+
 
 public class ProcessorDetailAct extends AppCompatActivity {
 
@@ -33,6 +31,7 @@ public class ProcessorDetailAct extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_processor_detail);
+        setRequestedOrientation( ActivityInfo.SCREEN_ORIENTATION_PORTRAIT );
 
         LinearLayout llSensor = findViewById(R.id.ll_sensor);
 

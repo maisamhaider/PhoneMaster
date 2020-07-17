@@ -19,7 +19,7 @@ import java.util.List;
 
 public class SensorListAct extends AppCompatActivity {
 
-    ArrayList<View> viewArrayList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -5,8 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.TextView;
+ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.phonemaster.R;
