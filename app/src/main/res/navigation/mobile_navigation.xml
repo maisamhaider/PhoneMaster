@@ -7,20 +7,20 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.phonemaster.fragments.dashboard.DashboardFragment"
+        android:name="com.cleaner.booster.phone.repairer.app.fragments.dashboard.DashboardFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
         android:id="@+id/navigation_tool"
-        android:name="com.example.phonemaster.fragments.tools.ToolsFragment"
+        android:name="com.cleaner.booster.phone.repairer.app.fragments.tools.ToolsFragment"
         android:label="@string/title_tool"
         tools:layout="@layout/fragment_tool" />
 
 
     <fragment
         android:id="@+id/navigation_me"
-        android:name="com.example.phonemaster.fragments.me.AboutUsFragment"
+        android:name="com.cleaner.booster.phone.repairer.app.fragments.me.AboutUsFragment"
         android:label="@string/title_me"
         tools:layout="@layout/fragment_setting" />
 </navigation>
