@@ -193,14 +193,11 @@ public class CpuCooler extends AppCompatActivity {
         cpuCoolerApps_rv.setAdapter(allAppsAdapter);
         allAppsAdapter.notifyDataSetChanged();
 
-        cpuCoolBtn_ll.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        cpuCoolBtn_ll.setOnClickListener(v -> {
 
-                CpuCooler.KillAppsTask appsTask = new KillAppsTask();
-                appsTask.execute();
+            KillAppsTask appsTask = new KillAppsTask();
+            appsTask.execute();
 
-            }
         });
 
     }
