@@ -3,9 +3,14 @@ package com.cleaner.booster.phone.repairer.app.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.annotation.SuppressLint;
+import android.app.ActivityManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -179,14 +184,18 @@ public class JunkFilesAct extends AppCompatActivity {
 
         junkFileMoreApps_ll.setOnClickListener(v -> {
             Toast.makeText(JunkFilesAct.this, "More Apps ", Toast.LENGTH_SHORT).show();
+            startActivity( new Intent( Intent.ACTION_VIEW, Uri.parse( "https://play.google.com/store/apps/developer?id=SPAG+Apps+Studio" ) ) );
+
         });
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        pkg  = utils.getAllPackages(dirPath);
+        new JunkCleanerTask().execute();
     }
+
+
 
     public void lastView() {
         junkBinDone_giv.setImageResource(R.drawable.junk_bin);
@@ -199,4 +208,24 @@ public class JunkFilesAct extends AppCompatActivity {
             whenJunkCleanedMain_cl.setVisibility(View.VISIBLE);
         }, 3000);
     }
+
+    @SuppressLint("StaticFieldLeak")
+    class JunkCleanerTask extends AsyncTask<Void, Integer, String> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(Void... voids) {
+            pkg  = utils.getAllPackages(dirPath);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+        }
+    }
+
 }

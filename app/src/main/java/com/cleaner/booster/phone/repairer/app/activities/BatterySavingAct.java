@@ -31,7 +31,7 @@ import com.cleaner.booster.phone.repairer.app.utils.Utils;
 import java.util.Calendar;
 import java.util.List;
 
-public class BatterySavingAct extends AppCompatActivity {
+public class BatterySavingAct extends BaseActivity {
     Utils utils;
 
     ConstraintLayout hibernatingAppsPkgMain_cl;

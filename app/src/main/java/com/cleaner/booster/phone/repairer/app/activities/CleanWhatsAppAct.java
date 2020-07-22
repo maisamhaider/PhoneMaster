@@ -17,7 +17,7 @@ import android.widget.TextView;
 import com.cleaner.booster.phone.repairer.app.R;
 import com.cleaner.booster.phone.repairer.app.utils.Utils;
 
-public class CleanWhatsAppAct extends AppCompatActivity implements View.OnClickListener {
+public class CleanWhatsAppAct extends BaseActivity implements View.OnClickListener {
 
     private View cleanWpOne, cleanWpTwo;
     private ProgressBar pb;
@@ -35,7 +35,7 @@ public class CleanWhatsAppAct extends AppCompatActivity implements View.OnClickL
 
         cleanWpOne = findViewById(R.id.clean_wp_one);
         cleanWpTwo = findViewById(R.id.clean_wp_two);
-
+        adView(findViewById(R.id.cleanWhatsApp_adView));
         ConstraintLayout audio_CL = findViewById(R.id.audio_CL);
         ConstraintLayout images_CL = findViewById(R.id.images_CL);
         ConstraintLayout back_up_conversation_history_CL = findViewById(R.id.back_up_conversation_history_CL);
@@ -95,16 +95,14 @@ public class CleanWhatsAppAct extends AppCompatActivity implements View.OnClickL
                 startActivity(intent1);
                 break;
             case R.id.images_CL:
-                Intent intent2 = new Intent(this, WhatsAppImagesListAct.class);
-                startActivity(intent2);
-                break;
+                 sNewActivityAds(new WhatsAppImagesListAct());
+                 break;
             case R.id.audio_CL:
                 Intent intent3 = new Intent(this, WhatsAppAudioListAct.class);
                 startActivity(intent3);
                 break;
             case R.id.video_CL:
-                Intent intent4 = new Intent(this, WhatsAppVideosListAct.class);
-                startActivity(intent4);
+                sNewActivityAds(new WhatsAppVideosListAct());
                 break;
             case R.id.received_file_CL:
                 Intent intent5 = new Intent(this, WhatsAppDocumentsListAct.class);

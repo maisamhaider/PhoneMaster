@@ -22,7 +22,7 @@ import android.widget.Toast;
 import com.cleaner.booster.phone.repairer.app.R;
 import com.cleaner.booster.phone.repairer.app.utils.Utils;
 
-public class HarassmentFilterAct extends AppCompatActivity {
+public class HarassmentFilterAct extends BaseActivity {
     Utils utils;
     Button copyContact_btn, block_unBlock_btn;
     static final int PICK_CONTACT = 1;
@@ -39,7 +39,7 @@ public class HarassmentFilterAct extends AppCompatActivity {
 
         utils = new Utils(this);
         telecomManager = (TelecomManager) getSystemService(Context.TELECOM_SERVICE);
-
+        adView(findViewById(R.id.harassmentFilter_adView));
         copyContact_btn = findViewById(R.id.copyContact_btn);
         block_unBlock_btn = findViewById(R.id.block_unBlock_btn);
         ivBack = findViewById(R.id.iv_h_back);

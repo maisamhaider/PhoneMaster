@@ -25,8 +25,9 @@ import com.cleaner.booster.phone.repairer.app.activities.ProcessorDetailAct;
 import com.cleaner.booster.phone.repairer.app.activities.RootCheckerAct;
 import com.cleaner.booster.phone.repairer.app.activities.SensorListAct;
 import com.cleaner.booster.phone.repairer.app.activities.UnInstallAppAct;
+import com.cleaner.booster.phone.repairer.app.fragments.BaseFragment;
 
-public class ToolsFragment extends Fragment {
+public class ToolsFragment extends BaseFragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -35,7 +36,7 @@ public class ToolsFragment extends Fragment {
         ConstraintLayout appInstall_cl = root.findViewById(R.id.appInstall_cl);
 //        ConstraintLayout fileMover_cl = root.findViewById(R.id.fileMover_cl);
         ConstraintLayout hardwareInfo_cl = root.findViewById(R.id.hardwareInfo_cl);
-         ConstraintLayout harassmentFiler_cl = root.findViewById(R.id.harassmentFiler_cl);
+        ConstraintLayout harassmentFiler_cl = root.findViewById(R.id.harassmentFiler_cl);
         ConstraintLayout rootchecker_cl = root.findViewById(R.id.rootchecker_cl);
         ConstraintLayout sensorlist_cl = root.findViewById(R.id.sensorlist_cl);
         ConstraintLayout processesor_cl = root.findViewById(R.id.processesor_cl);
@@ -51,20 +52,15 @@ public class ToolsFragment extends Fragment {
 //                startActivity(new Intent(getActivity(), FilesMoverAct.class));
 //            }
 //        });
-        processesor_cl.setOnClickListener(v -> startActivity(new Intent(getActivity(), ProcessorDetailAct.class)));
-        rootchecker_cl.setOnClickListener(v -> startActivity(new Intent(getActivity(), RootCheckerAct.class)));
-        sensorlist_cl.setOnClickListener(v -> startActivity(new Intent(getActivity(), SensorListAct.class)));
-        hardwareInfo_cl.setOnClickListener(v -> startActivity(new Intent(getActivity(), DeviceInfoAct.class)));
-        blueInfo_cl.setOnClickListener(v -> startActivity(new Intent(getActivity(), BluetoothInfoAct.class)));
-        hrdTest_cl.setOnClickListener(v -> startActivity(new Intent(getActivity(), HardwareTest.class)));
-         deviceFeatures_cl.setOnClickListener(v -> startActivity(new Intent(getActivity(), FeaturesAct.class)));
+        processesor_cl.setOnClickListener(v -> sNewActivityAds(new ProcessorDetailAct()));
+        rootchecker_cl.setOnClickListener(v -> sNewActivityAds(new RootCheckerAct()));
+        sensorlist_cl.setOnClickListener(v -> sNewActivityAds(new SensorListAct()));
+        hardwareInfo_cl.setOnClickListener(v -> sNewActivityAds(new DeviceInfoAct()));
+        blueInfo_cl.setOnClickListener(v -> sNewActivityAds(new BluetoothInfoAct()));
+        hrdTest_cl.setOnClickListener(v -> sNewActivityAds(new HardwareTest()));
+        deviceFeatures_cl.setOnClickListener(v -> sNewActivityAds(new FeaturesAct()));
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            harassmentFiler_cl.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startActivity(new Intent(getActivity(), HarassmentFilterAct.class));
-                }
-            });
+            harassmentFiler_cl.setOnClickListener(v -> sNewActivityAds(new HarassmentFilterAct()));
         } else {
             harassmentFiler_cl.setVisibility(View.GONE);
         }

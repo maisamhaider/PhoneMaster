@@ -24,6 +24,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.app.adprogressbarlib.AdCircleProgress;
 import com.cleaner.booster.phone.repairer.app.R;
+import com.cleaner.booster.phone.repairer.app.activities.BaseActivity;
 import com.cleaner.booster.phone.repairer.app.activities.BatterySavingAct;
 import com.cleaner.booster.phone.repairer.app.activities.CleanWhatsAppAct;
 import com.cleaner.booster.phone.repairer.app.activities.CpuCooler;
@@ -35,18 +36,19 @@ import com.cleaner.booster.phone.repairer.app.activities.RepairAct;
 import com.cleaner.booster.phone.repairer.app.activities.SmartChargingAct;
 import com.cleaner.booster.phone.repairer.app.activities.UnInstallAppAct;
 import com.cleaner.booster.phone.repairer.app.activities.WhatsAppStatusAct;
+import com.cleaner.booster.phone.repairer.app.fragments.BaseFragment;
 import com.cleaner.booster.phone.repairer.app.permission.Permissions;
 import com.cleaner.booster.phone.repairer.app.utils.Utils;
 
 
-public class DashboardFragment extends Fragment implements View.OnClickListener {
+public class DashboardFragment extends BaseFragment implements View.OnClickListener {
 
     private Permissions permissions;
     private Utils utils;
     private View root;
     private AdCircleProgress cpbRam, cpbStorage;
     private ProgressBar pbRam, pbStorage;
-    private TextView tvRamInfo, tvStorageInfo,tv_num;
+    private TextView tvRamInfo, tvStorageInfo, tv_num;
 //    private Button b_optimize;
 
 
@@ -60,10 +62,10 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
     }
 
     public void init() {
-        permissions = new Permissions(getActivity());
+        permissions = new Permissions(getContext());
         permissions.permission();
-        utils = new Utils(getActivity());
-        SharedPreferences preferences = getActivity().getSharedPreferences("myPref", Context.MODE_PRIVATE);
+        utils = new Utils(getContext());
+        SharedPreferences preferences = getContext().getSharedPreferences("myPref", Context.MODE_PRIVATE);
 
         cpbRam = root.findViewById(R.id.pgb_ram);
         cpbStorage = root.findViewById(R.id.pgb_storage);
@@ -91,7 +93,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
 
 //        b_optimize.setOnClickListener(this);
 
-        @SuppressLint("DefaultLocale") String temp1 = String.format("%d",(int)utils.cpuTemperature());
+        @SuppressLint("DefaultLocale") String temp1 = String.format("%d", (int) utils.cpuTemperature());
         tv_num.setText(temp1);
 
         ivAppCleanup.setOnClickListener(this);
@@ -119,7 +121,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
 //        TextView storageUsagePercent_tv = root.findViewById(R.id.storageUsagePercent_tv);
 
 //for Ram
-        ActivityManager activityManager = (ActivityManager) getActivity().getSystemService(Context.ACTIVITY_SERVICE);
+        ActivityManager activityManager = (ActivityManager) getContext().getSystemService(Context.ACTIVITY_SERVICE);
         ActivityManager.MemoryInfo memoryInfo = new ActivityManager.MemoryInfo();
         activityManager.getMemoryInfo(memoryInfo);
         float totalRam1 = memoryInfo.totalMem;
@@ -181,82 +183,86 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
         switch (v.getId()) {
 
             case R.id.photoVideo_cl:
-                    startActivity(new Intent(getActivity(), RepairAct.class));
+                sNewActivityAds(new RepairAct());
                 break;
             case R.id.repair_cl:
-                    startActivity(new Intent(getActivity(), RepairAct.class));
+                sNewActivityAds(new RepairAct());
+
                 break;
             case R.id.cleanWhatsApp_cl:
                 if (permissions.permission()) {
-                    startActivity(new Intent(getActivity(), CleanWhatsAppAct.class));
+                    sNewActivityAds(new CleanWhatsAppAct());
                 } else
-                    Toast.makeText(getActivity(), "Permission is not granted ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Permission is not granted ", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.iv_junk_file:
                 if (permissions.permission()) {
-                    startActivity(new Intent(getActivity(), JunkFilesAct.class));
+                    sNewActivityAds(new JunkFilesAct());
+
                 } else
-                    Toast.makeText(getActivity(), "Permission is not granted ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Permission is not granted ", Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.iv_cpu_cooler:
 
                 if (permissions.permission()) {
-                    startActivity(new Intent(getActivity(), CpuCooler.class));
+                    sNewActivityAds(new CpuCooler());
+
                 } else
-                    Toast.makeText(getActivity(), "Permission is not granted ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Permission is not granted ", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.iv_boost_phone:
                 if (permissions.permission()) {
-                    startActivity(new Intent(getActivity(), PhoneBoostAct.class));
+                    sNewActivityAds(new PhoneBoostAct());
                 } else
-                    Toast.makeText(getActivity(), "Permission is not granted ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Permission is not granted ", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.iv_power_saving:
 
                 if (permissions.permission()) {
-                    startActivity(new Intent(getActivity(), BatterySavingAct.class));
+                    sNewActivityAds(new BatterySavingAct());
                 } else {
-                    Toast.makeText(getActivity(), "Permission is not granted ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Permission is not granted ", Toast.LENGTH_SHORT).show();
                 }
                 break;
 
             case R.id.iv_app_cleanup:
 
                 if (permissions.permission()) {
-                    startActivity(new Intent(getActivity(), UnInstallAppAct.class));
+                    sNewActivityAds(new UnInstallAppAct());
+
                 } else {
-                    Toast.makeText(getActivity(), "Permission is not granted ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Permission is not granted ", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.iv_status_saver:
 
                 if (permissions.permission()) {
-                    startActivity(new Intent(getActivity(), WhatsAppStatusAct.class));
+                    sNewActivityAds(new WhatsAppStatusAct());
                 } else {
-                    Toast.makeText(getActivity(), "Permission is not granted ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Permission is not granted ", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.smartCharge_cl:
 
                 if (permissions.permission()) {
-                    startActivity(new Intent(getActivity(), SmartChargingAct.class));
+                    sNewActivityAds(new SmartChargingAct());
                 } else {
-                    Toast.makeText(getActivity(), "Permission is not granted ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Permission is not granted ", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.deepClean_cl:
                 if (permissions.permission()) {
-                    startActivity(new Intent(getActivity(), DeepCleanAct.class));
+                    sNewActivityAds(new DeepCleanAct());
                 } else {
-                    Toast.makeText(getActivity(), "Permission is not granted ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Permission is not granted ", Toast.LENGTH_SHORT).show();
                 }
-                break;case R.id.speedTest_cl:
+                break;
+            case R.id.speedTest_cl:
                 if (permissions.permission()) {
-                    Intent internetSpeedIntent = new Intent(getActivity(), InternetSpeedAct.class);
-                    startActivity(internetSpeedIntent);
+                    sNewActivityAds(new InternetSpeedAct());
                 } else {
-                    Toast.makeText(getActivity(), "Permission is not granted ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Permission is not granted ", Toast.LENGTH_SHORT).show();
                 }
                 break;
         }

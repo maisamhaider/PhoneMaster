@@ -10,9 +10,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <!--    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />-->
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /> -->
     <uses-permission
         android:name="android.permission.PACKAGE_USAGE_STATS"
         tools:ignore="ProtectedPermissions" />
@@ -34,12 +32,13 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_main_icon_two"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@drawable/ic_main_icon_two"
         android:supportsRtl="true"
         android:theme="@style/AppThemeNoActionBar"
-        android:requestLegacyExternalStorage="true"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
+        <activity android:name=".activities.BaseActivity" />
         <activity android:name=".activities.RepairAct" />
         <activity android:name=".activities.ProcessorDetailAct" />
         <activity android:name=".activities.SensorListAct" />
@@ -47,7 +46,6 @@
         <activity
             android:name=".activities.DeviceInfoAct"
             android:launchMode="singleInstance" />
-
         <activity android:name=".activities.FeaturesAct" />
         <activity android:name=".activities.BluetoothInfoAct" />
         <activity
@@ -91,7 +89,7 @@
         <activity android:name=".activities.WhatsAppAudioListAct" />
         <activity android:name=".activities.CleanWhatsAppAct" />
         <activity android:name=".activities.InternetSpeedAct" />
-        <activity android:name=".activities.MainActivity"/>
+        <activity android:name=".activities.MainActivity" />
         <activity android:name=".activities.HardwareTest" />
         <activity android:name=".activities.DrawingAct" />
 
@@ -110,8 +108,8 @@
             android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.SCREEN_OFF"/>
-                <action android:name="android.intent.action.SCREEN_ON"/>
+                <action android:name="android.intent.action.SCREEN_OFF" />
+                <action android:name="android.intent.action.SCREEN_ON" />
                 <action android:name="android.intent.action.PHONE_STATE" />
                 <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
                 <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
@@ -122,6 +120,13 @@
             android:name=".services.SmartChargeService"
             android:enabled="true"
             android:exported="false" />
+
+         <meta-data
+         android:name="com.google.android.gms.ads.APPLICATION_ID"
+         android:value="@string/app_id"/>
+        <meta-data
+            android:name="com.google.android.gms.ads.AD_MANAGER_APP"
+            android:value="true" />
     </application>
 
 </manifest>

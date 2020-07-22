@@ -22,8 +22,9 @@ import androidx.fragment.app.Fragment;
 import com.cleaner.booster.phone.repairer.app.BuildConfig;
 import com.cleaner.booster.phone.repairer.app.R;
 import com.cleaner.booster.phone.repairer.app.activities.MainActivity;
+import com.cleaner.booster.phone.repairer.app.fragments.BaseFragment;
 
-public class AboutUsFragment extends Fragment {
+public class AboutUsFragment extends BaseFragment {
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -36,27 +37,12 @@ public class AboutUsFragment extends Fragment {
         ConstraintLayout rateUsCl = root.findViewById(R.id.rateUs_cl);
         ConstraintLayout aboutUsCl = root.findViewById(R.id.aboutUs_cl);
 
+        adView(root.findViewById(R.id.settingBanner_adView));
 
-        ivTool.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((MainActivity) requireActivity()).onBackPressed();
-            }
-        });
+        ivTool.setOnClickListener((View.OnClickListener) v -> ((MainActivity) requireActivity()).onBackPressed());
 
-        shareCl.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                shareUs();
-            }
-        });
-        rateUsCl.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + getActivity().getPackageName())));
-
-            }
-        });
+        shareCl.setOnClickListener(v -> shareUs());
+        rateUsCl.setOnClickListener(v -> startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + getActivity().getPackageName()))));
 
         aboutUsCl.setOnClickListener(new View.OnClickListener() {
             @Override

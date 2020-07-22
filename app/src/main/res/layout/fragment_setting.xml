@@ -59,6 +59,7 @@
 
 
         <include
+            android:id="@+id/include"
             layout="@layout/setting_it_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -66,7 +67,20 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view"/>
+            app:layout_constraintTop_toBottomOf="@+id/view" />
+
+
+        <com.google.android.gms.ads.AdView
+            xmlns:ads="http://schemas.android.com/apk/res-auto"
+            ads:adSize="BANNER"
+            ads:adUnitId="ca-app-pub-8589419510089723/5476337829"
+            android:id="@+id/settingBanner_adView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

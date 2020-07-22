@@ -1,7 +1,12 @@
 <resources>
-    <string name="app_name">Phone Repair</string>
+    <string name="app_name">repair system: Fast Repair &amp; Phone Cleaner for all</string>
     <string name="clean">Clean</string>
     <!-- TODO: Remove or change this placeholder text -->
+
+        <string name="app_id">ca-app-pub-8589419510089723~2498820693</string>
+    <string name="banner">ca-app-pub-8589419510089723/5476337829</string>
+    <string name="interstial">ca-app-pub-8589419510089723/8681085668</string>
+
     <string name="images">Images</string>
     <string name="videos">Videos</string>
     <string name="saved">Saved</string>
