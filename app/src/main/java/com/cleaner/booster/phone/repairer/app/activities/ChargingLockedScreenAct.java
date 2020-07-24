@@ -94,28 +94,19 @@ public class ChargingLockedScreenAct extends AppCompatActivity {
         tvTime.setText(getTime());
         tvDate.setText(getDate());
 
-        ivJunkFile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                selection = 1;
-                new BackgroundTask().execute();
+        ivJunkFile.setOnClickListener(v -> {
+            selection = 1;
+            new BackgroundTask().execute();
 
-            }
         });
-        ivCpuCooler.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                selection = 2;
-                new BackgroundTask().execute();
-            }
+        ivCpuCooler.setOnClickListener(v -> {
+            selection = 2;
+            new BackgroundTask().execute();
         });
 
-        ivBoostPhone.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                selection = 3;
-                new BackgroundTask().execute();
-            }
+        ivBoostPhone.setOnClickListener(v -> {
+            selection = 3;
+            new BackgroundTask().execute();
         });
 
         vHead.setBackground(getResources().getDrawable(R.drawable.s_bg_head));
@@ -129,17 +120,14 @@ public class ChargingLockedScreenAct extends AppCompatActivity {
         animator.setInterpolator(new LinearInterpolator());
         animator.setStartDelay(0);
         animator.setDuration(2_000);
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                int value = (int) valueAnimator.getAnimatedValue();
-                pbBattery.setProgress(value);
-                String bValue = value + "%";
-                tvPercentage.setText(bValue);
-                if (value == 100) {
-                    playOrVibrate();
-                    vHead.setBackground(getResources().getDrawable(R.drawable.bg_head));
-                }
+        animator.addUpdateListener(valueAnimator -> {
+            int value = (int) valueAnimator.getAnimatedValue();
+            pbBattery.setProgress(value);
+            String bValue = value + "%";
+            tvPercentage.setText(bValue);
+            if (value == 100) {
+                playOrVibrate();
+                vHead.setBackground(getResources().getDrawable(R.drawable.bg_head));
             }
         });
         animator.start();

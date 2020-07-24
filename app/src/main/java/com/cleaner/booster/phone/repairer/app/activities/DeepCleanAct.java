@@ -217,30 +217,46 @@ public class DeepCleanAct extends BaseActivity {
             });
             animatorText.start();
 
+            if (utils.getAllImagePaths().size()  - 1 >= 0)
+            {
+                Glide.with(getBaseContext())
+                        .load(utils.getAllImagePaths().get(utils.getAllImagePaths().size() - 1).getImagePath())
+                        .into(deepCleanImage_iv1);
+
+            } if (utils.getAllImagePaths().size()  - 2 >= 0)
+            {
+
+                Glide.with(getApplicationContext())
+                        .load(utils.getAllImagePaths().get(utils.getAllImagePaths().size() - 2).getImagePath())
+                        .into(deepCleanImage_iv2);
+            } if (utils.getAllImagePaths().size()  - 3 >= 0)
+            {
+                Glide.with(getApplicationContext())
+                        .load(utils.getAllImagePaths().get(utils.getAllImagePaths().size() - 3).getImagePath())
+                        .into(deepCleanImage_iv3);
+            }
+
+            if (utils.getAllVideosPaths().size() - 1 >= 0)
+            {
+                Glide.with(getApplicationContext())
+                        .load(utils.getAllVideosPaths().get(utils.getAllVideosPaths().size() - 1).getVideoPath())
+                        .into(deepCleanVideos_iv1);
+
+            }
+            if (utils.getAllVideosPaths().size() - 2 >= 0)
+            {
+                Glide.with(getApplicationContext())
+                        .load(utils.getAllVideosPaths().get(utils.getAllVideosPaths().size() - 2).getVideoPath())
+                        .into(deepCleanVideos_iv2);
+            }
+            if (utils.getAllVideosPaths().size() - 3 >= 0)
+            {
+                Glide.with(getApplicationContext())
+                        .load(utils.getAllVideosPaths().get(utils.getAllVideosPaths().size() - 3).getVideoPath())
+                        .into(deepCleanVideos_iv3);
+            }
 
 
-            Glide.with(getBaseContext())
-                    .load(utils.getAllImagePaths().get(utils.getAllImagePaths().size() - 1).getImagePath())
-                    .into(deepCleanImage_iv1);
-            Glide.with(getApplicationContext())
-                    .load(utils.getAllImagePaths().get(utils.getAllImagePaths().size() - 2).getImagePath())
-                    .into(deepCleanImage_iv2);
-            Glide.with(getApplicationContext())
-                    .load(utils.getAllImagePaths().get(utils.getAllImagePaths().size() - 3).getImagePath())
-                    .into(deepCleanImage_iv3);
-
-
-
-
-            Glide.with(getApplicationContext())
-                    .load(utils.getAllVideosPaths().get(utils.getAllVideosPaths().size() - 1).getVideoPath())
-                    .into(deepCleanVideos_iv1);
-            Glide.with(getApplicationContext())
-                    .load(utils.getAllVideosPaths().get(utils.getAllVideosPaths().size() - 2).getVideoPath())
-                    .into(deepCleanVideos_iv2);
-            Glide.with(getApplicationContext())
-                    .load(utils.getAllVideosPaths().get(utils.getAllVideosPaths().size() - 3).getVideoPath())
-                    .into(deepCleanVideos_iv3);
 
             super.onPostExecute(s);
         }
