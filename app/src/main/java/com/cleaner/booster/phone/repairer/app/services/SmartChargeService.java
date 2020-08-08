@@ -98,8 +98,6 @@ public class SmartChargeService extends Service {
                     getApplicationContext().registerReceiver(fastChargingChargerReceiver, intentChargingFilter);
                 }
 
-
-
             }
         },4_000,1_000);
         return START_STICKY;
@@ -110,8 +108,7 @@ public class SmartChargeService extends Service {
 
     @Override
     public void onTaskRemoved(Intent rootIntent) {
-        Intent restartService = new Intent(getApplicationContext(),
-                this.getClass());
+        Intent restartService = new Intent(getApplicationContext(), this.getClass());
         restartService.setPackage(getPackageName());
         PendingIntent restartServicePI = PendingIntent.getService(
                 getApplicationContext(), 1, restartService,
