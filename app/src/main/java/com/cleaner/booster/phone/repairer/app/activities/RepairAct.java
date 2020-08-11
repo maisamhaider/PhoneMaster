@@ -3,6 +3,7 @@ package com.cleaner.booster.phone.repairer.app.activities;
 import android.animation.ValueAnimator;
 import android.app.ActivityManager;
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -37,6 +38,7 @@ public class RepairAct extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_repair);
+        setRequestedOrientation( ActivityInfo.SCREEN_ORIENTATION_PORTRAIT );
         init();
     }
 
