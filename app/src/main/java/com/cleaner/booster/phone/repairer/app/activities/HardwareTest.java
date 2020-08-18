@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -210,11 +211,16 @@ public class HardwareTest extends AppCompatActivity implements View.OnClickListe
         @Override
         public void onReceive(Context context, Intent intent) {
             int isConnected = intent.getIntExtra( "state", -1 );
-            if (isConnected != -1) {
-                isHeadphoneCtd = true;
-            } else {
+            if (isConnected == 0)
+            {
                 isHeadphoneCtd = false;
             }
+            else if (isConnected ==1)
+            {
+                isHeadphoneCtd = true;
+            }
+            else
+                Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
         }
     };
 

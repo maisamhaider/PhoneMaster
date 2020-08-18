@@ -181,26 +181,26 @@ public class FilesMoverAct extends AppCompatActivity {
 
             if (utils.getAllImagePaths().size() != 0) {
                 Glide.with(this)
-                        .load(utils.getAllImagePaths().get(utils.getAllImagePaths().size() - 1).getImagePath())
+                        .load(utils.getAllImagePaths().get(utils.getAllImagePaths().size() - 1).getPath())
                         .into(fileMoverImage_iv1);
                 Glide.with(this)
-                        .load(utils.getAllImagePaths().get(utils.getAllImagePaths().size() - 2).getImagePath())
+                        .load(utils.getAllImagePaths().get(utils.getAllImagePaths().size() - 2).getPath())
                         .into(fileMoverImage_iv2);
                 Glide.with(this)
-                        .load(utils.getAllImagePaths().get(utils.getAllImagePaths().size() - 3).getImagePath())
+                        .load(utils.getAllImagePaths().get(utils.getAllImagePaths().size() - 3).getPath())
                         .into(fileMoverImage_iv3);
             }
 
             if (utils.getAllVideosPaths().size() != 0) {
 
                 Glide.with(this)
-                        .load(utils.getAllVideosPaths().get(utils.getAllVideosPaths().size() - 1).getVideoPath())
+                        .load(utils.getAllVideosPaths().get(utils.getAllVideosPaths().size() - 1).getPath())
                         .into(fileMoverVideos_iv1);
                 Glide.with(this)
-                        .load(utils.getAllVideosPaths().get(utils.getAllVideosPaths().size() - 2).getVideoPath())
+                        .load(utils.getAllVideosPaths().get(utils.getAllVideosPaths().size() - 2).getPath())
                         .into(fileMoverVideos_iv2);
                 Glide.with(this)
-                        .load(utils.getAllVideosPaths().get(utils.getAllVideosPaths().size() - 3).getVideoPath())
+                        .load(utils.getAllVideosPaths().get(utils.getAllVideosPaths().size() - 3).getPath())
                         .into(fileMoverVideos_iv3);
             }
             initIntents();

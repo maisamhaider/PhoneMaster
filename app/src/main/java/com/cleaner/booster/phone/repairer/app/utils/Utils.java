@@ -19,11 +19,6 @@ import android.widget.Toast;
 import androidx.core.content.ContextCompat;
 
 import com.cleaner.booster.phone.repairer.app.models.CommonModel;
-import com.cleaner.booster.phone.repairer.app.models.DeepCleanAudioModel;
-import com.cleaner.booster.phone.repairer.app.models.DeepCleanDocsModel;
-import com.cleaner.booster.phone.repairer.app.models.DeepCleanImagesModel;
-import com.cleaner.booster.phone.repairer.app.models.DeepCleanPackagesModel;
-import com.cleaner.booster.phone.repairer.app.models.DeepCleanVideosModel;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -382,9 +377,9 @@ public class Utils {
     }
 
     @SuppressLint("Recycle")
-    public List<DeepCleanImagesModel> getAllImagePaths() {
-        List<DeepCleanImagesModel> list = new ArrayList<>();
-        DeepCleanImagesModel file;
+    public List<CommonModel> getAllImagePaths() {
+        List<CommonModel> list = new ArrayList<>();
+        CommonModel file;
         Uri uri;
         Cursor cursor;
         int column_index_data;
@@ -400,8 +395,8 @@ public class Utils {
             String title = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.TITLE));
             long size = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.SIZE));
 //            Long size = (new File(absolutePathOfVideo)).length();
-            file = new DeepCleanImagesModel();
-            file.setImagePath(absolutePath);
+            file = new CommonModel();
+            file.setPath(absolutePath);
 //            file.setSize(size);
 //            file.setType(FileTypes.ImageType);
             if (/*isPhoto(absolutePathOfVideo) &&*/ size > 0)
@@ -410,9 +405,9 @@ public class Utils {
         return list;
     }
 
-    public List<DeepCleanVideosModel> getAllVideosPaths() {
-        List<DeepCleanVideosModel> list = new ArrayList<>();
-        DeepCleanVideosModel file;
+    public List<CommonModel> getAllVideosPaths() {
+        List<CommonModel> list = new ArrayList<>();
+        CommonModel file;
         Uri uri;
         Cursor cursor;
         int column_index_data;
@@ -427,8 +422,8 @@ public class Utils {
             String title = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.TITLE));
             long size = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.SIZE));
 //            Long size = (new File(absolutePathOfVideo)).length();
-            file = new DeepCleanVideosModel();
-            file.setVideoPath(absolutePath);
+            file = new CommonModel();
+            file.setPath(absolutePath);
 //            file.setSize(size);
 //            file.setType(FileTypes.ImageType);
             if (/*isPhoto(absolutePathOfVideo) &&*/ size > 0)
@@ -437,9 +432,9 @@ public class Utils {
         return list;
     }
 
-    public List<DeepCleanAudioModel> getAllAudiosPaths() {
-        List<DeepCleanAudioModel> list = new ArrayList<>();
-        DeepCleanAudioModel file;
+    public List<CommonModel> getAllAudiosPaths() {
+        List<CommonModel> list = new ArrayList<>();
+        CommonModel file;
         Uri uri;
         Cursor cursor;
         int column_index_data;
@@ -454,9 +449,9 @@ public class Utils {
             String title = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.TITLE));
             long size = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.SIZE));
 //            Long size = (new File(absolutePathOfVideo)).length();
-            file = new DeepCleanAudioModel();
-            file.setAudioPath(absolutePath);
-            file.setAudioName(title);
+            file = new CommonModel();
+            file.setPath(absolutePath);
+            file.setName(title);
 //            file.setSize(size);
 //            file.setType(FileTypes.ImageType);
             if (/*isPhoto(absolutePathOfVideo) &&*/ size > 0)
@@ -466,26 +461,26 @@ public class Utils {
     }
 
 
-    public List<DeepCleanDocsModel> getAllDocs(String path) {
+    public List<CommonModel> getAllDocs(String path) {
         File fold = new File(path);
-        List<DeepCleanDocsModel> docList = new ArrayList<>();
+        List<CommonModel> docList = new ArrayList<>();
         File[] mlist = fold.listFiles();
         File[] mFilelist = fold.listFiles(new AllDoFilter());
         if (mlist != null) {
             for (File f : mlist) {
                 if (f.isDirectory()) {
-                    List<DeepCleanDocsModel> fList = getAllDocs(f.getAbsolutePath());
+                    List<CommonModel> fList = getAllDocs(f.getAbsolutePath());
                     docList.addAll(fList);
                 }
             }
         }
         if (mFilelist != null) {
             for (File f : mFilelist) {
-                DeepCleanDocsModel doc = new DeepCleanDocsModel();
-                doc.setDocName(f.getName());
+                CommonModel doc = new CommonModel();
+                doc.setName(f.getName());
     //                doc.setSize(f.length());
     //                doc.setType(FileTypes.DocumentType);
-                doc.setDocPath(f.getAbsolutePath());
+                doc.setPath(f.getAbsolutePath());
                 if (f.length() > 0)
                     docList.add(doc);
             }
@@ -494,26 +489,26 @@ public class Utils {
     }
 
 
-    public List<DeepCleanVideosModel> getVideos(String path) {
+    public List<CommonModel> getVideos(String path) {
         File fold = new File(path);
-        List<DeepCleanVideosModel> docList = new ArrayList<>();
+        List<CommonModel> docList = new ArrayList<>();
         File[] mlist = fold.listFiles();
         File[] mFilelist = fold.listFiles();
         if (mlist != null) {
             for (File f : mlist) {
                 if (f.isDirectory()) {
-                    List<DeepCleanVideosModel> fList = getVideos(f.getAbsolutePath());
+                    List<CommonModel> fList = getVideos(f.getAbsolutePath());
                     docList.addAll(fList);
                 }
             }
         }
         if (mFilelist != null) {
             for (File f : mFilelist) {
-                DeepCleanVideosModel doc = new DeepCleanVideosModel();
-                doc.setVideoName(f.getName());
+                CommonModel doc = new CommonModel();
+                doc.setName(f.getName());
     //                doc.setSize(f.length());
     //                doc.setType(FileTypes.DocumentType);
-                doc.setVideoPath(f.getAbsolutePath());
+                doc.setPath(f.getAbsolutePath());
                 if (f.length() > 0)
                     docList.add(doc);
             }
@@ -521,26 +516,26 @@ public class Utils {
         return docList;
     }
 
-    public List<DeepCleanImagesModel> getImages(String path) {
+    public List<CommonModel> getImages(String path) {
         File fold = new File(path);
-        List<DeepCleanImagesModel> docList = new ArrayList<>();
+        List<CommonModel> docList = new ArrayList<>();
         File[] mlist = fold.listFiles();
         File[] mFilelist = fold.listFiles();
         if (mlist != null) {
             for (File f : mlist) {
                 if (f.isDirectory()) {
-                    List<DeepCleanImagesModel> fList = getImages(f.getAbsolutePath());
+                    List<CommonModel> fList = getImages(f.getAbsolutePath());
                     docList.addAll(fList);
                 }
             }
         }
         if (mFilelist != null) {
             for (File f : mFilelist) {
-               DeepCleanImagesModel img = new DeepCleanImagesModel();
-               img.setImageName(f.getName());
+                CommonModel img = new CommonModel();
+               img.setName(f.getName());
    //                doc.setSize(f.length());
    //                doc.setType(FileTypes.DocumentType);
-               img.setImagePath(f.getAbsolutePath());
+               img.setPath(f.getAbsolutePath());
                if (f.length() > 0)
                    docList.add(img);
            }
@@ -549,25 +544,25 @@ public class Utils {
     }
 
 
-    public List<DeepCleanPackagesModel> getAllPackages(String path) {
+    public List<CommonModel> getAllPackages(String path) {
         File fold = new File(path);
-        List<DeepCleanPackagesModel> docList = new ArrayList<>();
+        List<CommonModel> docList = new ArrayList<>();
         File[] mlist = fold.listFiles();
         File[] mFilelist = fold.listFiles(new AllPackagesFilter());
         if (mlist != null) {
             for (File f : mlist) {
                 if (f.isDirectory()) {
-                    List<DeepCleanPackagesModel> fList = getAllPackages(f.getAbsolutePath());
+                    List<CommonModel> fList = getAllPackages(f.getAbsolutePath());
                     docList.addAll(fList);
                 }
             }
             if (mFilelist != null) {
                 for (File f : mFilelist) {
-                    DeepCleanPackagesModel doc = new DeepCleanPackagesModel();
-                    doc.setPkgName(f.getName());
+                    CommonModel doc = new CommonModel();
+                    doc.setName(f.getName());
     //                doc.setSize(f.length());
     //                doc.setType(FileTypes.DocumentType);
-                    doc.setPkgPath(f.getAbsolutePath());
+                    doc.setPath(f.getAbsolutePath());
                     if (f.length() > 0)
                         docList.add(doc);
                 }

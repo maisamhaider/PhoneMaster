@@ -4,25 +4,21 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.cleaner.booster.phone.repairer.app.R;
-import com.cleaner.booster.phone.repairer.app.models.DeepCleanAudioModel;
-import com.cleaner.booster.phone.repairer.app.models.DeepCleanDocsModel;
+import com.cleaner.booster.phone.repairer.app.models.CommonModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DeepCleanDocsAdapter extends RecyclerView.Adapter<DeepCleanDocsAdapter.WhatsAppStatusHolder> {
     Context context;
-    List<DeepCleanDocsModel> fileList;
+    List<CommonModel> fileList;
     List<String> list;
 
     public DeepCleanDocsAdapter(Context context) {
@@ -31,7 +27,7 @@ public class DeepCleanDocsAdapter extends RecyclerView.Adapter<DeepCleanDocsAdap
     }
 
 
-    public void setFileList(List<DeepCleanDocsModel> fileList) {
+    public void setFileList(List<CommonModel> fileList) {
         this.fileList = fileList;
     }
 
@@ -54,8 +50,8 @@ public class DeepCleanDocsAdapter extends RecyclerView.Adapter<DeepCleanDocsAdap
     @Override
     public void onBindViewHolder(@NonNull WhatsAppStatusHolder holder, int position) {
 
-        final String docsString = fileList.get(position).getDocPath();
-        final String docName = fileList.get(position).getDocName();
+        final String docsString = fileList.get(position).getPath();
+        final String docName = fileList.get(position).getName();
 
         if (list.contains(docsString)) {
             holder.selectDocs_iv.setImageResource(R.drawable.ic_select);
@@ -71,7 +67,7 @@ public class DeepCleanDocsAdapter extends RecyclerView.Adapter<DeepCleanDocsAdap
                     list.add(docsString);
                     holder.selectDocs_iv.setImageResource(R.drawable.ic_select);
                 } else {
-                    list.remove(position);
+                    list.remove(docsString);
                     holder.selectDocs_iv.setImageResource(R.drawable.ic_deselect);
                 }
             }

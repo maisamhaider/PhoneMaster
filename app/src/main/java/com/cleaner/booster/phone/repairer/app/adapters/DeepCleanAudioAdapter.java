@@ -4,8 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,14 +13,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.cleaner.booster.phone.repairer.app.R;
 import com.cleaner.booster.phone.repairer.app.models.CommonModel;
-import com.cleaner.booster.phone.repairer.app.models.DeepCleanAudioModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DeepCleanAudioAdapter extends RecyclerView.Adapter<DeepCleanAudioAdapter.WhatsAppStatusHolder> {
     Context context;
-    List<DeepCleanAudioModel> fileList;
+    List<CommonModel> fileList;
     List<String> list;
 
     public DeepCleanAudioAdapter(Context context) {
@@ -31,10 +28,10 @@ public class DeepCleanAudioAdapter extends RecyclerView.Adapter<DeepCleanAudioAd
     }
 
 
-    public void setFileList(List<DeepCleanAudioModel> fileList) {
+    public void setFileList(List<CommonModel> fileList) {
         this.fileList = fileList;
-        for (DeepCleanAudioModel cleanAudioModel:fileList){
-            list.add(cleanAudioModel.getAudioPath());
+        for (CommonModel commonModel:fileList){
+            list.add(commonModel.getPath());
         }
     }
 
@@ -57,8 +54,8 @@ public class DeepCleanAudioAdapter extends RecyclerView.Adapter<DeepCleanAudioAd
     @Override
     public void onBindViewHolder(@NonNull WhatsAppStatusHolder holder, int position) {
 
-        final String audioString = fileList.get(position).getAudioPath();
-        final String audioName = fileList.get(position).getAudioName();
+        final String audioString = fileList.get(position).getPath();
+        final String audioName = fileList.get(position).getPath();
 
         if (list.contains(audioString)) {
             holder.selection_iv.setImageResource(R.drawable.ic_select);
@@ -72,7 +69,7 @@ public class DeepCleanAudioAdapter extends RecyclerView.Adapter<DeepCleanAudioAd
         holder.selection_iv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String audioString = fileList.get(position).getAudioPath();
+                String audioString = fileList.get(position).getPath();
                 if (list.contains(audioString))
                 {
                     list.remove(audioString);

@@ -17,7 +17,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Vibrator;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.LinearInterpolator;
@@ -29,7 +28,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.cleaner.booster.phone.repairer.app.R;
-import com.cleaner.booster.phone.repairer.app.models.DeepCleanPackagesModel;
+import com.cleaner.booster.phone.repairer.app.models.CommonModel;
 import com.cleaner.booster.phone.repairer.app.utils.LoadingDialog;
 import com.cleaner.booster.phone.repairer.app.utils.StorageUtils;
 import com.cleaner.booster.phone.repairer.app.utils.Utils;
@@ -38,8 +37,6 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import static com.cleaner.booster.phone.repairer.app.R.raw.notification_sound;
 
@@ -162,11 +159,11 @@ public class ChargingLockedScreenAct extends AppCompatActivity {
     public void cleanJunk() {
         storageUtils.deleteCache(getApplicationContext());
         storageUtils.deleteEmptyFolder(dirPath);
-        List<DeepCleanPackagesModel> pkg = utils.getAllPackages(dirPath);
+        List<CommonModel> pkg = utils.getAllPackages(dirPath);
 
         if (pkg.size() != 0) {
             for (int i = 0; i < pkg.size(); i++) {
-                pkg.get(i).getPkgPath();
+                pkg.get(i).getPath();
             }
         }
     }

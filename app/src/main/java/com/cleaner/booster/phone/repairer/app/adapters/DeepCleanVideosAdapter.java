@@ -4,8 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -13,15 +11,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.cleaner.booster.phone.repairer.app.R;
-import com.cleaner.booster.phone.repairer.app.models.DeepCleanImagesModel;
-import com.cleaner.booster.phone.repairer.app.models.DeepCleanVideosModel;
+import com.cleaner.booster.phone.repairer.app.models.CommonModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DeepCleanVideosAdapter extends RecyclerView.Adapter<DeepCleanVideosAdapter.WhatsAppStatusHolder> {
     Context context;
-    List<DeepCleanVideosModel> fileList;
+    List<CommonModel> fileList;
     List<String> list;
 
     public DeepCleanVideosAdapter(Context context) {
@@ -30,7 +27,7 @@ public class DeepCleanVideosAdapter extends RecyclerView.Adapter<DeepCleanVideos
     }
 
 
-    public void setFileList(List<DeepCleanVideosModel> fileList) {
+    public void setFileList(List<CommonModel> fileList) {
         this.fileList = fileList;
     }
 
@@ -53,7 +50,7 @@ public class DeepCleanVideosAdapter extends RecyclerView.Adapter<DeepCleanVideos
     @Override
     public void onBindViewHolder(@NonNull WhatsAppStatusHolder holder, int position) {
 
-        final String videoString = fileList.get(position).getVideoPath();
+        final String videoString = fileList.get(position).getPath();
 
         if (list.contains(videoString))
         {

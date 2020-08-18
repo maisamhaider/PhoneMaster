@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cleaner.booster.phone.repairer.app.adapters.DeepCleanPackagesAdapter;
-import com.cleaner.booster.phone.repairer.app.models.DeepCleanPackagesModel;
+import com.cleaner.booster.phone.repairer.app.models.CommonModel;
 import com.cleaner.booster.phone.repairer.app.utils.LoadingDialog;
 import com.cleaner.booster.phone.repairer.app.utils.Utils;
 
@@ -21,7 +21,7 @@ public class DeepCleanPkgsTask extends AsyncTask<Void, Integer, String> {
     Context context;
     private DeepCleanPackagesAdapter deepCleanPackagesAdapter;
     private RecyclerView recyclerView;
-    private List<DeepCleanPackagesModel> list;
+    private List<CommonModel> list;
     Utils utils;
     LoadingDialog loadingDialog;
 

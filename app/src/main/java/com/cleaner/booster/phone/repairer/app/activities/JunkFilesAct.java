@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.annotation.SuppressLint;
-import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -21,31 +20,38 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cleaner.booster.phone.repairer.app.R;
-import com.cleaner.booster.phone.repairer.app.models.DeepCleanPackagesModel;
+import com.cleaner.booster.phone.repairer.app.models.CommonModel;
 import com.cleaner.booster.phone.repairer.app.utils.StorageUtils;
 import com.cleaner.booster.phone.repairer.app.utils.Utils;
 
+import java.io.File;
 import java.util.Calendar;
 import java.util.List;
 
 import pl.droidsonroids.gif.GifImageView;
 
 public class JunkFilesAct extends AppCompatActivity {
-     TextView trashCleanLast_tv;
-    GifImageView junkCollecting_giv, junkBinDone_giv,junkGiv;
-    ConstraintLayout cacheJunkBin_cl,whenJunkCleanedMain_cl;
-    List<DeepCleanPackagesModel> pkg;
-    Utils utils;
-    String dirPath;
+    private TextView trashCleanLast_tv;
+    private GifImageView junkCollecting_giv, junkBinDone_giv, junkGiv;
+    private ConstraintLayout cacheJunkBin_cl, whenJunkCleanedMain_cl;
+    private List<CommonModel> pkg;
+    private Utils utils;
+    private String dirPath;
+    private StorageUtils storageUtils;
+    private SharedPreferences preferences;
+    private Calendar current;
+    private ConstraintLayout constraintLayout;
+    private SharedPreferences.Editor editor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_junk_files_atc);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        SharedPreferences preferences = getSharedPreferences("myPref", Context.MODE_PRIVATE);
-        StorageUtils storageUtils = new StorageUtils();
-        SharedPreferences.Editor editor = preferences.edit();
+        preferences = getSharedPreferences("myPref", Context.MODE_PRIVATE);
+        storageUtils = new StorageUtils();
+        editor = preferences.edit();
 
         LinearLayout junkFileCleanBtn_ll = findViewById(R.id.junkFileCleanBtn_ll);
         LinearLayout junkFileMoreApps_ll = findViewById(R.id.junkFileMoreApps_ll);
@@ -56,8 +62,8 @@ public class JunkFilesAct extends AppCompatActivity {
         ImageView junkFileEmptyFolderClear_iv = findViewById(R.id.junkFileEmptyFolderClear_iv);
         ImageView junkFileBack_iv = findViewById(R.id.junkFileBack_iv);
 
-        ConstraintLayout constraintLayout = findViewById(R.id.junkFilesSecond_cl);
-        whenJunkCleanedMain_cl= findViewById(R.id.whenJunkCleanedMain_cl);
+        constraintLayout = findViewById(R.id.junkFilesSecond_cl);
+        whenJunkCleanedMain_cl = findViewById(R.id.whenJunkCleanedMain_cl);
         cacheJunkBin_cl = findViewById(R.id.cacheJunkBin_cl);
         junkGiv = findViewById(R.id.junk_giv);
 
@@ -68,8 +74,7 @@ public class JunkFilesAct extends AppCompatActivity {
         cacheJunkBin_cl.setVisibility(View.GONE);
         junkCollecting_giv.setVisibility(View.GONE);
         whenJunkCleanedMain_cl.setVisibility(View.GONE);
-        Calendar current = Calendar.getInstance();
-
+        current = Calendar.getInstance();
 
 
         junkFileBack_iv.setOnClickListener(v -> finish());
@@ -81,6 +86,31 @@ public class JunkFilesAct extends AppCompatActivity {
             constraintLayout.setVisibility(View.GONE);
             whenJunkCleanedMain_cl.setVisibility(View.VISIBLE);
 
+        }
+        if (preferences.getBoolean("isEFolderClean", false)) {
+            junkFileEmptyFolderClear_iv.setImageResource(R.drawable.ic_select);
+        } else {
+            junkFileEmptyFolderClear_iv.setImageResource(R.drawable.ic_deselect);
+        }
+
+        if (preferences.getBoolean("isCacheJunkClean", false)) {
+            cacheJunkClear_iv.setImageResource(R.drawable.ic_select);
+
+        } else {
+            cacheJunkClear_iv.setImageResource(R.drawable.ic_deselect);
+        }
+        if (preferences.getBoolean("isInstallationPkgClean", false)) {
+            installationPackages_iv.setImageResource(R.drawable.ic_select);
+
+        } else {
+            installationPackages_iv.setImageResource(R.drawable.ic_deselect);
+        }
+        if (preferences.getBoolean("isResidualJunkClean", false)) {
+
+            residualJunk_iv.setImageResource(R.drawable.ic_select);
+
+        } else {
+            residualJunk_iv.setImageResource(R.drawable.ic_deselect);
         }
 
         //junk File Empty Folder
@@ -116,7 +146,6 @@ public class JunkFilesAct extends AppCompatActivity {
         });
 
 
-
         residualJunk_iv.setOnClickListener(v -> {
             if (preferences.getBoolean("isResidualJunkClean", false)) {
                 residualJunk_iv.setImageResource(R.drawable.ic_deselect);
@@ -128,63 +157,17 @@ public class JunkFilesAct extends AppCompatActivity {
         });
 
 
-          dirPath = String.valueOf(Environment.getExternalStorageDirectory());
-          utils = new Utils(this);
+        dirPath = String.valueOf(Environment.getExternalStorageDirectory());
+        utils = new Utils(this);
 
 
         junkFileCleanBtn_ll.setOnClickListener(v -> {
-
-
-            if (preferences.getLong("junkCleanTime", current.getTimeInMillis()) <= current.getTimeInMillis()) {
-
-                cacheJunkBin_cl.setVisibility(View.VISIBLE);
-                junkCollecting_giv.setVisibility(View.VISIBLE);
-                trashCleanLast_tv.setText("FINISHED CLEANING");
-
-                 Handler handler = new Handler();
-                handler.postDelayed(() -> lastView(), 3000);
-
-
-                if (preferences.getBoolean("isCacheJunkClean", false)) {
-                    storageUtils.deleteCache(JunkFilesAct.this);
-                }
-
-
-                if (preferences.getBoolean("isEFolderClean", false)) {
-                    storageUtils.deleteEmptyFolder(dirPath);
-                }
-
-
-                if (preferences.getBoolean("isInstallationPkgClean", false)) {
-                    if (pkg.size() != 0) {
-                        for (int i = 0; i < pkg.size(); i++) {
-                            pkg.get(i).getPkgPath();
-                        }
-                    }
-
-                }
-
-                if (preferences.getBoolean("isResidualJunkClean", false)) {
-                    storageUtils.deleteCache(JunkFilesAct.this);
-                }
-                Calendar nextTime = Calendar.getInstance();
-
-                nextTime.add(Calendar.MINUTE, 5);
-                long dateMilliSec = nextTime.getTimeInMillis();
-
-                editor.putLong("junkCleanTime", dateMilliSec).commit();
-                constraintLayout.setVisibility(View.GONE);
-                junkGiv.setImageResource(R.drawable.optimized);
-
-            } else {
-                Toast.makeText(JunkFilesAct.this, "Not cleaned", Toast.LENGTH_SHORT).show();
-            }
-
+            new CacheClean().execute();
         });
 
         junkFileMoreApps_ll.setOnClickListener(v -> {
             Toast.makeText(JunkFilesAct.this, "More Apps ", Toast.LENGTH_SHORT).show();
-            startActivity( new Intent( Intent.ACTION_VIEW, Uri.parse( "https://play.google.com/store/apps/developer?id=SPAG+Apps+Studio" ) ) );
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/developer?id=SPAG+Apps+Studio")));
 
         });
     }
@@ -194,7 +177,6 @@ public class JunkFilesAct extends AppCompatActivity {
         super.onResume();
         new JunkCleanerTask().execute();
     }
-
 
 
     public void lastView() {
@@ -218,7 +200,7 @@ public class JunkFilesAct extends AppCompatActivity {
 
         @Override
         protected String doInBackground(Void... voids) {
-            pkg  = utils.getAllPackages(dirPath);
+            pkg = utils.getAllPackages(dirPath);
             return null;
         }
 
@@ -228,4 +210,70 @@ public class JunkFilesAct extends AppCompatActivity {
         }
     }
 
+
+    class CacheClean extends AsyncTask<Void, Integer, String> {
+        String p = Environment.getExternalStorageDirectory().getAbsolutePath();
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            cacheJunkBin_cl.setVisibility(View.VISIBLE);
+            junkCollecting_giv.setVisibility(View.VISIBLE);
+            trashCleanLast_tv.setText("FINISHED CLEANING");
+            Handler handler = new Handler();
+            handler.postDelayed(() -> lastView(), 3000);
+        }
+
+        @Override
+        protected String doInBackground(Void... voids) {
+            cleanOrFinishFun(true, p);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            constraintLayout.setVisibility(View.GONE);
+            junkGiv.setImageResource(R.drawable.optimized);
+        }
+    }
+    public void cleanOrFinishFun(boolean isClean, String p) {
+        if (isClean) {
+            if (preferences.getLong("junkCleanTime", current.getTimeInMillis()) <= current.getTimeInMillis()) {
+                if (preferences.getBoolean("isCacheJunkClean", false)) {
+                    storageUtils.deleteCache(JunkFilesAct.this);
+                }
+                if (preferences.getBoolean("isEFolderClean", false)) {
+                    storageUtils.deleteEmptyFolder(dirPath);
+                    storageUtils.deleteCache(JunkFilesAct.this);
+                    for (CommonModel path : storageUtils.getAllUnUsableFile(p)) {
+                        File file = new File(path.getPath());
+                        if (file.exists()) {
+                            file.delete();
+                        }
+                    }
+                }
+                if (preferences.getBoolean("isInstallationPkgClean", false)) {
+                    if (pkg.size() != 0) {
+                        for (int i = 0; i < pkg.size(); i++) {
+                            pkg.get(i).getPath();
+                        }
+                    }
+                }
+                if (preferences.getBoolean("isResidualJunkClean", false)) {
+                    storageUtils.deleteCache(JunkFilesAct.this);
+                }
+                Calendar nextTime = Calendar.getInstance();
+
+                nextTime.add(Calendar.MINUTE, 5);
+                long dateMilliSec = nextTime.getTimeInMillis();
+
+                editor.putLong("junkCleanTime", dateMilliSec).commit();
+            } else {
+                Toast.makeText(JunkFilesAct.this, "Not cleaned", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            finish();
+        }
+    }
 }

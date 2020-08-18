@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cleaner.booster.phone.repairer.app.adapters.DeepCleanAudioAdapter;
-import com.cleaner.booster.phone.repairer.app.models.DeepCleanAudioModel;
+import com.cleaner.booster.phone.repairer.app.models.CommonModel;
 import com.cleaner.booster.phone.repairer.app.utils.LoadingDialog;
 import com.cleaner.booster.phone.repairer.app.utils.Utils;
 
@@ -20,7 +20,7 @@ public class DeepCleanAudiosTask extends AsyncTask<Void, Integer, String> {
     Context context;
     private DeepCleanAudioAdapter deepCleanAudioAdapter;
     private RecyclerView recyclerView;
-    private List<DeepCleanAudioModel> list;
+    private List<CommonModel> list;
     Utils utils;
     LoadingDialog loadingDialog;
 

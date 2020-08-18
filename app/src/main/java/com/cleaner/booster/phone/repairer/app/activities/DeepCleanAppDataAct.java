@@ -17,25 +17,21 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.cleaner.booster.phone.repairer.app.R;
 import com.cleaner.booster.phone.repairer.app.adapters.DeepCleanImagesAdapter;
 import com.cleaner.booster.phone.repairer.app.adapters.DeepCleanVideosAdapter;
-import com.cleaner.booster.phone.repairer.app.models.DeepCleanImagesModel;
-import com.cleaner.booster.phone.repairer.app.models.DeepCleanVideosModel;
+import com.cleaner.booster.phone.repairer.app.models.CommonModel;
 import com.cleaner.booster.phone.repairer.app.utils.Utils;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import bot.box.appusage.utils.UsageUtils;
-
 public class DeepCleanAppDataAct extends AppCompatActivity {
 
     Utils utils;
-    List<DeepCleanVideosModel> videosModelList;
-    List<DeepCleanImagesModel> imagesModelList;
+    List<CommonModel> videosModelList;
+    List<CommonModel> imagesModelList;
     boolean isImages = false;
     boolean isFacebookClicked = false;
     boolean isMessengerClicked = false;

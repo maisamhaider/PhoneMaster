@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cleaner.booster.phone.repairer.app.adapters.DeepCleanImagesAdapter;
-import com.cleaner.booster.phone.repairer.app.models.DeepCleanImagesModel;
+import com.cleaner.booster.phone.repairer.app.models.CommonModel;
 import com.cleaner.booster.phone.repairer.app.utils.LoadingDialog;
 import com.cleaner.booster.phone.repairer.app.utils.Utils;
 
@@ -20,7 +20,7 @@ public class DeepCleanImagesTask extends AsyncTask<Void, Integer, String> {
     Context context;
     private DeepCleanImagesAdapter deepCleanImagesAdapter;
     private RecyclerView recyclerView;
-    private List<DeepCleanImagesModel> list;
+    private List<CommonModel> list;
     Utils utils;
     LoadingDialog loadingDialog;
 

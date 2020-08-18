@@ -220,39 +220,39 @@ public class DeepCleanAct extends BaseActivity {
             if (utils.getAllImagePaths().size()  - 1 >= 0)
             {
                 Glide.with(getBaseContext())
-                        .load(utils.getAllImagePaths().get(utils.getAllImagePaths().size() - 1).getImagePath())
+                        .load(utils.getAllImagePaths().get(utils.getAllImagePaths().size() - 1).getPath())
                         .into(deepCleanImage_iv1);
 
             } if (utils.getAllImagePaths().size()  - 2 >= 0)
             {
 
                 Glide.with(getApplicationContext())
-                        .load(utils.getAllImagePaths().get(utils.getAllImagePaths().size() - 2).getImagePath())
+                        .load(utils.getAllImagePaths().get(utils.getAllImagePaths().size() - 2).getPath())
                         .into(deepCleanImage_iv2);
             } if (utils.getAllImagePaths().size()  - 3 >= 0)
             {
                 Glide.with(getApplicationContext())
-                        .load(utils.getAllImagePaths().get(utils.getAllImagePaths().size() - 3).getImagePath())
+                        .load(utils.getAllImagePaths().get(utils.getAllImagePaths().size() - 3).getPath())
                         .into(deepCleanImage_iv3);
             }
 
             if (utils.getAllVideosPaths().size() - 1 >= 0)
             {
                 Glide.with(getApplicationContext())
-                        .load(utils.getAllVideosPaths().get(utils.getAllVideosPaths().size() - 1).getVideoPath())
+                        .load(utils.getAllVideosPaths().get(utils.getAllVideosPaths().size() - 1).getPath())
                         .into(deepCleanVideos_iv1);
 
             }
             if (utils.getAllVideosPaths().size() - 2 >= 0)
             {
                 Glide.with(getApplicationContext())
-                        .load(utils.getAllVideosPaths().get(utils.getAllVideosPaths().size() - 2).getVideoPath())
+                        .load(utils.getAllVideosPaths().get(utils.getAllVideosPaths().size() - 2).getPath())
                         .into(deepCleanVideos_iv2);
             }
             if (utils.getAllVideosPaths().size() - 3 >= 0)
             {
                 Glide.with(getApplicationContext())
-                        .load(utils.getAllVideosPaths().get(utils.getAllVideosPaths().size() - 3).getVideoPath())
+                        .load(utils.getAllVideosPaths().get(utils.getAllVideosPaths().size() - 3).getPath())
                         .into(deepCleanVideos_iv3);
             }
 

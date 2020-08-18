@@ -4,25 +4,21 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.cleaner.booster.phone.repairer.app.R;
-import com.cleaner.booster.phone.repairer.app.models.DeepCleanDocsModel;
-import com.cleaner.booster.phone.repairer.app.models.DeepCleanPackagesModel;
+import com.cleaner.booster.phone.repairer.app.models.CommonModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DeepCleanPackagesAdapter extends RecyclerView.Adapter<DeepCleanPackagesAdapter.WhatsAppStatusHolder> {
     Context context;
-    List<DeepCleanPackagesModel> fileList;
+    List<CommonModel> fileList;
     List<String> list;
 
     public DeepCleanPackagesAdapter(Context context) {
@@ -31,7 +27,7 @@ public class DeepCleanPackagesAdapter extends RecyclerView.Adapter<DeepCleanPack
     }
 
 
-    public void setFileList(List<DeepCleanPackagesModel> fileList) {
+    public void setFileList(List<CommonModel> fileList) {
         this.fileList = fileList;
     }
 
@@ -54,8 +50,8 @@ public class DeepCleanPackagesAdapter extends RecyclerView.Adapter<DeepCleanPack
     @Override
     public void onBindViewHolder(@NonNull WhatsAppStatusHolder holder, int position) {
 
-        final String pkgString = fileList.get(position).getPkgPath();
-        final String pkgName = fileList.get(position).getPkgName();
+        final String pkgString = fileList.get(position).getPath();
+        final String pkgName = fileList.get(position).getName();
 
         if (list.contains(pkgString)) {
             holder.selectPkg_iv.setImageResource(R.drawable.ic_select);

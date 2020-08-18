@@ -18,7 +18,6 @@
         tools:layout_editor_absoluteX="30dp">
 
 
-
         <pl.droidsonroids.gif.GifImageView
             android:id="@+id/junk_giv"
             android:layout_width="130dp"
@@ -45,12 +44,12 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:background="?android:attr/selectableItemBackgroundBorderless"
             android:id="@+id/junkFileBack_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="12dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
             android:src="@drawable/ic_baseline_arrow_back_white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -112,13 +111,12 @@
                         app:layout_constraintVertical_bias="0.529" />
 
                     <ImageView
-                        android:background="?android:attr/selectableItemBackgroundBorderless"
                         android:id="@+id/cacheJunkClear_iv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_marginEnd="10dp"
-                        android:src="@drawable/ic_select"
-                         app:layout_constraintBottom_toBottomOf="parent"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -152,12 +150,11 @@
 
 
                     <ImageView
-                        android:background="?android:attr/selectableItemBackgroundBorderless"
                         android:id="@+id/residualJunk_iv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_marginEnd="10dp"
-                        android:src="@drawable/ic_select"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -200,14 +197,12 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/junkFileCache_cl">
 
-
                     <ImageView
-                        android:background="?android:attr/selectableItemBackgroundBorderless"
                         android:id="@+id/installationPackages_iv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_marginEnd="10dp"
-                        android:src="@drawable/ic_select"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -252,10 +247,9 @@
 
                     <ImageView
                         android:id="@+id/junkFileEmptyFolderClear_iv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_marginEnd="10dp"
-                        android:src="@drawable/ic_select"
                         android:background="?android:attr/selectableItemBackgroundBorderless"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -364,9 +358,9 @@
             android:layout_alignParentBottom="true"
             android:layout_margin="10dp"
             android:layout_marginBottom="117dp"
-             android:gravity="center"
-            android:orientation="vertical"
             android:background="@drawable/main_button_bg"
+            android:gravity="center"
+            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView27"
             app:layout_constraintVertical_bias="0.98"

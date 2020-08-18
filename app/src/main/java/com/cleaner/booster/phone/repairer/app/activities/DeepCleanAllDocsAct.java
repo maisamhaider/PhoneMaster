@@ -98,7 +98,6 @@ public class DeepCleanAllDocsAct extends AppCompatActivity {
                             finish();
                         }
                     });
-
                 }
             }
         });
