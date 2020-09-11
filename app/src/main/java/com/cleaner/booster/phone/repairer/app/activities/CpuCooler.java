@@ -36,8 +36,7 @@ import java.util.List;
 public class CpuCooler extends AppCompatActivity {
     Utils utils;
     ProgressBar cooling_pb;
-    ImageView coolingBack_iv;
-    private BatterySavingAllAppsAdapter allAppsAdapter;
+     private BatterySavingAllAppsAdapter allAppsAdapter;
     ConstraintLayout cpuCoolerSecond_cl, cpuCoolerMain_cl, cpuCooled_cl, coolingMain_cl;
     TextView cpuTemp_tv;
     SharedPreferences preferences;
@@ -58,21 +57,18 @@ public class CpuCooler extends AppCompatActivity {
         cpuCoolerApps_rv = findViewById(R.id.cpuCoolerApps_rv);
         cpuCoolBtn_ll = findViewById(R.id.cpuCoolBtn_ll);
         cpuTemp_tv = findViewById(R.id.cpuTemp_tv);
-        ImageView cpuCoolingMainBack_iv = findViewById(R.id.cpuCoolingMainBack_iv);
-        cpuCooled_cl = findViewById(R.id.cpuCooled_cl);
+         cpuCooled_cl = findViewById(R.id.cpuCooled_cl);
 
         String temp = String.format("%.1f", utils.cpuTemperature());
         cpuTemp_tv.setText(temp);
 
         //scanning cpu
         ConstraintLayout cpuCoolingFirstScreenMain_cl = findViewById(R.id.cpuCoolingFirstScreenMain_cl);
-        ImageView cpuCoolingFirstScreenBack_iv = findViewById(R.id.cpuCoolingFirstScreenBack_iv);
 
         //Cooling apps
         coolingMain_cl = findViewById(R.id.coolingMain_cl);
         cooling_pb = findViewById(R.id.cooling_pb);
-        coolingBack_iv = findViewById(R.id.coolingBack_iv);
-        coolingMain_cl.setVisibility(View.GONE);
+         coolingMain_cl.setVisibility(View.GONE);
 
         //last screen
         cpuCoolerMain_cl = findViewById(R.id.cpuCoolerMain_cl);
@@ -95,20 +91,6 @@ public class CpuCooler extends AppCompatActivity {
             cpuTemp_tv.setText(temp2);
         }
 
-        cpuCoolingMainBack_iv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-
-            }
-        });
-
-        cpuCoolingFirstScreenBack_iv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
 
 
         Handler handler = new Handler();

@@ -32,10 +32,11 @@
 
     <Button
         android:id="@+id/clean_btn"
-        style="@style/AppTheme.Button"
+       android:background="@drawable/black_ripple_flat_d"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:textColor="@android:color/white"
         android:text="@string/clean"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

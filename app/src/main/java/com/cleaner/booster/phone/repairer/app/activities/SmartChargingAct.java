@@ -23,15 +23,13 @@ public class SmartChargingAct extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_smart_charging_act);
-        setContentView(R.layout.activity_smart_charging_act);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         SharedPreferences preferences = getSharedPreferences("myPref", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
 
         SwitchButton smartCharging_switch = findViewById(R.id.smartCharging_switch);
-        ImageView smartChargeBack_iv = findViewById(R.id.smartChargeBack_iv);
-        ImageView smartChargeFirstTimeBack_iv = findViewById(R.id.smartChargeFirstTimeBack_iv);
+         ImageView smartChargeFirstTimeBack_iv = findViewById(R.id.smartChargeFirstTimeBack_iv);
         LinearLayout smartChargeFirstTimeEnable_ll = findViewById(R.id.smartChargeFirstTimeEnable_ll);
         ConstraintLayout smart_charging_first_time = findViewById(R.id.smart_charging_first_time);
 
@@ -62,13 +60,6 @@ public class SmartChargingAct extends AppCompatActivity {
             }
         });
 
-
-        smartChargeBack_iv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
 
         smartChargeFirstTimeBack_iv.setOnClickListener(new View.OnClickListener() {
             @Override

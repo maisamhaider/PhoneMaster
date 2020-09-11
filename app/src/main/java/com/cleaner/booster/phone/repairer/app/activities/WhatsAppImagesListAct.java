@@ -12,8 +12,7 @@ import com.cleaner.booster.phone.repairer.app.utils.Utils;
 
 public class WhatsAppImagesListAct extends WhatsAppBaseActivity {
 
-    String[] fileNames;
-    Utils utils;
+     Utils utils;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -127,9 +128,9 @@ public class AllAppsAdapter extends RecyclerView.Adapter<AllAppsAdapter.AllAppsH
 
 
     class AllAppsHolder extends RecyclerView.ViewHolder {
-        TextView appName_Tv, appInstalledTime_Tv;
+        TextView appName_Tv;
         ImageView appImage_Iv, deleteAppImage_Iv;
-        RelativeLayout allAppsMain_Rl;
+        ConstraintLayout allAppsMain_Rl;
 
         public AllAppsHolder(@NonNull View itemView) {
             super( itemView );

@@ -28,6 +28,19 @@ public class FullChargedRemindAct extends AppCompatActivity {
         fullChargedAlarm_switch = findViewById(R.id.fullChargedAlarm_switch);
         fullChargedRemindSound_switch = findViewById(R.id.fullChargedRemindSound_switch);
         fullChargedRemindVibrate_switch = findViewById(R.id.fullChargedRemindVibrate_switch);
+        if (preferences.getBoolean("FULL_CHARGED_ALARM",false))
+        {
+            fullChargedAlarm_switch.setChecked(true);
+            if (preferences.getBoolean("FULL_CHARGED_SOUND",false))
+            {
+                fullChargedRemindSound_switch.setChecked(true);
+            }
+            if (preferences.getBoolean("FULL_CHARGED_VIBRATE",false))
+            {
+                fullChargedRemindVibrate_switch.setChecked(true);
+            }
+
+        }
 
         fullChargedAlarm_switch.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
             @Override

@@ -29,7 +29,6 @@ public class HarassmentFilterAct extends BaseActivity {
     String cNumber;
     String name;
     TelecomManager telecomManager;
-    ImageView ivBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +41,6 @@ public class HarassmentFilterAct extends BaseActivity {
         adView(findViewById(R.id.harassmentFilter_adView));
         copyContact_btn = findViewById(R.id.copyContact_btn);
         block_unBlock_btn = findViewById(R.id.block_unBlock_btn);
-        ivBack = findViewById(R.id.iv_h_back);
 
         copyContact_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,14 +58,6 @@ public class HarassmentFilterAct extends BaseActivity {
                 }
             }
         });
-
-        ivBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
 
 
     }
@@ -102,7 +92,7 @@ public class HarassmentFilterAct extends BaseActivity {
                             ClipboardManager clipboardManager = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
                             ClipData clipData = ClipData.newPlainText(name, cNumber);
                             clipboardManager.setPrimaryClip(clipData);
-                            Toast.makeText(this, "Number is copied"+cNumber, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, "Number is copied" + cNumber, Toast.LENGTH_SHORT).show();
                         }
                     } catch (IllegalArgumentException e) {
                         e.printStackTrace();

@@ -34,7 +34,6 @@ public class StatusImagesFrag extends Fragment {
 
     }
 
-    MainActivity mainActivity = (MainActivity) getActivity();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

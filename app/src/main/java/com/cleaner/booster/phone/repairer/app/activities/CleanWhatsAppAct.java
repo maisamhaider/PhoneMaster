@@ -19,9 +19,7 @@ import com.cleaner.booster.phone.repairer.app.utils.Utils;
 
 public class CleanWhatsAppAct extends BaseActivity implements View.OnClickListener {
 
-    private View cleanWpOne, cleanWpTwo;
-    private ProgressBar pb;
-    private TextView tvTotalSize;
+     private TextView tvTotalSize;
     private float totalSize;
     private Utils utils;
 
@@ -33,9 +31,7 @@ public class CleanWhatsAppAct extends BaseActivity implements View.OnClickListen
 
         utils = new Utils(this);
 
-        cleanWpOne = findViewById(R.id.clean_wp_one);
-        cleanWpTwo = findViewById(R.id.clean_wp_two);
-        adView(findViewById(R.id.cleanWhatsApp_adView));
+         adView(findViewById(R.id.cleanWhatsApp_adView));
         ConstraintLayout audio_CL = findViewById(R.id.audio_CL);
         ConstraintLayout images_CL = findViewById(R.id.images_CL);
         ConstraintLayout back_up_conversation_history_CL = findViewById(R.id.back_up_conversation_history_CL);
@@ -51,7 +47,6 @@ public class CleanWhatsAppAct extends BaseActivity implements View.OnClickListen
         audio_dataSize_Tv = findViewById(R.id.audio_dataSize_Tv);
         Videos_dataSize_Tv = findViewById(R.id.Videos_dataSize_Tv);
         received_file_dataSize_Tv = findViewById(R.id.received_file_dataSize_Tv);
-        pb = findViewById(R.id.progressBar);
 
         startAnimation();
 
@@ -75,7 +70,7 @@ public class CleanWhatsAppAct extends BaseActivity implements View.OnClickListen
                 + utils.getAllSize(Environment.getExternalStorageDirectory().getPath() + "/WhatsApp/Media/WhatsApp Video")
                 + utils.getAllSize(Environment.getExternalStorageDirectory().getPath() + "/WhatsApp/Media/WhatsApp Documents");
 
-        tvTotalSize.setText(utils.getCalculatedDataSize(totalSize).substring(0, utils.getCalculatedDataSize(totalSize).length() - 2));
+        tvTotalSize.setText(utils.getCalculatedDataSize(totalSize).substring(0, utils.getCalculatedDataSize(totalSize).length() - 2)+ "MB");
 
 
         startAnimation();
@@ -113,8 +108,6 @@ public class CleanWhatsAppAct extends BaseActivity implements View.OnClickListen
 
     private void startAnimation() {
 
-        cleanWpOne.setVisibility(View.VISIBLE);
-        cleanWpTwo.setVisibility(View.GONE);
 
         ValueAnimator animator = ValueAnimator.ofInt(0, 100);
         animator.setInterpolator(new LinearInterpolator());
@@ -124,10 +117,7 @@ public class CleanWhatsAppAct extends BaseActivity implements View.OnClickListen
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
                 int value = (int) valueAnimator.getAnimatedValue();
-                pb.setProgress(value);
-                if (value == 100) {
-                    cleanWpOne.setVisibility(View.GONE);
-                    cleanWpTwo.setVisibility(View.VISIBLE);
+                 if (value == 100) {
 
                     int dataSize = (int)utils.getCalculatedDataSizeMB(totalSize);
 
@@ -141,13 +131,8 @@ public class CleanWhatsAppAct extends BaseActivity implements View.OnClickListen
                             int value = (int) valueAnimator.getAnimatedValue();
                             tvTotalSize.setText(String.valueOf(value));
                             if (value==dataSize){
-                                if (utils.getCalculatedDataSize(totalSize).contains("Bytes"))
-                                {
-                                    tvTotalSize.setText(utils.getCalculatedDataSize(totalSize).substring(0, utils.getCalculatedDataSize(totalSize).length() - 5));
-                                }
-                                else {
-                                tvTotalSize.setText(utils.getCalculatedDataSize(totalSize).substring(0, utils.getCalculatedDataSize(totalSize).length() - 2));
-                            }}
+                                tvTotalSize.setText(utils.getCalculatedDataSize(totalSize));
+                            }
                         }
                     });
                     tvAnimator.start();
@@ -158,7 +143,7 @@ public class CleanWhatsAppAct extends BaseActivity implements View.OnClickListen
         animator.start();
     }
 
-    public void backHandler(View view) {
+    public void abackHandler(View view) {
         finish();
     }
 }

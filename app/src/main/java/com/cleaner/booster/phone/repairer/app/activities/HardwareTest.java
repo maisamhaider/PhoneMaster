@@ -157,7 +157,7 @@ public class HardwareTest extends AppCompatActivity implements View.OnClickListe
                 getApplicationContext().registerReceiver( receiver, iFilter );
                 if (isHeadphoneCtd) {
                     headphone_tv.setVisibility( View.VISIBLE );
-                    headphone_tv.setText( "Headphone is unplugged" );
+                    headphone_tv.setText( "Headphone is plugged" );
                     handler.postDelayed( () -> headphone_tv.setVisibility( View.GONE ), 2000 );
                 } else {
                     headphone_tv.setVisibility( View.VISIBLE );

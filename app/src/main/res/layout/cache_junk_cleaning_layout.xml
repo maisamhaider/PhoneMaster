@@ -5,23 +5,25 @@
     android:id="@+id/cacheJunkBin_cl"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/standard_white">
-
+    android:background="@android:color/white">
 
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/junkCollecting_giv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/junk_colecting"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp" />
+        android:src="@drawable/junk_collecting"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
 
     <pl.droidsonroids.gif.GifImageView
+        android:visibility="gone"
         android:id="@+id/junkBinDone_giv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-          tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
 
     <TextView
         android:id="@+id/textView51"
@@ -31,7 +33,6 @@
         android:text="JUNK FILES"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -44,10 +45,8 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView51"
         app:layout_constraintVertical_bias="0.95" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

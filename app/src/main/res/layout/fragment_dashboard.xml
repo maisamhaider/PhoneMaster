@@ -1,355 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/white"
     android:scrollbars="none">
 
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline24"
         android:layout_width="match_parent"
-        android:background="@android:color/white"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.1" />
 
-        <com.app.adprogressbarlib.AdCircleProgress
-            android:id="@+id/pgb_ram"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:backgroundTintMode="add"
-            android:elevation="8dp"
-            app:adpgb_background_color="#00ffffff"
-            app:adpgb_finished_color="@color/colorBoarder"
-            app:adpgb_max="100"
-            app:adpgb_text_color="@color/colorWhite"
-            app:adpgb_text_size="12dp"
-            app:adpgb_unfinished_color="@color/colorStopScanning"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView"
-            app:layout_constraintEnd_toEndOf="@+id/imageView"
-            app:layout_constraintStart_toEndOf="@+id/tv_num"
-            app:layout_constraintTop_toTopOf="@+id/imageView"
-            app:layout_constraintVertical_bias="0.3"
-            custom:adpgb_finished_stroke_width="5dp"
-            custom:adpgb_show_text="true"
-            custom:adpgb_unfinished_stroke_width="5dp" />
+    <View
+        android:id="@+id/view14"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/ic_background"
+        app:layout_constraintBottom_toTopOf="@+id/guideline24"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <com.app.adprogressbarlib.AdCircleProgress
-            android:id="@+id/pgb_storage"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:backgroundTintMode="add"
-            android:elevation="8dp"
-            app:adpgb_max="100"
-            app:layout_constraintEnd_toStartOf="@+id/tv_num"
-            app:layout_constraintVertical_bias="0.3"
-            custom:adpgb_background_color="#00ffffff"
-            custom:adpgb_finished_color="@color/colorBoarder"
-            custom:adpgb_finished_stroke_width="5dp"
-            custom:adpgb_show_text="true"
-            custom:adpgb_text_color="@color/colorWhite"
-            custom:adpgb_text_size="12dp"
-            custom:adpgb_unfinished_color="@color/colorStopScanning"
-            custom:adpgb_unfinished_stroke_width="5dp"
-            custom:layout_constraintBottom_toBottomOf="@+id/imageView"
-            custom:layout_constraintStart_toStartOf="parent"
-            custom:layout_constraintTop_toTopOf="@+id/imageView" />
 
-        <include
-            layout="@layout/m_lt_items"
+
+
+    <ScrollView
+        android:id="@+id/scrollView6"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline24"
+        app:layout_constraintVertical_bias="0.0">
+
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView10" />
+            android:background="@android:color/white">
 
-        <ImageView
-            android:id="@+id/iv_junk_file"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_junk_files"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView"
-            app:layout_constraintEnd_toStartOf="@+id/iv_cpu_cooler"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+            <HorizontalScrollView
+                android:id="@+id/horizontalScrollView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginEnd="18dp"
+                 android:scrollbars="none"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <include
+                    android:id="@+id/include4"
+                    layout="@layout/home_upper_xml" />
+            </HorizontalScrollView>
 
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="0dp"
-            android:layout_height="340dp"
-            android:scaleType="fitXY"
-            app:layout_constraintBottom_toTopOf="@+id/iv_junk_file"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_artboard" />
+            <include
 
-        <ImageView
-            android:id="@+id/iv_cpu_cooler"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_cpu_cooler"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_junk_file"
-            app:layout_constraintEnd_toStartOf="@+id/iv_boost_phone"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/iv_junk_file"
-            app:layout_constraintTop_toTopOf="@+id/iv_junk_file" />
+                android:id="@+id/include3"
+                layout="@layout/home_middle_xml"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
 
-        <ImageView
-            android:id="@+id/iv_power_saving"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="24dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_power_saving"
-            app:layout_constraintEnd_toStartOf="@+id/iv_app_cleanup"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintHorizontal_chainStyle="spread"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView7">
+            <include
+                android:id="@+id/include2"
+                layout="@layout/m_lt_items"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/include3" />
 
-        </ImageView>
+        </LinearLayout>
 
-        <ImageView
-            android:id="@+id/iv_app_cleanup"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_app_cleanup"
-            app:layout_constraintEnd_toStartOf="@+id/iv_status_saver"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/iv_power_saving"
-            app:layout_constraintTop_toTopOf="@+id/iv_power_saving">
 
-        </ImageView>
+    </ScrollView>
 
-        <ImageView
-            android:id="@+id/iv_status_saver"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_whatsapp_status_saver"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/iv_app_cleanup"
-            app:layout_constraintTop_toTopOf="@+id/iv_app_cleanup">
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PHONE REPAIR"
+        android:textColor="@color/colorWhite"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/guideline24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view14" />
 
-        </ImageView>
 
-        <ImageView
-            android:id="@+id/iv_boost_phone"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_boost_phone"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_cpu_cooler"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/iv_cpu_cooler"
-            app:layout_constraintTop_toTopOf="@+id/iv_cpu_cooler">
-
-        </ImageView>
-
-        <TextView
-            android:id="@+id/textView7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/junk_files"
-            app:layout_constraintEnd_toEndOf="@+id/iv_junk_file"
-            app:layout_constraintStart_toStartOf="@+id/iv_junk_file"
-            app:layout_constraintTop_toBottomOf="@+id/iv_junk_file" />
-
-        <TextView
-            android:id="@+id/textView8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/cpu_cooler"
-            app:layout_constraintEnd_toEndOf="@+id/iv_cpu_cooler"
-            app:layout_constraintStart_toStartOf="@+id/iv_cpu_cooler"
-            app:layout_constraintTop_toBottomOf="@+id/iv_cpu_cooler" />
-
-        <TextView
-            android:id="@+id/textView9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/boost_phone"
-            app:layout_constraintEnd_toEndOf="@+id/iv_boost_phone"
-            app:layout_constraintStart_toStartOf="@+id/iv_boost_phone"
-            app:layout_constraintTop_toBottomOf="@+id/iv_boost_phone" />
-
-        <TextView
-            android:id="@+id/textView10"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/power_saving"
-            app:layout_constraintEnd_toEndOf="@+id/iv_power_saving"
-            app:layout_constraintStart_toStartOf="@+id/iv_power_saving"
-            app:layout_constraintTop_toBottomOf="@+id/iv_power_saving" />
-
-        <TextView
-            android:id="@+id/textView11"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/app_cleanup"
-            app:layout_constraintEnd_toEndOf="@+id/iv_app_cleanup"
-            app:layout_constraintStart_toStartOf="@+id/iv_app_cleanup"
-            app:layout_constraintTop_toBottomOf="@+id/iv_app_cleanup" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/status_saver"
-            app:layout_constraintEnd_toEndOf="@+id/iv_status_saver"
-            app:layout_constraintStart_toStartOf="@+id/iv_status_saver"
-            app:layout_constraintTop_toBottomOf="@+id/iv_status_saver" />
-
-        <TextView
-            android:id="@+id/tv_num"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:elevation="8dp"
-            android:text="89"
-            android:textColor="@color/colorWhite"
-            android:textSize="65sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/b_optimize"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView16"
-            app:layout_constraintVertical_bias="0.110000014"
-            app:layout_constraintVertical_chainStyle="packed" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="°C"
-            android:textColor="@color/standard_white"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/textView"
-            app:layout_constraintStart_toEndOf="@+id/tv_num"
-            app:layout_constraintTop_toTopOf="@+id/tv_num"
-            app:layout_constraintVertical_bias="0.803" />
-
-        <TextView
-            android:id="@+id/textView16"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:elevation="8dp"
-            android:text="Phone Repair"
-            android:textColor="@color/colorWhite"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Cpu Tempereture"
-            android:textColor="@color/colorWhite"
-            android:textSize="10sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_num"
-            app:layout_constraintEnd_toEndOf="@+id/tv_num"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="@+id/tv_num"
-            app:layout_constraintTop_toBottomOf="@+id/tv_num" />
-
-        <Button
-            android:id="@+id/b_optimize"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:backgroundTint="@color/colorWhite"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:text="Optimize"
-            android:textStyle="bold"
-            android:visibility="gone"
-            app:layout_constraintBottom_toTopOf="@+id/iv_cpu_cooler"
-            app:layout_constraintEnd_toEndOf="@+id/textView"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="@+id/textView"
-            app:layout_constraintTop_toBottomOf="@+id/tv_num" />
-
-        <ProgressBar
-            android:id="@+id/pb_storage"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="70dp"
-            android:layout_height="5dp"
-            android:layout_marginTop="8dp"
-            android:max="100"
-            android:progressDrawable="@drawable/maincustomprogress"
-            app:layout_constraintEnd_toEndOf="@+id/pgb_storage"
-            app:layout_constraintStart_toStartOf="@+id/pgb_storage"
-            app:layout_constraintTop_toBottomOf="@+id/pgb_storage" />
-
-        <ProgressBar
-            android:id="@+id/pb_ram"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="70dp"
-            android:layout_height="5dp"
-            android:layout_marginTop="8dp"
-            android:max="100"
-            android:progressDrawable="@drawable/maincustomprogress"
-            app:layout_constraintEnd_toEndOf="@+id/pgb_ram"
-            app:layout_constraintStart_toStartOf="@+id/pgb_ram"
-            app:layout_constraintTop_toBottomOf="@+id/pgb_ram" />
-
-        <TextView
-            android:id="@+id/tv_storage_info"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="1532MB/3.7GB"
-            android:textColor="@color/colorWhite"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/pb_storage"
-            app:layout_constraintStart_toStartOf="@+id/pb_storage"
-            app:layout_constraintTop_toBottomOf="@+id/pb_storage" />
-
-        <TextView
-            android:id="@+id/tv_ram_info"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="1532MB/3.7GB"
-            android:textColor="@color/colorWhite"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/pb_ram"
-            app:layout_constraintStart_toStartOf="@+id/pb_ram"
-            app:layout_constraintTop_toBottomOf="@+id/pb_ram" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ram"
-            android:textColor="@color/standard_white"
-            app:layout_constraintEnd_toEndOf="@+id/tv_ram_info"
-            app:layout_constraintStart_toStartOf="@+id/tv_ram_info"
-            app:layout_constraintTop_toBottomOf="@+id/tv_ram_info" />
-
-        <TextView
-            android:id="@+id/textView53"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Storage"
-            android:textColor="@color/standard_white"
-            app:layout_constraintEnd_toEndOf="@+id/tv_storage_info"
-            app:layout_constraintStart_toStartOf="@+id/tv_storage_info"
-            app:layout_constraintTop_toBottomOf="@+id/tv_storage_info" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

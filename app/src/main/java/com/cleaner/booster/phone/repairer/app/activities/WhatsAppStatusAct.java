@@ -1,14 +1,17 @@
 package com.cleaner.booster.phone.repairer.app.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,6 +19,9 @@ import com.cleaner.booster.phone.repairer.app.R;
 import com.cleaner.booster.phone.repairer.app.fragments.StatusImagesFrag;
 import com.cleaner.booster.phone.repairer.app.fragments.StatusSavedFrag;
 import com.cleaner.booster.phone.repairer.app.fragments.StatusVideosFrag;
+import com.cleaner.booster.phone.repairer.app.fragments.dashboard.DashboardFragment;
+import com.cleaner.booster.phone.repairer.app.fragments.me.AboutUsFragment;
+import com.cleaner.booster.phone.repairer.app.fragments.tools.ToolsFragment;
 import com.cleaner.booster.phone.repairer.app.utils.Utils;
 import com.google.android.material.tabs.TabLayout;
 
@@ -24,6 +30,12 @@ import java.io.File;
 public class WhatsAppStatusAct extends AppCompatActivity {
     Utils utils;
     Fragment mFragment;
+    private ConstraintLayout image_bar_cl, video_bar_cl, saved_bar_cl;
+    private ImageView image_bar_iv, video_bar_iv, saved_bar_iv;
+    private TextView image_bar_tv, video_bar_tv, saved_bar_tv;
+    private ImageView statusSaverMain_iv;
+    private TextView amountOfStatusImages_tv;
+    File file1;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -34,52 +46,48 @@ public class WhatsAppStatusAct extends AppCompatActivity {
 
         utils = new Utils(this);
 
-        TabLayout tabLayout = findViewById(R.id.status_tl);
-        ImageView statusSaverMain_iv = findViewById(R.id.statusSaverMain_iv);
-        TextView amountOfStatusImages_tv = findViewById(R.id.amountOfStatusImages_tv);
+        statusSaverMain_iv = findViewById(R.id.statusSaverMain_iv);
+        amountOfStatusImages_tv = findViewById(R.id.amountOfStatusImages_tv);
+
+        image_bar_cl = findViewById(R.id.image_bar_cl);
+        video_bar_cl = findViewById(R.id.video_bar_cl);
+        saved_bar_cl = findViewById(R.id.saved_bar_cl);
+
+        image_bar_iv = findViewById(R.id.image_bar_iv);
+        video_bar_iv = findViewById(R.id.video_bar_iv);
+        saved_bar_iv = findViewById(R.id.saved_bar_iv);
+
+        image_bar_tv = findViewById(R.id.Image_bar_tv);
+        video_bar_tv = findViewById(R.id.video_bar_tv);
+        saved_bar_tv = findViewById(R.id.saved_bar_tv);
 
         StatusImagesFrag statusImagesFrag = new StatusImagesFrag();
         loadmyfrag(statusImagesFrag);
 
-        File file1 = new File(Environment.getExternalStorageDirectory().getPath() + "/WhatsApp/Media/.Statuses");
+        file1 = new File(Environment.getExternalStorageDirectory().getPath() + "/WhatsApp/Media/.Statuses");
         amountOfStatusImages_tv.setText(utils.getListFiles(file1, "images").size() + " images status found");
-        statusSaverMain_iv.setImageResource(R.drawable.ic_status_saver_image_header);
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        statusSaverMain_iv.setImageResource(R.drawable.ic_status_saver_image);
+
+        image_bar_cl.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                switch (tab.getPosition()) {
-                    case 0:
-                        StatusImagesFrag statusImagesFrag = new StatusImagesFrag();
-                        loadmyfrag(statusImagesFrag);
-                        amountOfStatusImages_tv.setText(utils.getListFiles(file1, "images").size() + " images status found");
-                        statusSaverMain_iv.setImageResource(R.drawable.ic_status_saver_image_header);
-                        break;
-
-                    case 1:
-                        StatusVideosFrag statusVideosFrag = new StatusVideosFrag();
-                        loadmyfrag(statusVideosFrag);
-                        File file2 = new File(Environment.getExternalStorageDirectory().getPath() + "/WhatsApp/Media/.Statuses");
-                        amountOfStatusImages_tv.setText(utils.getListFiles(file2, "images").size() + " videos status found");
-                        statusSaverMain_iv.setImageResource(R.drawable.ic_status_saver_video_header);
-                        break;
-
-                    case 2:
-                        StatusSavedFrag statusSavedFrag = new StatusSavedFrag();
-                        loadmyfrag(statusSavedFrag);
-                        amountOfStatusImages_tv.setText("Status Saved");
-                        statusSaverMain_iv.setImageResource(R.drawable.ic_status_saver_saved_header);
-                        break;
-                }
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
+            public void onClick(View v) {
+                navFun(image_bar_cl);
             }
         });
+        video_bar_cl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navFun(video_bar_cl);
+            }
+        });
+        saved_bar_cl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navFun(saved_bar_cl);
+            }
+        });
+
+
     }
 
     public void loadmyfrag(Fragment fragment) {
@@ -95,5 +103,62 @@ public class WhatsAppStatusAct extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         finish();
+    }
+
+    public void navFun(View view) {
+        switch (view.getId()) {
+            case R.id.image_bar_cl:
+                loadmyfrag(new StatusImagesFrag());
+                image_bar_cl.setBackground(getDrawable(R.drawable.orange_two_d));
+                video_bar_cl.setBackgroundColor(Color.WHITE);
+                saved_bar_cl.setBackgroundColor(Color.WHITE);
+
+                image_bar_iv.setImageResource(R.drawable.ic_select_image);
+                video_bar_iv.setImageResource(R.drawable.ic_videos);
+                saved_bar_iv.setImageResource(R.drawable.ic_saved);
+
+                image_bar_tv.setVisibility(View.VISIBLE);
+                video_bar_tv.setVisibility(View.GONE);
+                saved_bar_tv.setVisibility(View.GONE);
+                amountOfStatusImages_tv.setText(utils.getListFiles(file1, "images").size() + " images status found");
+                statusSaverMain_iv.setImageResource(R.drawable.ic_status_saver_image);
+                break;
+            case R.id.video_bar_cl:
+                loadmyfrag(new StatusVideosFrag());
+                image_bar_cl.setBackgroundColor(Color.WHITE);
+                video_bar_cl.setBackground(getDrawable(R.drawable.orange_two_d));
+                saved_bar_cl.setBackgroundColor(Color.WHITE);
+
+                image_bar_iv.setImageResource(R.drawable.ic_image);
+                video_bar_iv.setImageResource(R.drawable.ic_select_video);
+                saved_bar_iv.setImageResource(R.drawable.ic_saved);
+
+
+                image_bar_tv.setVisibility(View.GONE);
+                video_bar_tv.setVisibility(View.VISIBLE);
+                saved_bar_tv.setVisibility(View.GONE);
+
+                amountOfStatusImages_tv.setText("Status Saved");
+                statusSaverMain_iv.setImageResource(R.drawable.ic_status_saved);
+
+                break;
+            case R.id.saved_bar_cl:
+                loadmyfrag(new StatusSavedFrag());
+                image_bar_cl.setBackgroundColor(Color.WHITE);
+                video_bar_cl.setBackgroundColor(Color.WHITE);
+                saved_bar_cl.setBackground(getDrawable(R.drawable.orange_two_d));
+
+                image_bar_iv.setImageResource(R.drawable.ic_image);
+                video_bar_iv.setImageResource(R.drawable.ic_videos);
+                saved_bar_iv.setImageResource(R.drawable.ic_select_saved);
+
+                image_bar_tv.setVisibility(View.GONE);
+                video_bar_tv.setVisibility(View.GONE);
+                saved_bar_tv.setVisibility(View.VISIBLE);
+                File file2 = new File(Environment.getExternalStorageDirectory().getPath() + "/WhatsApp/Media/.Statuses");
+                amountOfStatusImages_tv.setText(utils.getListFiles(file2, "images").size() + " videos status found");
+                statusSaverMain_iv.setImageResource(R.drawable.ic_status_video);
+                break;
+        }
     }
 }

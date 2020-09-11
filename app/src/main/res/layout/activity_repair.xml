@@ -9,17 +9,16 @@ android:orientation="vertical"
 tools:context=".activities.RepairAct">
 
 
+
 <include
     android:id="@+id/repair_one"
     layout="@layout/repair_one"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:visibility="visible" />
+    <include
+        android:visibility="gone"
+        android:id="@+id/repair_two"
+        layout="@layout/repair_two"/>
 
-<include
-    android:id="@+id/repair_two"
-    layout="@layout/repair_two"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:visibility="gone" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

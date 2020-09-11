@@ -40,7 +40,7 @@ import java.util.List;
 
 import static com.cleaner.booster.phone.repairer.app.R.raw.notification_sound;
 
-public class ChargingLockedScreenAct extends AppCompatActivity {
+public class ChargingLockedScreenAct extends AppCompatActivity implements MediaPlayer.OnPreparedListener, MediaPlayer.OnErrorListener {
 
     private ProgressBar pbBattery;
     private TextView tvCharging, tvPercentage;
@@ -54,7 +54,7 @@ public class ChargingLockedScreenAct extends AppCompatActivity {
     private MediaPlayer mp;
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
-    TextView tvTime,tvDate;
+    TextView tvTime, tvDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,12 +142,11 @@ public class ChargingLockedScreenAct extends AppCompatActivity {
 
             if (preferences.getBoolean("FULL_CHARGED_SOUND", false)) {
 
-                mp = MediaPlayer.create(this, notification_sound);
                 try {
-                    mp.prepare();
-                    mp.start();
+                    mp = MediaPlayer.create(this, R.raw.notification_sound);
+                    mp.prepareAsync();
                     mp.setLooping(false);
-                } catch (IOException e) {
+                } catch (IllegalStateException e) {
                     e.printStackTrace();
                 }
             }
@@ -195,6 +194,21 @@ public class ChargingLockedScreenAct extends AppCompatActivity {
             startAnimation(level);
         }
     };
+
+    @Override
+    public boolean onError(MediaPlayer mp, int what, int extra) {
+        Toast.makeText(this, "Ring tone error", Toast.LENGTH_SHORT).show();
+        return false;
+    }
+
+    @Override
+    public void onPrepared(MediaPlayer mp) {
+
+        if (preferences.getBoolean("FULL_CHARGED_SOUND", false)) {
+            mp.start();
+            Toast.makeText(this, "Ring tone playing", Toast.LENGTH_SHORT).show();
+        }
+    }
 
 
     @SuppressLint("StaticFieldLeak")
@@ -250,12 +264,12 @@ public class ChargingLockedScreenAct extends AppCompatActivity {
 
     public String getTime() {
         Calendar calendar = Calendar.getInstance();
-        return new SimpleDateFormat( "h:mm a" ).format( calendar.getTime() );
+        return new SimpleDateFormat("h:mm a").format(calendar.getTime());
     }
 
     public String getDate() {
         Calendar calendar = Calendar.getInstance();
-        return new SimpleDateFormat( "dd MMM yyyy" ).format( calendar.getTime() );
+        return new SimpleDateFormat("dd MMM yyyy").format(calendar.getTime());
     }
 
 }

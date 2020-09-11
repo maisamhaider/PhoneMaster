@@ -85,7 +85,7 @@ public class CommonAdapter extends RecyclerView.Adapter<CommonAdapter.WhatsAppSt
         } else if (fileType==DOCUMENT) {
             holder.commonFileRv_iv.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_received_file));
         } else if (fileType==BACKUP) {
-            holder.commonFileRv_iv.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_backup_conversation));
+            holder.commonFileRv_iv.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_backup_conversation_history));
         }
 
         holder.selection_iv.setOnClickListener(new View.OnClickListener() {

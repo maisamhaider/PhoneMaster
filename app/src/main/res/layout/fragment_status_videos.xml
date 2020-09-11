@@ -8,6 +8,7 @@
     tools:context=".fragments.StatusImagesFrag">
 
     <TextView
+        android:textColor="@color/colorTextOne"
         android:text="No status video"
         android:id="@+id/statusNoVideo_tv"
         android:layout_width="wrap_content"
@@ -24,19 +25,13 @@
         android:layout_height="match_parent"
         android:background="@color/standard_white">
 
-        <TextView
-            android:id="@+id/statusVideos_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="SELECT VIDEOS :"
-            android:textColor="@color/colorTextOne" />
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/statusVideos_rv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@+id/saveStatusVideos_ll"
-            android:layout_below="@+id/statusVideos_tv"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="0dp"
             android:paddingStart="10dp"
             android:paddingEnd="10dp" />
 
@@ -45,8 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_alignParentBottom="true"
-            android:background="@drawable/main_button_bg"
-
+            android:background="@drawable/black_ripple_flat_d"
             android:gravity="center"
             android:orientation="vertical">
 

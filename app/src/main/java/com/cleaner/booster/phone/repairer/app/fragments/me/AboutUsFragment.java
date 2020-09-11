@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
@@ -32,14 +33,12 @@ public class AboutUsFragment extends BaseFragment {
 
         View root = inflater.inflate(R.layout.fragment_setting, container, false);
 
-        ImageView ivTool = root.findViewById(R.id.iv_s_back);
-        ConstraintLayout shareCl = root.findViewById(R.id.share_cl);
+         ConstraintLayout shareCl = root.findViewById(R.id.share_cl);
         ConstraintLayout rateUsCl = root.findViewById(R.id.rateUs_cl);
         ConstraintLayout aboutUsCl = root.findViewById(R.id.aboutUs_cl);
 
         adView(root.findViewById(R.id.settingBanner_adView));
 
-        ivTool.setOnClickListener((View.OnClickListener) v -> ((MainActivity) requireActivity()).onBackPressed());
 
         shareCl.setOnClickListener(v -> shareUs());
         rateUsCl.setOnClickListener(v -> startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + getActivity().getPackageName()))));

@@ -37,8 +37,7 @@ public class BatterySavingAct extends BaseActivity {
     ConstraintLayout hibernatingAppsPkgMain_cl;
     TextView hibernatingAppsPkg_tv, powerSavingMainAppsAmount_tv;
     ProgressBar hibernatingAppsPkg_pb;
-    ImageView hibernatingAppsPkgBack_iv;
-    private BatterySavingAllAppsAdapter allAppsAdapter;
+     private BatterySavingAllAppsAdapter allAppsAdapter;
     ConstraintLayout powerSavingSecond_cl, powerSavingLastScreenMain_cl, noDrainingApp_cl;
     SharedPreferences preferences;
 
@@ -55,24 +54,20 @@ public class BatterySavingAct extends BaseActivity {
         powerSavingSecond_cl = findViewById(R.id.powerSavingSecond_cl);
         RecyclerView powerSavingApp_rv = findViewById(R.id.powerSavingApp_rv);
         LinearLayout powerSavingBtn_ll = findViewById(R.id.powerSavingBtn_ll);
-        TextView batterySavingRunningApps_tv = findViewById(R.id.batterySavingRunningApps_tv);
-        powerSavingMainAppsAmount_tv = findViewById(R.id.powerSavingMainAppsAmount_tv);
-        ImageView powerSavingBack_iv = findViewById(R.id.powerSavingBack_iv);
-        noDrainingApp_cl = findViewById(R.id.noDrainingApp_cl);
+         powerSavingMainAppsAmount_tv = findViewById(R.id.powerSavingMainAppsAmount_tv);
+         noDrainingApp_cl = findViewById(R.id.noDrainingApp_cl);
 
 
         //analyzing apps
         ConstraintLayout powerSavingFirstScreenMain_cl = findViewById(R.id.powerSavingFirstScreenMain_cl);
         ProgressBar progressBar = findViewById(R.id.roundedHorizontalPSF_pb);
         TextView analyzingBatteryStatusPercent_tv = findViewById(R.id.analyzingBatteryStatusPercent_tv);
-        ImageView powerSavingFirstScreenBack_iv = findViewById(R.id.powerSavingFirstScreenBack_iv);
 
         //hibernating apps
         hibernatingAppsPkgMain_cl = findViewById(R.id.hibernatingAppsPkgMain_cl);
         hibernatingAppsPkg_tv = findViewById(R.id.hibernatingAppsPkg_tv);
         hibernatingAppsPkg_pb = findViewById(R.id.hibernatingAppsPkg_pb);
-        hibernatingAppsPkgBack_iv = findViewById(R.id.hibernatingAppsPkgBack_iv);
-        hibernatingAppsPkgMain_cl.setVisibility(View.GONE);
+         hibernatingAppsPkgMain_cl.setVisibility(View.GONE);
 
         //last screen
         powerSavingLastScreenMain_cl = findViewById(R.id.powerSavingLastScreenMain_cl);
@@ -101,11 +96,8 @@ public class BatterySavingAct extends BaseActivity {
             noDrainingApp_cl.setVisibility(View.GONE);
             powerSavingSecond_cl.setVisibility(View.VISIBLE);
             powerSavingMainAppsAmount_tv.setText(String.valueOf(list.size()));
-            batterySavingRunningApps_tv.setText(list.size() + " app are Running");
-        }
+         }
 
-        powerSavingBack_iv.setOnClickListener(v -> finish());
-        powerSavingFirstScreenBack_iv.setOnClickListener(v -> finish());
 
         ValueAnimator animatorText = ValueAnimator.ofInt(0, 100);
         animatorText.setInterpolator(new LinearInterpolator());

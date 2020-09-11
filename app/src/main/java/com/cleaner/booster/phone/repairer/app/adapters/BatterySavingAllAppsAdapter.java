@@ -48,9 +48,9 @@ public class BatterySavingAllAppsAdapter extends RecyclerView.Adapter<BatterySav
         return checkList;
     }
 
-    public void setCheckList(List<String> checkList) {
-        this.checkList = checkList;
-    }
+//    public void setCheckList(List<String> checkList) {
+//        this.checkList = checkList;
+//    }
 
     @NonNull
     @Override

@@ -5,7 +5,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
- import android.annotation.SuppressLint;
+import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -14,7 +14,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
- import android.widget.ImageView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -29,10 +29,9 @@ import java.util.List;
 public class PhoneBoostAct extends AppCompatActivity {
     Utils utils;
     ProgressBar phoneBoosting_pb;
-    ImageView BoostingBack_iv;
     private BatterySavingAllAppsAdapter allAppsAdapter;
     ConstraintLayout phoneBoostSecond_cl, phoneBoostedLastMain_cl, phoneBoostedMain1_cl, BoostingMain_cl;
-    TextView phoneBoostUsedPercent_tv, phoneBoostingPercent_tv, phoneBoostRamDetail_tv, runningApps_tv;
+    TextView phoneBoostUsedPercent_tv, phoneBoostRamDetail_tv;
     SharedPreferences preferences;
 
     ActivityManager activityManager;
@@ -52,10 +51,8 @@ public class PhoneBoostAct extends AppCompatActivity {
         RecyclerView phoneBoostApps_rv = findViewById(R.id.phoneBoostApps_rv);
         LinearLayout phoneBoostBtn_ll = findViewById(R.id.phoneBoostBtn_ll);
         phoneBoostUsedPercent_tv = findViewById(R.id.phoneBoostUsedPercent_tv);
-        ImageView phoneBoostMainBack_iv = findViewById(R.id.phoneBoostMainBack_iv);
         phoneBoostedMain1_cl = findViewById(R.id.phoneBoostedMain1_cl);
         phoneBoostRamDetail_tv = findViewById(R.id.phoneBoostRamDetail_tv);
-        runningApps_tv = findViewById(R.id.runningApps_tv);
 
 
         activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
@@ -70,14 +67,10 @@ public class PhoneBoostAct extends AppCompatActivity {
         phoneBoostUsedPercent_tv.setText(percent);
 
         //scanning Ram
-        ConstraintLayout phoneBoostFirstScreenMain_cl = findViewById(R.id.phoneBoostFirstScreenMain_cl);
-        ImageView phoneBoostFirstScreenBack_iv = findViewById(R.id.phoneBoostFirstScreenBack_iv);
 
         //Boosting ram
         BoostingMain_cl = findViewById(R.id.BoostingMain_cl);
-        phoneBoostingPercent_tv = findViewById(R.id.phoneBoostingPercent_tv);
         phoneBoosting_pb = findViewById(R.id.phoneBoosting_pb);
-        BoostingBack_iv = findViewById(R.id.BoostingBack_iv);
         BoostingMain_cl.setVisibility(View.GONE);
 
         //boosted screen
@@ -106,33 +99,7 @@ public class PhoneBoostAct extends AppCompatActivity {
             phoneBoostRamDetail_tv.setText(utils.getCalculatedDataSize(usedRam4) + "/" + utils.getCalculatedDataSize(totalRam4));
             String percent4 = (String.format("%.0f", utils.getPercentage(totalRam4, usedRam4)));
             phoneBoostUsedPercent_tv.setText(percent4);
-            runningApps_tv.setText("Running apps " + "(" + list.size() + ")");
-        }
-
-        phoneBoostMainBack_iv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-
-            }
-        });
-
-        phoneBoostFirstScreenBack_iv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
-
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                phoneBoostFirstScreenMain_cl.setVisibility(View.GONE);
-            }
-        }, 4000);
-
+         }
 
         allAppsAdapter = new BatterySavingAllAppsAdapter(this, list);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -182,9 +149,6 @@ public class PhoneBoostAct extends AppCompatActivity {
         protected void onProgressUpdate(Integer... values) {
             super.onProgressUpdate(values);
             phoneBoosting_pb.setProgress(values[0]);
-            phoneBoostingPercent_tv.setText(String.format("%s/%s", values[0], packageName.size()));
-
-
         }
 
 
@@ -201,8 +165,6 @@ public class PhoneBoostAct extends AppCompatActivity {
             float totalRam2 = memoryInfo.totalMem;
             float freeRam2 = memoryInfo.availMem;
             float usedRam1 = totalRam2 - freeRam2;
-            phoneBoostingPercent_tv.setText(utils.getPercentage(totalRam2, usedRam1) + "%");
-
             editor.putLong("lastPhoneBoostTime", nextTime.getTimeInMillis()).commit();
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {

@@ -4,13 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="80dp"
-    android:layout_marginStart="16dp"
-    android:layout_marginTop="10dp"
-    android:layout_marginEnd="16dp"
-    android:background="@drawable/btn_boarder_bg"
+      android:background="@drawable/white_stroke_curved_d"
     android:gravity="center"
     android:orientation="vertical"
-    android:padding="5dp">
+   >
 
     <TextView
         android:id="@+id/tv_title"
@@ -20,6 +17,7 @@
         android:padding="10dp"
         android:text="Speaker Test"
         android:textSize="12sp"
+        android:textColor="@color/colorTextOne"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline7"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,9 +39,25 @@
         android:text="TextView"
         android:textAlignment="center"
         android:textSize="12sp"
+        android:textColor="@color/colorTextOne"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline7"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline50"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.30" />
+
+    <View
+        android:layout_width="8dp"
+        android:layout_height="0dp"
+        android:background="@drawable/black_bar_d"
+        app:layout_constraintBottom_toTopOf="@+id/guideline50"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

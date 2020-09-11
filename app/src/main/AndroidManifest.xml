@@ -30,11 +30,11 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_main_icon_two"
+        android:icon="@drawable/ic_icon_main"
         android:label="@string/app_name"
         android:requestLegacyExternalStorage="true"
         android:usesCleartextTraffic="true"
-        android:roundIcon="@drawable/ic_main_icon_two"
+        android:roundIcon="@drawable/ic_icon_main"
         android:supportsRtl="true"
         android:theme="@style/AppThemeNoActionBar"
         tools:targetApi="q">
@@ -57,8 +57,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.FilesMoverAct" />
-        <activity android:name=".activities.JunkFilesAct" />
+         <activity android:name=".activities.JunkFilesAct" />
         <activity
             android:name=".activities.ChargingLockedScreenAct"
             android:excludeFromRecents="true"

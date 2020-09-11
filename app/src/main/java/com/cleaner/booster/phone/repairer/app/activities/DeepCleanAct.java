@@ -9,6 +9,7 @@ import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
@@ -25,10 +26,10 @@ public class DeepCleanAct extends BaseActivity {
     private Permissions permissions;
     private ConstraintLayout deepCleanWhatsApp_cl, deeCleanImages_cl, deeCleanVideos_cl, deeCleanAudios_cl, deeCleanAppData_cl, deepCleanLargeFiles_cl, deeCleanInstallationPkg_cl;
     private ImageView deepCleanWhatsAppNext_iv, deepCleanImagesNext_iv, deepCleanVideosNext_iv, deepCleanAudiosNext_iv,deepCleanLargeFilesNext_iv, deepCleanAppDataNext_iv, deepCleanInstallationPkgsNext_iv;
-    ImageView deepCleanImage_iv1, deepCleanImage_iv2, deepCleanImage_iv3, deepCleanVideos_iv1, deepCleanVideos_iv2, deepCleanVideos_iv3,deepCleanMainBack_iv;
+    ImageView deepCleanImage_iv1, deepCleanImage_iv2, deepCleanImage_iv3, deepCleanVideos_iv1, deepCleanVideos_iv2, deepCleanVideos_iv3;
     TextView deepCleanWhatsAppDataSize_tv, deepCleanImagesSize_tv, deepCleanVideosSize_tv,
-            deepCleanAudiosDataSize_tv,deepCleanAppDataSize_tv, deepCleanLargeFileSize_tv, deepCleanInstallationPkgseSize_tv,
-            deepCleanProgress_tv,deepCleanDetail_tv,deepCleanMainTotalDataSize_tv,deepCleanDataPrefix_tv;
+            deepCleanAudiosDataSize_tv,deepCleanAppDataSize_tv, deepCleanLargeFileSize_tv, deepCleanInstallationPkgseSize_tv
+            ,deepCleanDetail_tv,deepCleanMainTotalDataSize_tv;
     ProgressBar deepClean_pb;
     Utils utils;
 
@@ -66,24 +67,22 @@ public class DeepCleanAct extends BaseActivity {
         deepCleanVideos_iv2 = findViewById(R.id.deepCleanVideos_iv2);
         deepCleanVideos_iv3 = findViewById(R.id.deepCleanVideos_iv3);
 
-        deepCleanMainBack_iv = findViewById(R.id.deepCleanMainBack_iv);
 
 
 
         deepCleanMainTotalDataSize_tv = findViewById(R.id.deepCleanMainTotalDataSize_tv);
-        deepCleanDataPrefix_tv = findViewById(R.id.deepCleanDataPrefix_tv);
-        deepCleanImagesSize_tv = findViewById(R.id.deepCleanImagesSize_tv);
+         deepCleanImagesSize_tv = findViewById(R.id.deepCleanImagesSize_tv);
         deepCleanVideosSize_tv = findViewById(R.id.deepCleanVideosSize_tv);
         deepCleanAudiosDataSize_tv = findViewById(R.id.deepCleanAudiosDataSize_tv);
         deepCleanLargeFileSize_tv = findViewById(R.id.deepCleanLargeFileSize_tv);
         deepCleanInstallationPkgseSize_tv = findViewById(R.id.deepCleanInstallationPkgseSize_tv);
         deepCleanWhatsAppDataSize_tv = findViewById(R.id.deepCleanWhatsAppDataSize_tv);
-        deepCleanProgress_tv = findViewById(R.id.deepCleanProgress_tv);
-        deepCleanDetail_tv = findViewById(R.id.deepCleanDetail_tv);
+         deepCleanDetail_tv = findViewById(R.id.deepCleanDetail_tv);
         deepCleanAppDataSize_tv = findViewById(R.id.deepCleanAppDataSize_tv);
 
 
         deepClean_pb= findViewById(R.id.deepClean_pb);
+
 
         initIntents();
         new DeepCleanerTask().execute();
@@ -132,17 +131,9 @@ public class DeepCleanAct extends BaseActivity {
             float totalSize = whatsAppDataSize+imagesSize+VideosSize+audiosSize+docSize+pkgSize;
             int size = utils.getCalculatedDataSize(totalSize).length();
             String dataPrefix;
-            if (utils.getCalculatedDataSize(totalSize).contains("Bytes"))
-            {
-                dataPrefix = utils.getCalculatedDataSize(totalSize).substring(size-5,size);
-            }
-            else {
-                dataPrefix = utils.getCalculatedDataSize(totalSize).substring(size-2,size);
 
-            }
 
-            deepCleanDataPrefix_tv.setText(dataPrefix);
-            deepCleanImagesSize_tv.setText(utils.getCalculatedDataSize(imagesSize));
+             deepCleanImagesSize_tv.setText(utils.getCalculatedDataSize(imagesSize));
             deepCleanVideosSize_tv.setText(utils.getCalculatedDataSize(VideosSize));
             deepCleanAudiosDataSize_tv.setText(utils.getCalculatedDataSize(audiosSize));
             deepCleanLargeFileSize_tv.setText(utils.getCalculatedDataSize(docSize));
@@ -157,9 +148,8 @@ public class DeepCleanAct extends BaseActivity {
             deeCleanAppData_cl.setVisibility(View.GONE);
             deeCleanInstallationPkg_cl.setVisibility(View.GONE);
 
-            deepCleanMainBack_iv.setOnClickListener(v -> finish());
 
-            deepClean_pb.setMax(100);
+            int totalStorage = (int) utils.getTotalStorage();// utils.getPercentage(,totalSize);
             ValueAnimator animator = ValueAnimator.ofInt(0, (int) utils.getCalculatedDataSizeFloat(totalSize));
             animator.setInterpolator(new LinearInterpolator());
             animator.setStartDelay(0);
@@ -169,13 +159,12 @@ public class DeepCleanAct extends BaseActivity {
                 deepCleanMainTotalDataSize_tv.setText(String.valueOf(value));
                 if (value == (int) utils.getCalculatedDataSizeFloat(totalSize))
                 {
-                    deepCleanMainTotalDataSize_tv.setText( String.format("%.1f",utils.getCalculatedDataSizeFloat(totalSize)));
+                    deepCleanMainTotalDataSize_tv.setText( utils.getCalculatedDataSize(totalSize));
                 }
             });
             animator.start();
 
-
-            deepClean_pb.setMax(100);
+             deepClean_pb.setMax(100);
             ValueAnimator animatorText = ValueAnimator.ofInt(0, 100);
             animatorText.setInterpolator(new LinearInterpolator());
             animatorText.setStartDelay(0);
@@ -211,11 +200,15 @@ public class DeepCleanAct extends BaseActivity {
                 {
                     deeCleanInstallationPkg_cl.setVisibility(View.VISIBLE);
                     deepCleanDetail_tv.setText("Scan is completed");
+                    deepClean_pb.setVisibility(View.INVISIBLE);
+
                 }
                 deepClean_pb.setProgress(value);
-                deepCleanProgress_tv.setText("SCANNING"+"("+utils.getPercentage((float)100,(float)value)+"%)");
+
+
             });
             animatorText.start();
+
 
             if (utils.getAllImagePaths().size()  - 1 >= 0)
             {

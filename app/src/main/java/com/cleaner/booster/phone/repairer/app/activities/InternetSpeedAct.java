@@ -61,6 +61,7 @@ public class InternetSpeedAct extends AppCompatActivity {
 
         startButton.setOnClickListener( new View.OnClickListener() {
             public void onClick(View v) {
+
                 startButton.setEnabled( false );
 
                 //Restart test icin eger baglanti koparsa
@@ -71,9 +72,9 @@ public class InternetSpeedAct extends AppCompatActivity {
 
                 new Thread(new Runnable() {
                     RotateAnimation rotate;
-                    ImageView barImageView = (ImageView) findViewById( R.id.barImageView );
-                    TextView downloadTextView = (TextView) findViewById( R.id.downloadTextView );
-                    TextView uploadTextView = (TextView) findViewById( R.id.uploadTextView );
+                    ImageView barImageView = findViewById( R.id.barImageView );
+                    TextView downloadTextView =  findViewById( R.id.downloadTextView );
+                    TextView uploadTextView = findViewById( R.id.uploadTextView );
 
                     @Override
                     public void run() {
