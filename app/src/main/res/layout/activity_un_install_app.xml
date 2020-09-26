@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="@android:color/white"
     android:elevation="8dp"
+    android:id="@+id/unInstallAct_cl"
     tools:context=".activities.UnInstallAppAct">
 
     <androidx.constraintlayout.widget.Guideline
@@ -23,7 +24,18 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline46"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/searchApps_iv"
+        android:src="@drawable/ic_baseline_search"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline46"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
+        android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="App Cleanup"
@@ -36,6 +48,44 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <EditText
+        android:id="@+id/appsSearch_et"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:visibility="gone"
+        android:background="@drawable/white_stroke_curved_d"
+        android:maxLines="1"
+        android:paddingStart="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline46"
+        app:layout_constraintEnd_toEndOf="@+id/view17"
+        app:layout_constraintStart_toStartOf="@+id/view17"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/cancel_iv"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:visibility="gone"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+         android:src="@drawable/ic_baseline_cancel"
+        app:layout_constraintBottom_toTopOf="@+id/appsSearch_et"
+        app:layout_constraintEnd_toEndOf="@+id/appsSearch_et"
+        app:layout_constraintStart_toEndOf="@+id/appsSearch_et"
+        app:layout_constraintTop_toTopOf="@+id/appsSearch_et" />
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/swipeRefreshLayout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline"
+        >
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/allAppsUnInstallApp_rv"
@@ -47,6 +97,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline" />
 
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <View
         android:id="@+id/view"

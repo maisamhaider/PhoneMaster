@@ -128,15 +128,33 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.498">
 
+            <TextView
+                android:layout_marginStart="16dp"
+                android:id="@+id/textView21"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="select/deselect"
+                app:layout_constraintBottom_toTopOf="@+id/phoneBoostApps_rv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <CheckBox
+                android:checked="true"
+                android:layout_marginEnd="16dp"
+                android:id="@+id/selectAll_cb"
+                android:layout_width="wrap_content"
+                android:buttonTint="@color/checkbox_selector"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/phoneBoostApps_rv"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginTop="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:layout_editor_absoluteX="0dp" />
+                app:layout_constraintTop_toBottomOf="@+id/selectAll_cb"
+              />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -224,11 +242,11 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <include
-        layout="@layout/phone_boost_after_boosclick_screen_layout"
+         layout="@layout/phone_boost_after_boosclick_screen_layout"
          />
 
     <include
-        layout="@layout/phone_boost_last_screen_layout"
+         layout="@layout/phone_boost_last_screen_layout"
          />
 
 

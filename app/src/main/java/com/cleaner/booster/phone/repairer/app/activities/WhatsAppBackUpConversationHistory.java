@@ -4,6 +4,8 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.constraintlayout.widget.Group;
@@ -11,11 +13,12 @@ import androidx.constraintlayout.widget.Group;
 import com.cleaner.booster.phone.repairer.app.R;
 import com.cleaner.booster.phone.repairer.app.adapters.CommonAdapter;
 import com.cleaner.booster.phone.repairer.app.async.WhatsAppCommonTask;
+import com.cleaner.booster.phone.repairer.app.interfaces.SelectAll;
 import com.cleaner.booster.phone.repairer.app.utils.Utils;
 
 import java.io.File;
 
-public class WhatsAppBackUpConversationHistory extends WhatsAppBaseActivity {
+public class WhatsAppBackUpConversationHistory extends WhatsAppBaseActivity implements SelectAll{
 
     Utils utils;
     File file;
@@ -33,10 +36,12 @@ public class WhatsAppBackUpConversationHistory extends WhatsAppBaseActivity {
         whatsAppBUCHList_btn = findViewById(R.id.clean_btn);
         group = findViewById(R.id.group);
         noDatatv = findViewById(R.id.no_data_tv);
+        selectAll_cb1 = findViewById(R.id.selectAll_cb1);
+        select_tv = findViewById(R.id.select_tv);
 
         type = "BUCH";
 
-        commonAdapter = new CommonAdapter(this, CommonAdapter.BACKUP);
+        commonAdapter = new CommonAdapter(this, CommonAdapter.BACKUP,this);
         WhatsAppCommonTask whatsAppCommonTask = new WhatsAppCommonTask(this, commonAdapter, rvCleanWhatsApp, type );
         whatsAppCommonTask.execute();
 
@@ -46,6 +51,36 @@ public class WhatsAppBackUpConversationHistory extends WhatsAppBaseActivity {
                 alertDialog();
             }
         });
+
+        selectAll_cb1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SelectAll selectAll = commonAdapter.getSelectAll();
+                if (!b) {
+                    selectAll.selectAll(false);
+                    b = true;
+                } else {
+                    selectAll.selectAll(true);
+                    b = false;
+
+                }
+            }
+        });
+    }
+    @Override
+    public void selectAll(boolean isSelectAll) {
+
+        if (isSelectAll)
+        {
+            selectAll_cb1.setChecked(true);
+            b = false;
+
+        }
+        else {
+            selectAll_cb1.setChecked(false);
+            b = true;
+
+        }
     }
 
 }

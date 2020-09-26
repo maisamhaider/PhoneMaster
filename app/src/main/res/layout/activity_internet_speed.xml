@@ -64,8 +64,7 @@
                 android:id="@+id/barImageView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/ic_internet_speed_pointer"
-                android:tint="@color/colorWhite" />
+                android:src="@drawable/ic_internet_speed_pointer" />
 
         </RelativeLayout>
 
@@ -210,18 +209,20 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.cardview.widget.CardView>
+            <TextView
+                android:layout_margin="20dp"
+                android:id="@+id/startButton"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/black_ripple_flat_d"
+                android:gravity="center"
+                android:text="Begin"
+                android:textColor="@color/standard_white"
+                android:textSize="16sp" />
 
         </LinearLayout>
 
 
     </LinearLayout>
-    <TextView
-        android:id="@+id/startButton"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@drawable/black_ripple_flat_d"
-        android:gravity="center"
-        android:text="Begin"
-        android:textColor="@color/standard_white"
-        android:textSize="16sp" />
+
 </LinearLayout>

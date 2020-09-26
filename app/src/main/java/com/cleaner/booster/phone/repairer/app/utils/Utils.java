@@ -47,6 +47,40 @@ public class Utils {
         this.context = context;
     }
 
+    // get saved status data
+    public List<CommonModel> getSavedStatusFiles(File parentDir) {
+        File fold = new File(parentDir.getPath());
+        List<CommonModel> docList = new ArrayList<>();
+        File[] mlist = fold.listFiles();
+
+        {
+            if (mlist != null)
+                for (File f : mlist) {
+                    if (f.isDirectory()) {
+                        docList.addAll(getSavedStatusFiles(new File(f.getAbsolutePath())));
+                    } else {
+                        CommonModel data = new CommonModel();
+                        if (f.getAbsolutePath().endsWith(".jpeg") ||
+                                f.getAbsolutePath().endsWith(".jpg") ||
+                                f.getAbsolutePath().endsWith(".png") ||
+                                f.getName().endsWith("mp4"))
+                        {
+                            if (f.getName().contains("p_repair")) {
+                                data.setName(f.getName());
+                                data.setPath(f.getPath());
+                                data.setSize(f.length());
+                                //                doc.setType(FileTypes.DocumentType);
+                                if (f.length() > 0)
+                                    docList.add(data);
+                            }
+                        }
+                    }
+                }
+        }
+
+        return docList;
+    }
+
     // get all data
     public List<CommonModel> getListFiles(File parentDir) {
         File fold = new File(parentDir.getPath());
@@ -339,7 +373,8 @@ public class Utils {
 
         try {
             File src = new File(srcDir);
-            File dst = new File(Environment.getExternalStorageDirectory() + "/Phone_Master_Status", src.getName());
+            File dst = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+
+                    "/DCIM/phone_repair/p_repair" + src.getName());
 
             if (src.isDirectory()) {
 
@@ -354,6 +389,8 @@ public class Utils {
                 }
             } else {
                 copyFile(src, dst);
+                context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
+                        Uri.fromFile(new File(dst .getAbsolutePath()))));
                 Toast.makeText(context, "Saved", Toast.LENGTH_SHORT).show();
 
             }
@@ -478,8 +515,8 @@ public class Utils {
             for (File f : mFilelist) {
                 CommonModel doc = new CommonModel();
                 doc.setName(f.getName());
-    //                doc.setSize(f.length());
-    //                doc.setType(FileTypes.DocumentType);
+                //                doc.setSize(f.length());
+                //                doc.setType(FileTypes.DocumentType);
                 doc.setPath(f.getAbsolutePath());
                 if (f.length() > 0)
                     docList.add(doc);
@@ -506,8 +543,8 @@ public class Utils {
             for (File f : mFilelist) {
                 CommonModel doc = new CommonModel();
                 doc.setName(f.getName());
-    //                doc.setSize(f.length());
-    //                doc.setType(FileTypes.DocumentType);
+                //                doc.setSize(f.length());
+                //                doc.setType(FileTypes.DocumentType);
                 doc.setPath(f.getAbsolutePath());
                 if (f.length() > 0)
                     docList.add(doc);
@@ -532,13 +569,13 @@ public class Utils {
         if (mFilelist != null) {
             for (File f : mFilelist) {
                 CommonModel img = new CommonModel();
-               img.setName(f.getName());
-   //                doc.setSize(f.length());
-   //                doc.setType(FileTypes.DocumentType);
-               img.setPath(f.getAbsolutePath());
-               if (f.length() > 0)
-                   docList.add(img);
-           }
+                img.setName(f.getName());
+                //                doc.setSize(f.length());
+                //                doc.setType(FileTypes.DocumentType);
+                img.setPath(f.getAbsolutePath());
+                if (f.length() > 0)
+                    docList.add(img);
+            }
         }
         return docList;
     }
@@ -560,8 +597,8 @@ public class Utils {
                 for (File f : mFilelist) {
                     CommonModel doc = new CommonModel();
                     doc.setName(f.getName());
-    //                doc.setSize(f.length());
-    //                doc.setType(FileTypes.DocumentType);
+                    //                doc.setSize(f.length());
+                    //                doc.setType(FileTypes.DocumentType);
                     doc.setPath(f.getAbsolutePath());
                     if (f.length() > 0)
                         docList.add(doc);
@@ -602,11 +639,11 @@ public class Utils {
                 if (f.isDirectory()) {
                     getAllDocSize(f.getAbsolutePath());
                 }
-        }
+            }
         }
         if (mFilelist != null) {
             for (File f : mFilelist) {
-                    docSize = docSize + f.length();
+                docSize = docSize + f.length();
             }
         }
         return docSize;
@@ -617,7 +654,7 @@ public class Utils {
         File[] mlist = fold.listFiles();
         File[] mFilelist = fold.listFiles(new AllPackagesFilter());
         if (mlist != null) {
-            for (File f : mlist ) {
+            for (File f : mlist) {
                 if (f.isDirectory()) {
                     getAllPkgsSize(f.getAbsolutePath());
                 }
@@ -626,7 +663,7 @@ public class Utils {
 
         if (mFilelist != null) {
             for (File f : mFilelist) {
-                    size = size + f.length();
+                size = size + f.length();
             }
         }
         return size;
@@ -755,7 +792,9 @@ public class Utils {
                     float sizeGb = sizeMB / 1024;
                     sizePrefix = "GB";
                     finalSize = sizeGb;
-                } } }
+                }
+            }
+        }
         return String.format("%.2f", finalSize) + sizePrefix;
     }
 

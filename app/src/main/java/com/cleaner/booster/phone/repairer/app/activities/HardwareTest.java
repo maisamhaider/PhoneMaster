@@ -12,6 +12,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.speech.tts.TextToSpeech;
@@ -34,9 +35,9 @@ import java.util.Locale;
 
 public class HardwareTest extends AppCompatActivity implements View.OnClickListener {
 
-    TextView simCardVal_tv, headphone_tv, bluetoothSate_tv;
+    TextView simCardVal_tv, headphone_tv, bluetoothSate_tv,speakerIsW_tv,vibration_tv;
     TextToSpeech txtSpeech;
-    Handler handler;
+
     int counter = 0;
     boolean isHeadphoneCtd;
 
@@ -46,12 +47,13 @@ public class HardwareTest extends AppCompatActivity implements View.OnClickListe
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_hardware_test);
          setRequestedOrientation( ActivityInfo.SCREEN_ORIENTATION_PORTRAIT );
-         handler = new Handler();
 
         LinearLayout vibration_ll, simCard_ll, displayTst_ll, tuchSensor_ll, speakerTst_ll, checkHdPhne_ll, checkBlotoooth_ll;
         simCardVal_tv = findViewById( R.id.simCrdTstVal_tv);
         headphone_tv = findViewById( R.id.isHdphne_tv);
         bluetoothSate_tv = findViewById( R.id.blotooothState_tv);
+        speakerIsW_tv = findViewById( R.id.speakerIsW_tv);
+        vibration_tv = findViewById( R.id.vibration_tv);
 
         vibration_ll = findViewById( R.id.vibration_ll);
         simCard_ll = findViewById( R.id.simCard_ll);
@@ -92,10 +94,15 @@ public class HardwareTest extends AppCompatActivity implements View.OnClickListe
 // Vibrate for 500 milliseconds
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     vb.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
+                    vibration_tv.setVisibility( View.VISIBLE );
+                    new Handler(Looper.getMainLooper()).postDelayed( () -> vibration_tv.setVisibility( View.GONE ), 2000 );
                 } else {
                     //deprecated in API 26
                     vb.vibrate(500);}
+                vibration_tv.setVisibility( View.VISIBLE );
+                new Handler(Looper.getMainLooper()).postDelayed( () -> vibration_tv.setVisibility( View.GONE ), 2000 );
                 break;
+
             case R.id.simCard_ll:
                 TelephonyManager telMgr = (TelephonyManager) getSystemService( Context.TELEPHONY_SERVICE );
                 int simState = telMgr.getSimState();
@@ -103,17 +110,17 @@ public class HardwareTest extends AppCompatActivity implements View.OnClickListe
                     case TelephonyManager.SIM_STATE_ABSENT:
                         simCardVal_tv.setVisibility( View.VISIBLE );
                         simCardVal_tv.setText( "Sim card is absent" );
-                        handler.postDelayed( () -> simCardVal_tv.setVisibility( View.GONE ), 2000 );
+                        new Handler(Looper.getMainLooper()).postDelayed( () -> simCardVal_tv.setVisibility( View.GONE ), 2000 );
                         break;
                     case TelephonyManager.SIM_STATE_READY:
                         simCardVal_tv.setVisibility( View.VISIBLE );
                         simCardVal_tv.setText( "sim card is inserted" );
-                        handler.postDelayed( () -> simCardVal_tv.setVisibility( View.GONE ), 2000 );
+                        new Handler(Looper.getMainLooper()).postDelayed( () -> simCardVal_tv.setVisibility( View.GONE ), 2000 );
                         break;
                     case TelephonyManager.SIM_STATE_UNKNOWN:
                         simCardVal_tv.setVisibility( View.VISIBLE );
                         simCardVal_tv.setText( "sim card unknown" );
-                        handler.postDelayed( () -> simCardVal_tv.setVisibility( View.GONE ), 2000 );
+                        new Handler(Looper.getMainLooper()).postDelayed( () -> simCardVal_tv.setVisibility( View.GONE ), 2000 );
                         break;
                 }
 
@@ -158,23 +165,31 @@ public class HardwareTest extends AppCompatActivity implements View.OnClickListe
                 if (isHeadphoneCtd) {
                     headphone_tv.setVisibility( View.VISIBLE );
                     headphone_tv.setText( "Headphone is plugged" );
-                    handler.postDelayed( () -> headphone_tv.setVisibility( View.GONE ), 2000 );
+                    new Handler(Looper.getMainLooper()).postDelayed( () -> headphone_tv.setVisibility( View.GONE ), 2000 );
                 } else {
                     headphone_tv.setVisibility( View.VISIBLE );
                     headphone_tv.setText( "Headphone is unplugged" );
-                    handler.postDelayed( () -> headphone_tv.setVisibility( View.GONE ), 2000 );
+                    new Handler(Looper.getMainLooper()).postDelayed( () -> headphone_tv.setVisibility( View.GONE ), 2000 );
                 }
 
                 break;
             case R.id.speakerTst_ll:
-                txtSpeech.speak( "speaker is working.", TextToSpeech.QUEUE_FLUSH, null );
+                txtSpeech.speak( "speaker is working.", TextToSpeech.QUEUE_FLUSH, null ,null);
+                if(txtSpeech.isSpeaking()) {
+                    speakerIsW_tv.setVisibility( View.VISIBLE );
+                } else {
+                    vibration_tv.setVisibility( View.GONE );
+                }
+                new Handler(Looper.getMainLooper()).postDelayed( () -> {
+                    vibration_tv.setVisibility(View.GONE);
+                }, 2000 );
                 break;
             case R.id.checkBlotoooth_ll:
                 BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
                 if (bluetoothAdapter == null) {
                     bluetoothSate_tv.setVisibility( View.VISIBLE );
                     bluetoothSate_tv.setText( "device does not have bluetooth" );
-                    handler.postDelayed( new Runnable() {
+                    new Handler(Looper.getMainLooper()).postDelayed( new Runnable() {
                         @Override
                         public void run() {
                             bluetoothSate_tv.setVisibility( View.GONE );
@@ -182,8 +197,8 @@ public class HardwareTest extends AppCompatActivity implements View.OnClickListe
                     }, 2000 );
                 } else if (bluetoothAdapter.isEnabled()) {
                     bluetoothSate_tv.setVisibility( View.VISIBLE );
-                    bluetoothSate_tv.setText( "bluetooth is On" );
-                    handler.postDelayed( new Runnable() {
+                    bluetoothSate_tv.setText( "Bluetooth is on" );
+                    new Handler(Looper.getMainLooper()).postDelayed( new Runnable() {
                         @Override
                         public void run() {
                             bluetoothSate_tv.setVisibility( View.GONE );
@@ -191,8 +206,8 @@ public class HardwareTest extends AppCompatActivity implements View.OnClickListe
                     }, 2000 );
                 } else {
                     bluetoothSate_tv.setVisibility( View.VISIBLE );
-                    bluetoothSate_tv.setText( "bluetooth is Off" );
-                    handler.postDelayed( new Runnable() {
+                    bluetoothSate_tv.setText( "Bluetooth is off" );
+                    new Handler(Looper.getMainLooper()).postDelayed( new Runnable() {
                         @Override
                         public void run() {
                             bluetoothSate_tv.setVisibility( View.GONE );

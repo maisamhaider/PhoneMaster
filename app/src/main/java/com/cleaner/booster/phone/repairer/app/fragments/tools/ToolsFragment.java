@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.cleaner.booster.phone.repairer.app.R;
@@ -37,7 +38,7 @@ public class ToolsFragment extends BaseFragment {
         ConstraintLayout hrdTest_cl = root.findViewById(R.id.hrdTest_cl);
         ConstraintLayout blueInfo_cl = root.findViewById(R.id.blueInfo_cl);
         ConstraintLayout deviceFeatures_cl = root.findViewById(R.id.deviceFeatures_cl);
-
+        CardView harassmentFiler_cv = root.findViewById(R.id.harassmentFiler_cv);
          appInstall_cl.setOnClickListener(v -> startActivity(new Intent(getActivity(), UnInstallAppAct.class)));
         processesor_cl.setOnClickListener(v -> sNewActivityAds(new ProcessorDetailAct()));
         rootchecker_cl.setOnClickListener(v -> sNewActivityAds(new RootCheckerAct()));
@@ -49,7 +50,7 @@ public class ToolsFragment extends BaseFragment {
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             harassmentFiler_cl.setOnClickListener(v -> sNewActivityAds(new HarassmentFilterAct()));
         } else {
-            harassmentFiler_cl.setVisibility(View.GONE);
+            harassmentFiler_cv.setVisibility(View.GONE);
         }
         return root;
     }

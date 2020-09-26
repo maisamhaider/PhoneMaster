@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -20,6 +21,8 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.cleaner.booster.phone.repairer.app.R;
 import com.cleaner.booster.phone.repairer.app.activities.MainActivity;
 import com.cleaner.booster.phone.repairer.app.database.Db;
+import com.cleaner.booster.phone.repairer.app.interfaces.SelectAll;
+import com.cleaner.booster.phone.repairer.app.models.CommonModel;
 import com.cleaner.booster.phone.repairer.app.utils.AppUtility;
 import com.cleaner.booster.phone.repairer.app.utils.Utils;
 
@@ -28,116 +31,108 @@ import java.util.List;
 
 import bot.box.appusage.utils.UsageUtils;
 
-public class FastChargeAllAppsAdapter extends RecyclerView.Adapter<FastChargeAllAppsAdapter.AllAppsHolder>   {
+public class FastChargeAllAppsAdapter extends RecyclerView.Adapter<FastChargeAllAppsAdapter.AllAppsHolder> implements SelectAll {
 
     private List<String> apps;
     private List<String> fullList;
     private List<String> checkList;
     private Context context;
     private AppUtility appUtility;
-     private Db db;
+    private Db db;
     private Utils utils;
-
+    private SelectAll selectAll;
+    AllAppsHolder holder;
 
     @SuppressLint("NewApi")
-    public FastChargeAllAppsAdapter(Context context) {
+    public FastChargeAllAppsAdapter(Context context,SelectAll selectAll) {
 
         this.context = context;
-        appUtility = new AppUtility( context );
-        apps = new ArrayList<>(  );
-        fullList = new ArrayList<>(  );
+        appUtility = new AppUtility(context);
+        apps = new ArrayList<>();
+        fullList = new ArrayList<>();
         db = new Db(context);
         this.checkList = new ArrayList<>();
+        this.selectAll = selectAll;
 
 
-     }
+    }
 
-     public void setList(List<String> apps,Db db){
+    public void setList(List<String> apps, Db db) {
         this.apps.clear();
-         this.fullList.clear();
+        this.fullList.clear();
         this.apps = apps;
-         this.fullList.addAll( apps );
-         this.db = db;
-         getDbList();
-     }
-
+        this.fullList.addAll(apps);
+        checkList.addAll(apps);
+        this.db = db;
+        getDbList();
+    }
 
 
     @NonNull
     @Override
     public AllAppsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from( parent.getContext() ).inflate( R.layout.fast_charge_allapp_lo, parent, false );
-        return new AllAppsHolder( view );
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fast_charge_allapp_lo, parent, false);
+        holder = new AllAppsHolder(view);
+        return holder;
     }
 
     @SuppressLint("NewApi")
     @Override
     public void onBindViewHolder(@NonNull AllAppsHolder holder, final int position) {
-            utils = new Utils(context);
-         String appName = utils.GetAppName(apps.get( position ));
-        final String appPackage = apps.get( position );
+        utils = new Utils(context);
+        String appName = utils.GetAppName(apps.get(position));
+        final String appPackage = apps.get(position);
 
-        if (checkList.contains(appPackage)){
+        if (checkList.contains(appPackage)) {
             holder.fastChargeAllApp_iv.setImageResource(R.drawable.ic_select);
-        }else{
+        } else {
             holder.fastChargeAllApp_iv.setImageResource(R.drawable.ic_deselect);
 
         }
 
-
-        holder.fastChargeAllAppName_Tv.setText( appName );
-
-        Glide.with(context).load( UsageUtils.parsePackageIcon(apps.get( position ), R.mipmap.ic_launcher))
+        holder.fastChargeAllAppName_Tv.setText(appName);
+        Glide.with(context).load(UsageUtils.parsePackageIcon(apps.get(position), R.mipmap.ic_launcher))
                 .transition(new DrawableTransitionOptions().crossFade()).into(holder.fastChargeAllAppImage_Iv);
 
-
-
-
-        holder.fastChargeAllApp_iv.setOnClickListener(new View.OnClickListener() {
+        holder.fastChargeallApp_cl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String packageName = apps.get( position ) ;
-                if (!checkList.contains(packageName))
-                {
-                    boolean isInserted =  db.insertPkgPath(packageName);
-                    if (isInserted)
-                    {
+                String packageName = apps.get(position);
+                if (!checkList.contains(packageName)) {
+                    boolean isInserted = db.insertPkgPath(packageName);
+                    if (isInserted) {
                         checkList.add(packageName);
-                        Toast.makeText(context, "pkg Inserted", Toast.LENGTH_SHORT).show();
+                        if (checkList.size() == apps.size()) {
+                            selectAll.selectAll(true);
+                        }
+
                         holder.fastChargeAllApp_iv.setImageResource(R.drawable.ic_select);
 
                     }
-                    else {
-                        Toast.makeText(context, "pkg not Inserted", Toast.LENGTH_SHORT).show();
 
-                    }
-
-                }else {
+                } else {
                     boolean isDeleted = db.deletePkgPath(packageName);
-                    if (isDeleted)
-                    {
-                        if (checkList.contains(packageName))
-                        {
+                    if (isDeleted) {
+                        if (checkList.contains(packageName)) {
                             checkList.remove(packageName);
+                            if (checkList.isEmpty()) {
+                                selectAll.selectAll(true);
+                            }
                         }
-                        Toast.makeText(context, "pkg Deleted", Toast.LENGTH_SHORT).show();
                         holder.fastChargeAllApp_iv.setImageResource(R.drawable.ic_deselect);
                     }
-                    else {
-                        Toast.makeText(context, "pkg not Deleted", Toast.LENGTH_SHORT).show();
-                    }
+
                 }
                 getDbList();
             }
         });
     }
 
-    public void getDbList(){
+    public void getDbList() {
 
         Cursor cursor = db.getAllPkg();
 
-        while (cursor.moveToNext())
-        {
+        while (cursor.moveToNext()) {
             checkList.add(cursor.getString(1));
         }
 
@@ -149,17 +144,49 @@ public class FastChargeAllAppsAdapter extends RecyclerView.Adapter<FastChargeAll
         return apps.size();
     }
 
+    public SelectAll getSelectAll() {
+        return this;
+    }
 
+    private void selectAll() {
+        if (!checkList.isEmpty()) {
+            checkList.clear();
+        }
+        for (String path : apps) {
+            checkList.add(path);
+            holder.fastChargeAllApp_iv.setImageResource(R.drawable.ic_select);
+            notifyDataSetChanged();
+        }
+    }
+
+    private void clearList() {
+        if (!checkList.isEmpty()) {
+            checkList.clear();
+            holder.fastChargeAllApp_iv.setImageResource(R.drawable.ic_deselect);
+            notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    public void selectAll(boolean isSelectAll) {
+        if (isSelectAll) {
+            selectAll();
+        } else {
+            clearList();
+        }
+    }
 
     class AllAppsHolder extends RecyclerView.ViewHolder {
         TextView fastChargeAllAppName_Tv;
-        ImageView fastChargeAllAppImage_Iv,fastChargeAllApp_iv;
+        ImageView fastChargeAllAppImage_Iv, fastChargeAllApp_iv;
+        ConstraintLayout fastChargeallApp_cl;
 
         public AllAppsHolder(@NonNull View itemView) {
-            super( itemView );
-            fastChargeAllAppName_Tv = itemView.findViewById( R.id.fastChargeAllAppName_Tv );
-            fastChargeAllAppImage_Iv = itemView.findViewById( R.id.fastChargeAllAppImage_Iv );
-            fastChargeAllApp_iv = itemView.findViewById( R.id.fastChargeAllApp_iv );
+            super(itemView);
+            fastChargeallApp_cl = itemView.findViewById(R.id.fastChargeallApp_cl);
+            fastChargeAllAppName_Tv = itemView.findViewById(R.id.fastChargeAllAppName_Tv);
+            fastChargeAllAppImage_Iv = itemView.findViewById(R.id.fastChargeAllAppImage_Iv);
+            fastChargeAllApp_iv = itemView.findViewById(R.id.fastChargeAllApp_iv);
 
         }
     }

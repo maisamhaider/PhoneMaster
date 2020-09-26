@@ -2,11 +2,13 @@ package com.cleaner.booster.phone.repairer.app.async;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.view.View;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.cleaner.booster.phone.repairer.app.adapters.DeepCleanAudioAdapter;
+import com.cleaner.booster.phone.repairer.app.activities.DeepCleanAllAudiosAct;
+import com.cleaner.booster.phone.repairer.app.adapters.DeepCleanAdapter;
 import com.cleaner.booster.phone.repairer.app.models.CommonModel;
 import com.cleaner.booster.phone.repairer.app.utils.LoadingDialog;
 import com.cleaner.booster.phone.repairer.app.utils.Utils;
@@ -18,16 +20,16 @@ import java.util.List;
 public class DeepCleanAudiosTask extends AsyncTask<Void, Integer, String> {
 
     Context context;
-    private DeepCleanAudioAdapter deepCleanAudioAdapter;
+    private DeepCleanAdapter deepCleanAdapter;
     private RecyclerView recyclerView;
     private List<CommonModel> list;
     Utils utils;
     LoadingDialog loadingDialog;
 
-    public DeepCleanAudiosTask(Context context, DeepCleanAudioAdapter deepCleanAudioAdapter,
+    public DeepCleanAudiosTask(Context context, DeepCleanAdapter deepCleanAdapter,
                                RecyclerView recyclerView) {
         this.context = context;
-        this.deepCleanAudioAdapter = deepCleanAudioAdapter;
+        this.deepCleanAdapter = deepCleanAdapter;
         this.recyclerView = recyclerView;
         this.list = new ArrayList<>();
         utils = new Utils(context);
@@ -57,9 +59,22 @@ public class DeepCleanAudiosTask extends AsyncTask<Void, Integer, String> {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
-        deepCleanAudioAdapter.setFileList(list);
-        recyclerView.setAdapter(deepCleanAudioAdapter);
-        deepCleanAudioAdapter.notifyDataSetChanged();
+        deepCleanAdapter.setFileList(list);
+        recyclerView.setAdapter(deepCleanAdapter);
+        deepCleanAdapter.notifyDataSetChanged();
             loadingDialog.dismiss();
+            if (list.isEmpty())
+            {
+                ((DeepCleanAllAudiosAct)context).selectAll_cb1.setVisibility(View.GONE);
+                ((DeepCleanAllAudiosAct)context).select_tv.setVisibility(View.GONE);
+                ((DeepCleanAllAudiosAct)context).noData_tv.setVisibility(View.VISIBLE);
+
+            }
+            else
+            {
+                ((DeepCleanAllAudiosAct)context).selectAll_cb1.setVisibility(View.VISIBLE);
+                ((DeepCleanAllAudiosAct)context).select_tv.setVisibility(View.VISIBLE);
+                ((DeepCleanAllAudiosAct)context).noData_tv.setVisibility(View.GONE);
+            }
         }
 }

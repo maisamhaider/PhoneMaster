@@ -99,6 +99,27 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline4">
+
+        <TextView
+            android:layout_marginStart="16dp"
+            android:id="@+id/textView21"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="select/deselect"
+            app:layout_constraintBottom_toTopOf="@+id/powerSavingApp_rv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <CheckBox
+            android:checked="true"
+            android:layout_marginEnd="16dp"
+            android:id="@+id/selectAll_cb"
+            android:layout_width="wrap_content"
+            android:buttonTint="@color/checkbox_selector"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/powerSavingApp_rv"
             android:layout_width="match_parent"
@@ -107,13 +128,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/selectAll_cb"
             app:layout_constraintVertical_bias="1.0" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout13"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-             app:layout_constraintBottom_toTopOf="@+id/powerSavingBtn_ll"
+            app:layout_constraintBottom_toTopOf="@+id/powerSavingBtn_ll"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.498">
@@ -203,13 +225,13 @@
 
 
     <include
-        layout="@layout/battery_savers_first_screen_layout" />
+         layout="@layout/battery_savers_first_screen_layout" />
 
     <include
-        layout="@layout/battery_savers_after_cleanclick_screen_layout"
-      />
+         layout="@layout/battery_savers_after_cleanclick_screen_layout" />
 
     <include
+        android:visibility="gone"
         layout="@layout/battery_savers_last_screen_layout"
          />
 

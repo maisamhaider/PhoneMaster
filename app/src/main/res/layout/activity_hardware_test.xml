@@ -68,6 +68,16 @@
                         android:layout_height="wrap_content"
                         android:text="Vibration" />
 
+                    <TextView
+                        android:id="@+id/vibration_tv"
+                        android:textStyle="bold"
+                        android:layout_width="wrap_content"
+                        android:fontFamily="@font/poppins_medium"
+                        android:textColor="@color/colorTextTwo"
+                        android:visibility="gone"
+                        android:layout_height="wrap_content"
+                        android:text="Vibrating" />
+
                 </LinearLayout>
                 <View
                     android:layout_width="8dp"
@@ -241,6 +251,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Speaker Test" />
+                    <TextView
+                        android:id="@+id/speakerIsW_tv"
+                        android:textStyle="bold"
+                         android:layout_width="wrap_content"
+                        android:fontFamily="@font/poppins_medium"
+                        android:textColor="@color/colorTextTwo"
+                        android:visibility="gone"
+                        android:layout_height="wrap_content"
+                        android:text="Speaker is working" />
 
                 </LinearLayout>
                 <View

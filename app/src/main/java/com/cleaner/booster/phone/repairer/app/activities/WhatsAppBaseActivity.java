@@ -4,8 +4,10 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +19,7 @@ import com.cleaner.booster.phone.repairer.app.adapters.CommonAdapter;
 import com.cleaner.booster.phone.repairer.app.async.WhatsAppCommonTask;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class WhatsAppBaseActivity extends AppCompatActivity {
@@ -25,7 +28,9 @@ public abstract class WhatsAppBaseActivity extends AppCompatActivity {
     RecyclerView rvCleanWhatsApp;
     String type;
     Group group;
-    TextView noDatatv;
+    TextView noDatatv,select_tv;
+    CheckBox selectAll_cb1;
+    boolean b = false;
 
 
     public void alertDialog() {
@@ -35,39 +40,52 @@ public abstract class WhatsAppBaseActivity extends AppCompatActivity {
         LinearLayout yes_ll = view.findViewById(R.id.yes_ll);
         builder.setView(view).setCancelable(true);
         AlertDialog dialog = builder.create();
-        dialog.show();
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        no_ll.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-        yes_ll.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cleanData();
-                dialog.dismiss();
-            }
-        });
+
+        List<String>  imagePathList = commonAdapter.getList();
+        if (imagePathList.isEmpty())
+        {
+            Toast.makeText(this, "no file selected", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            dialog.show();
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            no_ll.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });
+            yes_ll.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    cleanData();
+                    dialog.dismiss();
+                }
+            });
+        }
+
+
     }
 
     public void cleanData() {
         File file;
         List<String> imagePathList = commonAdapter.getList();
-        for (int i = 0; i < imagePathList.size(); i++) {
-            try {
+
+
+            for (int i = 0; i < imagePathList.size(); i++) {
                 try {
-                    file = new File(imagePathList.get(i));
-                    if (file.delete()) {
-                        Log.i("TAG", "Delete  ");
+                    try {
+                        file = new File(imagePathList.get(i));
+                        if (file.delete()) {
+                            Log.i("TAG", "Delete  ");
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         }
         WhatsAppCommonTask whatsAppCommonTask = new WhatsAppCommonTask(this, commonAdapter, rvCleanWhatsApp, type);
         whatsAppCommonTask.execute();
@@ -77,11 +95,14 @@ public abstract class WhatsAppBaseActivity extends AppCompatActivity {
         if (isRvVisible){
             group.setVisibility(View.VISIBLE);
             noDatatv.setVisibility(View.GONE);
+            selectAll_cb1.setVisibility(View.VISIBLE);
+            select_tv.setVisibility(View.VISIBLE);
         }else{
             group.setVisibility(View.GONE);
             noDatatv.setVisibility(View.VISIBLE);
+            selectAll_cb1.setVisibility(View.GONE);
+            select_tv.setVisibility(View.GONE);
         }
     }
-
 
 }

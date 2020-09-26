@@ -12,7 +12,7 @@
         android:layout_height="56dp"
         android:background="@drawable/ic_background"
         android:gravity="center"
-        android:text="Features'"
+        android:text="Features"
         android:textColor="@color/standard_white"
         android:textStyle="bold" />
 
@@ -53,22 +53,22 @@
 
 
                     <TextView
+                        android:id="@+id/textView57"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
+                         android:layout_marginTop="16dp"
                         android:text="Wifi Direct"
                         android:textColor="@color/colorTextOne"
                         android:textSize="14sp"
                         android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.511"
                         app:layout_constraintVertical_chainStyle="packed" />
 
                     <TextView
                         android:id="@+id/wifiDirect_tv2"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
                         android:maxLines="1"
@@ -76,7 +76,8 @@
                         android:textSize="10sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                         app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView57" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -111,29 +112,30 @@
 
 
                     <TextView
+                        android:id="@+id/textView58"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
+                         android:layout_marginTop="16dp"
                         android:text="Bluetooth"
                         android:textColor="@color/colorTextOne"
                         android:textSize="14sp"
                         android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_chainStyle="packed" />
 
                     <TextView
                         android:id="@+id/bluetooth_tv2"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:maxLines="1"
+                         android:maxLines="1"
                         android:textColor="@color/colorTextTwo"
                         android:textSize="10sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                         app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView58" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -168,32 +170,33 @@
 
 
                     <TextView
+                        android:id="@+id/textView60"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="16dp"
                         android:text="Bluetooth LE"
                         android:textColor="@color/colorTextOne"
                         android:textSize="14sp"
                         android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.535"
                         app:layout_constraintVertical_chainStyle="packed" />
 
                     <TextView
                         android:id="@+id/bluetoothLE_tv2"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:maxLines="1"
+                         android:maxLines="1"
                         android:textColor="@color/colorTextTwo"
                         android:textSize="10sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                         app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView60" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
                 <View
                     android:layout_width="8dp"
                     android:layout_height="30dp"
@@ -224,29 +227,30 @@
                     android:background="@android:color/white">
 
                     <TextView
+                        android:id="@+id/textView61"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
+                         android:layout_marginTop="16dp"
                         android:text="Camera Flash"
                         android:textColor="@color/colorTextOne"
                         android:textSize="14sp"
                         android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_chainStyle="packed" />
 
                     <TextView
                         android:id="@+id/cameraFlash_tv2"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:maxLines="1"
+                         android:maxLines="1"
                         android:textColor="@color/colorTextTwo"
                         android:textSize="10sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                         app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView61" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
                 <View
@@ -280,29 +284,30 @@
 
 
                     <TextView
+                        android:id="@+id/textView62"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
+                         android:layout_marginTop="16dp"
                         android:text="Camera Front"
                         android:textColor="@color/colorTextOne"
                         android:textSize="14sp"
                         android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_chainStyle="packed" />
 
                     <TextView
                         android:id="@+id/cameraFront_tv"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:maxLines="1"
+                         android:maxLines="1"
                         android:textColor="@color/colorTextTwo"
                         android:textSize="10sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                         app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView62" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -336,29 +341,30 @@
                     android:background="@android:color/white">
 
                     <TextView
+                        android:id="@+id/textView63"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="16dp"
                         android:text="Microphone"
                         android:textColor="@color/colorTextOne"
                         android:textSize="14sp"
                         android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_chainStyle="packed" />
 
                     <TextView
                         android:id="@+id/microphone_tv2"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:maxLines="1"
+                         android:maxLines="1"
                         android:textColor="@color/colorTextTwo"
                         android:textSize="10sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                         app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView63" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
                 <View
@@ -391,15 +397,16 @@
                     android:background="@android:color/white">
 
                     <TextView
+                        android:id="@+id/textView66"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="16dp"
                         android:text="NFC"
                         android:textColor="@color/colorTextOne"
                         android:textSize="14sp"
                         android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_chainStyle="packed" />
 
@@ -413,7 +420,8 @@
                         android:textSize="10sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                         app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView66" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -448,15 +456,16 @@
 
 
                     <TextView
+                        android:id="@+id/textView67"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
+                         android:layout_marginTop="16dp"
                         android:text="Multitouch"
                         android:textColor="@color/colorTextOne"
                         android:textSize="14sp"
                         android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_chainStyle="packed" />
 
@@ -464,13 +473,13 @@
                         android:id="@+id/multitouch_tv2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:maxLines="1"
+                         android:maxLines="1"
                         android:textColor="@color/colorTextTwo"
                         android:textSize="10sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                         app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView67" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -504,30 +513,29 @@
                     android:background="@android:color/white">
 
                     <TextView
+                        android:id="@+id/textView68"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
+                         android:layout_marginTop="16dp"
                         android:text="Consumer IP"
                         android:textColor="@color/colorTextOne"
                         android:textSize="14sp"
                         android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.507"
                         app:layout_constraintVertical_chainStyle="packed" />
 
                     <TextView
                         android:id="@+id/consumerIR_tv2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:maxLines="1"
+                         android:maxLines="1"
                         android:textColor="@color/colorTextTwo"
                         android:textSize="10sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toBottomOf="@+id/textView68" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
                 <View
@@ -560,15 +568,16 @@
                     android:background="@android:color/white">
 
                     <TextView
+                        android:id="@+id/textView69"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="16dp"
                         android:text="Printing"
                         android:textColor="@color/colorTextOne"
                         android:textSize="14sp"
                         android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_chainStyle="packed" />
 
@@ -582,7 +591,9 @@
                         android:textSize="10sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView69" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
                 <View
@@ -615,15 +626,16 @@
                     android:background="@android:color/white">
 
                     <TextView
+                        android:id="@+id/textView65"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
                         android:text="GSM"
                         android:textColor="@color/colorTextOne"
                         android:textSize="14sp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_chainStyle="packed" />
 
@@ -631,13 +643,14 @@
                         android:id="@+id/gSM_tv2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
                         android:maxLines="1"
                         android:textColor="@color/colorTextTwo"
                         android:textSize="10sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView65" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
                 <View
@@ -670,14 +683,16 @@
                     android:background="@android:color/white">
 
                     <TextView
+                        android:id="@+id/textView64"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="16dp"
                         android:text="Fingerprint"
                         android:textColor="@color/colorTextOne"
                         android:textSize="14sp"
                         android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_chainStyle="packed" />
@@ -686,13 +701,14 @@
                         android:id="@+id/fingerprint_tv2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
                         android:maxLines="1"
                         android:textColor="@color/colorTextTwo"
                         android:textSize="10sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView64" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
                 <View
@@ -725,14 +741,16 @@
                     android:background="@android:color/white">
 
                     <TextView
+                        android:id="@+id/textView56"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="10dp"
                         android:text="App Widgets"
                         android:textColor="@color/colorTextOne"
                         android:textSize="14sp"
                         android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_chainStyle="packed" />
@@ -741,13 +759,14 @@
                         android:id="@+id/appWidgets_tv2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
                         android:maxLines="1"
                         android:textColor="@color/colorTextTwo"
                         android:textSize="10sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView56" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
                 <View
                     android:layout_width="8dp"
@@ -779,29 +798,31 @@
                     android:background="@android:color/white">
 
                     <TextView
+                        android:id="@+id/textView55"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:text="SIP"
+                        android:layout_marginTop="16dp"
+                         android:text="SIP"
                         android:textColor="@color/colorTextOne"
                         android:textSize="14sp"
                         android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_chainStyle="packed" />
 
                     <TextView
                         android:id="@+id/sIP_tv2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:maxLines="1"
+                        android:layout_width="4dp"
+                        android:layout_height="8dp"
+                         android:maxLines="1"
                         android:textColor="@color/colorTextTwo"
                         android:textSize="10sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                         app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/textView55" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
                 <View
                     android:layout_width="8dp"
@@ -833,14 +854,16 @@
                     android:background="@android:color/white">
 
                     <TextView
+                        android:id="@+id/textView52"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
+                         android:layout_marginTop="16dp"
                         android:text="SIP-Based VO-IP"
                         android:textColor="@color/colorTextOne"
                         android:textSize="14sp"
                         android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.483"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_chainStyle="packed" />
@@ -849,13 +872,14 @@
                         android:id="@+id/sIPBasedVOIP_tv2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:maxLines="1"
+                         android:maxLines="1"
                         android:textColor="@color/colorTextTwo"
                         android:textSize="10sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView52" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
                 <View

@@ -17,8 +17,9 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:id="@+id/pkgAdapter_cl"
         android:layout_height="wrap_content"
-        android:background="@drawable/white_stroke_curved_d">
+        android:background="@drawable/white_curved_ripple">
 
 
         <ImageView

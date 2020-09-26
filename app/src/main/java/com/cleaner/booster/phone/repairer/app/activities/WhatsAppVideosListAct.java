@@ -4,16 +4,19 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 
 import com.cleaner.booster.phone.repairer.app.R;
 import com.cleaner.booster.phone.repairer.app.adapters.CommonAdapter;
 import com.cleaner.booster.phone.repairer.app.async.WhatsAppCommonTask;
+import com.cleaner.booster.phone.repairer.app.interfaces.SelectAll;
 import com.cleaner.booster.phone.repairer.app.utils.Utils;
 
-public class WhatsAppVideosListAct extends WhatsAppBaseActivity {
+public class WhatsAppVideosListAct extends WhatsAppBaseActivity implements SelectAll {
 
-    String[] fileNames;
     Utils utils;
+    boolean b = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,17 +29,46 @@ public class WhatsAppVideosListAct extends WhatsAppBaseActivity {
         Button whatsAppVideosList_btn = findViewById(R.id.clean_btn);
         group = findViewById(R.id.group);
         noDatatv = findViewById(R.id.no_data_tv);
+        selectAll_cb1 = findViewById(R.id.selectAll_cb1);
+        select_tv = findViewById(R.id.select_tv);
 
         type = "videos";
-        CommonAdapter commonAdapter = new CommonAdapter(this,CommonAdapter.VIDEO);
-        WhatsAppCommonTask whatsAppCommonTask = new WhatsAppCommonTask(this,commonAdapter,rvCleanWhatsApp,type);
+        commonAdapter = new CommonAdapter(this, CommonAdapter.VIDEO, this);
+        WhatsAppCommonTask whatsAppCommonTask = new WhatsAppCommonTask(this, commonAdapter, rvCleanWhatsApp, type);
         whatsAppCommonTask.execute();
 
         whatsAppVideosList_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              alertDialog();
+                alertDialog();
             }
         });
-      }
+
+        selectAll_cb1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SelectAll selectAll = commonAdapter.getSelectAll();
+                if (!b) {
+                    selectAll.selectAll(false);
+                    b = true;
+                } else {
+                    selectAll.selectAll(true);
+                    b = false;
+
+                }
+            }
+        });
+    }
+
+    @Override
+    public void selectAll(boolean isSelectAll) {
+
+        if (isSelectAll) {
+            selectAll_cb1.setChecked(true);
+            b = false;
+        } else {
+            selectAll_cb1.setChecked(false);
+            b = true;
+        }
+    }
 }

@@ -125,6 +125,7 @@ public class WhatsAppStatusAct extends AppCompatActivity {
                 break;
             case R.id.video_bar_cl:
                 loadmyfrag(new StatusVideosFrag());
+
                 image_bar_cl.setBackgroundColor(Color.WHITE);
                 video_bar_cl.setBackground(getDrawable(R.drawable.orange_two_d));
                 saved_bar_cl.setBackgroundColor(Color.WHITE);
@@ -132,18 +133,20 @@ public class WhatsAppStatusAct extends AppCompatActivity {
                 image_bar_iv.setImageResource(R.drawable.ic_image);
                 video_bar_iv.setImageResource(R.drawable.ic_select_video);
                 saved_bar_iv.setImageResource(R.drawable.ic_saved);
-
-
                 image_bar_tv.setVisibility(View.GONE);
                 video_bar_tv.setVisibility(View.VISIBLE);
                 saved_bar_tv.setVisibility(View.GONE);
 
-                amountOfStatusImages_tv.setText("Status Saved");
-                statusSaverMain_iv.setImageResource(R.drawable.ic_status_saved);
+
+                File file2 = new File(Environment.getExternalStorageDirectory().getPath() + "/WhatsApp/Media/.Statuses");
+                amountOfStatusImages_tv.setText(utils.getListFiles(file2, "videos").size() + " videos status found");
+                statusSaverMain_iv.setImageResource(R.drawable.ic_status_video);
 
                 break;
             case R.id.saved_bar_cl:
                 loadmyfrag(new StatusSavedFrag());
+
+
                 image_bar_cl.setBackgroundColor(Color.WHITE);
                 video_bar_cl.setBackgroundColor(Color.WHITE);
                 saved_bar_cl.setBackground(getDrawable(R.drawable.orange_two_d));
@@ -155,9 +158,12 @@ public class WhatsAppStatusAct extends AppCompatActivity {
                 image_bar_tv.setVisibility(View.GONE);
                 video_bar_tv.setVisibility(View.GONE);
                 saved_bar_tv.setVisibility(View.VISIBLE);
-                File file2 = new File(Environment.getExternalStorageDirectory().getPath() + "/WhatsApp/Media/.Statuses");
-                amountOfStatusImages_tv.setText(utils.getListFiles(file2, "images").size() + " videos status found");
-                statusSaverMain_iv.setImageResource(R.drawable.ic_status_video);
+
+
+                amountOfStatusImages_tv.setText("Status Saved");
+                statusSaverMain_iv.setImageResource(R.drawable.ic_status_saved);
+
+
                 break;
         }
     }

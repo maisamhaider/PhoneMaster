@@ -44,6 +44,10 @@ public class JunkFilesAct extends AppCompatActivity {
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
     MainActivity mainActivity;
+    boolean isEFolderClean = false;
+    boolean isCacheJunkClean = false;
+    boolean isInstallationPkgClean = false;
+    boolean isResidualJunkClean =false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,72 +77,54 @@ public class JunkFilesAct extends AppCompatActivity {
         junkCollecting_giv.setVisibility(View.GONE);
 
 
-        if (preferences.getBoolean("isEFolderClean", false)) {
-            junkFileEmptyFolderClear_iv.setImageResource(R.drawable.ic_select);
-        } else {
+
+
             junkFileEmptyFolderClear_iv.setImageResource(R.drawable.ic_deselect);
-        }
-
-        if (preferences.getBoolean("isCacheJunkClean", false)) {
-            cacheJunkClear_iv.setImageResource(R.drawable.ic_select);
-
-        } else {
             cacheJunkClear_iv.setImageResource(R.drawable.ic_deselect);
-        }
-        if (preferences.getBoolean("isInstallationPkgClean", false)) {
-            installationPackages_iv.setImageResource(R.drawable.ic_select);
-
-        } else {
             installationPackages_iv.setImageResource(R.drawable.ic_deselect);
-        }
-        if (preferences.getBoolean("isResidualJunkClean", false)) {
-
-            residualJunk_iv.setImageResource(R.drawable.ic_select);
-
-        } else {
             residualJunk_iv.setImageResource(R.drawable.ic_deselect);
-        }
+
 
         //junk File Empty Folder
         junkFileEmptyFolderClear_iv.setOnClickListener(v -> {
-            if (preferences.getBoolean("isEFolderClean", false)) {
+            if (isEFolderClean) {
                 junkFileEmptyFolderClear_iv.setImageResource(R.drawable.ic_deselect);
-                editor.putBoolean("isEFolderClean", false).commit();
-            } else {
+                isEFolderClean = false;
+             } else {
                 junkFileEmptyFolderClear_iv.setImageResource(R.drawable.ic_select);
-                editor.putBoolean("isEFolderClean", true).commit();
+                isEFolderClean = true;
             }
         });
 
         //cache junks
         cacheJunkClear_iv.setOnClickListener(v -> {
-            if (preferences.getBoolean("isCacheJunkClean", false)) {
+            if (isCacheJunkClean) {
                 cacheJunkClear_iv.setImageResource(R.drawable.ic_deselect);
-                editor.putBoolean("isCacheJunkClean", false).commit();
+                isCacheJunkClean = false;
             } else {
                 cacheJunkClear_iv.setImageResource(R.drawable.ic_select);
-                editor.putBoolean("isCacheJunkClean", true).commit();
+                isCacheJunkClean = true;
             }
         });
 
         installationPackages_iv.setOnClickListener(v -> {
-            if (preferences.getBoolean("isInstallationPkgClean", false)) {
+            if (isInstallationPkgClean) {
                 installationPackages_iv.setImageResource(R.drawable.ic_deselect);
-                editor.putBoolean("isInstallationPkgClean", false).commit();
+                isInstallationPkgClean= false;
             } else {
                 installationPackages_iv.setImageResource(R.drawable.ic_select);
-                editor.putBoolean("isInstallationPkgClean", true).commit();
+                isInstallationPkgClean= true;
             }
         });
 
 
         residualJunk_iv.setOnClickListener(v -> {
-            if (preferences.getBoolean("isResidualJunkClean", false)) {
+            if (isInstallationPkgClean) {
                 residualJunk_iv.setImageResource(R.drawable.ic_deselect);
-                editor.putBoolean("isResidualJunkClean", false).commit();
-            } else {
+                isInstallationPkgClean = false;
+             } else {
                 residualJunk_iv.setImageResource(R.drawable.ic_select);
-                editor.putBoolean("isResidualJunkClean", true).commit();
+                isInstallationPkgClean = true;
             }
         });
 
@@ -147,8 +133,18 @@ public class JunkFilesAct extends AppCompatActivity {
         utils = new Utils(this);
 
 
+
+
+
         junkFileCleanBtn_ll.setOnClickListener(v -> {
-            new CacheClean().execute();
+            if (isEFolderClean || isCacheJunkClean || isInstallationPkgClean || isResidualJunkClean) {
+                new CacheClean().execute();
+            }
+            else
+            {
+                Toast.makeText(this, "Please select item first", Toast.LENGTH_SHORT).show();
+            }
+
         });
 
 

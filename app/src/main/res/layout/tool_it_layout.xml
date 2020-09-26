@@ -412,6 +412,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="6dp"
         android:layout_marginEnd="16dp"
+        android:id="@+id/harassmentFiler_cv"
         android:layout_marginBottom="6dp"
         app:cardCornerRadius="8dp"
         app:cardElevation="5dp"

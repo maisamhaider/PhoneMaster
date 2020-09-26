@@ -60,7 +60,8 @@
     <Button
         android:layout_marginTop="16dp"
         android:id="@+id/aboutUsMoreApp_btn"
-        style="@style/AppTheme.Button"
+
+        android:background="@drawable/white_ripple_orange_bg_d"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

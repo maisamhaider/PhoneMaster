@@ -23,7 +23,6 @@ public class DeviceInfoAct extends AppCompatActivity {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_hardware_info );
         setRequestedOrientation( ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        MainActivity mainActivity = new MainActivity();
 
         androidVersion_Tv = findViewById( R.id.androidVersion_Tv );
         manufactureName_Tv =  findViewById( R.id.manufactureName_Tv );

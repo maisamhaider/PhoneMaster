@@ -18,13 +18,17 @@ import android.os.Handler;
 
 import android.view.View;
 import android.view.animation.LinearInterpolator;
- import android.widget.ImageView;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cleaner.booster.phone.repairer.app.R;
 import com.cleaner.booster.phone.repairer.app.adapters.BatterySavingAllAppsAdapter;
+import com.cleaner.booster.phone.repairer.app.interfaces.SelectAll;
 import com.cleaner.booster.phone.repairer.app.utils.Utils;
 
 
@@ -40,7 +44,7 @@ public class BatterySavingAct extends BaseActivity {
      private BatterySavingAllAppsAdapter allAppsAdapter;
     ConstraintLayout powerSavingSecond_cl, powerSavingLastScreenMain_cl, noDrainingApp_cl;
     SharedPreferences preferences;
-
+    CheckBox selectAll_cb;
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +60,7 @@ public class BatterySavingAct extends BaseActivity {
         LinearLayout powerSavingBtn_ll = findViewById(R.id.powerSavingBtn_ll);
          powerSavingMainAppsAmount_tv = findViewById(R.id.powerSavingMainAppsAmount_tv);
          noDrainingApp_cl = findViewById(R.id.noDrainingApp_cl);
+        selectAll_cb = findViewById(R.id.selectAll_cb);
 
 
         //analyzing apps
@@ -121,11 +126,31 @@ public class BatterySavingAct extends BaseActivity {
         powerSavingApp_rv.setAdapter(allAppsAdapter);
         allAppsAdapter.notifyDataSetChanged();
 
-
+        selectAll_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                SelectAll selectAll = allAppsAdapter.getSelectAll();
+                if (b)
+                {
+                    selectAll.selectAll(true);
+                }
+                else
+                {
+                    selectAll.selectAll(false);
+                }
+            }
+        });
         powerSavingBtn_ll.setOnClickListener(v -> {
 
-            KillAppsTask appsTask = new KillAppsTask();
-            appsTask.execute();
+            if (allAppsAdapter.getCheckList().isEmpty())
+            {
+                Toast.makeText(this, "Please select app first", Toast.LENGTH_SHORT).show();
+            }
+            else
+            {
+                KillAppsTask appsTask = new KillAppsTask();
+                appsTask.execute();
+            }
 
         });
 

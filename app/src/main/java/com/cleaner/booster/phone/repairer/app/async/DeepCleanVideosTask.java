@@ -2,10 +2,13 @@ package com.cleaner.booster.phone.repairer.app.async;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.view.View;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.cleaner.booster.phone.repairer.app.activities.DeepCleanAllDocsAct;
+import com.cleaner.booster.phone.repairer.app.activities.DeepCleanAllVideosAct;
 import com.cleaner.booster.phone.repairer.app.adapters.DeepCleanVideosAdapter;
 import com.cleaner.booster.phone.repairer.app.models.CommonModel;
 import com.cleaner.booster.phone.repairer.app.utils.LoadingDialog;
@@ -59,5 +62,18 @@ public class DeepCleanVideosTask extends AsyncTask<Void, Integer, String> {
         recyclerView.setAdapter(deepCleanVideosAdapter);
         deepCleanVideosAdapter.notifyDataSetChanged();
             loadingDialog.dismiss();
+        if (list.isEmpty())
+        {
+            ((DeepCleanAllVideosAct)context).selectAll_cb1.setVisibility(View.GONE);
+            ((DeepCleanAllVideosAct)context).select_tv.setVisibility(View.GONE);
+            ((DeepCleanAllVideosAct)context).noData_tv.setVisibility(View.VISIBLE);
+
+        }
+        else
+        {
+            ((DeepCleanAllVideosAct)context).selectAll_cb1.setVisibility(View.VISIBLE);
+            ((DeepCleanAllVideosAct)context).select_tv.setVisibility(View.VISIBLE);
+            ((DeepCleanAllVideosAct)context).noData_tv.setVisibility(View.GONE);
+        }
         }
 }

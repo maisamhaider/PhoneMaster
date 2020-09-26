@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Environment;
+import android.view.View;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,7 +25,7 @@ public class WhatsAppCommonTask extends AsyncTask<Void, Integer, String> {
     Context context;
     private CommonAdapter commonAdapter;
     private RecyclerView recyclerView;
-    private List<CommonModel> list;
+    public List<CommonModel> list;
     Utils utils;
     LoadingDialog loadingDialog;
     String whatThingIs;
@@ -32,8 +33,7 @@ public class WhatsAppCommonTask extends AsyncTask<Void, Integer, String> {
     private File file12;
 
 
-
-    public WhatsAppCommonTask(Context context, CommonAdapter commonAdapter, RecyclerView recyclerView,String whatThingIs) {
+    public WhatsAppCommonTask(Context context, CommonAdapter commonAdapter, RecyclerView recyclerView, String whatThingIs) {
         this.context = context;
         this.commonAdapter = commonAdapter;
         this.recyclerView = recyclerView;
@@ -57,44 +57,36 @@ public class WhatsAppCommonTask extends AsyncTask<Void, Integer, String> {
 
     @Override
     protected String doInBackground(Void... voids) {
-        if (whatThingIs.matches("videos"))
-        {
-            file1 = new File(Environment.getExternalStorageDirectory().getPath()+"/WhatsApp/Media/WhatsApp Video");
-        }
-        else
-        if (whatThingIs.matches("audios"))
-        {
-            file1 = new File(Environment.getExternalStorageDirectory().getPath()+"/WhatsApp/Media/WhatsApp Audio");
-        }
-        else
-        if (whatThingIs.matches("images"))
-        {
-            file1 = new File(Environment.getExternalStorageDirectory().getPath()+"/WhatsApp/Media/WhatsApp Images");
-        }
-        else
-        if (whatThingIs.matches("doc"))
-        {
+        if (whatThingIs.matches("videos")) {
+            file1 = new File(Environment.getExternalStorageDirectory().getPath() + "/WhatsApp/Media/WhatsApp Video");
+        } else if (whatThingIs.matches("audios")) {
+            file1 = new File(Environment.getExternalStorageDirectory().getPath() + "/WhatsApp/Media/WhatsApp Audio");
+        } else if (whatThingIs.matches("images")) {
+            file1 = new File(Environment.getExternalStorageDirectory().getPath() + "/WhatsApp/Media/WhatsApp Images");
+        } else if (whatThingIs.matches("doc")) {
             file1 = new File(Environment.getExternalStorageDirectory().getPath() + "/WhatsApp/Media/WhatsApp Documents");
 
-        } else
-        if (whatThingIs.matches("BUCH"))
-        {
+        } else if (whatThingIs.matches("BUCH")) {
             //back up and conversation history
             file1 = new File(Environment.getExternalStorageDirectory().getPath() + "/WhatsApp/Backups");
-             file12 = new File(Environment.getExternalStorageDirectory().getPath() + "/WhatsApp/Databases");
+            file12 = new File(Environment.getExternalStorageDirectory().getPath() + "/WhatsApp/Databases");
 //            List<CommonModel> list1 ;
 //            List<CommonModel> list2 ;
 
-            list=  utils.getListFiles(file1);
+            if (file1.exists()) {
+                list = utils.getListFiles(file1);
+            }
+            if (file12.exists()) {
+                list.addAll(utils.getListFiles(file12));
+            }
 //            list2 = utils.getListFiles(file12);
-            list.addAll(utils.getListFiles(file12));
         }
 
 
         list = utils.getListFiles(file1);
 
 
-    return null;
+        return null;
     }
 
     @Override
@@ -106,10 +98,10 @@ public class WhatsAppCommonTask extends AsyncTask<Void, Integer, String> {
         recyclerView.setAdapter(commonAdapter);
         commonAdapter.notifyDataSetChanged();
         loadingDialog.dismiss();
-        if (list.size()>0){
-             ((WhatsAppBaseActivity)context).toggleVisibility(true);
-        }else{
-             ((WhatsAppBaseActivity)context).toggleVisibility(false);
+        if (list.size() > 0) {
+            ((WhatsAppBaseActivity) context).toggleVisibility(true);
+        } else {
+            ((WhatsAppBaseActivity) context).toggleVisibility(false);
         }
-        }
+    }
 }

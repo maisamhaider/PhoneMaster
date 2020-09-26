@@ -17,6 +17,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.cleaner.booster.phone.repairer.app.R;
 import com.cleaner.booster.phone.repairer.app.database.Db;
+import com.cleaner.booster.phone.repairer.app.interfaces.SelectAll;
+import com.cleaner.booster.phone.repairer.app.models.CommonModel;
 import com.cleaner.booster.phone.repairer.app.utils.AppUtility;
 import com.cleaner.booster.phone.repairer.app.utils.Utils;
 
@@ -25,14 +27,14 @@ import java.util.List;
 
 import bot.box.appusage.utils.UsageUtils;
 
-public class BatterySavingAllAppsAdapter extends RecyclerView.Adapter<BatterySavingAllAppsAdapter.AllAppsHolder> {
+public class BatterySavingAllAppsAdapter extends RecyclerView.Adapter<BatterySavingAllAppsAdapter.AllAppsHolder> implements SelectAll{
 
     private List<String> apps;
     private List<String> checkList;
     private Context context;
     private AppUtility appUtility;
     private Utils utils;
-
+    AllAppsHolder holder;
 
     @SuppressLint("NewApi")
     public BatterySavingAllAppsAdapter(Context context, List<String> apps) {
@@ -42,21 +44,20 @@ public class BatterySavingAllAppsAdapter extends RecyclerView.Adapter<BatterySav
         this.apps = apps;
         checkList = new ArrayList<>();
         checkList.addAll(apps);
-    }
+     }
 
     public List<String> getCheckList() {
         return checkList;
     }
 
-//    public void setCheckList(List<String> checkList) {
-//        this.checkList = checkList;
-//    }
+
 
     @NonNull
     @Override
     public AllAppsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.battery_saving_apps_lo, parent, false);
-        return new AllAppsHolder(view);
+       holder = new AllAppsHolder(view);
+        return holder;
     }
 
     @SuppressLint("NewApi")
@@ -99,6 +100,41 @@ public class BatterySavingAllAppsAdapter extends RecyclerView.Adapter<BatterySav
     @Override
     public int getItemCount() {
         return apps.size();
+    }
+
+    public SelectAll getSelectAll()
+    {
+        return this;
+    }
+    private void selectAll() {
+        if(!checkList.isEmpty())
+        {
+            checkList.clear();
+        }
+        for (String path : apps) {
+            checkList.add(path);
+            holder.batterySavingApp_iv.setImageResource(R.drawable.ic_select);
+            notifyDataSetChanged();
+        }
+    }
+
+    private void clearList() {
+        if(!checkList.isEmpty())
+        {
+            checkList.clear();
+            holder.batterySavingApp_iv.setImageResource(R.drawable.ic_deselect);
+            notifyDataSetChanged();
+        }
+
+    }
+
+    @Override
+    public void selectAll(boolean isSelectAll) {
+        if (isSelectAll) {
+            selectAll();
+        } else {
+            clearList();
+        }
     }
 
 

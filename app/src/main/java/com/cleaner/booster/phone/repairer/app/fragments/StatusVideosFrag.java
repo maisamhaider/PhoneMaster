@@ -26,7 +26,6 @@ import java.util.List;
 public class StatusVideosFrag extends Fragment {
 
 
-
     public StatusVideosFrag() {
         // Required empty public constructor
     }
@@ -40,7 +39,7 @@ public class StatusVideosFrag extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-         View view = inflater.inflate(R.layout.fragment_status_videos, container, false);
+        View view = inflater.inflate(R.layout.fragment_status_videos, container, false);
 
         Utils utils = new Utils(getContext());
 
@@ -50,16 +49,14 @@ public class StatusVideosFrag extends Fragment {
         TextView statusNoVideo_tv = view.findViewById(R.id.statusNoVideo_tv);
         statusNoVideo_tv.setVisibility(View.GONE);
 
-        List<CommonModel> list  ;
+        List<CommonModel> list;
         File file1 = new File(Environment.getExternalStorageDirectory().getPath() + "/WhatsApp/Media/.Statuses");
-        list = utils.getListFiles(file1,"videos");
-        if (list.size()==0)
-        {
+        list = utils.getListFiles(file1, "videos");
+        if (list.size() == 0) {
             statusNoVideo_tv.setVisibility(View.VISIBLE);
             statusVideos_rl.setVisibility(View.GONE);
 
-        }
-else {
+        } else {
             statusNoVideo_tv.setVisibility(View.GONE);
             statusVideos_rl.setVisibility(View.VISIBLE);
             statusVideos_rv.setLayoutManager(new GridLayoutManager(getContext(), 2));
@@ -82,6 +79,6 @@ else {
                 }
             });
         }
-return view;
+        return view;
     }
 }

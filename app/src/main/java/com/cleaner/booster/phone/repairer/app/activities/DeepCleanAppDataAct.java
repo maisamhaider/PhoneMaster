@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.cleaner.booster.phone.repairer.app.R;
 import com.cleaner.booster.phone.repairer.app.adapters.DeepCleanImagesAdapter;
 import com.cleaner.booster.phone.repairer.app.adapters.DeepCleanVideosAdapter;
+import com.cleaner.booster.phone.repairer.app.interfaces.SelectAll;
 import com.cleaner.booster.phone.repairer.app.models.CommonModel;
 import com.cleaner.booster.phone.repairer.app.utils.Utils;
 
@@ -27,7 +28,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DeepCleanAppDataAct extends AppCompatActivity {
+public class DeepCleanAppDataAct extends AppCompatActivity implements SelectAll {
 
     Utils utils;
     List<CommonModel> videosModelList;
@@ -63,7 +64,9 @@ public class DeepCleanAppDataAct extends AppCompatActivity {
 
         utils = new Utils(this);
 
-        TextView facebookDataSize_tv, facebookSavedImagesSize_tv, messengerDataSize_tv, messengerSavedImagesSize_tv, messengerSavedVideosSize_tv, instagramDataSize_tv, instagramSavedImagesSize_tv, instagramSavedVideosSize_tv;
+        TextView facebookDataSize_tv, facebookSavedImagesSize_tv, messengerDataSize_tv,
+                messengerSavedImagesSize_tv, messengerSavedVideosSize_tv, instagramDataSize_tv,
+                instagramSavedImagesSize_tv, instagramSavedVideosSize_tv;
 
 
         facebook_cl = findViewById(R.id.facebook_cl);
@@ -112,8 +115,8 @@ public class DeepCleanAppDataAct extends AppCompatActivity {
         imagesModelList = new ArrayList<>();
 
         //adapter
-        imagesAdapter = new DeepCleanImagesAdapter(DeepCleanAppDataAct.this);
-        videosAdapter = new DeepCleanVideosAdapter(DeepCleanAppDataAct.this);
+        imagesAdapter = new DeepCleanImagesAdapter(DeepCleanAppDataAct.this,this);
+        videosAdapter = new DeepCleanVideosAdapter(DeepCleanAppDataAct.this,this);
 
 
         //Done child layouts
@@ -474,4 +477,8 @@ public class DeepCleanAppDataAct extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void selectAll(boolean isSelectAll) {
+
+    }
 }

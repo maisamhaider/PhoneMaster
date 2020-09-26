@@ -21,13 +21,17 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cleaner.booster.phone.repairer.app.R;
 import com.cleaner.booster.phone.repairer.app.adapters.BatterySavingAllAppsAdapter;
+import com.cleaner.booster.phone.repairer.app.interfaces.SelectAll;
 import com.cleaner.booster.phone.repairer.app.utils.Utils;
 
 import java.util.Calendar;
@@ -42,7 +46,7 @@ public class CpuCooler extends AppCompatActivity {
     SharedPreferences preferences;
     RecyclerView cpuCoolerApps_rv;
     LinearLayout cpuCoolBtn_ll;
-
+    private CheckBox selectAll_cb;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +62,7 @@ public class CpuCooler extends AppCompatActivity {
         cpuCoolBtn_ll = findViewById(R.id.cpuCoolBtn_ll);
         cpuTemp_tv = findViewById(R.id.cpuTemp_tv);
          cpuCooled_cl = findViewById(R.id.cpuCooled_cl);
+        selectAll_cb = findViewById(R.id.selectAll_cb);
 
         String temp = String.format("%.1f", utils.cpuTemperature());
         cpuTemp_tv.setText(temp);
@@ -178,10 +183,32 @@ public class CpuCooler extends AppCompatActivity {
         cpuCoolBtn_ll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (allAppsAdapter.getCheckList().isEmpty())
+                {
+                    Toast.makeText(CpuCooler.this,
+                            "Please select app first", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    CpuCooler.KillAppsTask appsTask = new KillAppsTask();
+                    appsTask.execute();
+                }
 
-                CpuCooler.KillAppsTask appsTask = new KillAppsTask();
-                appsTask.execute();
 
+            }
+        });
+        selectAll_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                SelectAll selectAll = allAppsAdapter.getSelectAll();
+                if (b)
+                {
+                    selectAll.selectAll(true);
+                }
+                else
+                {
+                    selectAll.selectAll(false);
+                }
             }
         });
 

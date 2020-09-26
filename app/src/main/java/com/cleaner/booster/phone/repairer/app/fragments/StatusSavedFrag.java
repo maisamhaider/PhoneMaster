@@ -53,8 +53,9 @@ public class StatusSavedFrag extends Fragment {
         TextView noStatusData_tv = view.findViewById(R.id.noStatusData_tv);
         noStatusData_tv.setVisibility(View.GONE);
 
-        File file1 = new File(Environment.getExternalStorageDirectory().getPath() + "/Phone_Master_Status");
-        List<CommonModel> list = utils.getListFiles(file1);
+        File file1 = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+
+                "/DCIM/phone_repair");
+        List<CommonModel> list = utils.getSavedStatusFiles(file1);
         if (list.size()==0){
             noStatusData_tv.setVisibility(View.VISIBLE);
         }

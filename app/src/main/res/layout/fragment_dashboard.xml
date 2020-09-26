@@ -24,8 +24,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-
-
     <ScrollView
         android:id="@+id/scrollView6"
         android:layout_width="match_parent"
@@ -39,26 +37,194 @@
         app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/white">
+            android:background="@android:color/white"
+            android:orientation="vertical">
 
             <HorizontalScrollView
+                android:layout_gravity="center"
                 android:id="@+id/horizontalScrollView"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="18dp"
-                android:layout_marginEnd="18dp"
-                 android:scrollbars="none"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:scrollbars="none"
+                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <include
-                    android:id="@+id/include4"
-                    layout="@layout/home_upper_xml" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:background="@android:color/white"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+
+                        <ImageView
+
+                            android:id="@+id/iv_junk_file"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:background="@drawable/ic_selctor_junk"
+                            android:src="@drawable/ic_junk_files" />
+
+                        <TextView
+                            android:id="@+id/junk_file_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="@string/junk_files"
+                            android:textColor="@color/colorTextThree"
+                            android:textStyle="bold"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:background="@android:color/white"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/iv_cpu_cooler"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:background="@drawable/ic_selctor_cpu"
+                            android:src="@drawable/ic_cpu_cooler" />
+
+                        <TextView
+                            android:id="@+id/cpu_cooler_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="@string/cpu_cooler"
+                            android:textColor="@color/colorTextThree"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:background="@android:color/white"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/iv_boost_phone"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:src="@drawable/ic_boost_phone" />
+
+
+                        <TextView
+                            android:id="@+id/boost_phone_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="@string/boost_phone"
+                            android:textColor="@color/colorTextThree"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:background="@android:color/white"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/iv_power_saving"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:src="@drawable/ic_power_saving" />
+
+                        <TextView
+                            android:id="@+id/power_saving_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="@string/power_saving"
+                            android:textColor="@color/colorTextThree"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:background="@android:color/white"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/iv_app_cleanup"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:src="@drawable/ic_app_cleanup" />
+
+                        <TextView
+                            android:id="@+id/app_cleanup_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="@string/app_cleanup"
+                            android:textColor="@color/colorTextThree"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:background="@android:color/white"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/iv_status_saver"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:src="@drawable/ic_status_saver" />
+
+                        <TextView
+                            android:id="@+id/status_saver_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="@string/status_saver"
+                            android:textColor="@color/colorTextThree"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
             </HorizontalScrollView>
 
 

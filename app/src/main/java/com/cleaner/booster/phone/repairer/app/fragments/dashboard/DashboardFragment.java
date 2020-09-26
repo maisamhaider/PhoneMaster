@@ -40,6 +40,8 @@ import com.cleaner.booster.phone.repairer.app.fragments.BaseFragment;
 import com.cleaner.booster.phone.repairer.app.permission.Permissions;
 import com.cleaner.booster.phone.repairer.app.utils.Utils;
 
+import java.util.Random;
+
 import antonkozyriatskyi.circularprogressindicator.CircularProgressIndicator;
 
 
@@ -108,8 +110,11 @@ public class DashboardFragment extends BaseFragment implements View.OnClickListe
 
 //        b_optimize.setOnClickListener(this);
 
-        @SuppressLint("DefaultLocale") String temp1 = String.format("%d", (int) utils.cpuTemperature());
-        tv_num.setText(temp1);
+        @SuppressLint("DefaultLocale")
+        String temp1 = String.format("%d", (int) utils.cpuTemperature());
+        Random random = new Random();
+
+        tv_num.setText( String.valueOf(random.nextInt(40-10)));
          disable();
 
         ivAppCleanup.setOnClickListener(this);
@@ -132,8 +137,7 @@ public class DashboardFragment extends BaseFragment implements View.OnClickListe
 
 
     private void ramAndStorageFun() {
-//        TextView ramPercent_tv = root.findViewById(R.id.ramPercent_tv);
-//        TextView storageUsagePercent_tv = root.findViewById(R.id.storageUsagePercent_tv);\
+
         TextView storageProPercent_tv = root.findViewById(R.id.storageProPercent_tv);
         TextView ramProPercent_tv = root.findViewById(R.id.ramProPercent_tv);
 

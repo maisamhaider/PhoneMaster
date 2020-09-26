@@ -4,15 +4,18 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 
 import com.cleaner.booster.phone.repairer.app.R;
 import com.cleaner.booster.phone.repairer.app.adapters.CommonAdapter;
 import com.cleaner.booster.phone.repairer.app.async.WhatsAppCommonTask;
+import com.cleaner.booster.phone.repairer.app.interfaces.SelectAll;
 import com.cleaner.booster.phone.repairer.app.utils.Utils;
 
 import java.io.File;
 
-public class WhatsAppAudioListAct extends WhatsAppBaseActivity {
+public class WhatsAppAudioListAct extends WhatsAppBaseActivity implements  SelectAll{
 
     String[] fileNames;
     Utils utils;
@@ -29,17 +32,48 @@ public class WhatsAppAudioListAct extends WhatsAppBaseActivity {
         whatsAppAudioList_btn = findViewById(R.id.clean_btn);
         group = findViewById(R.id.group);
         noDatatv = findViewById(R.id.no_data_tv);
+        select_tv = findViewById(R.id.select_tv);
+        selectAll_cb1 = findViewById(R.id.selectAll_cb1);
 
         type = "audios";
-        commonAdapter = new CommonAdapter(this, CommonAdapter.AUDIO);
+        commonAdapter = new CommonAdapter(this, CommonAdapter.AUDIO,this);
         WhatsAppCommonTask whatsAppCommonTask = new WhatsAppCommonTask(this, commonAdapter, rvCleanWhatsApp, type);
         whatsAppCommonTask.execute();
-
         whatsAppAudioList_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 alertDialog();
             }
         });
+        selectAll_cb1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SelectAll selectAll = commonAdapter.getSelectAll();
+                if (!b) {
+                    selectAll.selectAll(false);
+                    b = true;
+                } else {
+                    selectAll.selectAll(true);
+                    b = false;
+
+                }
+            }
+        });
+    }
+
+    @Override
+    public void selectAll(boolean isSelectAll) {
+
+        if (isSelectAll)
+        {
+            selectAll_cb1.setChecked(true);
+            b = false;
+
+        }
+        else {
+            selectAll_cb1.setChecked(false);
+            b = true;
+
+        }
     }
 }

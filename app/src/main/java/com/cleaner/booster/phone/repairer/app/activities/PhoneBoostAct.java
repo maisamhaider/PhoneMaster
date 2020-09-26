@@ -14,13 +14,17 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cleaner.booster.phone.repairer.app.R;
 import com.cleaner.booster.phone.repairer.app.adapters.BatterySavingAllAppsAdapter;
+import com.cleaner.booster.phone.repairer.app.interfaces.SelectAll;
 import com.cleaner.booster.phone.repairer.app.utils.Utils;
 
 import java.util.Calendar;
@@ -33,7 +37,7 @@ public class PhoneBoostAct extends AppCompatActivity {
     ConstraintLayout phoneBoostSecond_cl, phoneBoostedLastMain_cl, phoneBoostedMain1_cl, BoostingMain_cl;
     TextView phoneBoostUsedPercent_tv, phoneBoostRamDetail_tv;
     SharedPreferences preferences;
-
+    CheckBox selectAll_cb;
     ActivityManager activityManager;
     ActivityManager.MemoryInfo memoryInfo;
 
@@ -53,6 +57,7 @@ public class PhoneBoostAct extends AppCompatActivity {
         phoneBoostUsedPercent_tv = findViewById(R.id.phoneBoostUsedPercent_tv);
         phoneBoostedMain1_cl = findViewById(R.id.phoneBoostedMain1_cl);
         phoneBoostRamDetail_tv = findViewById(R.id.phoneBoostRamDetail_tv);
+        selectAll_cb = findViewById(R.id.selectAll_cb);
 
 
         activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
@@ -108,13 +113,37 @@ public class PhoneBoostAct extends AppCompatActivity {
         phoneBoostApps_rv.setAdapter(allAppsAdapter);
         allAppsAdapter.notifyDataSetChanged();
 
+        selectAll_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                SelectAll selectAll = allAppsAdapter.getSelectAll();
+                if (b)
+                {
+                    selectAll.selectAll(true);
+                }
+                else
+                {
+                    selectAll.selectAll(false);
+                }
+            }
+        });
+
 
         phoneBoostBtn_ll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                KillAppsTask appsTask = new KillAppsTask();
-                appsTask.execute();
+                if (allAppsAdapter.getCheckList().isEmpty())
+                {
+                    Toast.makeText(PhoneBoostAct.this,
+                            "Please select app first", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    KillAppsTask appsTask = new KillAppsTask();
+                    appsTask.execute();
+                }
+
 
             }
         });

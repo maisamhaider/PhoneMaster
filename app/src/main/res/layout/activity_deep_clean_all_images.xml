@@ -6,12 +6,38 @@
     android:layout_height="match_parent"
     tools:context=".activities.DeepCleanAllImagesAct">
 
+    <TextView
+        android:textColor="@android:color/black"
+        android:layout_marginTop="5dp"
+        android:id="@+id/select_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/noData_tv"
+        android:layout_alignBottom="@+id/selectAll_cb1"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="16dp"
+        android:gravity="center"
+        android:text="select/deselect" />
+
+    <CheckBox
+        android:id="@+id/selectAll_cb1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+         android:buttonTint="@color/checkbox_selector"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/DeepCleanAllImages_rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/deepCleanImagesClean_ll" />
+        android:layout_above="@+id/deepCleanImagesClean_ll"
+        android:layout_below="@+id/selectAll_cb1"
+     />
 
 
     <LinearLayout
@@ -39,7 +65,13 @@
 
     </LinearLayout>
 
-
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/noData_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="No data" />
 
 
 </RelativeLayout>
